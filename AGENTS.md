@@ -216,6 +216,7 @@ When you change a task, follow [CONTRIBUTING.md](CONTRIBUTING.md) and
 | [docs/agent-track.md](docs/agent-track.md) | Coding agents and skill packs |
 | [docs/harness-study.md](docs/harness-study.md) | The agent harness comparison |
 | [docs/contamination-study.md](docs/contamination-study.md) | Public against private tasks |
+| [docs/feedback-study.md](docs/feedback-study.md) | Attempts with feedback against fresh answers (why c@k) |
 | [docs/leaderboard-schema.md](docs/leaderboard-schema.md) | The published results format |
 | [docs/grader-throughput.md](docs/grader-throughput.md) | How fast grading runs, and why |
 | [docs/traces-dataset.md](docs/traces-dataset.md) | The gated reasoning-traces dataset |
