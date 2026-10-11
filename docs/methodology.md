@@ -190,11 +190,11 @@ Aider Polyglot's headline score, the pass rate after a second attempt shown the 
   pass@1; overall the macro average over suites, with the same stratified bootstrap interval. It is reported only for a complete entry whose attempts 2 to k
   are complete (every answer generated and graded), never on part of them. **Failures fixed**
   counts the answers that failed attempt 1 and passed a later one.
-- **Feedback beats trying again.** In a controlled study (three fresh answers per task against
-  three attempts with feedback, on tasks each model had failed before), feedback solved about
-  twice as many: for example 22.5% against 12.4% for Qwen3.8 27B and 31.3% against 15.7% for
-  Gemma 4 31B, with intervals that exclude no gain. c@k measures fixing, not a second roll of
-  the dice.
+- **Feedback beats trying again.** In a controlled study ([feedback study](feedback-study.md):
+  three fresh answers per task against three attempts with feedback, on tasks each model had
+  failed before), feedback solved clearly more for all four models tested, from about a third
+  more (27.6% against 20.7%, Gemma 4 26B-A4B) to about twice as many (31.3% against 15.7%,
+  Gemma 4 31B). c@k measures fixing, not a second roll of the dice.
 
 ### Cost, time and tokens per task
 
