@@ -12,6 +12,7 @@ mistral: {name: Mistral AI}
 moonshotai: {name: Moonshot AI}
 nvidia: {name: NVIDIA}
 openai: {name: OpenAI}
+openbmb: {name: OpenBMB}
 poolside: {name: Poolside}
 qwen: {name: Qwen}
 thinkingmachines: {name: Thinking Machines Lab}

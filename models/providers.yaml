@@ -107,3 +107,8 @@ direct-gpu:       # the single-GPU vLLM server; it serves one model at a time
   local: true
   base_url_env: FORCEBENCH_GPU_BASE_URL
   api_key_env: FORCEBENCH_GPU_API_KEY
+direct-minicpm:   # MiniCPM-V 4.7 on vLLM, one GB10
+  kind: openai_compatible
+  local: true
+  base_url_env: FORCEBENCH_MINICPM_BASE_URL
+  api_key_env: FORCEBENCH_MINICPM_API_KEY

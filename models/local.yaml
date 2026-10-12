@@ -503,3 +503,47 @@ models:
       "on": {chat_template_kwargs: {enable_thinking: true}}
     effort_tiers: {"off": "off", "on": "on"}
     notes: Google's official quantisation-aware-trained 4-bit weights (W4A16, compressed-tensors). One thinking switch.
+
+  # ---------------------------------------------------------------- MiniCPM-V 4.7 35B-A3B (MoE)
+  # OpenBMB's vision MoE on the Qwen3.5 MoE backbone. vLLM support landed after 0.31.0, so both
+  # servers run the same pinned nightly (fe4df3d); both keep a bf16 KV cache, so the two differ
+  # only in the weights.
+  - id: minicpm-v-4.7-35b-a3b-int4
+    provider: direct-gpu
+    endpoint_model: minicpm-v-4.7
+    display: MiniCPM-V 4.7 35B-A3B
+    model_id: minicpm-v-4-7-35b-a3b
+    developer: openbmb
+    family: MiniCPM-V-4.7
+    base_model: MiniCPM-V-4.7-35B-A3B
+    quant: INT4 W4A16 experts, BF16 dense
+    engine: vLLM
+    hardware: 1× NVIDIA GeForce RTX 5090 (32 GB)
+    context: 65536
+    sampling: {temperature: 1.0, top_p: 0.95, top_k: 20}
+    default_effort: "on"
+    efforts:
+      "off": {chat_template_kwargs: {enable_thinking: false}}
+      "on": {chat_template_kwargs: {enable_thinking: true}}
+    effort_tiers: {"off": "off", "on": "on"}
+    notes: OpenBMB's official int4 (round-to-nearest W4A16, groups of 128) on the routed experts; attention, shared experts and the vision tower stay BF16. One thinking switch.
+
+  - id: minicpm-v-4.7-35b-a3b-bf16
+    provider: direct-minicpm
+    endpoint_model: minicpm-v-4.7
+    display: MiniCPM-V 4.7 35B-A3B
+    model_id: minicpm-v-4-7-35b-a3b
+    developer: openbmb
+    family: MiniCPM-V-4.7
+    base_model: MiniCPM-V-4.7-35B-A3B
+    quant: BF16
+    engine: vLLM
+    hardware: 1× NVIDIA DGX Spark (GB10, 128 GB)
+    context: 262144
+    sampling: {temperature: 1.0, top_p: 0.95, top_k: 20}
+    default_effort: "on"
+    efforts:
+      "off": {chat_template_kwargs: {enable_thinking: false}}
+      "on": {chat_template_kwargs: {enable_thinking: true}}
+    effort_tiers: {"off": "off", "on": "on"}
+    notes: OpenBMB's official BF16 weights, unquantised. One thinking switch.
