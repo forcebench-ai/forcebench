@@ -12,8 +12,12 @@ POOL       ?= public           # public, private or both: whose tasks (docs/priv
 # /private, and so never to one grading public answers alone. `python -m forcebench.pool
 # docker-args` checks it (outside this working tree, results/ and results/runs not symbolic
 # links) and prints the mount options; a refusal stops make. With POOL=public nothing is run and
-# every recipe is exactly as without a pool. Both expansions start with a space when not empty.
+# every recipe is exactly as without a pool, except that the sandbox is told there is none: it
+# mounts this working tree, .env included, and a FORCEBENCH_PRIVATE_DIR set there names a host
+# path the container does not have (forcebench refused to start). An empty value in the
+# environment wins over .env. These expansions start with a space when not empty.
 POOL_ARGS = $(if $(filter public,$(POOL)),, --pool $(POOL))
+NO_POOL = $(if $(filter public,$(POOL)), -e FORCEBENCH_PRIVATE_DIR=)
 private_mounts = $(if $(filter public,$(POOL)),,$(call _pool_or_error,$(shell uv run --quiet python -m forcebench.pool docker-args $(1) 2>/dev/null || echo "ERROR: the private pool could not be checked")))
 _pool_or_error = $(if $(filter ERROR:%,$(firstword $(1))),$(error $(1)), $(1))
 
@@ -27,7 +31,7 @@ SANDBOX = docker run --rm $(TTY) \
 	-v forcebench-cache:/cache \
 	--add-host=host.docker.internal:host-gateway \
 	-e FORCEBENCH_MTPLX_BASE_URL=http://host.docker.internal:$(MTPLX_PORT)/v1 \
-	-e FORCEBENCH_LMSTUDIO_BASE_URL=http://host.docker.internal:1234/v1$(call private_mounts,sandbox)
+	-e FORCEBENCH_LMSTUDIO_BASE_URL=http://host.docker.internal:1234/v1$(NO_POOL)$(call private_mounts,sandbox)
 
 # The grader type that runs model-written JavaScript (src/forcebench/graders/lwc.py). grade,
 # regrade-all and validate split their two passes by grader type, not by suite: tasks of this

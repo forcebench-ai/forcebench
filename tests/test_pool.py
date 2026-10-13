@@ -20,7 +20,7 @@ import yaml
 from pydantic import ValidationError
 from typer.testing import CliRunner
 
-from forcebench import CANARY, CANARY_GUID, REPO_ROOT, cli, graders, runner
+from forcebench import CANARY, CANARY_GUID, REPO_ROOT, cli, graders, models, runner
 from forcebench.answers import extract
 from forcebench.cli import app
 from forcebench.graders import Grade, GradeEnv, lwc
@@ -946,6 +946,29 @@ def test_make_gives_containers_the_private_pool_only_when_asked(tmp_path):
         )
 
 
+def test_make_tells_a_public_sandbox_there_is_no_private_pool(tmp_path):
+    """The sandbox mounts the working tree, .env included, and forcebench reads .env in there.
+
+    A FORCEBENCH_PRIVATE_DIR set in .env names a host path the container does not have, so with
+    POOL=public the sandbox gets an empty value, which wins over .env; with a pool, the mount's.
+    """
+    root = tmp_path / "pool"
+    root.mkdir()
+    init_private_dir(root)
+
+    def sandbox_env(pool: str) -> list[str]:
+        dry = _make_n("run", root, pool)
+        assert dry.returncode == 0, dry.stderr
+        [sandbox] = [ln for ln in dry.stdout.splitlines() if ln.startswith("docker run")]
+        argv = shlex.split(sandbox)
+        return [
+            argv[i + 1] for i, a in enumerate(argv) if a == "-e" and "PRIVATE_DIR" in argv[i + 1]
+        ]
+
+    assert sandbox_env("public") == ["FORCEBENCH_PRIVATE_DIR="]
+    assert sandbox_env("private") == ["FORCEBENCH_PRIVATE_DIR=/private"]
+
+
 def test_make_private_check_always_gives_the_sandbox_the_private_pool(tmp_path):
     root = tmp_path / "pool"
     root.mkdir()
@@ -1153,3 +1176,13 @@ def test_tests_can_keep_the_real_env_file_out_of_the_private_dir_setting(monkeyp
 
     monkeypatch.setattr("forcebench.models.load_dotenv", fake_dotenv)
     assert configured_private_dir() == Path("/from-the-fake-env")
+
+
+def test_an_empty_private_dir_in_the_environment_wins_over_env_file(monkeypatch, tmp_path):
+    """How the public sandbox ignores the host's FORCEBENCH_PRIVATE_DIR in the mounted .env."""
+    env_file = tmp_path / ".env"
+    env_file.write_text(f"FORCEBENCH_PRIVATE_DIR={tmp_path / 'host-only'}\n")
+    real_dotenv = models.load_dotenv
+    monkeypatch.setattr("forcebench.models.load_dotenv", lambda: real_dotenv(env_file))
+    monkeypatch.setenv("FORCEBENCH_PRIVATE_DIR", "")
+    assert configured_private_dir() is None
