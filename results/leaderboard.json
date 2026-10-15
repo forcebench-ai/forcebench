@@ -3,7 +3,7 @@
  "benchmark": "forcebench",
  "visibility": "public",
  "version": "0.2.0",
- "generated_at": "2026-10-15T04:15:57+00:00",
+ "generated_at": "2026-10-15T05:14:53+00:00",
  "tasks_sha": "21fe52ce6d1f04b7",
  "suites": [
   {
@@ -64202,7 +64202,207 @@
     "ci_low": 0.3645,
     "ci_high": 0.4719
    },
-   "c_at": {},
+   "c_at": {
+    "2": {
+     "score": 0.5703,
+     "ci_low": 0.5185,
+     "ci_high": 0.621,
+     "suites": {
+      "apex": {
+       "score": 0.7,
+       "ci_low": 0.481,
+       "ci_high": 0.8545,
+       "n": 20
+      },
+      "api": {
+       "score": 0.5556,
+       "ci_low": 0.3372,
+       "ci_high": 0.7544,
+       "n": 18
+      },
+      "ci": {
+       "score": 0.8235,
+       "ci_low": 0.5897,
+       "ci_high": 0.9381,
+       "n": 17
+      },
+      "cli": {
+       "score": 0.55,
+       "ci_low": 0.3421,
+       "ci_high": 0.7418,
+       "n": 20
+      },
+      "docs": {
+       "score": 0.2353,
+       "ci_low": 0.0956,
+       "ci_high": 0.4726,
+       "n": 17
+      },
+      "fflib": {
+       "score": 0.3333,
+       "ci_low": 0.1628,
+       "ci_high": 0.5625,
+       "n": 18
+      },
+      "flow": {
+       "score": 0.4444,
+       "ci_low": 0.2456,
+       "ci_high": 0.6628,
+       "n": 18
+      },
+      "limits": {
+       "score": 0.5789,
+       "ci_low": 0.3628,
+       "ci_high": 0.7686,
+       "n": 19
+      },
+      "lwc": {
+       "score": 0.9444,
+       "ci_low": 0.7424,
+       "ci_high": 0.9901,
+       "n": 18
+      },
+      "npsp": {
+       "score": 0.5,
+       "ci_low": 0.2903,
+       "ci_high": 0.7097,
+       "n": 18
+      },
+      "packaging": {
+       "score": 0.4444,
+       "ci_low": 0.2456,
+       "ci_high": 0.6628,
+       "n": 18
+      },
+      "permissions": {
+       "score": 0.6,
+       "ci_low": 0.3575,
+       "ci_high": 0.8018,
+       "n": 15
+      },
+      "scratch-def": {
+       "score": 0.1111,
+       "ci_low": 0.031,
+       "ci_high": 0.328,
+       "n": 18
+      },
+      "soql": {
+       "score": 0.9,
+       "ci_low": 0.699,
+       "ci_high": 0.9721,
+       "n": 20
+      },
+      "taf": {
+       "score": 0.8333,
+       "ci_low": 0.6078,
+       "ci_high": 0.9416,
+       "n": 18
+      }
+     }
+    },
+    "3": {
+     "score": 0.6303,
+     "ci_low": 0.58,
+     "ci_high": 0.68,
+     "suites": {
+      "apex": {
+       "score": 0.75,
+       "ci_low": 0.5313,
+       "ci_high": 0.8881,
+       "n": 20
+      },
+      "api": {
+       "score": 0.5556,
+       "ci_low": 0.3372,
+       "ci_high": 0.7544,
+       "n": 18
+      },
+      "ci": {
+       "score": 0.8824,
+       "ci_low": 0.6566,
+       "ci_high": 0.9671,
+       "n": 17
+      },
+      "cli": {
+       "score": 0.55,
+       "ci_low": 0.3421,
+       "ci_high": 0.7418,
+       "n": 20
+      },
+      "docs": {
+       "score": 0.2353,
+       "ci_low": 0.0956,
+       "ci_high": 0.4726,
+       "n": 17
+      },
+      "fflib": {
+       "score": 0.3889,
+       "ci_low": 0.2031,
+       "ci_high": 0.6138,
+       "n": 18
+      },
+      "flow": {
+       "score": 0.5,
+       "ci_low": 0.2903,
+       "ci_high": 0.7097,
+       "n": 18
+      },
+      "limits": {
+       "score": 0.7368,
+       "ci_low": 0.5121,
+       "ci_high": 0.8819,
+       "n": 19
+      },
+      "lwc": {
+       "score": 1.0,
+       "ci_low": 0.8241,
+       "ci_high": 1.0,
+       "n": 18
+      },
+      "npsp": {
+       "score": 0.6111,
+       "ci_low": 0.3862,
+       "ci_high": 0.7969,
+       "n": 18
+      },
+      "packaging": {
+       "score": 0.5,
+       "ci_low": 0.2903,
+       "ci_high": 0.7097,
+       "n": 18
+      },
+      "permissions": {
+       "score": 0.7333,
+       "ci_low": 0.4805,
+       "ci_high": 0.891,
+       "n": 15
+      },
+      "scratch-def": {
+       "score": 0.2778,
+       "ci_low": 0.125,
+       "ci_high": 0.5087,
+       "n": 18
+      },
+      "soql": {
+       "score": 0.9,
+       "ci_low": 0.699,
+       "ci_high": 0.9721,
+       "n": 20
+      },
+      "taf": {
+       "score": 0.8333,
+       "ci_low": 0.6078,
+       "ci_high": 0.9416,
+       "n": 18
+      }
+     }
+    },
+    "fixed": {
+     "fixed": 58,
+     "failed": 158,
+     "within": 3
+    }
+   },
    "usage": {
     "1": {
      "overall": {
@@ -64733,6 +64933,581 @@
          "cached_input": 5.476e-05,
          "reasoning": 0.001267,
          "answer": 0.005201,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      }
+     }
+    },
+    "2": {
+     "overall": {
+      "tasks": 272,
+      "answers": 388,
+      "failed": 0,
+      "solved": 156,
+      "unreported": 0,
+      "time_s": {
+       "median": 13.21,
+       "p90": 58.39,
+       "mean": 29.99
+      },
+      "tokens": {
+       "input": 1546.1,
+       "cached_input": 239.5,
+       "reasoning": 624.9,
+       "answer": 827.0,
+       "unsplit": 0.0,
+       "output": 1451.9
+      },
+      "cost": {
+       "per_task": 0.008553,
+       "per_solved": 0.01491,
+       "total": 2.326,
+       "parts": {
+        "input": 0.001829,
+        "cached_input": 0.0003353,
+        "reasoning": 0.00275,
+        "answer": 0.003639,
+        "unsplit": 0.0
+       }
+      },
+      "no_cost": null,
+      "recorded": {
+       "cached_input": 388,
+       "served_by": 388
+      }
+     }
+    },
+    "3": {
+     "overall": {
+      "tasks": 272,
+      "answers": 449,
+      "failed": 0,
+      "solved": 172,
+      "unreported": 0,
+      "time_s": {
+       "median": 13.48,
+       "p90": 83.97,
+       "mean": 47.6
+      },
+      "tokens": {
+       "input": 2141.9,
+       "cached_input": 471.1,
+       "reasoning": 1352.0,
+       "answer": 1006.8,
+       "unsplit": 0.0,
+       "output": 2358.8
+      },
+      "cost": {
+       "per_task": 0.01338,
+       "per_solved": 0.02115,
+       "total": 3.639,
+       "parts": {
+        "input": 0.002339,
+        "cached_input": 0.0006595,
+        "reasoning": 0.005949,
+        "answer": 0.00443,
+        "unsplit": 0.0
+       }
+      },
+      "no_cost": null,
+      "recorded": {
+       "cached_input": 449,
+       "served_by": 449
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 34,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 25.47,
+        "p90": 83.02,
+        "mean": 39.17
+       },
+       "tokens": {
+        "input": 2665.8,
+        "cached_input": 412.8,
+        "reasoning": 476.4,
+        "answer": 1835.5,
+        "unsplit": 0.0,
+        "output": 2312.0
+       },
+       "cost": {
+        "per_task": 0.0139,
+        "per_solved": 0.01854,
+        "total": 0.2781,
+        "parts": {
+         "input": 0.003154,
+         "cached_input": 0.0005779,
+         "reasoning": 0.002096,
+         "answer": 0.008076,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 10,
+       "unreported": 0,
+       "time_s": {
+        "median": 7.82,
+        "p90": 14.47,
+        "mean": 13.22
+       },
+       "tokens": {
+        "input": 371.6,
+        "cached_input": 17.8,
+        "reasoning": 262.3,
+        "answer": 217.8,
+        "unsplit": 0.0,
+        "output": 480.2
+       },
+       "cost": {
+        "per_task": 0.002633,
+        "per_solved": 0.004739,
+        "total": 0.04739,
+        "parts": {
+         "input": 0.0004954,
+         "cached_input": 2.489e-05,
+         "reasoning": 0.001154,
+         "answer": 0.0009585,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 23,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 13.18,
+        "p90": 25.78,
+        "mean": 19.62
+       },
+       "tokens": {
+        "input": 882.0,
+        "cached_input": 158.1,
+        "reasoning": 222.2,
+        "answer": 596.3,
+        "unsplit": 0.0,
+        "output": 818.5
+       },
+       "cost": {
+        "per_task": 0.004836,
+        "per_solved": 0.005481,
+        "total": 0.08221,
+        "parts": {
+         "input": 0.001013,
+         "cached_input": 0.0002214,
+         "reasoning": 0.0009776,
+         "answer": 0.002624,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 34,
+       "failed": 0,
+       "solved": 11,
+       "unreported": 0,
+       "time_s": {
+        "median": 7.08,
+        "p90": 26.86,
+        "mean": 10.56
+       },
+       "tokens": {
+        "input": 634.6,
+        "cached_input": 204.8,
+        "reasoning": 201.8,
+        "answer": 106.2,
+        "unsplit": 0.0,
+        "output": 308.0
+       },
+       "cost": {
+        "per_task": 0.002244,
+        "per_solved": 0.004079,
+        "total": 0.04487,
+        "parts": {
+         "input": 0.0006017,
+         "cached_input": 0.0002867,
+         "reasoning": 0.0008877,
+         "answer": 0.0004675,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 4,
+       "unreported": 0,
+       "time_s": {
+        "median": 5.42,
+        "p90": 13.72,
+        "mean": 7.34
+       },
+       "tokens": {
+        "input": 255.7,
+        "cached_input": 15.1,
+        "reasoning": 70.6,
+        "answer": 116.7,
+        "unsplit": 0.0,
+        "output": 187.3
+       },
+       "cost": {
+        "per_task": 0.001182,
+        "per_solved": 0.005024,
+        "total": 0.0201,
+        "parts": {
+         "input": 0.0003369,
+         "cached_input": 2.108e-05,
+         "reasoning": 0.0003106,
+         "answer": 0.0005135,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 45,
+       "failed": 0,
+       "solved": 7,
+       "unreported": 0,
+       "time_s": {
+        "median": 53.84,
+        "p90": 187.76,
+        "mean": 101.57
+       },
+       "tokens": {
+        "input": 4915.7,
+        "cached_input": 1020.4,
+        "reasoning": 3596.7,
+        "answer": 2343.8,
+        "unsplit": 0.0,
+        "output": 5940.4
+       },
+       "cost": {
+        "per_task": 0.03302,
+        "per_solved": 0.08491,
+        "total": 0.5944,
+        "parts": {
+         "input": 0.005453,
+         "cached_input": 0.001429,
+         "reasoning": 0.01583,
+         "answer": 0.01031,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 41,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 62.92,
+        "p90": 383.32,
+        "mean": 152.31
+       },
+       "tokens": {
+        "input": 4494.1,
+        "cached_input": 1080.9,
+        "reasoning": 4853.8,
+        "answer": 2851.4,
+        "unsplit": 0.0,
+        "output": 7705.2
+       },
+       "cost": {
+        "per_task": 0.04019,
+        "per_solved": 0.08039,
+        "total": 0.7235,
+        "parts": {
+         "input": 0.004778,
+         "cached_input": 0.001513,
+         "reasoning": 0.02136,
+         "answer": 0.01255,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 35,
+       "failed": 0,
+       "solved": 14,
+       "unreported": 0,
+       "time_s": {
+        "median": 21.22,
+        "p90": 88.41,
+        "mean": 41.23
+       },
+       "tokens": {
+        "input": 1900.5,
+        "cached_input": 370.5,
+        "reasoning": 763.8,
+        "answer": 1202.9,
+        "unsplit": 0.0,
+        "output": 1966.7
+       },
+       "cost": {
+        "per_task": 0.01131,
+        "per_solved": 0.01536,
+        "total": 0.215,
+        "parts": {
+         "input": 0.002142,
+         "cached_input": 0.0005187,
+         "reasoning": 0.003361,
+         "answer": 0.005293,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 28,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 11.32,
+        "p90": 28.5,
+        "mean": 18.4
+       },
+       "tokens": {
+        "input": 1431.1,
+        "cached_input": 348.4,
+        "reasoning": 153.1,
+        "answer": 911.9,
+        "unsplit": 0.0,
+        "output": 1064.9
+       },
+       "cost": {
+        "per_task": 0.006689,
+        "per_solved": 0.006689,
+        "total": 0.1204,
+        "parts": {
+         "input": 0.001516,
+         "cached_input": 0.0004878,
+         "reasoning": 0.0006734,
+         "answer": 0.004012,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 31,
+       "failed": 0,
+       "solved": 11,
+       "unreported": 0,
+       "time_s": {
+        "median": 17.46,
+        "p90": 85.95,
+        "mean": 50.81
+       },
+       "tokens": {
+        "input": 2277.7,
+        "cached_input": 714.7,
+        "reasoning": 1491.9,
+        "answer": 1566.4,
+        "unsplit": 0.0,
+        "output": 3058.4
+       },
+       "cost": {
+        "per_task": 0.01665,
+        "per_solved": 0.02724,
+        "total": 0.2996,
+        "parts": {
+         "input": 0.002188,
+         "cached_input": 0.001001,
+         "reasoning": 0.006565,
+         "answer": 0.006892,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 29,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 10.59,
+        "p90": 35.22,
+        "mean": 33.37
+       },
+       "tokens": {
+        "input": 938.7,
+        "cached_input": 234.7,
+        "reasoning": 1103.1,
+        "answer": 376.9,
+        "unsplit": 0.0,
+        "output": 1479.9
+       },
+       "cost": {
+        "per_task": 0.007826,
+        "per_solved": 0.01565,
+        "total": 0.1409,
+        "parts": {
+         "input": 0.0009857,
+         "cached_input": 0.0003285,
+         "reasoning": 0.004853,
+         "answer": 0.001658,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 22,
+       "failed": 0,
+       "solved": 11,
+       "unreported": 0,
+       "time_s": {
+        "median": 12.16,
+        "p90": 264.48,
+        "mean": 108.1
+       },
+       "tokens": {
+        "input": 1333.3,
+        "cached_input": 311.5,
+        "reasoning": 3600.1,
+        "answer": 660.3,
+        "unsplit": 0.0,
+        "output": 4260.4
+       },
+       "cost": {
+        "per_task": 0.02061,
+        "per_solved": 0.02811,
+        "total": 0.3092,
+        "parts": {
+         "input": 0.001431,
+         "cached_input": 0.0004361,
+         "reasoning": 0.01584,
+         "answer": 0.002905,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 43,
+       "failed": 0,
+       "solved": 5,
+       "unreported": 0,
+       "time_s": {
+        "median": 30.5,
+        "p90": 108.63,
+        "mean": 50.19
+       },
+       "tokens": {
+        "input": 1347.6,
+        "cached_input": 387.6,
+        "reasoning": 2090.7,
+        "answer": 356.3,
+        "unsplit": 0.0,
+        "output": 2446.9
+       },
+       "cost": {
+        "per_task": 0.01265,
+        "per_solved": 0.04555,
+        "total": 0.2278,
+        "parts": {
+         "input": 0.001344,
+         "cached_input": 0.0005426,
+         "reasoning": 0.009199,
+         "answer": 0.001568,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 23,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 3.54,
+        "p90": 21.5,
+        "mean": 9.72
+       },
+       "tokens": {
+        "input": 334.1,
+        "cached_input": 80.0,
+        "reasoning": 175.2,
+        "answer": 100.3,
+        "unsplit": 0.0,
+        "output": 275.6
+       },
+       "cost": {
+        "per_task": 0.00168,
+        "per_solved": 0.001867,
+        "total": 0.0336,
+        "parts": {
+         "input": 0.0003557,
+         "cached_input": 0.000112,
+         "reasoning": 0.0007709,
+         "answer": 0.0004415,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 26,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 18.55,
+        "p90": 71.21,
+        "mean": 74.21
+       },
+       "tokens": {
+        "input": 8359.3,
+        "cached_input": 1724.4,
+        "reasoning": 1847.7,
+        "answer": 1827.2,
+        "unsplit": 0.0,
+        "output": 3674.9
+       },
+       "cost": {
+        "per_task": 0.02787,
+        "per_solved": 0.03345,
+        "total": 0.5017,
+        "parts": {
+         "input": 0.009289,
+         "cached_input": 0.002414,
+         "reasoning": 0.00813,
+         "answer": 0.00804,
          "unsplit": 0.0
         }
        },
