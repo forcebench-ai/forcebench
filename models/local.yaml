@@ -547,3 +547,29 @@ models:
       "on": {chat_template_kwargs: {enable_thinking: true}}
     effort_tiers: {"off": "off", "on": "on"}
     notes: OpenBMB's official BF16 weights, unquantised. One thinking switch.
+
+  # ---------------------------------------------------------------- Muse Glimmer 30B (dense)
+  # Meta's open-weight agentic model (Apache-2.0): dense, 52 layers in a 3:1 local:global attention
+  # pattern (2048-token window), so the KV cache is small. Effort is the chat template's
+  # reasoning_strength (low/medium/high/xhigh, default high); there is no thinking-off switch.
+  - id: muse-glimmer-30b-nvfp4
+    provider: direct-gpu
+    endpoint_model: muse-glimmer-30b
+    display: Muse Glimmer 30B
+    model_id: muse-glimmer-30b
+    developer: meta
+    family: Muse-Glimmer
+    base_model: Muse-Glimmer-30B
+    quant: NVFP4 + FP8 mixed (NVIDIA ModelOpt)
+    engine: vLLM
+    hardware: 1× NVIDIA GeForce RTX 5090 (32 GB)
+    context: 131072
+    sampling: {temperature: 1.0, top_p: 0.95, top_k: 64}
+    default_effort: high
+    efforts:
+      low: {chat_template_kwargs: {reasoning_strength: low}}
+      medium: {chat_template_kwargs: {reasoning_strength: medium}}
+      high: {chat_template_kwargs: {reasoning_strength: high}}
+      xhigh: {chat_template_kwargs: {reasoning_strength: xhigh}}
+    effort_tiers: {low: low, medium: medium, high: high, xhigh: max}
+    notes: NVIDIA's ModelOpt AutoQuant checkpoint, about 6.6 bits a weight on average (most MLP weights NVFP4 W4A16, most attention FP8, the rest BF16); bf16 KV cache. Served text-only.

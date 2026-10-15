@@ -78,7 +78,7 @@ against another.
 
 - **Sampling** follows each vendor's recommendation for thinking mode and is recorded per
   configuration in `models/*.yaml` (currently temperature 1.0 and top-p 0.95 for every model,
-  with top-k 20 for Qwen and top-k 64 for Gemma; GLM, DeepSeek and MiMo set no top-k).
+  with top-k 20 for Qwen and top-k 64 for Gemma and Muse Glimmer; GLM, DeepSeek and MiMo set no top-k).
 - **Reasoning effort** uses each model's own vocabulary (`low`/`medium`/`xhigh`,
   `off`/`low`/`high`/`max`, or a thinking on/off switch) and is mapped to a common
   off/low/medium/high/max tier for comparison. A plain thinking **switch** (Gemma 4, Qwen3.6,
