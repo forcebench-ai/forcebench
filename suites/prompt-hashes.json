@@ -134,6 +134,7 @@
   "limits-count-cascading-trigger-queries": {"version": 1, "prompt_sha": "8c6496393c71"},
   "limits-count-queries-helper-per-lead": {"version": 1, "prompt_sha": "c7c904584e5e"},
   "limits-first-limit-exceeded": {"version": 1, "prompt_sha": "9faee56b2d8c"},
+  "limits-pushback-batch-rollup-start-loads-all": {"version": 1, "prompt_sha": "6dc43f73303f"},
   "limits-pushback-case-priority-query-in-loop": {"version": 1, "prompt_sha": "4cce44e19d4d"},
   "limits-pushback-erp-callout-per-account": {"version": 1, "prompt_sha": "8185da87e5ce"},
   "limits-pushback-eventbus-publish-per-record": {"version": 1, "prompt_sha": "c0068427728e"},
