@@ -573,3 +573,28 @@ models:
       xhigh: {chat_template_kwargs: {reasoning_strength: xhigh}}
     effort_tiers: {low: low, medium: medium, high: high, xhigh: max}
     notes: NVIDIA's ModelOpt AutoQuant checkpoint, about 6.6 bits a weight on average (most MLP weights NVFP4 W4A16, most attention FP8, the rest BF16); bf16 KV cache. Served text-only.
+
+  # ---------------------------------------------------------------- Nemotron 3.5 Bolt 74B-A9B (MoE)
+  # NVIDIA's hybrid Mamba/attention MoE (OpenMDW-1.1): 88 blocks (40 Mamba, 40 MoE, 8 attention),
+  # 9 of 240-496 experts a layer, packed by NVIDIA to fit 24 GB. One thinking switch, the chat
+  # template's enable_thinking (on by default): TensorFold renders its own template, which ignores
+  # the model card's medium_effort flag.
+  - id: nemotron-3.5-bolt-24gb-tensorfold
+    provider: direct-nemotron-bolt-tf
+    endpoint_model: Nemotron-3.5-Bolt
+    display: Nemotron 3.5 Bolt
+    model_id: nemotron-3-5-bolt
+    developer: nvidia
+    family: Nemotron-3.5
+    base_model: Nemotron-3.5-Bolt-74B-A9B
+    quant: IQ2_XXS + NVFP4 + Q8_0 mixed (NVIDIA ModelOpt)
+    engine: TensorFold (Zig)
+    hardware: 1× NVIDIA DGX Spark (GB10, 128 GB)
+    context: 262144
+    sampling: {temperature: 1.0, top_p: 0.95}
+    default_effort: "on"
+    efforts:
+      "off": {chat_template_kwargs: {enable_thinking: false}}
+      "on": {chat_template_kwargs: {enable_thinking: true}}
+    effort_tiers: {"off": "off", "on": "on"}
+    notes: NVIDIA's 24GB checkpoint (routed and shared experts IQ2_XXS, Mamba projections NVFP4, attention, latent projections and lm_head Q8_0); LiLiCorr drafting, bf16 KV cache, 16 concurrent streams. Served text-only.
