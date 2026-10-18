@@ -422,7 +422,13 @@ models:
       CX7 ring; DSpark drafting, 16 concurrent requests, 1M context. Prompts come from SGLang's V4.1
       encoder, whose effort levels match DeepSeek's current reference encoder (low 50, high 75,
       max 100); that reference, shared by 1017 and the updated September release, also changes
-      multi-turn tool-result turns and adds tool namespaces, which this server does not.
+      multi-turn tool-result turns and adds tool namespaces, which this server does not. The recipe
+      version used here changes three things on the generation path, each only for requests that used
+      to fail: a broken tool call left in the history reaches the template as
+      {"_unparseable_arguments": ...} instead of an HTTP 400; the encoder tolerates its own image
+      placeholder token in message text instead of raising; and the repetition abort keeps the exit the
+      September run had (finish_reason stop with the text so far, DSV41_LOOP_NAMED_EXIT=0), so a loop
+      scores as a failed answer rather than an endpoint error.
     sampling: {temperature: 1.0, top_p: 1.0}
     default_effort: high
     efforts:
