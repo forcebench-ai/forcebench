@@ -401,6 +401,43 @@ models:
       max: {chat_template_kwargs: {thinking: true, reasoning_effort: 100}}
     effort_tiers: {"off": "off", low: low, high: high, max: max}
 
+  # DeepSeek's 1017 update: new weights, but the same config, tensor index and tokenizer as the
+  # September release, so it is a separate model on the same SGLang server, now on four GB10s
+  # (the four-node lane answers at the three-node lane's address).
+  - id: deepseek-v4.1-flash-1017-native
+    provider: direct-ds41x3
+    endpoint_model: deepseek-v4.1-flash-1017
+    proxy_model: deepseek-v4.1-flash-tp4
+    display: DeepSeek V4.1 Flash 1017
+    model_id: deepseek-v4-1-flash-1017
+    developer: deepseek
+    family: DeepSeek-V4
+    base_model: DeepSeek-V4.1-Flash-1017
+    quant: Native FP8, FP4 experts
+    engine: SGLang
+    hardware: 4× NVIDIA GB10, 128 GB each (3× DGX Spark, 1× Gigabyte AI TOP ATOM)
+    context: 1048576
+    notes: >-
+      DeepSeek's own 1017 release on MiaAI-Lab's SGLang recipe, tensor-parallel over a switchless
+      CX7 ring; DSpark drafting, 16 concurrent requests, 1M context. Prompts come from SGLang's V4.1
+      encoder, whose effort levels match DeepSeek's current reference encoder (low 50, high 75,
+      max 100); that reference, shared by 1017 and the updated September release, also changes
+      multi-turn tool-result turns and adds tool namespaces, which this server does not. The recipe
+      version used here changes three things on the generation path, each only for requests that used
+      to fail: a broken tool call left in the history reaches the template as
+      {"_unparseable_arguments": ...} instead of an HTTP 400; the encoder tolerates its own image
+      placeholder token in message text instead of raising; and the repetition abort keeps the exit the
+      September run had (finish_reason stop with the text so far, DSV41_LOOP_NAMED_EXIT=0), so a loop
+      scores as a failed answer rather than an endpoint error.
+    sampling: {temperature: 1.0, top_p: 1.0}
+    default_effort: high
+    efforts:
+      "off": {chat_template_kwargs: {thinking: false}}
+      low: {chat_template_kwargs: {thinking: true, reasoning_effort: 50}}
+      high: {chat_template_kwargs: {thinking: true, reasoning_effort: 75}}
+      max: {chat_template_kwargs: {thinking: true, reasoning_effort: 100}}
+    effort_tiers: {"off": "off", low: low, high: high, max: max}
+
   - id: deepseek-v4-flash-vision-nvfp4
     provider: direct-ds4v
     endpoint_model: deepseek-v4-flash-vision-exp
