@@ -658,3 +658,28 @@ models:
       "on": {chat_template_kwargs: {enable_thinking: true}}
     effort_tiers: {"off": "off", "on": "on"}
     notes: NVIDIA's 24GB checkpoint (routed and shared experts IQ2_XXS, Mamba projections NVFP4, attention, latent projections and lm_head Q8_0); LiLiCorr drafting, bf16 KV cache, 16 concurrent streams. Served text-only.
+
+  # ---------------------------------------------------------------- Nemotron 3.5 Super VL 120B-A12B (MoE)
+  # NVIDIA's hybrid Mamba/attention latent-MoE vision-language model (OpenMDW-1.1), its NVFP4 release. One thinking
+  # switch, the chat template's enable_thinking (on by default). The template also has a medium_effort flag and
+  # TensorFold parses reasoning_effort, but neither changes this model's prompt or reply on TensorFold (the same
+  # token hash at low, medium and high and with medium_effort), so there is no effort level between off and on.
+  - id: nemotron-3.5-super-vl-nvfp4-tensorfold
+    provider: direct-nemotron-super-vl-tf
+    endpoint_model: nemotron-3.5-super-vl
+    display: Nemotron 3.5 Super VL
+    model_id: nemotron-3-5-super-vl
+    developer: nvidia
+    family: Nemotron-3.5
+    base_model: Nemotron-3.5-Super-VL-120B-A12B
+    quant: NVFP4 mixed precision (NVIDIA ModelOpt)
+    engine: TensorFold (Zig)
+    hardware: 1× NVIDIA DGX Spark (GB10, 128 GB)
+    context: 131072
+    sampling: {temperature: 1.0, top_p: 0.95}
+    default_effort: "on"
+    efforts:
+      "off": {chat_template_kwargs: {enable_thinking: false}}
+      "on": {chat_template_kwargs: {enable_thinking: true}}
+    effort_tiers: {"off": "off", "on": "on"}
+    notes: NVIDIA's NVFP4 checkpoint (HF revision 82d93699) on TensorFold 1.0.12 with plotarmordev's single-Spark recipe, whose 18 patches speed up decoding without changing tokens (replies matched stock TensorFold 1.0.12 token for token on the recipe's benchmark prompts); MTP drafting, 8 concurrent streams at a 131,072-token window. The image tower is loaded; the tasks are text-only.
