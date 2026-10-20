@@ -22,8 +22,13 @@ def test_the_clientell_manifest_loads_and_names_its_token_variable():
     )
     assert s.token_env == "FORCEBENCH_CLIENTELL_TOKEN"
     assert "search_salesforce_metadata" in s.tools
-    # Tools that change the Clientell account are never offered to an unattended agent.
-    assert not {"clientell_upgrade", "clientell_delete_my_data", "use_connector"} & set(s.tools)
+    # Tools that change the Clientell account or propose writes are never offered to an
+    # unattended agent.
+    never = {
+        "clientell_upgrade", "clientell_delete_my_data", "use_connector", "sf_confirm_write",
+        "sf_propose_update", "clientell_connect_salesforce", "clientell_set_active_org",
+    }  # fmt: skip
+    assert not never & set(s.tools)
 
 
 def test_a_bad_manifest_is_refused(tmp_path):
