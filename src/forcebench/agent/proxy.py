@@ -63,10 +63,12 @@ UNREADABLE = (ValueError, KeyError, TypeError)
 # Chat completion finish reasons as Anthropic stop reasons, for a translated reply.
 STOP_REASONS = {"stop": "end_turn", "length": "max_tokens", "tool_calls": "tool_use"}
 # MCP request headers passed on to the MCP server (its token is the proxy's own), and the response
-# headers passed back.
+# headers passed back. The harness's User-Agent goes too, or the proxy's own when it sends none: a
+# server behind a web firewall may refuse a request without one (Clientell's answers 403).
 MCP_REQUEST_HEADERS = ("Content-Type", "Accept", "Mcp-Session-Id", "Mcp-Protocol-Version",
-                       "Last-Event-ID")  # fmt: skip
+                       "Last-Event-ID", "User-Agent")  # fmt: skip
 MCP_RESPONSE_HEADERS = ("Content-Type", "Mcp-Session-Id")
+MCP_USER_AGENT = "forcebench-agent-proxy"
 
 
 def merge(base: dict[str, Any], extra: dict[str, Any]) -> dict[str, Any]:
@@ -617,6 +619,7 @@ def make_handler(proxy: Proxy) -> type[BaseHTTPRequestHandler]:
             try:
                 conn = proxy.mcp_connect()
                 headers = {h: self.headers[h] for h in MCP_REQUEST_HEADERS if self.headers.get(h)}
+                headers.setdefault("User-Agent", MCP_USER_AGENT)
                 headers["Authorization"] = f"Bearer {proxy.mcp_key}"
                 conn.request(method, proxy.mcp.path or "/", data or None, headers)
                 resp = conn.getresponse()

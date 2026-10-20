@@ -374,9 +374,13 @@ class _McpServer(BaseHTTPRequestHandler):
     def do_POST(self):
         msg = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         self.seen.append(
-            {"auth": self.headers.get("Authorization"),
+            {"auth": self.headers.get("Authorization"), "ua": self.headers.get("User-Agent"),
              "session": self.headers.get("Mcp-Session-Id"), "body": msg}
         )  # fmt: skip
+        if not self.headers.get("User-Agent"):  # as a web firewall in front of a server may
+            self.send_response(403)
+            self.end_headers()
+            return
         self.send_response(200)
         self.send_header("Mcp-Session-Id", "s-1")
         if msg["method"] == "tools/list":
@@ -420,9 +424,12 @@ def mcp(tmp_path):
     up.shutdown()
 
 
-def _call(url: str, method: str, params: dict | None = None, session: str = "") -> tuple:
+def _call(
+    url: str, method: str, params: dict | None = None, session: str = "", ua: str = "opencode/2"
+) -> tuple:
     body = {"jsonrpc": "2.0", "id": 1, "method": method, **({"params": params} if params else {})}
-    headers = {"Content-Type": "application/json", "Accept": "application/json, text/event-stream"}
+    headers = {"Content-Type": "application/json", "Accept": "application/json, text/event-stream",
+               "User-Agent": ua}  # fmt: skip
     if session:
         headers["Mcp-Session-Id"] = session
     req = request.Request(url, json.dumps(body).encode(), headers)
@@ -462,6 +469,13 @@ def test_the_agent_sees_only_the_run_s_tools(mcp):
     events = _events(body)
     assert [t["name"] for t in events[0]["result"]["tools"]] == ["search_docs"]
     assert _logged(log, 1)[0]["offered"] == ["search_docs", "upgrade", "delete"]
+
+
+def test_the_harness_s_user_agent_goes_on_or_the_proxy_s_when_it_sends_none(mcp):
+    url, _ = mcp
+    _call(url, "initialize", ua="opencode/2.0.21")
+    _call(url, "initialize", ua="")  # the stand-in, like a web firewall, refuses no User-Agent
+    assert [s["ua"] for s in _McpServer.seen] == ["opencode/2.0.21", "forcebench-agent-proxy"]
 
 
 def test_a_call_to_a_tool_the_run_does_not_offer_never_reaches_the_server(mcp):
