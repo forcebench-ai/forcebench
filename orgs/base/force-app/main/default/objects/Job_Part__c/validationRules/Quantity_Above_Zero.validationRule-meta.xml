@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantity_Above_Zero</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(ISBLANK(Quantity__c), Quantity__c &lt;= 0)</errorConditionFormula>
+    <errorDisplayField>Quantity__c</errorDisplayField>
+    <errorMessage>A part line needs a quantity above zero.</errorMessage>
+</ValidationRule>

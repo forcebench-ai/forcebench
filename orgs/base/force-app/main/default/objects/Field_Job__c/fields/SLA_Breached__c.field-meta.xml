@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SLA_Breached__c</fullName>
+    <description>Set by the job trigger when a job is completed after its SLA allows.</description>
+<defaultValue>false</defaultValue>
+    <label>SLA Breached</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

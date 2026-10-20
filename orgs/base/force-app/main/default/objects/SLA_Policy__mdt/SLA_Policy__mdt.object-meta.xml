@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>How many hours a field job of each priority band has, from its scheduled start, to be completed. Field service study schema (docs/mcp-study.md).</description>
+    <label>SLA Policy</label>
+    <pluralLabel>SLA Policies</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

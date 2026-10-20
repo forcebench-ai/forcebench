@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Parts_Total__c</fullName>
+    <description>The sum of the job's parts' line totals.</description>
+<label>Parts Total</label>
+    <summarizedField>Job_Part__c.Line_Total__c</summarizedField>
+    <summaryForeignKey>Job_Part__c.Field_Job__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>
