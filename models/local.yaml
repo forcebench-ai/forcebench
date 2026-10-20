@@ -508,6 +508,7 @@ models:
   - id: gemma-4-26b-a4b-nvfp4
     provider: direct-gpu
     endpoint_model: gemma-4-26b-a4b
+    proxy_model: gemma-4-26b-a4b
     display: Gemma 4 26B-A4B
     model_id: gemma-4-26b-a4b
     developer: google
