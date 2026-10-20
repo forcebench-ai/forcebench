@@ -13,13 +13,20 @@ model the same way, with the same fields. On the way the proxy:
 - logs every request's token usage, finish reason and latency (one JSON line each), which is
   how agent runs are measured: a harness's cost is part of the result.
 
-The model server's address and key live only in this process's environment; the agent never sees
-them. Standard library only, so it runs in the agent image's own Python.
+A run with an MCP server (forcebench.agent.mcp) also reaches that one server through the proxy, at
+``/mcp`` (MCP's Streamable HTTP transport). The proxy adds the server's token, shows the agent only
+the run's tools (a ``tools/list`` answer is cut to them) and refuses a call to any other, and logs
+every exchange: the method, the tool and its arguments, the status, size and latency.
+
+The model server's address and key, and the MCP server's token, live only in this process's
+environment; the agent never sees them. Standard library only, so it runs in the agent image's own
+Python.
 
 Environment: FB_UPSTREAM (base URL ending in /v1), FB_UPSTREAM_KEY (optional), FB_MODEL (the name
 the server serves), FB_INJECT (JSON object merged into each request), FB_MAX_TOKENS,
 FB_MAX_REQUESTS, FB_MAX_OUTPUT_TOKENS, FB_LOG (JSON lines file), FB_FIRST_REQUEST (file), FB_PORT
-(default 8080).
+(default 8080); for an MCP server, FB_MCP_UPSTREAM (its URL), FB_MCP_KEY (its bearer token),
+FB_MCP_TOOLS (JSON list of the tools the agent may use) and FB_MCP_LOG (JSON lines file).
 """
 
 import contextlib
@@ -55,6 +62,11 @@ HARNESS_DROP = (
 UNREADABLE = (ValueError, KeyError, TypeError)
 # Chat completion finish reasons as Anthropic stop reasons, for a translated reply.
 STOP_REASONS = {"stop": "end_turn", "length": "max_tokens", "tool_calls": "tool_use"}
+# MCP request headers passed on to the MCP server (its token is the proxy's own), and the response
+# headers passed back.
+MCP_REQUEST_HEADERS = ("Content-Type", "Accept", "Mcp-Session-Id", "Mcp-Protocol-Version",
+                       "Last-Event-ID")  # fmt: skip
+MCP_RESPONSE_HEADERS = ("Content-Type", "Mcp-Session-Id")
 
 
 def merge(base: dict[str, Any], extra: dict[str, Any]) -> dict[str, Any]:
@@ -410,6 +422,83 @@ def usage_from_sse(lines: list[bytes]) -> tuple[dict[str, Any] | None, str | Non
     return usage, finish
 
 
+def _rpc(body: Any) -> list[dict[str, Any]]:
+    """The JSON-RPC messages in an MCP body: one message, or a batch."""
+    return [m for m in (body if isinstance(body, list) else [body]) if isinstance(m, dict)]
+
+
+class McpExchange:
+    """One MCP request relayed to the MCP server, and its log record.
+
+    ``refused`` names a tool the request calls that the run does not offer (the request is then
+    answered here, as an MCP server answers an unknown tool). The server's answer passes through
+    ``answer``, which cuts a ``tools/list`` result to the run's tools and notes what each tool
+    call returned.
+    """
+
+    def __init__(self, body: Any, allowed: set[str], record: dict[str, Any]) -> None:
+        self.allowed, self.record = allowed, record
+        msgs = _rpc(body)
+        self.lists = {m.get("id") for m in msgs if m.get("method") == "tools/list"}
+        calls = [m for m in msgs if m.get("method") == "tools/call"]
+        self.calls = {m.get("id") for m in calls}
+        self.refused: str | None = None
+        self.refusal: dict[str, Any] = {}
+        methods = [str(m["method"]) for m in msgs if m.get("method")]
+        if methods:
+            record["methods"] = methods
+        for m in calls:
+            params = m.get("params") or {}
+            name = str(params.get("name") or "")
+            record.update(tool=name, arguments=params.get("arguments"))
+            if name not in allowed:
+                self.refused = name
+                self.refusal = {
+                    "jsonrpc": "2.0",
+                    "id": m.get("id"),
+                    "error": {"code": -32602, "message": f"Unknown tool: {name}"},
+                }
+
+    def answer(self, obj: Any) -> Any:
+        for m in _rpc(obj):
+            result = m.get("result")
+            if m.get("id") in self.lists and isinstance(result, dict):
+                tools = [t for t in result.get("tools") or [] if isinstance(t, dict)]
+                self.record["offered"] = [str(t.get("name")) for t in tools]
+                result["tools"] = [t for t in tools if t.get("name") in self.allowed]
+            elif m.get("id") in self.calls:
+                if "error" in m:
+                    self.record["rpc_error"] = str((m["error"] or {}).get("message"))[:500]
+                elif isinstance(result, dict):
+                    self.record["is_error"] = bool(result.get("isError"))
+                    self.record["result_chars"] = len(json.dumps(result.get("content")))
+            if isinstance(result, dict) and isinstance(result.get("serverInfo"), dict):
+                self.record["server_info"] = result["serverInfo"]
+        return obj
+
+    def json(self, data: bytes) -> bytes:
+        """A JSON answer, through ``answer``."""
+        try:
+            return json.dumps(self.answer(json.loads(data))).encode()
+        except ValueError:
+            return data
+
+    def event(self, lines: list[bytes]) -> bytes:
+        """One server-sent event (its lines, without the blank line ending it), through ``answer``.
+
+        An event whose data is a JSON-RPC message is sent again with that message as one data line.
+        """
+        data = [x[5:].strip() for x in lines if x.startswith(b"data:")]
+        try:
+            obj = json.loads(b"\n".join(data)) if data else None
+        except ValueError:
+            obj = None
+        if obj is None:
+            return b"".join(lines)
+        rest = [x for x in lines if not x.startswith(b"data:")]
+        return b"".join(rest) + b"data: " + json.dumps(self.answer(obj)).encode() + b"\n"
+
+
 class Proxy:
     def __init__(self, env: dict[str, str]) -> None:
         self.upstream = urllib.parse.urlsplit(env["FB_UPSTREAM"].rstrip("/"))
@@ -426,11 +515,18 @@ class Proxy:
         # with the run's raw records), when FB_FIRST_REQUEST names a file.
         self.first_path = env.get("FB_FIRST_REQUEST") or ""
         self.first_kept = False
+        # The MCP server, when the run has one.
+        mcp = env.get("FB_MCP_UPSTREAM") or ""
+        self.mcp = urllib.parse.urlsplit(mcp) if mcp else None
+        self.mcp_key = env.get("FB_MCP_KEY") or ""
+        self.mcp_tools: set[str] = set(json.loads(env.get("FB_MCP_TOOLS") or "[]"))
+        self.mcp_log_path = env.get("FB_MCP_LOG") or ""
 
-    def log(self, record: dict[str, Any]) -> None:
-        if not self.log_path:
+    def log(self, record: dict[str, Any], path: str | None = None) -> None:
+        path = self.log_path if path is None else path
+        if not path:
             return
-        with self.log_lock, Path(self.log_path).open("a", encoding="utf-8") as f:
+        with self.log_lock, Path(path).open("a", encoding="utf-8") as f:
             f.write(json.dumps(record) + "\n")
 
     def keep_first(self, req: dict[str, Any]) -> None:
@@ -447,6 +543,12 @@ class Proxy:
             else http.client.HTTPConnection
         )
         return cls(self.upstream.hostname or "", self.upstream.port, timeout=3600)
+
+    def mcp_connect(self) -> http.client.HTTPConnection:
+        url = self.mcp or urllib.parse.urlsplit("")
+        cls = http.client.HTTPSConnection if url.scheme == "https" else http.client.HTTPConnection
+        # Longer than the agent waits for a tool (the harness's MCP timeout).
+        return cls(url.hostname or "", url.port, timeout=600)
 
 
 def make_handler(proxy: Proxy) -> type[BaseHTTPRequestHandler]:
@@ -466,7 +568,9 @@ def make_handler(proxy: Proxy) -> type[BaseHTTPRequestHandler]:
             self.wfile.write(data)
 
         def do_GET(self) -> None:
-            if self.path.rstrip("/").endswith("/models"):
+            if self._is_mcp():
+                self._mcp("GET")
+            elif self.path.rstrip("/").endswith("/models"):
                 self._json(200, {"object": "list", "data": [{"id": "model", "object": "model"}]})
             else:
                 self._json(404, {"error": {"message": "not found"}})
@@ -479,7 +583,83 @@ def make_handler(proxy: Proxy) -> type[BaseHTTPRequestHandler]:
                     status, {"error": {"message": message, **({"type": kind} if kind else {})}}
                 )
 
+        def do_DELETE(self) -> None:
+            if self._is_mcp():
+                self._mcp("DELETE")
+            else:
+                self._json(404, {"error": {"message": "not found"}})
+
+        def _is_mcp(self) -> bool:
+            return urllib.parse.urlsplit(self.path).path.rstrip("/") == "/mcp"
+
+        def _mcp(self, method: str) -> None:
+            """Relay one MCP request to the run's MCP server, with its token."""
+            if proxy.mcp is None:
+                self._json(404, {"error": {"message": "this run has no MCP server"}})
+                return
+            t0 = time.time()
+            record: dict[str, Any] = {"ts": t0, "http": method}
+            data = b""
+            if method == "POST":
+                data = self.rfile.read(int(self.headers.get("Content-Length") or 0))
+            try:
+                body = json.loads(data) if data else None
+            except ValueError:
+                self._json(400, {"error": {"message": "invalid JSON"}})
+                return
+            ex = McpExchange(body, proxy.mcp_tools, record)
+            if ex.refused is not None:
+                record["refused"] = ex.refused
+                proxy.log(record, proxy.mcp_log_path)
+                self._json(200, ex.refusal)
+                return
+            record["bytes"] = 0
+            try:
+                conn = proxy.mcp_connect()
+                headers = {h: self.headers[h] for h in MCP_REQUEST_HEADERS if self.headers.get(h)}
+                headers["Authorization"] = f"Bearer {proxy.mcp_key}"
+                conn.request(method, proxy.mcp.path or "/", data or None, headers)
+                resp = conn.getresponse()
+                record["status"] = resp.status
+                self.send_response(resp.status)
+                for h in MCP_RESPONSE_HEADERS:
+                    if resp.getheader(h):
+                        self.send_header(h, resp.getheader(h) or "")
+                if (resp.getheader("Content-Type") or "").startswith("text/event-stream"):
+                    self.end_headers()
+                    event: list[bytes] = []
+                    while True:
+                        line = resp.readline()
+                        if line and line.strip():
+                            event.append(line)
+                            continue
+                        out = (ex.event(event) if event else b"") + line
+                        record["bytes"] += len(out)
+                        self.wfile.write(out)
+                        self.wfile.flush()
+                        event = []
+                        if not line:
+                            break
+                else:
+                    out = resp.read()
+                    out = ex.json(out) if out and resp.status == 200 else out
+                    record["bytes"] = len(out)
+                    self.send_header("Content-Length", str(len(out)))
+                    self.end_headers()
+                    self.wfile.write(out)
+            except Exception as e:  # noqa: BLE001 (any failure is answered with a 502 and logged)
+                record["error"] = f"{type(e).__name__}: {e}"
+                if "status" not in record:  # nothing sent yet
+                    record["status"] = 502
+                    with contextlib.suppress(Exception):  # the client may be gone
+                        self._json(502, {"error": {"message": f"MCP server: {type(e).__name__}"}})
+            record["latency_s"] = round(time.time() - t0, 3)
+            proxy.log(record, proxy.mcp_log_path)
+
         def do_POST(self) -> None:
+            if self._is_mcp():
+                self._mcp("POST")
+                return
             path = urllib.parse.urlsplit(self.path).path.rstrip("/")
             if path.endswith("/messages/count_tokens"):
                 self._count_tokens()

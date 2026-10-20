@@ -6,6 +6,7 @@ What it changes in each request, the budget it enforces, and what it records.
 import ast
 import json
 import threading
+import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import ClassVar
@@ -360,3 +361,120 @@ def test_a_context_overflow_reads_as_anthropic_s_so_the_harness_compacts():
         },
     }
     assert anthropic_error(500, "boom")["error"] == {"type": "api_error", "message": "boom"}
+
+
+class _McpServer(BaseHTTPRequestHandler):
+    """An MCP server (Streamable HTTP): a session id, three tools listed over SSE, JSON results."""
+
+    seen: ClassVar[list[dict]] = []
+
+    def log_message(self, format, *args):  # noqa: A002 (BaseHTTPRequestHandler's name)
+        pass
+
+    def do_POST(self):
+        msg = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+        self.seen.append(
+            {"auth": self.headers.get("Authorization"),
+             "session": self.headers.get("Mcp-Session-Id"), "body": msg}
+        )  # fmt: skip
+        self.send_response(200)
+        self.send_header("Mcp-Session-Id", "s-1")
+        if msg["method"] == "tools/list":
+            tools = [{"name": n, "inputSchema": {}} for n in ("search_docs", "upgrade", "delete")]
+            reply = {"jsonrpc": "2.0", "id": msg["id"], "result": {"tools": tools}}
+            self.send_header("Content-Type", "text/event-stream")
+            self.end_headers()
+            self.wfile.write(f"event: message\ndata: {json.dumps(reply)}\n\n".encode())
+            return
+        if msg["method"] == "initialize":
+            result = {"serverInfo": {"name": "fake", "version": "1.2"}, "capabilities": {}}
+        else:
+            result = {"content": [{"type": "text", "text": "found it"}], "isError": False}
+        data = json.dumps({"jsonrpc": "2.0", "id": msg["id"], "result": result}).encode()
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+
+@pytest.fixture
+def mcp(tmp_path):
+    _McpServer.seen = []
+    up = ThreadingHTTPServer(("127.0.0.1", 0), _McpServer)
+    threading.Thread(target=up.serve_forever, daemon=True).start()
+    log = tmp_path / "mcp.jsonl"
+    proxy = Proxy(
+        {
+            "FB_UPSTREAM": "http://127.0.0.1:9/v1",
+            "FB_MODEL": "served-name",
+            "FB_MCP_UPSTREAM": f"http://127.0.0.1:{up.server_port}/mcp",
+            "FB_MCP_KEY": "mcp-token",
+            "FB_MCP_TOOLS": json.dumps(["search_docs"]),
+            "FB_MCP_LOG": str(log),
+        }
+    )
+    srv = ThreadingHTTPServer(("127.0.0.1", 0), make_handler(proxy))
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    yield f"http://127.0.0.1:{srv.server_port}/mcp", log
+    srv.shutdown()
+    up.shutdown()
+
+
+def _call(url: str, method: str, params: dict | None = None, session: str = "") -> tuple:
+    body = {"jsonrpc": "2.0", "id": 1, "method": method, **({"params": params} if params else {})}
+    headers = {"Content-Type": "application/json", "Accept": "application/json, text/event-stream"}
+    if session:
+        headers["Mcp-Session-Id"] = session
+    req = request.Request(url, json.dumps(body).encode(), headers)
+    with request.urlopen(req, timeout=10) as r:
+        return r.headers.get("Mcp-Session-Id"), r.read()
+
+
+def _logged(log: Path, n: int) -> list[dict]:
+    """The log's first n records; the proxy writes a record once it has answered."""
+    for _ in range(100):
+        lines = log.read_text().splitlines() if log.exists() else []
+        if len(lines) >= n:
+            return [json.loads(x) for x in lines[:n]]
+        time.sleep(0.02)
+    raise AssertionError(f"fewer than {n} records in {log.name}")
+
+
+def test_the_mcp_server_gets_its_token_from_the_proxy_and_the_session_passes_both_ways(mcp):
+    url, log = mcp
+    session, body = _call(url, "initialize")
+    assert session == "s-1"
+    assert json.loads(body)["result"]["serverInfo"]["name"] == "fake"
+    _call(url, "tools/call", {"name": "search_docs", "arguments": {"q": "x"}}, session="s-1")
+    assert [s["auth"] for s in _McpServer.seen] == ["Bearer mcp-token"] * 2  # the agent has none
+    assert _McpServer.seen[1]["session"] == "s-1"
+    first, call = _logged(log, 2)
+    assert first["server_info"] == {"name": "fake", "version": "1.2"}
+    assert (call["tool"], call["arguments"], call["is_error"], call["status"]) == (
+        "search_docs", {"q": "x"}, False, 200
+    )  # fmt: skip
+    assert call["result_chars"] > 0
+
+
+def test_the_agent_sees_only_the_run_s_tools(mcp):
+    url, log = mcp
+    _, body = _call(url, "tools/list")
+    events = _events(body)
+    assert [t["name"] for t in events[0]["result"]["tools"]] == ["search_docs"]
+    assert _logged(log, 1)[0]["offered"] == ["search_docs", "upgrade", "delete"]
+
+
+def test_a_call_to_a_tool_the_run_does_not_offer_never_reaches_the_server(mcp):
+    url, log = mcp
+    _, body = _call(url, "tools/call", {"name": "delete", "arguments": {}})
+    assert json.loads(body)["error"]["message"] == "Unknown tool: delete"
+    assert not _McpServer.seen
+    assert _logged(log, 1)[0]["refused"] == "delete"
+
+
+def test_a_run_without_an_mcp_server_relays_nothing(servers):
+    url, _ = servers
+    req = request.Request(url.replace("/v1", "/mcp"), b"{}", {"Content-Type": "application/json"})
+    with pytest.raises(error.HTTPError) as e:
+        request.urlopen(req, timeout=10)
+    assert e.value.code == 404
