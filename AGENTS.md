@@ -177,13 +177,15 @@ everything if anything private turns up. Pushing is a separate step. After a tas
 ### 5. The agent track and studies
 
 - **Agent track.** The same tasks answered by a coding agent (opencode, Claude Code or pi) in an
-  isolated container, optionally with a skill pack. The commands are `make agent-image` (or
-  `make agent-harnesses-image`), `make agent-run AGENT=<agent> ARGS="..."`,
-  `make agent-ab MODEL=<id> EFFORT=<level>` (with and without skills, side by side) and
-  `make agent-report`. See [docs/agent-track.md](docs/agent-track.md) and
-  [docs/harness-study.md](docs/harness-study.md).
+  isolated container, optionally with a skill pack or an MCP server (`--mcp clientell`). The
+  commands are `make agent-image` (or `make agent-harnesses-image`),
+  `make agent-run AGENT=<agent> ARGS="..."`, `make agent-ab MODEL=<id> EFFORT=<level>` (with and
+  without skills, side by side), `make mcp-study-arms MODEL=<id> EFFORT=<level>` (with and
+  without the MCP server) and `make agent-report`. See [docs/agent-track.md](docs/agent-track.md),
+  [docs/harness-study.md](docs/harness-study.md) and [docs/mcp-study.md](docs/mcp-study.md).
 - **Studies.** `forcebench study contamination` (public against private tasks,
-  [docs/contamination-study.md](docs/contamination-study.md)) and `forcebench study harness`.
+  [docs/contamination-study.md](docs/contamination-study.md)), `forcebench study harness` and
+  `forcebench study mcp`.
   The site's other studies (quantisation, effort, max effort, local vs hosted) are computed from
   `results/leaderboard.json`, so new runs update them.
 
@@ -215,6 +217,7 @@ When you change a task, follow [CONTRIBUTING.md](CONTRIBUTING.md) and
 | [docs/private-pool.md](docs/private-pool.md) | The held-out task pool and its rules |
 | [docs/agent-track.md](docs/agent-track.md) | Coding agents and skill packs |
 | [docs/harness-study.md](docs/harness-study.md) | The agent harness comparison |
+| [docs/mcp-study.md](docs/mcp-study.md) | An agent without and with Clientell's MCP server |
 | [docs/contamination-study.md](docs/contamination-study.md) | Public against private tasks |
 | [docs/feedback-study.md](docs/feedback-study.md) | Attempts with feedback against fresh answers (why c@k) |
 | [docs/leaderboard-schema.md](docs/leaderboard-schema.md) | The published results format |

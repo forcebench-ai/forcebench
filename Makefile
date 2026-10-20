@@ -180,6 +180,15 @@ agent-ab: ## Both arms of the skills A/B side by side: make agent-ab MODEL=<id> 
 	uv run forcebench run --agent opencode --skills sf-skills -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & b=$$!; \
 	wait $$a; ra=$$?; wait $$b; rb=$$?; exit $$(( ra || rb ))
 
+# The MCP study's two arms for one model (docs/mcp-study.md): opencode without and with Clientell's
+# MCP server, side by side, both through the LiteLLM proxy (--via local), started five seconds apart
+# as in agent-ab.
+mcp-study-arms: ## Both arms of the MCP study side by side: make mcp-study-arms MODEL=<id> EFFORT=<effort> ARGS="--subset lite -c 2"
+	@test -n "$(MODEL)" -a -n "$(EFFORT)" || { echo 'usage: make mcp-study-arms MODEL=<id> EFFORT=<effort> ARGS="--subset lite -c 2"' >&2; exit 2; }
+	uv run forcebench run --agent opencode --via local -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & a=$$!; sleep 5; \
+	uv run forcebench run --agent opencode --mcp clientell --via local -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & b=$$!; \
+	wait $$a; ra=$$?; wait $$b; rb=$$?; exit $$(( ra || rb ))
+
 agent-report: ## Aggregate agent runs into results/agent/leaderboard.json
 	uv run forcebench report --track agent
 
