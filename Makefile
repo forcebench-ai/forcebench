@@ -189,6 +189,17 @@ mcp-study-arms: ## Both arms of the MCP study side by side: make mcp-study-arms 
 	uv run forcebench run --agent opencode --mcp clientell --via local -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & b=$$!; \
 	wait $$a; ra=$$?; wait $$b; rb=$$?; exit $$(( ra || rb ))
 
+# Part 2 of the MCP study for one model: the org-context study tasks (--subset study) with nothing,
+# with the org's metadata in the workspace (orgs/base), and with Clientell's server connected to an
+# org that holds the same metadata, side by side. Its runs are never published: run it in a
+# worktree, whose results/ is its own.
+mcp-study-org-arms: ## Part 2 of the MCP study, three arms side by side: make mcp-study-org-arms MODEL=<id> EFFORT=<effort> ARGS="--samples 3 -c 2"
+	@test -n "$(MODEL)" -a -n "$(EFFORT)" || { echo 'usage: make mcp-study-org-arms MODEL=<id> EFFORT=<effort> ARGS="--samples 3 -c 2"' >&2; exit 2; }
+	uv run forcebench run --agent opencode --via local --subset study -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & a=$$!; sleep 5; \
+	uv run forcebench run --agent opencode --org-source base --via local --subset study -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & b=$$!; sleep 5; \
+	uv run forcebench run --agent opencode --mcp clientell-org --via local --subset study -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & c=$$!; \
+	wait $$a; ra=$$?; wait $$b; rb=$$?; wait $$c; rc=$$?; exit $$(( ra || rb || rc ))
+
 agent-report: ## Aggregate agent runs into results/agent/leaderboard.json
 	uv run forcebench report --track agent
 

@@ -35,6 +35,7 @@ from pathlib import Path
 from typing import Any, ClassVar
 
 from forcebench.agent.mcp import McpServer, mcp_usage
+from forcebench.agent.org_source import OrgSource
 from forcebench.agent.skills import SkillPack, skill_block
 from forcebench.answers import extract, lang_for
 from forcebench.llm import Generation, recorded_request
@@ -46,7 +47,8 @@ PROXY_SCRIPT = Path(__file__).with_name("proxy.py")
 # opencode's global skills directory in the agent's image (HOME is /home/node).
 SKILLS_MOUNT = "/home/node/.config/opencode/skills"
 
-# What the agent cannot reach. A run with an MCP server replaces it with the server's own sentence.
+# What the agent cannot reach. A run with an MCP server, or with the org's metadata in its
+# workspace, replaces it with a sentence saying what it has.
 NO_NETWORK = "There is no network access and no Salesforce org."
 # Appended to the task message: the only words the agent gets that a single-turn run does not.
 AGENT_NOTE = (
@@ -57,9 +59,13 @@ AGENT_NOTE = (
 )
 
 
-def agent_note(mcp: McpServer | None = None) -> str:
-    """The note a run appends to each task: with an MCP server, it says what the server reaches."""
-    return AGENT_NOTE.replace(NO_NETWORK, mcp.note) if mcp else AGENT_NOTE
+def agent_note(mcp: McpServer | None = None, org: OrgSource | None = None) -> str:
+    """The note a run appends to each task.
+
+    With an MCP server it says what the server reaches; with the org's metadata, where it is.
+    """
+    sentence = mcp.note if mcp else org.note if org else None
+    return AGENT_NOTE.replace(NO_NETWORK, sentence) if sentence else AGENT_NOTE
 
 
 @dataclass(frozen=True)
@@ -96,6 +102,11 @@ class Harness:
     preload: bool = False
     # A remote MCP server whose tools the agent may use, through the proxy (forcebench.agent.mcp).
     mcp: McpServer | None = None
+    # The org's metadata as the workspace's SFDX project (forcebench.agent.org_source).
+    org_source: OrgSource | None = None
+
+    def note(self) -> str:
+        return agent_note(self.mcp, self.org_source)
 
     def files(self, m: ModelConfig) -> dict[str, str]:
         """Configuration files, by their path in the container (mounted read-only)."""
@@ -119,7 +130,7 @@ class Harness:
             "name": self.name,
             "version": self.version,
             "image": image_id,
-            "note_sha": hashlib.sha256(agent_note(self.mcp).encode()).hexdigest()[:12],
+            "note_sha": hashlib.sha256(self.note().encode()).hexdigest()[:12],
             "budget": {
                 "max_requests": self.budget.max_requests,
                 "max_output_tokens": self.budget.max_output_tokens,
@@ -129,6 +140,7 @@ class Harness:
             # with.
             **({"skills": self._skills_record(self.skills)} if self.skills else {}),
             **({"mcp": self.mcp.describe()} if self.mcp else {}),
+            **({"org_source": self.org_source.describe()} if self.org_source else {}),
         }
 
     def _skills_record(self, pack: SkillPack) -> dict[str, Any]:
@@ -161,7 +173,9 @@ class Opencode(Harness):
         # opencode fixes a session's tools when it starts and does not wait for MCP servers, so a
         # session started at once would never have the server's tools. Start opencode's server
         # first, wait until it has connected the MCP server (at most a minute), then run the task
-        # on it.
+        # on it. opencode reports a server connected before it has its tools: it lists them, and
+        # the server's prompts, after (each a round trip, about 3 seconds in all for Clientell),
+        # so wait 5 seconds more.
         server = "--server http://127.0.0.1:4096"
         return (
             "export OPENCODE_SERVER_PASSWORD=$(od -An -N16 -tx1 /dev/urandom | tr -d ' \\n') && "
@@ -169,7 +183,7 @@ class Opencode(Harness):
             "(opencode serve --hostname 127.0.0.1 --port 4096 </dev/null >/dev/null 2>&1 &) && "
             "i=0; until opencode api " + server + " GET /api/mcp </dev/null 2>/dev/null"
             ' | grep -q \'"status":"connected"\'; do'
-            " i=$((i+1)); [ $i -ge 120 ] && break; sleep 0.5; done; "
+            " i=$((i+1)); [ $i -ge 120 ] && break; sleep 0.5; done; sleep 5; "
             f'exec opencode run {server} --auto --format json -m bench/model --title task "$(cat)"'
         )
 
@@ -262,7 +276,8 @@ def label(harness: dict[str, Any] | None) -> str | None:
     """How a harness is shown on the leaderboard, e.g. ``opencode 2.0.21``.
 
     With a skill pack: ``opencode 2.0.21 + sf-skills 1.58.0`` (``… sf-skills 1.58.0, preloaded``
-    when they are); with an MCP server: ``opencode 2.0.21 + Clientell MCP``.
+    when they are); with an MCP server: ``opencode 2.0.21 + Clientell MCP``; with the org's metadata
+    in its workspace: ``opencode 2.0.21 + org metadata``.
     """
     if not harness:
         return None
@@ -275,6 +290,7 @@ def label(harness: dict[str, Any] | None) -> str | None:
             else ""
         )
         + (f" + {mcp['label']}" if mcp else "")
+        + (" + org metadata" if harness.get("org_source") else "")
     )
 
 
@@ -543,16 +559,19 @@ def parse_pi_events(stream: str) -> Transcript:
     return t
 
 
-def assemble_answer(task: Task, text: str, workspace: Path) -> tuple[str, list[str]]:
+def assemble_answer(
+    task: Task, text: str, workspace: Path, base: dict[str, str] | None = None
+) -> tuple[str, list[str]]:
     """The answer to grade, and which files were added to it from the workspace.
 
     The final message is the answer, as in a single-turn run. For a task that asks for files, an
     expected file the message does not include is taken from the workspace when the agent wrote
-    it there (it differs from the file it was given, or is new).
+    it there (it differs from the file it was given, or is new). ``base`` is the workspace's files
+    under the task's own (the org's metadata), which were given too.
     """
     if task.answer.format is not AnswerFormat.FILES:
         return text, []
-    given = task.context_files
+    given = {**(base or {}), **task.context_files}
     # Parsed exactly as grading parses it, so a file counts as answered when grading would see it.
     in_text = set(extract(task, text).files) if text else set()
     added: list[str] = []
@@ -573,11 +592,14 @@ def assemble_answer(task: Task, text: str, workspace: Path) -> tuple[str, list[s
     return (text + "\n\n" + "\n\n".join(blocks)).strip(), added
 
 
-def write_workspace(task: Task, root: Path) -> Path:
-    """The task's visible files, at their paths, in a fresh directory the container can write."""
+def write_workspace(task: Task, root: Path, base: dict[str, str] | None = None) -> Path:
+    """The task's visible files, at their paths, in a fresh directory the container can write.
+
+    ``base`` (the org's metadata) is written first, the task's own files over it.
+    """
     work = root / "work"
     work.mkdir(parents=True)
-    for rel, content in task.context_files.items():
+    for rel, content in {**(base or {}), **task.context_files}.items():
         p = (work / rel).resolve()
         if not p.is_relative_to(work.resolve()):
             raise ValueError(f"{task.id}: context file outside the workspace: {rel}")
@@ -651,6 +673,8 @@ class AgentClient:
         self.skills = harness.skills.directory() if harness.skills else None
         # Read now, so a missing token stops the run before its first task.
         self.mcp_token = harness.mcp.token() if harness.mcp else ""
+        # Read once; the run recorded their hash.
+        self.org_files = harness.org_source.files() if harness.org_source else {}
 
     async def generate_task(self, task: Task, sample: int, system: str, prompt: str) -> Generation:
         key = f"{task.id}#{sample}"
@@ -660,7 +684,7 @@ class AgentClient:
         keep = self.run_dir / "raw" / "agent" / key
         t0 = time.time()
         try:
-            work = write_workspace(task, root)
+            work = write_workspace(task, root, self.org_files)
             (root / "log").mkdir()
             (root / "log").chmod(0o777)
             # The harness's configuration files, each mounted read-only at its path.
@@ -714,7 +738,7 @@ class AgentClient:
             if code:
                 return self._infra(t0, f"proxy: {err.decode()[-200:]}")
             await _run("docker", "network", "connect", "bridge", proxy)
-            message = task_message(system, prompt, agent_note(self.h.mcp))
+            message = task_message(system, prompt, self.h.note())
             if self.h.preload and self.h.skills and self.skills:
                 message = preload_skills(self.h.skills, self.skills, task.suite, message)
             try:
@@ -732,7 +756,7 @@ class AgentClient:
                 code, out, err, timed_out = -1, b"", b"", True
             u = usage(root / "log" / "requests.jsonl")
             tr = self.h.parse(out.decode(errors="replace"))
-            answer, added = assemble_answer(task, tr.text, work)
+            answer, added = assemble_answer(task, tr.text, work, self.org_files)
             keep.mkdir(parents=True, exist_ok=True)
             (keep / "events.jsonl").write_bytes(out)
             for name in ("requests.jsonl", "first_request.json", "mcp.jsonl"):

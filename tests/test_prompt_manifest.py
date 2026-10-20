@@ -13,7 +13,7 @@ from forcebench import cli, prompt_manifest
 from forcebench.answers import prompt_sha, render_prompt
 from forcebench.prompt_manifest import REGENERATE, build, problems, refusals, write
 from forcebench.runner import _sha
-from forcebench.tasks import all_tasks, load_suites
+from forcebench.tasks import EVERY_STATUS, all_tasks, load_suites
 
 
 def test_every_prompt_matches_the_committed_manifest():
@@ -24,7 +24,8 @@ def test_every_prompt_matches_the_committed_manifest():
     or grader rules alone keeps the version: stored answers are re-graded instead
     (`make regrade-all`).
     """
-    found = problems(all_tasks(load_suites()), prompt_manifest.load())
+    # Every public task, as `tasks --write-manifest` writes it (study tasks too).
+    found = problems(all_tasks(load_suites(statuses=EVERY_STATUS)), prompt_manifest.load())
     assert not found, "\n".join(found)
 
 

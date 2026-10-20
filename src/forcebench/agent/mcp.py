@@ -38,10 +38,16 @@ class McpServer:
     tools: tuple[str, ...]
     # Replaces the agent note's "no network, no org" sentence (harness.agent_note).
     note: str
+    # The manifest's file name, when it is not the server's name: two manifests may give one
+    # server with different notes (docs/mcp-study.md, part 2).
+    id: str = ""
 
     def describe(self) -> dict[str, Any]:
         """What a run records about its server (a resume must match it)."""
-        return {"name": self.name, "label": self.label, "url": self.url, "tools": list(self.tools)}
+        return {
+            "name": self.name, "label": self.label, "url": self.url, "tools": list(self.tools),
+            **({"id": self.id} if self.id and self.id != self.name else {}),
+        }  # fmt: skip
 
     def token(self) -> str:
         """The server's token, from the environment (.env); a RuntimeError names its variable."""
@@ -65,7 +71,9 @@ def load_server(name: str, servers: Path = SERVERS_DIR) -> McpServer:
         raise ValueError(f"{path.name}: token_env must be a FORCEBENCH_ variable")
     if not tools or any(not _NAME.fullmatch(t) for t in tools) or len(set(tools)) < len(tools):
         raise ValueError(f"{path.name}: tools must be distinct tool names")
-    return McpServer(d["name"], d["label"], d["url"], d["token_env"], tools, d["note"])
+    if not _NAME.fullmatch(d["name"]):
+        raise ValueError(f"{path.name}: name must be a tool prefix (lowercase, digits, - and _)")
+    return McpServer(d["name"], d["label"], d["url"], d["token_env"], tools, d["note"], name)
 
 
 def mcp_usage(log: Path) -> dict[str, Any]:

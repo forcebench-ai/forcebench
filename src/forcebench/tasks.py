@@ -35,10 +35,13 @@ Tier = Literal["private", "semi-private"]
 # active (public) and ready (private) tasks are run and scored. A private task becomes ready only
 # by passing `forcebench private check`, which records what it checked (pool.CheckRecord). draft
 # tasks (being written) and example tasks (which show the format and exercise the tooling) are
-# validated, never run, scored or studied.
-Status = Literal["active", "ready", "draft", "example"]
+# validated, never run, scored or studied. study tasks belong to one study (docs/mcp-study.md): they
+# are validated and graded like any task, run only when a run asks for them (`run --study`), and
+# never scored on a leaderboard nor drawn into a subset.
+Status = Literal["active", "ready", "draft", "example", "study"]
 ACTIVE: frozenset[Status] = frozenset({"active", "ready"})
-EVERY_STATUS: frozenset[Status] = frozenset({"active", "ready", "draft", "example"})
+STUDY: frozenset[Status] = frozenset({"study"})
+EVERY_STATUS: frozenset[Status] = frozenset({"active", "ready", "draft", "example", "study"})
 
 
 class AnswerFormat(StrEnum):
@@ -332,7 +335,9 @@ def load_suites(
     for sid, suite in public.items():
         tasks = [*(suite.tasks if pool != "private" else []), *hidden.get(sid, [])]
         tasks = [t for t in tasks if t.status in keep]
-        if pool == "private" and not tasks:
+        # A study's own suite (all its tasks study tasks) is not one of the benchmark's suites.
+        study_suite = bool(suite.tasks) and all(t.status == "study" for t in suite.tasks)
+        if (pool == "private" or study_suite) and not tasks:
             continue
         suites[sid] = suite.model_copy(update={"tasks": tasks})
     if suite_ids:
