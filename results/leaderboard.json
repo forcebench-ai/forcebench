@@ -3,7 +3,7 @@
  "benchmark": "forcebench",
  "visibility": "public",
  "version": "0.2.0",
- "generated_at": "2026-10-18T14:04:27+00:00",
+ "generated_at": "2026-10-20T01:40:46+00:00",
  "tasks_sha": "21fe52ce6d1f04b7",
  "suites": [
   {
@@ -7616,7 +7616,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/x-ai/grok-4.6/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "xai",
      "xai/zdr"
@@ -9476,7 +9476,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/openai/gpt-6-astra/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "openai/flex"
     ],
@@ -13189,7 +13189,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/openai/gpt-6-astra/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "openai/flex"
     ],
@@ -15047,7 +15047,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/openai/gpt-6.1-sol/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "openai/flex"
     ],
@@ -16905,7 +16905,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/x-ai/grok-4.7/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "xai",
      "xai/zdr"
@@ -20614,13 +20614,13 @@
    "provider": "OpenRouter",
    "hardware": null,
    "price": {
-    "input": 1.0,
-    "cached_input": 0.1,
-    "output": 5.0,
+    "input": 2.0,
+    "cached_input": 0.2,
+    "output": 10.0,
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/openai/gpt-5.6-sol/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "openai/flex"
     ],
@@ -20854,14 +20854,14 @@
        "output": 1419.2
       },
       "cost": {
-       "per_task": 0.007877,
-       "per_solved": 0.01015,
-       "total": 2.143,
+       "per_task": 0.01575,
+       "per_solved": 0.02031,
+       "total": 4.285,
        "parts": {
-        "input": 0.0007811,
+        "input": 0.001562,
         "cached_input": null,
-        "reasoning": 0.005121,
-        "answer": 0.001975,
+        "reasoning": 0.01024,
+        "answer": 0.00395,
         "unsplit": 0.0
        }
       },
@@ -20892,14 +20892,14 @@
         "output": 2419.9
        },
        "cost": {
-        "per_task": 0.01273,
-        "per_solved": 0.01958,
-        "total": 0.2546,
+        "per_task": 0.02546,
+        "per_solved": 0.03917,
+        "total": 0.5092,
         "parts": {
-         "input": 0.0006306,
+         "input": 0.001261,
          "cached_input": null,
-         "reasoning": 0.00774,
-         "answer": 0.004359,
+         "reasoning": 0.01548,
+         "answer": 0.008719,
          "unsplit": 0.0
         }
        },
@@ -20925,14 +20925,14 @@
         "output": 756.7
        },
        "cost": {
-        "per_task": 0.004151,
-        "per_solved": 0.005337,
-        "total": 0.07471,
+        "per_task": 0.008302,
+        "per_solved": 0.01067,
+        "total": 0.1494,
         "parts": {
-         "input": 0.0003672,
+         "input": 0.0007343,
          "cached_input": null,
-         "reasoning": 0.002983,
-         "answer": 0.0008003,
+         "reasoning": 0.005967,
+         "answer": 0.001601,
          "unsplit": 0.0
         }
        },
@@ -20958,14 +20958,14 @@
         "output": 1071.1
        },
        "cost": {
-        "per_task": 0.005797,
-        "per_solved": 0.00657,
-        "total": 0.09855,
+        "per_task": 0.01159,
+        "per_solved": 0.01314,
+        "total": 0.1971,
         "parts": {
-         "input": 0.0004412,
+         "input": 0.0008825,
          "cached_input": null,
-         "reasoning": 0.003485,
-         "answer": 0.001871,
+         "reasoning": 0.006969,
+         "answer": 0.003742,
          "unsplit": 0.0
         }
        },
@@ -20991,14 +20991,14 @@
         "output": 374.0
        },
        "cost": {
-        "per_task": 0.002149,
-        "per_solved": 0.002262,
-        "total": 0.04299,
+        "per_task": 0.004299,
+        "per_solved": 0.004525,
+        "total": 0.08597,
         "parts": {
-         "input": 0.0002792,
+         "input": 0.0005585,
          "cached_input": null,
-         "reasoning": 0.001607,
-         "answer": 0.0002632,
+         "reasoning": 0.003213,
+         "answer": 0.0005265,
          "unsplit": 0.0
         }
        },
@@ -21024,14 +21024,14 @@
         "output": 533.3
        },
        "cost": {
-        "per_task": 0.002919,
-        "per_solved": 0.005513,
-        "total": 0.04962,
+        "per_task": 0.005837,
+        "per_solved": 0.01103,
+        "total": 0.09923,
         "parts": {
-         "input": 0.0002521,
+         "input": 0.0005042,
          "cached_input": null,
-         "reasoning": 0.002431,
-         "answer": 0.0002353,
+         "reasoning": 0.004862,
+         "answer": 0.0004706,
          "unsplit": 0.0
         }
        },
@@ -21057,14 +21057,14 @@
         "output": 2415.3
        },
        "cost": {
-        "per_task": 0.01292,
-        "per_solved": 0.03322,
-        "total": 0.2325,
+        "per_task": 0.02584,
+        "per_solved": 0.06644,
+        "total": 0.4651,
         "parts": {
-         "input": 0.0008426,
+         "input": 0.001685,
          "cached_input": null,
-         "reasoning": 0.008334,
-         "answer": 0.003743,
+         "reasoning": 0.01667,
+         "answer": 0.007486,
          "unsplit": 0.0
         }
        },
@@ -21090,14 +21090,14 @@
         "output": 3139.3
        },
        "cost": {
-        "per_task": 0.01647,
-        "per_solved": 0.01852,
-        "total": 0.2964,
+        "per_task": 0.03293,
+        "per_solved": 0.03705,
+        "total": 0.5928,
         "parts": {
-         "input": 0.0007701,
+         "input": 0.00154,
          "cached_input": null,
-         "reasoning": 0.01117,
-         "answer": 0.004531,
+         "reasoning": 0.02233,
+         "answer": 0.009063,
          "unsplit": 0.0
         }
        },
@@ -21123,14 +21123,14 @@
         "output": 1228.5
        },
        "cost": {
-        "per_task": 0.006617,
-        "per_solved": 0.007396,
-        "total": 0.1257,
+        "per_task": 0.01323,
+        "per_solved": 0.01479,
+        "total": 0.2515,
         "parts": {
-         "input": 0.0004748,
+         "input": 0.0009497,
          "cached_input": null,
-         "reasoning": 0.004543,
-         "answer": 0.0016,
+         "reasoning": 0.009085,
+         "answer": 0.003199,
          "unsplit": 0.0
         }
        },
@@ -21156,14 +21156,14 @@
         "output": 1312.3
        },
        "cost": {
-        "per_task": 0.007132,
-        "per_solved": 0.008024,
-        "total": 0.1284,
+        "per_task": 0.01426,
+        "per_solved": 0.01605,
+        "total": 0.2568,
         "parts": {
-         "input": 0.0005708,
+         "input": 0.001142,
          "cached_input": null,
-         "reasoning": 0.004014,
-         "answer": 0.002547,
+         "reasoning": 0.008028,
+         "answer": 0.005094,
          "unsplit": 0.0
         }
        },
@@ -21189,14 +21189,14 @@
         "output": 2487.8
        },
        "cost": {
-        "per_task": 0.01295,
-        "per_solved": 0.01553,
-        "total": 0.233,
+        "per_task": 0.02589,
+        "per_solved": 0.03107,
+        "total": 0.466,
         "parts": {
-         "input": 0.0005068,
+         "input": 0.001014,
          "cached_input": null,
-         "reasoning": 0.009746,
-         "answer": 0.002693,
+         "reasoning": 0.01949,
+         "answer": 0.005386,
          "unsplit": 0.0
         }
        },
@@ -21222,14 +21222,14 @@
         "output": 758.2
        },
        "cost": {
-        "per_task": 0.004188,
-        "per_solved": 0.004712,
-        "total": 0.07539,
+        "per_task": 0.008376,
+        "per_solved": 0.009423,
+        "total": 0.1508,
         "parts": {
-         "input": 0.000397,
+         "input": 0.000794,
          "cached_input": null,
-         "reasoning": 0.003142,
-         "answer": 0.0006492,
+         "reasoning": 0.006284,
+         "answer": 0.001298,
          "unsplit": 0.0
         }
        },
@@ -21255,14 +21255,14 @@
         "output": 1095.2
        },
        "cost": {
-        "per_task": 0.006057,
-        "per_solved": 0.007571,
-        "total": 0.09085,
+        "per_task": 0.01211,
+        "per_solved": 0.01514,
+        "total": 0.1817,
         "parts": {
-         "input": 0.0005809,
+         "input": 0.001162,
          "cached_input": null,
-         "reasoning": 0.004111,
-         "answer": 0.001365,
+         "reasoning": 0.008222,
+         "answer": 0.00273,
          "unsplit": 0.0
         }
        },
@@ -21288,14 +21288,14 @@
         "output": 1474.0
        },
        "cost": {
-        "per_task": 0.007727,
-        "per_solved": 0.01739,
-        "total": 0.1391,
+        "per_task": 0.01545,
+        "per_solved": 0.03477,
+        "total": 0.2782,
         "parts": {
-         "input": 0.0003572,
+         "input": 0.0007143,
          "cached_input": null,
-         "reasoning": 0.006816,
-         "answer": 0.0005542,
+         "reasoning": 0.01363,
+         "answer": 0.001108,
          "unsplit": 0.0
         }
        },
@@ -21321,14 +21321,14 @@
         "output": 214.8
        },
        "cost": {
-        "per_task": 0.001337,
-        "per_solved": 0.001337,
-        "total": 0.02675,
+        "per_task": 0.002675,
+        "per_solved": 0.002675,
+        "total": 0.05349,
         "parts": {
-         "input": 0.0002632,
+         "input": 0.0005265,
          "cached_input": null,
-         "reasoning": 0.0007832,
-         "answer": 0.0002907,
+         "reasoning": 0.001566,
+         "answer": 0.0005815,
          "unsplit": 0.0
         }
        },
@@ -21354,14 +21354,14 @@
         "output": 2034.9
        },
        "cost": {
-        "per_task": 0.01522,
-        "per_solved": 0.01957,
-        "total": 0.274,
+        "per_task": 0.03044,
+        "per_solved": 0.03914,
+        "total": 0.548,
         "parts": {
-         "input": 0.005048,
+         "input": 0.0101,
          "cached_input": null,
-         "reasoning": 0.006121,
-         "answer": 0.004053,
+         "reasoning": 0.01224,
+         "answer": 0.008107,
          "unsplit": 0.0
         }
        },
@@ -21390,14 +21390,14 @@
        "output": 1689.4
       },
       "cost": {
-       "per_task": 0.009543,
-       "per_solved": 0.01109,
-       "total": 2.596,
+       "per_task": 0.01909,
+       "per_solved": 0.02218,
+       "total": 5.191,
        "parts": {
-        "input": 0.001096,
+        "input": 0.002191,
         "cached_input": null,
-        "reasoning": 0.005862,
-        "answer": 0.002585,
+        "reasoning": 0.01172,
+        "answer": 0.005169,
         "unsplit": 0.0
        }
       },
@@ -21429,14 +21429,14 @@
        "output": 1821.5
       },
       "cost": {
-       "per_task": 0.0104,
-       "per_solved": 0.01174,
-       "total": 2.83,
+       "per_task": 0.02081,
+       "per_solved": 0.02348,
+       "total": 5.659,
        "parts": {
-        "input": 0.001296,
+        "input": 0.002591,
         "cached_input": null,
-        "reasoning": 0.006232,
-        "answer": 0.002876,
+        "reasoning": 0.01246,
+        "answer": 0.005751,
         "unsplit": 0.0
        }
       },
@@ -21467,14 +21467,14 @@
         "output": 3084.3
        },
        "cost": {
-        "per_task": 0.01673,
-        "per_solved": 0.01761,
-        "total": 0.3345,
+        "per_task": 0.03345,
+        "per_solved": 0.03521,
+        "total": 0.669,
         "parts": {
-         "input": 0.001304,
+         "input": 0.002608,
          "cached_input": null,
-         "reasoning": 0.008838,
-         "answer": 0.006583,
+         "reasoning": 0.01768,
+         "answer": 0.01317,
          "unsplit": 0.0
         }
        },
@@ -21500,14 +21500,14 @@
         "output": 756.7
        },
        "cost": {
-        "per_task": 0.004151,
-        "per_solved": 0.005337,
-        "total": 0.07471,
+        "per_task": 0.008302,
+        "per_solved": 0.01067,
+        "total": 0.1494,
         "parts": {
-         "input": 0.0003672,
+         "input": 0.0007343,
          "cached_input": null,
-         "reasoning": 0.002983,
-         "answer": 0.0008003,
+         "reasoning": 0.005967,
+         "answer": 0.001601,
          "unsplit": 0.0
         }
        },
@@ -21533,14 +21533,14 @@
         "output": 1071.1
        },
        "cost": {
-        "per_task": 0.005797,
-        "per_solved": 0.00657,
-        "total": 0.09855,
+        "per_task": 0.01159,
+        "per_solved": 0.01314,
+        "total": 0.1971,
         "parts": {
-         "input": 0.0004412,
+         "input": 0.0008825,
          "cached_input": null,
-         "reasoning": 0.003485,
-         "answer": 0.001871,
+         "reasoning": 0.006969,
+         "answer": 0.003742,
          "unsplit": 0.0
         }
        },
@@ -21566,14 +21566,14 @@
         "output": 399.6
        },
        "cost": {
-        "per_task": 0.002301,
-        "per_solved": 0.002301,
-        "total": 0.04602,
+        "per_task": 0.004602,
+        "per_solved": 0.004602,
+        "total": 0.09205,
         "parts": {
-         "input": 0.0003029,
+         "input": 0.0006058,
          "cached_input": null,
-         "reasoning": 0.001723,
-         "answer": 0.0002755,
+         "reasoning": 0.003445,
+         "answer": 0.000551,
          "unsplit": 0.0
         }
        },
@@ -21599,14 +21599,14 @@
         "output": 533.3
        },
        "cost": {
-        "per_task": 0.002919,
-        "per_solved": 0.005513,
-        "total": 0.04962,
+        "per_task": 0.005837,
+        "per_solved": 0.01103,
+        "total": 0.09923,
         "parts": {
-         "input": 0.0002521,
+         "input": 0.0005042,
          "cached_input": null,
-         "reasoning": 0.002431,
-         "answer": 0.0002353,
+         "reasoning": 0.004862,
+         "answer": 0.0004706,
          "unsplit": 0.0
         }
        },
@@ -21632,14 +21632,14 @@
         "output": 4666.0
        },
        "cost": {
-        "per_task": 0.02708,
-        "per_solved": 0.04432,
-        "total": 0.4875,
+        "per_task": 0.05417,
+        "per_solved": 0.08864,
+        "total": 0.975,
         "parts": {
-         "input": 0.003754,
+         "input": 0.007508,
          "cached_input": null,
-         "reasoning": 0.01357,
-         "answer": 0.009758,
+         "reasoning": 0.02714,
+         "answer": 0.01952,
          "unsplit": 0.0
         }
        },
@@ -21665,14 +21665,14 @@
         "output": 3524.2
        },
        "cost": {
-        "per_task": 0.01883,
-        "per_solved": 0.01883,
-        "total": 0.3389,
+        "per_task": 0.03765,
+        "per_solved": 0.03765,
+        "total": 0.6778,
         "parts": {
-         "input": 0.001206,
+         "input": 0.002412,
          "cached_input": null,
-         "reasoning": 0.01193,
-         "answer": 0.005692,
+         "reasoning": 0.02386,
+         "answer": 0.01138,
          "unsplit": 0.0
         }
        },
@@ -21698,14 +21698,14 @@
         "output": 1465.9
        },
        "cost": {
-        "per_task": 0.007983,
-        "per_solved": 0.008427,
-        "total": 0.1517,
+        "per_task": 0.01597,
+        "per_solved": 0.01685,
+        "total": 0.3034,
         "parts": {
-         "input": 0.0006536,
+         "input": 0.001307,
          "cached_input": null,
-         "reasoning": 0.005357,
-         "answer": 0.001973,
+         "reasoning": 0.01071,
+         "answer": 0.003945,
          "unsplit": 0.0
         }
        },
@@ -21731,14 +21731,14 @@
         "output": 1432.4
        },
        "cost": {
-        "per_task": 0.007895,
-        "per_solved": 0.007895,
-        "total": 0.1421,
+        "per_task": 0.01579,
+        "per_solved": 0.01579,
+        "total": 0.2842,
         "parts": {
-         "input": 0.0007328,
+         "input": 0.001466,
          "cached_input": null,
-         "reasoning": 0.004279,
-         "answer": 0.002883,
+         "reasoning": 0.008559,
+         "answer": 0.005765,
          "unsplit": 0.0
         }
        },
@@ -21764,14 +21764,14 @@
         "output": 3119.3
        },
        "cost": {
-        "per_task": 0.01677,
-        "per_solved": 0.01775,
-        "total": 0.3018,
+        "per_task": 0.03353,
+        "per_solved": 0.03551,
+        "total": 0.6036,
         "parts": {
-         "input": 0.001171,
+         "input": 0.002341,
          "cached_input": null,
-         "reasoning": 0.01146,
-         "answer": 0.004137,
+         "reasoning": 0.02292,
+         "answer": 0.008273,
          "unsplit": 0.0
         }
        },
@@ -21797,14 +21797,14 @@
         "output": 758.2
        },
        "cost": {
-        "per_task": 0.004188,
-        "per_solved": 0.004712,
-        "total": 0.07539,
+        "per_task": 0.008376,
+        "per_solved": 0.009423,
+        "total": 0.1508,
         "parts": {
-         "input": 0.000397,
+         "input": 0.000794,
          "cached_input": null,
-         "reasoning": 0.003142,
-         "answer": 0.0006492,
+         "reasoning": 0.006284,
+         "answer": 0.001298,
          "unsplit": 0.0
         }
        },
@@ -21830,14 +21830,14 @@
         "output": 1303.9
        },
        "cost": {
-        "per_task": 0.007413,
-        "per_solved": 0.007943,
-        "total": 0.1112,
+        "per_task": 0.01483,
+        "per_solved": 0.01589,
+        "total": 0.2224,
         "parts": {
-         "input": 0.0008936,
+         "input": 0.001787,
          "cached_input": null,
-         "reasoning": 0.004795,
-         "answer": 0.001725,
+         "reasoning": 0.009589,
+         "answer": 0.00345,
          "unsplit": 0.0
         }
        },
@@ -21863,14 +21863,14 @@
         "output": 2447.3
        },
        "cost": {
-        "per_task": 0.01303,
-        "per_solved": 0.01675,
-        "total": 0.2346,
+        "per_task": 0.02606,
+        "per_solved": 0.03351,
+        "total": 0.4691,
         "parts": {
-         "input": 0.0007947,
+         "input": 0.001589,
          "cached_input": null,
-         "reasoning": 0.0113,
-         "answer": 0.0009347,
+         "reasoning": 0.0226,
+         "answer": 0.001869,
          "unsplit": 0.0
         }
        },
@@ -21896,14 +21896,14 @@
         "output": 214.8
        },
        "cost": {
-        "per_task": 0.001337,
-        "per_solved": 0.001337,
-        "total": 0.02675,
+        "per_task": 0.002675,
+        "per_solved": 0.002675,
+        "total": 0.05349,
         "parts": {
-         "input": 0.0002632,
+         "input": 0.0005265,
          "cached_input": null,
-         "reasoning": 0.0007832,
-         "answer": 0.0002907,
+         "reasoning": 0.001566,
+         "answer": 0.0005815,
          "unsplit": 0.0
         }
        },
@@ -21929,14 +21929,14 @@
         "output": 2561.3
        },
        "cost": {
-        "per_task": 0.0198,
-        "per_solved": 0.0198,
-        "total": 0.3563,
+        "per_task": 0.03959,
+        "per_solved": 0.03959,
+        "total": 0.7126,
         "parts": {
-         "input": 0.006989,
+         "input": 0.01398,
          "cached_input": null,
-         "reasoning": 0.007659,
-         "answer": 0.005148,
+         "reasoning": 0.01532,
+         "answer": 0.0103,
          "unsplit": 0.0
         }
        },
@@ -24332,7 +24332,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/google/gemini-3.8-flash/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "google-ai-studio/flex",
      "google-vertex/global/flex"
@@ -39200,7 +39200,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/openai/gpt-6-luna/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "openai/flex"
     ],
@@ -42915,7 +42915,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/deepseek/deepseek-v4.1-flash/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "deepinfra/fp8"
     ]
@@ -56686,7 +56686,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/xiaomi/mimo-v2.6-pro/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "xiaomi/fp8"
     ]
@@ -58599,7 +58599,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/deepseek/deepseek-v4-pro-0813/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "novita/fp8"
     ]
@@ -60474,7 +60474,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/thinkingmachines/inkling-small/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "deepinfra/fp8"
     ]
@@ -62331,7 +62331,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/z-ai/glm-5.3-flash/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "z-ai/fp8"
     ]
@@ -65684,7 +65684,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/z-ai/glm-5.3/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "z-ai/fp8"
     ]
@@ -69030,7 +69030,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/mistralai/mistral-large-4-0/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "mistral"
     ]
@@ -80405,7 +80405,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/xiaomi/mimo-v2.6-flash/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "xiaomi/fp8"
     ]
@@ -99193,7 +99193,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/qwen/qwen3.8-flash/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "alibaba"
     ]
@@ -106528,7 +106528,7 @@
     "reasoning": "output",
     "currency": "USD",
     "source": "https://openrouter.ai/inclusionai/ling-3.0-flash/providers",
-    "as_of": "2026-10-10",
+    "as_of": "2026-10-20",
     "route": [
      "deepinfra/bf16"
     ]
@@ -132067,8 +132067,8 @@
  ],
  "unscored": [],
  "prices": {
-  "version": "2026-10-10",
-  "file": "prices/2026-10-10.yaml",
+  "version": "2026-10-20",
+  "file": "prices/2026-10-20.yaml",
   "currency": "USD",
   "sources": [
    {
@@ -132084,107 +132084,117 @@
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/openai/gpt-6-astra/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/openai/gpt-6.1-sol/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/openai/gpt-5.6-sol/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/openai/gpt-6-luna/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/google/gemini-3.8-flash/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
+   },
+   {
+    "provider": "openrouter",
+    "url": "https://openrouter.ai/google/gemini-4-argon/providers",
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/x-ai/grok-4.7/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/x-ai/grok-4.6/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/mistralai/mistral-large-4-0/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
+   },
+   {
+    "provider": "openrouter",
+    "url": "https://openrouter.ai/meta/muse-wonder/providers",
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/meta/muse-spark-1.3-contributor/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/z-ai/glm-5.3/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/z-ai/glm-5.3-flash/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/z-ai/glm-5.2/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/moonshotai/kimi-k3/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/deepseek/deepseek-v4.1-flash/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/xiaomi/mimo-v2.6-flash/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/inclusionai/ling-3.0-flash/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/deepseek/deepseek-v4-pro-0813/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/xiaomi/mimo-v2.6-pro/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/thinkingmachines/inkling-small/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/qwen/qwen3.8-flash/providers",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    },
    {
     "provider": "openrouter",
     "url": "https://openrouter.ai/docs/use-cases/reasoning-tokens",
-    "as_of": "2026-10-10"
+    "as_of": "2026-10-20"
    }
   ]
  }
