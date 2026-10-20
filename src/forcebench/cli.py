@@ -40,6 +40,7 @@ from forcebench import leakcheck as leaks
 from forcebench import validate as validation
 from forcebench.agent import harness_study
 from forcebench.agent.harness import HARNESSES
+from forcebench.agent.mcp import load_server
 from forcebench.agent.skills import load_pack
 from forcebench.coverage import COVERAGE_FILE, read_targets, table
 from forcebench.difficulty import MIN_CONFIGS, propose
@@ -1420,6 +1421,15 @@ def run(
             "run.",
         ),
     ] = False,
+    mcp: Annotated[
+        str | None,
+        typer.Option(
+            "--mcp",
+            help="With --agent opencode: give the agent a remote MCP server's tools, "
+            "docker/agent/mcp/<name>.json (clientell), reached through the model proxy with the "
+            "token its manifest names in .env. Recorded with the run (with --resume: the run's).",
+        ),
+    ] = None,
     agent_image: Annotated[
         str | None,
         typer.Option(
@@ -1460,6 +1470,10 @@ def run(
         raise typer.BadParameter(
             "preloading needs a skill pack: add --skills", param_hint="--preload-skills"
         )
+    mcp = mcp or ((started.get("agent") or {}).get("mcp") or {}).get("name")
+    if mcp is not None and agent != "opencode":
+        raise typer.BadParameter("MCP servers are for opencode runs: add --agent opencode",
+                                 param_hint="--mcp")  # fmt: skip
     harness = None
     if agent is not None:
         if agent not in HARNESSES:
@@ -1481,7 +1495,11 @@ def run(
             pack = load_pack(skills) if skills else None
         except ValueError as err:
             raise typer.BadParameter(str(err), param_hint="--skills") from None
-        harness = HARNESSES[agent](skills=pack, preload=preload_skills)
+        try:
+            server = load_server(mcp) if mcp else None
+        except ValueError as err:
+            raise typer.BadParameter(str(err), param_hint="--mcp") from None
+        harness = HARNESSES[agent](skills=pack, preload=preload_skills, mcp=server)
         if agent_image:
             harness = dataclasses.replace(harness, image=agent_image)
     model = model or started.get("model", {}).get("id")

@@ -22,6 +22,7 @@ The agent's event stream and the proxy's request log are kept with the run's raw
 """
 
 import asyncio
+import contextlib
 import hashlib
 import json
 import re
@@ -33,6 +34,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, ClassVar
 
+from forcebench.agent.mcp import McpServer, mcp_usage
 from forcebench.agent.skills import SkillPack, skill_block
 from forcebench.answers import extract, lang_for
 from forcebench.llm import Generation, recorded_request
@@ -44,13 +46,20 @@ PROXY_SCRIPT = Path(__file__).with_name("proxy.py")
 # opencode's global skills directory in the agent's image (HOME is /home/node).
 SKILLS_MOUNT = "/home/node/.config/opencode/skills"
 
+# What the agent cannot reach. A run with an MCP server replaces it with the server's own sentence.
+NO_NETWORK = "There is no network access and no Salesforce org."
 # Appended to the task message: the only words the agent gets that a single-turn run does not.
 AGENT_NOTE = (
     "## Working directory\n"
     "The files shown above are also in your current working directory. You can read and edit "
-    "files there and run shell commands. There is no network access and no Salesforce org. When "
+    f"files there and run shell commands. {NO_NETWORK} When "
     "you are done, reply with your final answer in exactly the format described above."
 )
+
+
+def agent_note(mcp: McpServer | None = None) -> str:
+    """The note a run appends to each task: with an MCP server, it says what the server reaches."""
+    return AGENT_NOTE.replace(NO_NETWORK, mcp.note) if mcp else AGENT_NOTE
 
 
 @dataclass(frozen=True)
@@ -85,6 +94,8 @@ class Harness:
     skills: SkillPack | None = None
     # Start each task's message with the pack's skills for the task's suite (skills.skill_block).
     preload: bool = False
+    # A remote MCP server whose tools the agent may use, through the proxy (forcebench.agent.mcp).
+    mcp: McpServer | None = None
 
     def files(self, m: ModelConfig) -> dict[str, str]:
         """Configuration files, by their path in the container (mounted read-only)."""
@@ -108,14 +119,16 @@ class Harness:
             "name": self.name,
             "version": self.version,
             "image": image_id,
-            "note_sha": hashlib.sha256(AGENT_NOTE.encode()).hexdigest()[:12],
+            "note_sha": hashlib.sha256(agent_note(self.mcp).encode()).hexdigest()[:12],
             "budget": {
                 "max_requests": self.budget.max_requests,
                 "max_output_tokens": self.budget.max_output_tokens,
                 "timeout_s": self.budget.timeout_s,
             },
-            # Only when there is a pack, so runs without one keep the record they started with.
+            # Only when there is a pack (a server), so runs without keep the record they started
+            # with.
             **({"skills": self._skills_record(self.skills)} if self.skills else {}),
+            **({"mcp": self.mcp.describe()} if self.mcp else {}),
         }
 
     def _skills_record(self, pack: SkillPack) -> dict[str, Any]:
@@ -134,15 +147,30 @@ class Opencode(Harness):
     version: str = "2.0.21"
 
     def files(self, m: ModelConfig) -> dict[str, str]:
-        return {"/cfg/opencode.json": json.dumps(opencode_config(m))}
+        return {"/cfg/opencode.json": json.dumps(opencode_config(m, self.mcp))}
 
     def env(self, m: ModelConfig) -> dict[str, str]:
         return {"OPENCODE_CONFIG": "/cfg/opencode.json"}
 
     def command(self) -> str:
+        if not self.mcp:
+            return (
+                "exec opencode run --standalone --auto --format json -m bench/model "
+                '--title task "$(cat)"'
+            )
+        # opencode fixes a session's tools when it starts and does not wait for MCP servers, so a
+        # session started at once would never have the server's tools. Start opencode's server
+        # first, wait until it has connected the MCP server (at most a minute), then run the task
+        # on it.
+        server = "--server http://127.0.0.1:4096"
         return (
-            "exec opencode run --standalone --auto --format json -m bench/model "
-            '--title task "$(cat)"'
+            "export OPENCODE_SERVER_PASSWORD=$(od -An -N16 -tx1 /dev/urandom | tr -d ' \\n') && "
+            "export OPENCODE_PASSWORD=$OPENCODE_SERVER_PASSWORD && "
+            "(opencode serve --hostname 127.0.0.1 --port 4096 </dev/null >/dev/null 2>&1 &) && "
+            "i=0; until opencode api " + server + " GET /api/mcp </dev/null 2>/dev/null"
+            ' | grep -q \'"status":"connected"\'; do'
+            " i=$((i+1)); [ $i -ge 120 ] && break; sleep 0.5; done; "
+            f'exec opencode run {server} --auto --format json -m bench/model --title task "$(cat)"'
         )
 
     def parse(self, stream: str) -> Transcript:
@@ -234,15 +262,19 @@ def label(harness: dict[str, Any] | None) -> str | None:
     """How a harness is shown on the leaderboard, e.g. ``opencode 2.0.21``.
 
     With a skill pack: ``opencode 2.0.21 + sf-skills 1.58.0`` (``… sf-skills 1.58.0, preloaded``
-    when they are).
+    when they are); with an MCP server: ``opencode 2.0.21 + Clientell MCP``.
     """
     if not harness:
         return None
-    pack = harness.get("skills")
-    return f"{harness['name']} {harness['version']}" + (
-        f" + {pack['name']} {pack['version']}" + (", preloaded" if pack.get("preload") else "")
-        if pack
-        else ""
+    pack, mcp = harness.get("skills"), harness.get("mcp")
+    return (
+        f"{harness['name']} {harness['version']}"
+        + (
+            f" + {pack['name']} {pack['version']}" + (", preloaded" if pack.get("preload") else "")
+            if pack
+            else ""
+        )
+        + (f" + {mcp['label']}" if mcp else "")
     )
 
 
@@ -276,8 +308,22 @@ async def image_id(image: str) -> str:
     return out.decode().strip()
 
 
-def opencode_config(m: ModelConfig) -> dict[str, Any]:
-    """Opencode's configuration inside the container: one provider, the proxy, one model."""
+def opencode_config(m: ModelConfig, mcp: McpServer | None = None) -> dict[str, Any]:
+    """Opencode's configuration inside the container: one provider, the proxy, one model.
+
+    With an MCP server, that server too, at the proxy's ``/mcp``. Its tools are given to the model
+    as tools of their own, as most MCP clients give them, not through opencode's Code Mode (its
+    default: the model writes JavaScript that calls them). A tool call waits up to three minutes,
+    as the server's own setup recommends (opencode's default is five seconds). The proxy adds the
+    token, so opencode's own OAuth discovery is off.
+    """
+    server = {
+        "type": "remote",
+        "url": "http://fbproxy:8080/mcp",
+        "oauth": False,
+        "codemode": False,
+        "timeout": {"startup": 60_000, "catalog": 60_000, "execution": 180_000},
+    }
     return {
         "$schema": "https://opencode.ai/config.json",
         "default_agent": "build",
@@ -303,6 +349,7 @@ def opencode_config(m: ModelConfig) -> dict[str, Any]:
             {"action": "webfetch", "resource": "*", "effect": "deny"},
             {"action": "websearch", "resource": "*", "effect": "deny"},
         ],
+        **({"mcp": {"servers": {mcp.name: server}}} if mcp else {}),
     }
 
 
@@ -339,9 +386,9 @@ def injected_fields(m: ModelConfig, effort: str) -> dict[str, Any]:
     return out
 
 
-def task_message(system: str, prompt: str) -> str:
+def task_message(system: str, prompt: str, note: str = AGENT_NOTE) -> str:
     """The one message the agent receives."""
-    return f"{system}\n\n{prompt}\n\n{AGENT_NOTE}"
+    return f"{system}\n\n{prompt}\n\n{note}"
 
 
 def preload_skills(pack: SkillPack, pack_dir: Path, suite: str, message: str) -> str:
@@ -602,6 +649,8 @@ class AgentClient:
             raise RuntimeError(f"no base URL for {m.id}: set {provider.base_url_env}")
         # Prepared (fetched and hash-checked) by the runner before the first task.
         self.skills = harness.skills.directory() if harness.skills else None
+        # Read now, so a missing token stops the run before its first task.
+        self.mcp_token = harness.mcp.token() if harness.mcp else ""
 
     async def generate_task(self, task: Task, sample: int, system: str, prompt: str) -> Generation:
         key = f"{task.id}#{sample}"
@@ -636,6 +685,16 @@ class AgentClient:
                         f"FB_MAX_OUTPUT_TOKENS={self.h.budget.max_output_tokens}",
                         "FB_LOG=/log/requests.jsonl",
                         "FB_FIRST_REQUEST=/log/first_request.json",
+                        *(
+                            [
+                                f"FB_MCP_UPSTREAM={self.h.mcp.url}",
+                                f"FB_MCP_KEY={self.mcp_token}",
+                                f"FB_MCP_TOOLS={json.dumps(list(self.h.mcp.tools))}",
+                                "FB_MCP_LOG=/log/mcp.jsonl",
+                            ]
+                            if self.h.mcp
+                            else []
+                        ),
                     ]
                 )
                 + "\n"
@@ -655,7 +714,7 @@ class AgentClient:
             if code:
                 return self._infra(t0, f"proxy: {err.decode()[-200:]}")
             await _run("docker", "network", "connect", "bridge", proxy)
-            message = task_message(system, prompt)
+            message = task_message(system, prompt, agent_note(self.h.mcp))
             if self.h.preload and self.h.skills and self.skills:
                 message = preload_skills(self.h.skills, self.skills, task.suite, message)
             try:
@@ -676,14 +735,16 @@ class AgentClient:
             answer, added = assemble_answer(task, tr.text, work)
             keep.mkdir(parents=True, exist_ok=True)
             (keep / "events.jsonl").write_bytes(out)
-            for name in ("requests.jsonl", "first_request.json"):
+            for name in ("requests.jsonl", "first_request.json", "mcp.jsonl"):
                 if (root / "log" / name).exists():
                     shutil.copy(root / "log" / name, keep / name)
+            mu = self._mcp_usage(root / "log") if self.h.mcp else None
             (keep / "summary.json").write_text(
                 json.dumps(
                     {
                         "steps": tr.steps, "tools": tr.tools, "skills": tr.skills,
                         "errors": tr.errors, "usage": u,
+                        **({"mcp": mu} if mu is not None else {}),
                         "files_from_workspace": added, "exit_code": code, "timed_out": timed_out,
                         "stderr_tail": err.decode(errors="replace")[-2000:],
                     },
@@ -696,6 +757,10 @@ class AgentClient:
                 return self._infra(
                     t0, f"agent made no successful model call ({'; '.join(tr.errors)[:200]})"
                 )
+            if mu is not None and not (mu["listed"] and mu["in_first_request"]):
+                # The model did not have the server's tools from the start: a session without
+                # them, not with them. Pending, like a model server failure.
+                return self._infra(t0, "the MCP server's tools were not in the first request")
             finish = "stop"
             if timed_out:
                 finish = f"timeout ({self.h.budget.timeout_s}s)"
@@ -714,6 +779,20 @@ class AgentClient:
             await _run("docker", "rm", "-f", proxy)
             await _run("docker", "network", "rm", net)
             shutil.rmtree(root, ignore_errors=True)
+
+    def _mcp_usage(self, log: Path) -> dict[str, Any]:
+        """The MCP log's totals, and how many of the server's tools the first request carried."""
+        out = mcp_usage(log / "mcp.jsonl")
+        first = log / "first_request.json"
+        tools: list[Any] = []
+        if first.exists():
+            with contextlib.suppress(ValueError):
+                tools = json.loads(first.read_text()).get("tools") or []
+        prefix = f"{self.h.mcp.name}_" if self.h.mcp else ""
+        out["in_first_request"] = sum(
+            1 for t in tools if str((t.get("function") or {}).get("name") or "").startswith(prefix)
+        )
+        return out
 
     def _infra(self, t0: float, why: str) -> Generation:
         return Generation(error=f"agent harness: {why}", latency_s=round(time.time() - t0, 2))

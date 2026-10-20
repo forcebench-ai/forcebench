@@ -1,0 +1,16 @@
+{
+  "name": "clientell",
+  "label": "Clientell MCP",
+  "url": "https://mcp.clientell.ai/mcp",
+  "docs": "https://www.getclientell.com/salesforce-mcp/docs",
+  "token_env": "FORCEBENCH_CLIENTELL_TOKEN",
+  "selection": "The Salesforce tools that read or draft and that bear on the suites' subjects: the connected org's metadata, Salesforce's documentation and best practices, Flow drafts and org reports. Not the account, billing, onboarding and connector tools (some change the Clientell account, and opencode approves every call unattended), nor those for people, team context, record merges and reports and dashboards, which no suite asks about.",
+  "tools": [
+    "search_salesforce_metadata",
+    "get_salesforce_best_practices",
+    "search_salesforce_docs",
+    "build_or_fix_salesforce_flow",
+    "generate_salesforce_org_report"
+  ],
+  "note": "There is no network access except the clientell tools, which reach Clientell's Salesforce MCP server and, through it, a Salesforce Developer Edition org; there is no org to deploy to or run tests in."
+}
