@@ -3,7 +3,7 @@
  "benchmark": "forcebench",
  "visibility": "public",
  "version": "0.2.0",
- "generated_at": "2026-10-20T01:40:46+00:00",
+ "generated_at": "2026-10-20T04:18:22+00:00",
  "tasks_sha": "21fe52ce6d1f04b7",
  "suites": [
   {
@@ -153,7 +153,7 @@
    "suite": "apex",
    "title": "Payment terms parser with a custom exception hierarchy",
    "difficulty": "easy",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "apex-dynamic-soql-user-mode",
@@ -356,7 +356,7 @@
    "suite": "api",
    "title": "Run anonymous Apex through the Tooling API",
    "difficulty": "medium",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "api-uiapi-record-optional-fields",
@@ -370,14 +370,14 @@
    "suite": "api",
    "title": "Upsert an account by external ID with its parent",
    "difficulty": "medium",
-   "observed_difficulty": "medium"
+   "observed_difficulty": "easy"
   },
   {
    "id": "api-upsert-response-semantics",
    "suite": "api",
    "title": "Interpret external-ID upsert responses",
    "difficulty": "hard",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "ci-branch-routed-validation",
@@ -426,7 +426,7 @@
    "suite": "ci",
    "title": "Block pull requests on high-severity Code Analyzer violations",
    "difficulty": "medium",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "ci-delta-deploy-sgd",
@@ -454,14 +454,14 @@
    "suite": "ci",
    "title": "Nightly Apex regression run in a full sandbox",
    "difficulty": "easy",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "ci-pr-validate-jwt",
    "suite": "ci",
    "title": "Validate pull requests against production with JWT auth",
    "difficulty": "medium",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "ci-quick-deploy-on-merge",
@@ -538,7 +538,7 @@
    "suite": "cli",
    "title": "Bulk upsert a Windows CSV on an external ID",
    "difficulty": "medium",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "cli-delete-scratch-org",
@@ -573,7 +573,7 @@
    "suite": "cli",
    "title": "Generate a package.xml manifest from an org",
    "difficulty": "medium",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "cli-org-open-setup-page",
@@ -608,7 +608,7 @@
    "suite": "cli",
    "title": "Start a Developer Pro sandbox creation from a script",
    "difficulty": "medium",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "cli-scratch-org-create",
@@ -1336,7 +1336,7 @@
    "suite": "npsp",
    "title": "Replace a pledge's open payments with an installment plan",
    "difficulty": "medium",
-   "observed_difficulty": "medium"
+   "observed_difficulty": "easy"
   },
   {
    "id": "npsp-record-gift",
@@ -1427,7 +1427,7 @@
    "suite": "packaging",
    "title": "Package metadata that depends on unpackaged org metadata",
    "difficulty": "easy",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "packaging-create-unlocked-no-namespace",
@@ -1987,7 +1987,7 @@
    "suite": "taf",
    "title": "Roll up open cases to Account across all after contexts",
    "difficulty": "hard",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "taf-recursion-amount-audit",
@@ -2001,14 +2001,14 @@
    "suite": "taf",
    "title": "Run an admin's flow as an ordered trigger action",
    "difficulty": "medium",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "taf-required-permission-pilot",
    "suite": "taf",
    "title": "Release a new action to pilot users only",
    "difficulty": "easy",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "taf-shared-query-singleton",
@@ -7592,6 +7592,2174 @@
    "rank": 3
   },
   {
+   "config_id": "gemini-4-argon@low",
+   "subset": "full",
+   "model": "Gemini 4 Argon",
+   "model_family": "Gemini",
+   "base_model": "Gemini-4-Argon",
+   "quant": "Unknown",
+   "engine": "Unknown",
+   "effort": "low",
+   "effort_tier": "low",
+   "open_weights": false,
+   "local": false,
+   "model_id": "gemini-4-argon",
+   "developer": "google",
+   "developer_name": "Google",
+   "serving": "api",
+   "provider": "OpenRouter",
+   "hardware": null,
+   "price": {
+    "input": 1.0,
+    "cached_input": 0.05,
+    "output": 5.0,
+    "reasoning": "output",
+    "currency": "USD",
+    "source": "https://openrouter.ai/google/gemini-4-argon/providers",
+    "as_of": "2026-10-20",
+    "route": [
+     "google-ai-studio/flex"
+    ]
+   },
+   "overall": {
+    "score": 0.8947,
+    "ci_low": 0.8597,
+    "ci_high": 0.928
+   },
+   "c_at": {},
+   "usage": {
+    "1": {
+     "overall": {
+      "tasks": 272,
+      "answers": 272,
+      "failed": 0,
+      "solved": 244,
+      "unreported": 0,
+      "time_s": {
+       "median": 10.12,
+       "p90": 23.49,
+       "mean": 12.45
+      },
+      "tokens": {
+       "input": 889.3,
+       "cached_input": 15.8,
+       "reasoning": 0.5,
+       "answer": 597.1,
+       "unsplit": 0.0,
+       "output": 597.6
+      },
+      "cost": {
+       "per_task": 0.003877,
+       "per_solved": 0.004322,
+       "total": 1.055,
+       "parts": {
+        "input": 0.0008735,
+        "cached_input": 1.583e-05,
+        "reasoning": 2.261e-06,
+        "answer": 0.002986,
+        "unsplit": 0.0
+       }
+      },
+      "no_cost": null,
+      "recorded": {
+       "cached_input": 272,
+       "served_by": 272
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 19,
+       "unreported": 0,
+       "time_s": {
+        "median": 12.41,
+        "p90": 29.21,
+        "mean": 16.1
+       },
+       "tokens": {
+        "input": 704.0,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 1186.6,
+        "unsplit": 0.0,
+        "output": 1186.6
+       },
+       "cost": {
+        "per_task": 0.006637,
+        "per_solved": 0.006986,
+        "total": 0.1327,
+        "parts": {
+         "input": 0.0007041,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.005933,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 16,
+       "unreported": 0,
+       "time_s": {
+        "median": 9.28,
+        "p90": 19.8,
+        "mean": 10.26
+       },
+       "tokens": {
+        "input": 413.6,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 305.4,
+        "unsplit": 0.0,
+        "output": 305.4
+       },
+       "cost": {
+        "per_task": 0.001941,
+        "per_solved": 0.002183,
+        "total": 0.03493,
+        "parts": {
+         "input": 0.0004136,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.001527,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 9.58,
+        "p90": 15.41,
+        "mean": 10.26
+       },
+       "tokens": {
+        "input": 487.7,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 462.9,
+        "unsplit": 0.0,
+        "output": 462.9
+       },
+       "cost": {
+        "per_task": 0.002802,
+        "per_solved": 0.002802,
+        "total": 0.04764,
+        "parts": {
+         "input": 0.0004877,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.002315,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 19,
+       "unreported": 0,
+       "time_s": {
+        "median": 4.43,
+        "p90": 11.43,
+        "mean": 5.65
+       },
+       "tokens": {
+        "input": 312.6,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 70.9,
+        "unsplit": 0.0,
+        "output": 70.9
+       },
+       "cost": {
+        "per_task": 0.0006672,
+        "per_solved": 0.0007023,
+        "total": 0.01334,
+        "parts": {
+         "input": 0.0003126,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.0003545,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 5.81,
+        "p90": 18.51,
+        "mean": 9.56
+       },
+       "tokens": {
+        "input": 284.5,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 189.1,
+        "unsplit": 0.0,
+        "output": 189.1
+       },
+       "cost": {
+        "per_task": 0.00123,
+        "per_solved": 0.001609,
+        "total": 0.02091,
+        "parts": {
+         "input": 0.0002845,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.0009456,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 14,
+       "unreported": 0,
+       "time_s": {
+        "median": 8.79,
+        "p90": 24.84,
+        "mean": 13.34
+       },
+       "tokens": {
+        "input": 957.3,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 1059.3,
+        "unsplit": 0.0,
+        "output": 1059.3
+       },
+       "cost": {
+        "per_task": 0.006254,
+        "per_solved": 0.008041,
+        "total": 0.1126,
+        "parts": {
+         "input": 0.0009573,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.005297,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 16.78,
+        "p90": 33.17,
+        "mean": 18.48
+       },
+       "tokens": {
+        "input": 877.2,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 1031.1,
+        "unsplit": 0.0,
+        "output": 1031.1
+       },
+       "cost": {
+        "per_task": 0.006032,
+        "per_solved": 0.006032,
+        "total": 0.1086,
+        "parts": {
+         "input": 0.0008772,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.005155,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 19,
+       "failed": 0,
+       "solved": 19,
+       "unreported": 0,
+       "time_s": {
+        "median": 12.83,
+        "p90": 33.53,
+        "mean": 17.43
+       },
+       "tokens": {
+        "input": 537.5,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 804.1,
+        "unsplit": 0.0,
+        "output": 804.1
+       },
+       "cost": {
+        "per_task": 0.004558,
+        "per_solved": 0.004558,
+        "total": 0.0866,
+        "parts": {
+         "input": 0.0005375,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.004021,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 11.46,
+        "p90": 19.24,
+        "mean": 13.19
+       },
+       "tokens": {
+        "input": 635.8,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 599.8,
+        "unsplit": 0.0,
+        "output": 599.8
+       },
+       "cost": {
+        "per_task": 0.003635,
+        "per_solved": 0.003635,
+        "total": 0.06543,
+        "parts": {
+         "input": 0.0006358,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.002999,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 16,
+       "unreported": 0,
+       "time_s": {
+        "median": 11.64,
+        "p90": 24.93,
+        "mean": 14.26
+       },
+       "tokens": {
+        "input": 547.5,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 726.7,
+        "unsplit": 0.0,
+        "output": 726.7
+       },
+       "cost": {
+        "per_task": 0.004181,
+        "per_solved": 0.004703,
+        "total": 0.07526,
+        "parts": {
+         "input": 0.0005475,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.003633,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 14,
+       "unreported": 0,
+       "time_s": {
+        "median": 9.34,
+        "p90": 16.5,
+        "mean": 11.05
+       },
+       "tokens": {
+        "input": 443.7,
+        "cached_input": 0.0,
+        "reasoning": 6.8,
+        "answer": 302.2,
+        "unsplit": 0.0,
+        "output": 309.0
+       },
+       "cost": {
+        "per_task": 0.001989,
+        "per_solved": 0.002557,
+        "total": 0.0358,
+        "parts": {
+         "input": 0.0004437,
+         "cached_input": 0.0,
+         "reasoning": 3.417e-05,
+         "answer": 0.001511,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 15,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 9.95,
+        "p90": 12.67,
+        "mean": 9.46
+       },
+       "tokens": {
+        "input": 650.7,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 429.7,
+        "unsplit": 0.0,
+        "output": 429.7
+       },
+       "cost": {
+        "per_task": 0.002799,
+        "per_solved": 0.00323,
+        "total": 0.04199,
+        "parts": {
+         "input": 0.0006507,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.002148,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 10,
+       "unreported": 0,
+       "time_s": {
+        "median": 7.77,
+        "p90": 20.86,
+        "mean": 10.38
+       },
+       "tokens": {
+        "input": 400.3,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 252.4,
+        "unsplit": 0.0,
+        "output": 252.4
+       },
+       "cost": {
+        "per_task": 0.001663,
+        "per_solved": 0.002993,
+        "total": 0.02993,
+        "parts": {
+         "input": 0.0004003,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.001262,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 20,
+       "unreported": 0,
+       "time_s": {
+        "median": 6.05,
+        "p90": 21.85,
+        "mean": 9.64
+       },
+       "tokens": {
+        "input": 296.6,
+        "cached_input": 0.0,
+        "reasoning": 0.0,
+        "answer": 140.4,
+        "unsplit": 0.0,
+        "output": 140.4
+       },
+       "cost": {
+        "per_task": 0.0009989,
+        "per_solved": 0.0009989,
+        "total": 0.01998,
+        "parts": {
+         "input": 0.0002966,
+         "cached_input": 0.0,
+         "reasoning": 0.0,
+         "answer": 0.0007022,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 16.19,
+        "p90": 29.03,
+        "mean": 17.3
+       },
+       "tokens": {
+        "input": 5865.2,
+        "cached_input": 239.2,
+        "reasoning": 0.0,
+        "answer": 1370.3,
+        "unsplit": 0.0,
+        "output": 1370.3
+       },
+       "cost": {
+        "per_task": 0.01272,
+        "per_solved": 0.01272,
+        "total": 0.2289,
+        "parts": {
+         "input": 0.005626,
+         "cached_input": 0.0002392,
+         "reasoning": 0.0,
+         "answer": 0.006852,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      }
+     }
+    }
+   },
+   "suites": {
+    "apex": {
+     "score": 0.95,
+     "ci_low": 0.7639,
+     "ci_high": 0.9911,
+     "n": 20,
+     "tokens": {
+      "output_mean": 1186.6,
+      "output_median": 697.0,
+      "output_p90": 3121.3,
+      "input_mean": 704.0
+     },
+     "latency_s_median": 12.41
+    },
+    "api": {
+     "score": 0.8889,
+     "ci_low": 0.672,
+     "ci_high": 0.969,
+     "n": 18,
+     "tokens": {
+      "output_mean": 305.4,
+      "output_median": 248.5,
+      "output_p90": 533.7,
+      "input_mean": 413.6
+     },
+     "latency_s_median": 9.28
+    },
+    "ci": {
+     "score": 1.0,
+     "ci_low": 0.8157,
+     "ci_high": 1.0,
+     "n": 17,
+     "tokens": {
+      "output_mean": 462.9,
+      "output_median": 357.0,
+      "output_p90": 953.4,
+      "input_mean": 487.7
+     },
+     "latency_s_median": 9.58
+    },
+    "cli": {
+     "score": 0.95,
+     "ci_low": 0.7639,
+     "ci_high": 0.9911,
+     "n": 20,
+     "tokens": {
+      "output_mean": 70.9,
+      "output_median": 63.0,
+      "output_p90": 137.1,
+      "input_mean": 312.6
+     },
+     "latency_s_median": 4.43
+    },
+    "docs": {
+     "score": 0.7647,
+     "ci_low": 0.5274,
+     "ci_high": 0.9044,
+     "n": 17,
+     "tokens": {
+      "output_mean": 189.1,
+      "output_median": 180.0,
+      "output_p90": 282.2,
+      "input_mean": 284.5
+     },
+     "latency_s_median": 5.81
+    },
+    "fflib": {
+     "score": 0.7778,
+     "ci_low": 0.5479,
+     "ci_high": 0.91,
+     "n": 18,
+     "tokens": {
+      "output_mean": 1059.3,
+      "output_median": 429.0,
+      "output_p90": 2528.6,
+      "input_mean": 957.3
+     },
+     "latency_s_median": 8.79
+    },
+    "flow": {
+     "score": 1.0,
+     "ci_low": 0.8241,
+     "ci_high": 1.0,
+     "n": 18,
+     "tokens": {
+      "output_mean": 1031.1,
+      "output_median": 915.5,
+      "output_p90": 1894.9,
+      "input_mean": 877.2
+     },
+     "latency_s_median": 16.78
+    },
+    "limits": {
+     "score": 1.0,
+     "ci_low": 0.8318,
+     "ci_high": 1.0,
+     "n": 19,
+     "tokens": {
+      "output_mean": 804.1,
+      "output_median": 733.0,
+      "output_p90": 1158.0,
+      "input_mean": 537.5
+     },
+     "latency_s_median": 12.83
+    },
+    "lwc": {
+     "score": 1.0,
+     "ci_low": 0.8241,
+     "ci_high": 1.0,
+     "n": 18,
+     "tokens": {
+      "output_mean": 599.8,
+      "output_median": 592.5,
+      "output_p90": 811.5,
+      "input_mean": 635.8
+     },
+     "latency_s_median": 11.46
+    },
+    "npsp": {
+     "score": 0.8889,
+     "ci_low": 0.672,
+     "ci_high": 0.969,
+     "n": 18,
+     "tokens": {
+      "output_mean": 726.7,
+      "output_median": 653.0,
+      "output_p90": 1336.6,
+      "input_mean": 547.5
+     },
+     "latency_s_median": 11.64
+    },
+    "packaging": {
+     "score": 0.7778,
+     "ci_low": 0.5479,
+     "ci_high": 0.91,
+     "n": 18,
+     "tokens": {
+      "output_mean": 309.0,
+      "output_median": 307.0,
+      "output_p90": 502.9,
+      "input_mean": 443.7
+     },
+     "latency_s_median": 9.34
+    },
+    "permissions": {
+     "score": 0.8667,
+     "ci_low": 0.6212,
+     "ci_high": 0.9626,
+     "n": 15,
+     "tokens": {
+      "output_mean": 429.7,
+      "output_median": 457.0,
+      "output_p90": 518.2,
+      "input_mean": 650.7
+     },
+     "latency_s_median": 9.95
+    },
+    "scratch-def": {
+     "score": 0.5556,
+     "ci_low": 0.3372,
+     "ci_high": 0.7544,
+     "n": 18,
+     "tokens": {
+      "output_mean": 252.4,
+      "output_median": 253.5,
+      "output_p90": 449.1,
+      "input_mean": 400.3
+     },
+     "latency_s_median": 7.77
+    },
+    "soql": {
+     "score": 1.0,
+     "ci_low": 0.8389,
+     "ci_high": 1.0,
+     "n": 20,
+     "tokens": {
+      "output_mean": 140.4,
+      "output_median": 147.0,
+      "output_p90": 196.6,
+      "input_mean": 296.6
+     },
+     "latency_s_median": 6.05
+    },
+    "taf": {
+     "score": 1.0,
+     "ci_low": 0.8241,
+     "ci_high": 1.0,
+     "n": 18,
+     "tokens": {
+      "output_mean": 1370.3,
+      "output_median": 1009.5,
+      "output_p90": 2711.9,
+      "input_mean": 5865.2
+     },
+     "latency_s_median": 16.19
+    }
+   },
+   "per_task": {
+    "apex-api67-access-modes": 1.0,
+    "apex-batch-stateful-overdue": 1.0,
+    "apex-bulkify-legacy-trigger": 1.0,
+    "apex-callout-named-credential-retry": 1.0,
+    "apex-contact-email-domain": 1.0,
+    "apex-custom-exception-hierarchy": 1.0,
+    "apex-dynamic-soql-user-mode": 1.0,
+    "apex-invocable-contact-lookup": 1.0,
+    "apex-json-reserved-keys": 1.0,
+    "apex-mutation-tests-callout": 1.0,
+    "apex-mutation-tests-shipping": 1.0,
+    "apex-mutation-tests-won-handler": 1.0,
+    "apex-partial-success-lead-import": 1.0,
+    "apex-picklist-describe": 1.0,
+    "apex-platform-event-shipments": 1.0,
+    "apex-queueable-chain-depth": 0.0,
+    "apex-queueable-finalizer-retry": 1.0,
+    "apex-rollup-trigger-recursion": 1.0,
+    "apex-schedulable-log-purge": 1.0,
+    "apex-won-amount-by-account": 1.0,
+    "api-apexrest-namespaced-post": 1.0,
+    "api-bulk2-ingest-upsert": 1.0,
+    "api-bulk2-query-export": 1.0,
+    "api-choose-bulk-for-large-load": 1.0,
+    "api-collections-create-update": 1.0,
+    "api-composite-graph-orders": 1.0,
+    "api-composite-implicit-dependency": 0.0,
+    "api-describe-and-limits": 1.0,
+    "api-oauth-client-credentials": 1.0,
+    "api-platform-event-publish": 1.0,
+    "api-query-paging-queryall": 1.0,
+    "api-sobject-create-case": 1.0,
+    "api-sobject-update-delete": 1.0,
+    "api-tooling-coverage-query": 1.0,
+    "api-tooling-execute-anonymous": 1.0,
+    "api-uiapi-record-optional-fields": 1.0,
+    "api-upsert-external-id": 1.0,
+    "api-upsert-response-semantics": 0.0,
+    "ci-branch-routed-validation": 1.0,
+    "ci-choice-destructive-order": 1.0,
+    "ci-choice-quick-deploy-cache": 1.0,
+    "ci-choice-scratch-vs-sandbox": 1.0,
+    "ci-choice-source-tracking-ci": 1.0,
+    "ci-choice-test-level-prod": 1.0,
+    "ci-code-analyzer-gate": 1.0,
+    "ci-delta-deploy-sgd": 1.0,
+    "ci-environment-secrets-fix": 1.0,
+    "ci-lwc-jest-eslint": 1.0,
+    "ci-nightly-apex-tests": 1.0,
+    "ci-pr-validate-jwt": 1.0,
+    "ci-quick-deploy-on-merge": 1.0,
+    "ci-review-org-script": 1.0,
+    "ci-scratch-org-per-pr": 1.0,
+    "ci-uat-deploy-sfdx-url": 1.0,
+    "ci-unlocked-package-release": 1.0,
+    "cli-apex-run-script-file": 1.0,
+    "cli-apex-tail-log": 1.0,
+    "cli-apex-tests-junit-coverage": 1.0,
+    "cli-assign-permset-user": 1.0,
+    "cli-bulk-export-csv": 0.0,
+    "cli-bulk-upsert-external-id": 1.0,
+    "cli-delete-scratch-org": 1.0,
+    "cli-deploy-apex-class": 1.0,
+    "cli-dev-machine-config": 1.0,
+    "cli-jwt-login-and-deploy": 1.0,
+    "cli-manifest-from-org": 1.0,
+    "cli-org-open-setup-page": 1.0,
+    "cli-package-install-ci": 1.0,
+    "cli-post-destructive-deploy": 1.0,
+    "cli-retrieve-field-and-flexipage": 1.0,
+    "cli-sandbox-create-async": 1.0,
+    "cli-scratch-org-create": 1.0,
+    "cli-tree-export-import-seed": 1.0,
+    "cli-unlocked-package-release": 1.0,
+    "cli-validate-then-quick-deploy": 1.0,
+    "docs-api-concurrent-long-running": 1.0,
+    "docs-api-daily-allocation-calc": 1.0,
+    "docs-batch-querylocator-scope-max": 1.0,
+    "docs-big-object-index-text-length": 0.0,
+    "docs-bulk2-ingest-upload-size": 1.0,
+    "docs-callout-async-response-size": 1.0,
+    "docs-callout-default-timeout": 1.0,
+    "docs-cross-namespace-soql-limit": 1.0,
+    "docs-long-running-apex-concurrency": 0.0,
+    "docs-lws-distortions": 0.0,
+    "docs-lws-enable-setting": 1.0,
+    "docs-order-exec-after-trigger-vs-flow": 1.0,
+    "docs-pe-delivery-allocation-calc": 0.0,
+    "docs-pe-trigger-batch-size": 1.0,
+    "docs-queueable-async-enqueue-limit": 1.0,
+    "docs-rest-limit-info-header": 1.0,
+    "docs-scratch-org-max-duration": 1.0,
+    "fflib-apexmocks-argument-captor": 1.0,
+    "fflib-apexmocks-exception-paths": 0.0,
+    "fflib-apexmocks-mock-domain": 0.0,
+    "fflib-apexmocks-stub-selector": 1.0,
+    "fflib-apexmocks-verify-uow": 1.0,
+    "fflib-application-factories": 1.0,
+    "fflib-domain-calls-service": 1.0,
+    "fflib-domain-opportunity-defaults": 1.0,
+    "fflib-domain-sobjects-structure": 0.0,
+    "fflib-domain-unit-test-mock-db": 0.0,
+    "fflib-domain-validation": 1.0,
+    "fflib-selector-contacts": 1.0,
+    "fflib-selector-query-factory": 1.0,
+    "fflib-selector-user-mode-fieldset": 1.0,
+    "fflib-service-case-escalation": 1.0,
+    "fflib-service-facade": 1.0,
+    "fflib-uow-account-contacts": 1.0,
+    "fflib-uow-platform-events": 1.0,
+    "flow-account-credit-check-action": 1.0,
+    "flow-account-customer-welcome-task": 1.0,
+    "flow-account-discount-cascade": 1.0,
+    "flow-account-onboarding-subflow": 1.0,
+    "flow-case-breakdown-escalation": 1.0,
+    "flow-case-close-open-tasks": 1.0,
+    "flow-case-sla-due": 1.0,
+    "flow-choice-close-date-reminder": 1.0,
+    "flow-choice-guide-statements": 1.0,
+    "flow-choice-same-record-update": 1.0,
+    "flow-choice-undelete-restore": 1.0,
+    "flow-fix-account-address-sync": 1.0,
+    "flow-opportunity-amount-swing": 1.0,
+    "flow-opportunity-close-reminder-scheduled": 1.0,
+    "flow-opportunity-won-project": 1.0,
+    "flow-order-shipment-fault-path": 1.0,
+    "flow-shipping-quote-autolaunched": 1.0,
+    "flow-web-signup-contact-match": 1.0,
+    "limits-async-vs-sync-limits": 1.0,
+    "limits-control-contact-phone-partial-update": 1.0,
+    "limits-control-pipeline-query-per-stage": 1.0,
+    "limits-control-soql-for-loop-stale-deals": 1.0,
+    "limits-count-cascading-trigger-queries": 1.0,
+    "limits-count-queries-helper-per-lead": 1.0,
+    "limits-first-limit-exceeded": 1.0,
+    "limits-pushback-case-priority-query-in-loop": 1.0,
+    "limits-pushback-erp-callout-per-account": 1.0,
+    "limits-pushback-eventbus-publish-per-record": 1.0,
+    "limits-pushback-followup-tasks-dml-per-record": 1.0,
+    "limits-pushback-future-per-opportunity": 1.0,
+    "limits-pushback-helper-query-per-line-item": 1.0,
+    "limits-pushback-nested-loop-lead-matching": 1.0,
+    "limits-pushback-queueable-per-closed-case": 1.0,
+    "limits-pushback-send-email-per-opportunity": 1.0,
+    "limits-pushback-unfiltered-contact-query": 1.0,
+    "limits-spot-risky-trigger-snippets": 1.0,
+    "limits-trigger-chunks-apex-vs-data-loader": 1.0,
+    "lwc-account-header-wire": 1.0,
+    "lwc-account-quick-links-navigation": 1.0,
+    "lwc-case-status-badge": 1.0,
+    "lwc-collapsible-section-slots": 1.0,
+    "lwc-contact-list-sorted": 1.0,
+    "lwc-contact-search-debounce": 1.0,
+    "lwc-contacts-datatable-inline-save": 1.0,
+    "lwc-favorite-toggle-labels": 1.0,
+    "lwc-lms-account-panel": 1.0,
+    "lwc-open-opportunities-imperative-apex": 1.0,
+    "lwc-opportunity-row-actions": 1.0,
+    "lwc-order-lines-child-api": 1.0,
+    "lwc-pipeline-card-app-builder": 1.0,
+    "lwc-product-tile-select-event": 1.0,
+    "lwc-queue-monitor-polling-lifecycle": 1.0,
+    "lwc-registration-form-validation": 1.0,
+    "lwc-status-listbox-keyboard": 1.0,
+    "lwc-task-checklist-reactivity-fix": 1.0,
+    "npsp-affiliation-primary-employer": 1.0,
+    "npsp-bdi-gift-import": 1.0,
+    "npsp-crlp-promote-to-production": 1.0,
+    "npsp-enhanced-rd-monthly": 1.0,
+    "npsp-gau-percent-allocations": 1.0,
+    "npsp-household-create-members": 1.0,
+    "npsp-household-formal-greeting": 1.0,
+    "npsp-namespace-objects": 1.0,
+    "npsp-partial-soft-credits": 1.0,
+    "npsp-payment-installments": 1.0,
+    "npsp-record-gift": 1.0,
+    "npsp-relationship-parent-child": 1.0,
+    "npsp-soql-gau-totals": 1.0,
+    "npsp-soql-unpaid-payments-due": 1.0,
+    "npsp-tdtm-major-gift-handler": 0.0,
+    "npsp-tdtm-test-registration": 0.0,
+    "npsp-trigger-handler-exclude-user": 1.0,
+    "npsp-vs-nonprofit-cloud": 1.0,
+    "packaging-1gp-managed-released-upload": 0.0,
+    "packaging-1gp-vs-2gp": 1.0,
+    "packaging-abandon-ancestor": 1.0,
+    "packaging-ancestry-upgrade-paths": 1.0,
+    "packaging-create-org-dependent": 1.0,
+    "packaging-create-unlocked-no-namespace": 1.0,
+    "packaging-dependency-released-build": 1.0,
+    "packaging-lock-promoted-version": 0.0,
+    "packaging-managed-test-setup": 1.0,
+    "packaging-migrate-metadata-between-packages": 1.0,
+    "packaging-package-id-prefixes": 1.0,
+    "packaging-promote-and-install": 1.0,
+    "packaging-push-upgrade-schedule": 0.0,
+    "packaging-removed-components-upgrade": 0.0,
+    "packaging-skip-validation-consequences": 1.0,
+    "packaging-transitive-dependencies": 1.0,
+    "packaging-unlocked-project-config": 1.0,
+    "packaging-version-create-release-candidate": 1.0,
+    "permissions-bulk-editable-ids": 1.0,
+    "permissions-custom-permission-apex": 1.0,
+    "permissions-effective-access-muting": 1.0,
+    "permissions-fix-over-permissive": 1.0,
+    "permissions-integration-api-access": 1.0,
+    "permissions-profile-only-settings": 1.0,
+    "permissions-psg-muting": 1.0,
+    "permissions-readonly-claims-viewer": 1.0,
+    "permissions-required-field-fls": 1.0,
+    "permissions-session-based-elevation": 1.0,
+    "permissions-sharing-vs-object-perms": 1.0,
+    "permissions-strip-inaccessible-v67": 0.0,
+    "permissions-tab-app-visibility": 1.0,
+    "permissions-view-all-not-modify-all": 1.0,
+    "permissions-with-sharing-api-versions": 0.0,
+    "scratch-def-australian-locale": 0.0,
+    "scratch-def-einstein-generative-ai": 1.0,
+    "scratch-def-experience-cloud-guest-site": 0.0,
+    "scratch-def-field-service-multicurrency": 0.0,
+    "scratch-def-fix-broken-definition": 0.0,
+    "scratch-def-fix-org-preferences": 1.0,
+    "scratch-def-multicurrency-germany": 0.0,
+    "scratch-def-opportunity-teams": 1.0,
+    "scratch-def-package-object-settings": 1.0,
+    "scratch-def-partner-preview-release": 0.0,
+    "scratch-def-person-accounts": 1.0,
+    "scratch-def-professional-edition-api": 1.0,
+    "scratch-def-sales-forecasting": 0.0,
+    "scratch-def-service-knowledge-omni": 1.0,
+    "scratch-def-sfdx-project-2gp-monorepo": 1.0,
+    "scratch-def-sfdx-project-sandbox-team": 1.0,
+    "scratch-def-shield-security": 0.0,
+    "scratch-def-state-country-picklists": 1.0,
+    "soql-accounts-missing-country-or-industry": 1.0,
+    "soql-accounts-open-high-cases": 1.0,
+    "soql-banking-insurance-de-uk": 1.0,
+    "soql-customers-without-2025-wins": 1.0,
+    "soql-energy-wins-2025": 1.0,
+    "soql-fy2026-bookings-by-quarter": 1.0,
+    "soql-german-customers-open-shipments": 1.0,
+    "soql-globex-group-contacts": 1.0,
+    "soql-hardware-without-services-opps": 1.0,
+    "soql-healthcare-manager-contacts": 1.0,
+    "soql-in-transit-shipments": 1.0,
+    "soql-march-2025-activity-typeof": 1.0,
+    "soql-open-german-web-leads-count": 1.0,
+    "soql-open-shipments-handling": 1.0,
+    "soql-open-tasks-on-opportunities": 1.0,
+    "soql-parents-of-german-accounts": 1.0,
+    "soql-service-product-codes": 1.0,
+    "soql-summit-responders": 1.0,
+    "soql-top-customers-by-revenue": 1.0,
+    "soql-won-2025-by-industry": 1.0,
+    "taf-after-insert-onboarding-task": 1.0,
+    "taf-bypass-action-in-import": 1.0,
+    "taf-bypass-object-ownership-service": 1.0,
+    "taf-bypass-permission-integration": 1.0,
+    "taf-disable-action-hotfix": 1.0,
+    "taf-dml-finalizer-erp-sync": 1.0,
+    "taf-dml-less-action-test": 1.0,
+    "taf-duplicate-email-two-contexts": 1.0,
+    "taf-enable-opportunity": 1.0,
+    "taf-entry-criteria-formula": 1.0,
+    "taf-flow-action-authoring": 1.0,
+    "taf-lead-normalize-before-insert": 1.0,
+    "taf-migrate-legacy-case-trigger": 1.0,
+    "taf-open-case-rollup": 1.0,
+    "taf-recursion-amount-audit": 1.0,
+    "taf-register-flow-action": 1.0,
+    "taf-required-permission-pilot": 1.0,
+    "taf-shared-query-singleton": 1.0
+   },
+   "tokens": {
+    "output_mean": 597.6,
+    "output_median": 385.5,
+    "output_p90": 1167.5,
+    "input_mean": 889.3,
+    "reasoning_mean": 0.5
+   },
+   "outcomes": {
+    "no_answer": 0,
+    "truncated": 0,
+    "malformed": 0,
+    "retried": 0
+   },
+   "no_answer_rate": 0.0,
+   "no_answer_tasks": [],
+   "latency_s_mean": 12.45,
+   "latency_s_median": 10.12,
+   "concurrency": [
+    8
+   ],
+   "samples": 272,
+   "pending": 0,
+   "date": "2026-10-20",
+   "complete": true,
+   "runs": [
+    "20261020T014658Z_gemini-4-argon@low"
+   ],
+   "progress": {
+    "tasks_graded": 272,
+    "tasks_total": 272,
+    "suites_complete": 15,
+    "suites_total": 15
+   },
+   "legacy": 0,
+   "stale": {},
+   "rank": 4
+  },
+  {
+   "config_id": "gemini-4-argon@high",
+   "subset": "full",
+   "model": "Gemini 4 Argon",
+   "model_family": "Gemini",
+   "base_model": "Gemini-4-Argon",
+   "quant": "Unknown",
+   "engine": "Unknown",
+   "effort": "high",
+   "effort_tier": "high",
+   "open_weights": false,
+   "local": false,
+   "model_id": "gemini-4-argon",
+   "developer": "google",
+   "developer_name": "Google",
+   "serving": "api",
+   "provider": "OpenRouter",
+   "hardware": null,
+   "price": {
+    "input": 1.0,
+    "cached_input": 0.05,
+    "output": 5.0,
+    "reasoning": "output",
+    "currency": "USD",
+    "source": "https://openrouter.ai/google/gemini-4-argon/providers",
+    "as_of": "2026-10-20",
+    "route": [
+     "google-ai-studio/flex"
+    ]
+   },
+   "overall": {
+    "score": 0.8905,
+    "ci_low": 0.8534,
+    "ci_high": 0.9249
+   },
+   "c_at": {},
+   "usage": {
+    "1": {
+     "overall": {
+      "tasks": 272,
+      "answers": 272,
+      "failed": 0,
+      "solved": 243,
+      "unreported": 0,
+      "time_s": {
+       "median": 36.64,
+       "p90": 148.31,
+       "mean": 62.56
+      },
+      "tokens": {
+       "input": 889.3,
+       "cached_input": 0.0,
+       "reasoning": 4723.5,
+       "answer": 618.1,
+       "unsplit": 0.0,
+       "output": 5341.6
+      },
+      "cost": {
+       "per_task": 0.0276,
+       "per_solved": 0.03089,
+       "total": 7.506,
+       "parts": {
+        "input": 0.0008893,
+        "cached_input": 0.0,
+        "reasoning": 0.02362,
+        "answer": 0.00309,
+        "unsplit": 0.0
+       }
+      },
+      "no_cost": null,
+      "recorded": {
+       "cached_input": 272,
+       "served_by": 272
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 19,
+       "unreported": 0,
+       "time_s": {
+        "median": 83.78,
+        "p90": 161.91,
+        "mean": 98.19
+       },
+       "tokens": {
+        "input": 704.0,
+        "cached_input": 0.0,
+        "reasoning": 7511.1,
+        "answer": 1276.6,
+        "unsplit": 0.0,
+        "output": 8787.7
+       },
+       "cost": {
+        "per_task": 0.04464,
+        "per_solved": 0.04699,
+        "total": 0.8929,
+        "parts": {
+         "input": 0.0007041,
+         "cached_input": 0.0,
+         "reasoning": 0.03756,
+         "answer": 0.006383,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 25.66,
+        "p90": 53.3,
+        "mean": 29.01
+       },
+       "tokens": {
+        "input": 413.6,
+        "cached_input": 0.0,
+        "reasoning": 1841.1,
+        "answer": 317.6,
+        "unsplit": 0.0,
+        "output": 2158.7
+       },
+       "cost": {
+        "per_task": 0.01121,
+        "per_solved": 0.01187,
+        "total": 0.2017,
+        "parts": {
+         "input": 0.0004136,
+         "cached_input": 0.0,
+         "reasoning": 0.009206,
+         "answer": 0.001588,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 33.66,
+        "p90": 115.09,
+        "mean": 49.83
+       },
+       "tokens": {
+        "input": 487.7,
+        "cached_input": 0.0,
+        "reasoning": 3781.2,
+        "answer": 425.4,
+        "unsplit": 0.0,
+        "output": 4206.5
+       },
+       "cost": {
+        "per_task": 0.02152,
+        "per_solved": 0.02439,
+        "total": 0.3658,
+        "parts": {
+         "input": 0.0004877,
+         "cached_input": 0.0,
+         "reasoning": 0.01891,
+         "answer": 0.002127,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 19,
+       "unreported": 0,
+       "time_s": {
+        "median": 16.77,
+        "p90": 47.09,
+        "mean": 23.12
+       },
+       "tokens": {
+        "input": 312.6,
+        "cached_input": 0.0,
+        "reasoning": 1457.8,
+        "answer": 83.1,
+        "unsplit": 0.0,
+        "output": 1540.9
+       },
+       "cost": {
+        "per_task": 0.008017,
+        "per_solved": 0.008439,
+        "total": 0.1603,
+        "parts": {
+         "input": 0.0003126,
+         "cached_input": 0.0,
+         "reasoning": 0.007289,
+         "answer": 0.0004155,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 23.9,
+        "p90": 40.3,
+        "mean": 25.71
+       },
+       "tokens": {
+        "input": 284.5,
+        "cached_input": 0.0,
+        "reasoning": 1472.8,
+        "answer": 203.6,
+        "unsplit": 0.0,
+        "output": 1676.5
+       },
+       "cost": {
+        "per_task": 0.008667,
+        "per_solved": 0.01133,
+        "total": 0.1473,
+        "parts": {
+         "input": 0.0002845,
+         "cached_input": 0.0,
+         "reasoning": 0.007364,
+         "answer": 0.001018,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 14,
+       "unreported": 0,
+       "time_s": {
+        "median": 102.97,
+        "p90": 203.17,
+        "mean": 113.66
+       },
+       "tokens": {
+        "input": 957.3,
+        "cached_input": 0.0,
+        "reasoning": 9303.5,
+        "answer": 1379.7,
+        "unsplit": 0.0,
+        "output": 10683.2
+       },
+       "cost": {
+        "per_task": 0.05437,
+        "per_solved": 0.06991,
+        "total": 0.9787,
+        "parts": {
+         "input": 0.0009573,
+         "cached_input": 0.0,
+         "reasoning": 0.04652,
+         "answer": 0.006899,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 89.35,
+        "p90": 158.48,
+        "mean": 89.15
+       },
+       "tokens": {
+        "input": 877.2,
+        "cached_input": 0.0,
+        "reasoning": 6871.2,
+        "answer": 1090.9,
+        "unsplit": 0.0,
+        "output": 7962.1
+       },
+       "cost": {
+        "per_task": 0.04069,
+        "per_solved": 0.04308,
+        "total": 0.7324,
+        "parts": {
+         "input": 0.0008772,
+         "cached_input": 0.0,
+         "reasoning": 0.03436,
+         "answer": 0.005454,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 19,
+       "failed": 0,
+       "solved": 19,
+       "unreported": 0,
+       "time_s": {
+        "median": 46.43,
+        "p90": 82.79,
+        "mean": 51.97
+       },
+       "tokens": {
+        "input": 537.5,
+        "cached_input": 0.0,
+        "reasoning": 3408.2,
+        "answer": 707.4,
+        "unsplit": 0.0,
+        "output": 4115.6
+       },
+       "cost": {
+        "per_task": 0.02112,
+        "per_solved": 0.02112,
+        "total": 0.4012,
+        "parts": {
+         "input": 0.0005375,
+         "cached_input": 0.0,
+         "reasoning": 0.01704,
+         "answer": 0.003537,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 56.01,
+        "p90": 89.73,
+        "mean": 57.85
+       },
+       "tokens": {
+        "input": 635.8,
+        "cached_input": 0.0,
+        "reasoning": 4503.8,
+        "answer": 566.3,
+        "unsplit": 0.0,
+        "output": 5070.1
+       },
+       "cost": {
+        "per_task": 0.02599,
+        "per_solved": 0.02599,
+        "total": 0.4677,
+        "parts": {
+         "input": 0.0006358,
+         "cached_input": 0.0,
+         "reasoning": 0.02252,
+         "answer": 0.002831,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 14,
+       "unreported": 0,
+       "time_s": {
+        "median": 133.33,
+        "p90": 241.7,
+        "mean": 125.55
+       },
+       "tokens": {
+        "input": 547.5,
+        "cached_input": 0.0,
+        "reasoning": 10403.2,
+        "answer": 639.2,
+        "unsplit": 0.0,
+        "output": 11042.4
+       },
+       "cost": {
+        "per_task": 0.05576,
+        "per_solved": 0.07169,
+        "total": 1.004,
+        "parts": {
+         "input": 0.0005475,
+         "cached_input": 0.0,
+         "reasoning": 0.05202,
+         "answer": 0.003196,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 16,
+       "unreported": 0,
+       "time_s": {
+        "median": 33.07,
+        "p90": 74.06,
+        "mean": 38.97
+       },
+       "tokens": {
+        "input": 443.7,
+        "cached_input": 0.0,
+        "reasoning": 2746.1,
+        "answer": 293.8,
+        "unsplit": 0.0,
+        "output": 3039.9
+       },
+       "cost": {
+        "per_task": 0.01564,
+        "per_solved": 0.0176,
+        "total": 0.2816,
+        "parts": {
+         "input": 0.0004437,
+         "cached_input": 0.0,
+         "reasoning": 0.01373,
+         "answer": 0.001469,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 15,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 30.39,
+        "p90": 80.53,
+        "mean": 42.6
+       },
+       "tokens": {
+        "input": 650.7,
+        "cached_input": 0.0,
+        "reasoning": 2995.1,
+        "answer": 431.1,
+        "unsplit": 0.0,
+        "output": 3426.2
+       },
+       "cost": {
+        "per_task": 0.01778,
+        "per_solved": 0.02052,
+        "total": 0.2667,
+        "parts": {
+         "input": 0.0006507,
+         "cached_input": 0.0,
+         "reasoning": 0.01498,
+         "answer": 0.002156,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 12,
+       "unreported": 0,
+       "time_s": {
+        "median": 49.25,
+        "p90": 95.07,
+        "mean": 60.43
+       },
+       "tokens": {
+        "input": 400.3,
+        "cached_input": 0.0,
+        "reasoning": 4385.9,
+        "answer": 230.6,
+        "unsplit": 0.0,
+        "output": 4616.6
+       },
+       "cost": {
+        "per_task": 0.02348,
+        "per_solved": 0.03522,
+        "total": 0.4227,
+        "parts": {
+         "input": 0.0004003,
+         "cached_input": 0.0,
+         "reasoning": 0.02193,
+         "answer": 0.001153,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 20,
+       "unreported": 0,
+       "time_s": {
+        "median": 15.45,
+        "p90": 24.75,
+        "mean": 18.62
+       },
+       "tokens": {
+        "input": 296.6,
+        "cached_input": 0.0,
+        "reasoning": 1041.3,
+        "answer": 135.7,
+        "unsplit": 0.0,
+        "output": 1177.0
+       },
+       "cost": {
+        "per_task": 0.006181,
+        "per_solved": 0.006181,
+        "total": 0.1236,
+        "parts": {
+         "input": 0.0002966,
+         "cached_input": 0.0,
+         "reasoning": 0.005207,
+         "answer": 0.0006783,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 71.66,
+        "p90": 252.07,
+        "mean": 113.6
+       },
+       "tokens": {
+        "input": 5865.2,
+        "cached_input": 0.0,
+        "reasoning": 9144.5,
+        "answer": 1460.3,
+        "unsplit": 0.0,
+        "output": 10604.8
+       },
+       "cost": {
+        "per_task": 0.05889,
+        "per_solved": 0.06235,
+        "total": 1.06,
+        "parts": {
+         "input": 0.005865,
+         "cached_input": 0.0,
+         "reasoning": 0.04572,
+         "answer": 0.007302,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      }
+     }
+    }
+   },
+   "suites": {
+    "apex": {
+     "score": 0.95,
+     "ci_low": 0.7639,
+     "ci_high": 0.9911,
+     "n": 20,
+     "tokens": {
+      "output_mean": 8787.7,
+      "output_median": 7201.0,
+      "output_p90": 14727.5,
+      "input_mean": 704.0
+     },
+     "latency_s_median": 83.78
+    },
+    "api": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 2158.7,
+      "output_median": 1419.5,
+      "output_p90": 4369.6,
+      "input_mean": 413.6
+     },
+     "latency_s_median": 25.66
+    },
+    "ci": {
+     "score": 0.8824,
+     "ci_low": 0.6566,
+     "ci_high": 0.9671,
+     "n": 17,
+     "tokens": {
+      "output_mean": 4206.5,
+      "output_median": 2450.0,
+      "output_p90": 10076.4,
+      "input_mean": 487.7
+     },
+     "latency_s_median": 33.66
+    },
+    "cli": {
+     "score": 0.95,
+     "ci_low": 0.7639,
+     "ci_high": 0.9911,
+     "n": 20,
+     "tokens": {
+      "output_mean": 1540.9,
+      "output_median": 1127.0,
+      "output_p90": 3208.2,
+      "input_mean": 312.6
+     },
+     "latency_s_median": 16.77
+    },
+    "docs": {
+     "score": 0.7647,
+     "ci_low": 0.5274,
+     "ci_high": 0.9044,
+     "n": 17,
+     "tokens": {
+      "output_mean": 1676.5,
+      "output_median": 1553.0,
+      "output_p90": 2684.0,
+      "input_mean": 284.5
+     },
+     "latency_s_median": 23.9
+    },
+    "fflib": {
+     "score": 0.7778,
+     "ci_low": 0.5479,
+     "ci_high": 0.91,
+     "n": 18,
+     "tokens": {
+      "output_mean": 10683.2,
+      "output_median": 9381.5,
+      "output_p90": 20227.1,
+      "input_mean": 957.3
+     },
+     "latency_s_median": 102.97
+    },
+    "flow": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 7962.1,
+      "output_median": 7982.0,
+      "output_p90": 14732.0,
+      "input_mean": 877.2
+     },
+     "latency_s_median": 89.35
+    },
+    "limits": {
+     "score": 1.0,
+     "ci_low": 0.8318,
+     "ci_high": 1.0,
+     "n": 19,
+     "tokens": {
+      "output_mean": 4115.6,
+      "output_median": 3282.0,
+      "output_p90": 7067.4,
+      "input_mean": 537.5
+     },
+     "latency_s_median": 46.43
+    },
+    "lwc": {
+     "score": 1.0,
+     "ci_low": 0.8241,
+     "ci_high": 1.0,
+     "n": 18,
+     "tokens": {
+      "output_mean": 5070.1,
+      "output_median": 5284.5,
+      "output_p90": 8347.7,
+      "input_mean": 635.8
+     },
+     "latency_s_median": 56.01
+    },
+    "npsp": {
+     "score": 0.7778,
+     "ci_low": 0.5479,
+     "ci_high": 0.91,
+     "n": 18,
+     "tokens": {
+      "output_mean": 11042.4,
+      "output_median": 11772.0,
+      "output_p90": 21642.4,
+      "input_mean": 547.5
+     },
+     "latency_s_median": 133.33
+    },
+    "packaging": {
+     "score": 0.8889,
+     "ci_low": 0.672,
+     "ci_high": 0.969,
+     "n": 18,
+     "tokens": {
+      "output_mean": 3039.9,
+      "output_median": 2234.0,
+      "output_p90": 6365.8,
+      "input_mean": 443.7
+     },
+     "latency_s_median": 33.07
+    },
+    "permissions": {
+     "score": 0.8667,
+     "ci_low": 0.6212,
+     "ci_high": 0.9626,
+     "n": 15,
+     "tokens": {
+      "output_mean": 3426.2,
+      "output_median": 2005.0,
+      "output_p90": 6523.2,
+      "input_mean": 650.7
+     },
+     "latency_s_median": 30.39
+    },
+    "scratch-def": {
+     "score": 0.6667,
+     "ci_low": 0.4375,
+     "ci_high": 0.8372,
+     "n": 18,
+     "tokens": {
+      "output_mean": 4616.6,
+      "output_median": 3460.0,
+      "output_p90": 7284.9,
+      "input_mean": 400.3
+     },
+     "latency_s_median": 49.25
+    },
+    "soql": {
+     "score": 1.0,
+     "ci_low": 0.8389,
+     "ci_high": 1.0,
+     "n": 20,
+     "tokens": {
+      "output_mean": 1177.0,
+      "output_median": 824.0,
+      "output_p90": 1381.4,
+      "input_mean": 296.6
+     },
+     "latency_s_median": 15.45
+    },
+    "taf": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 10604.8,
+      "output_median": 7463.5,
+      "output_p90": 22006.2,
+      "input_mean": 5865.2
+     },
+     "latency_s_median": 71.66
+    }
+   },
+   "per_task": {
+    "apex-api67-access-modes": 1.0,
+    "apex-batch-stateful-overdue": 1.0,
+    "apex-bulkify-legacy-trigger": 1.0,
+    "apex-callout-named-credential-retry": 1.0,
+    "apex-contact-email-domain": 1.0,
+    "apex-custom-exception-hierarchy": 1.0,
+    "apex-dynamic-soql-user-mode": 1.0,
+    "apex-invocable-contact-lookup": 1.0,
+    "apex-json-reserved-keys": 1.0,
+    "apex-mutation-tests-callout": 1.0,
+    "apex-mutation-tests-shipping": 1.0,
+    "apex-mutation-tests-won-handler": 1.0,
+    "apex-partial-success-lead-import": 1.0,
+    "apex-picklist-describe": 1.0,
+    "apex-platform-event-shipments": 1.0,
+    "apex-queueable-chain-depth": 0.0,
+    "apex-queueable-finalizer-retry": 1.0,
+    "apex-rollup-trigger-recursion": 1.0,
+    "apex-schedulable-log-purge": 1.0,
+    "apex-won-amount-by-account": 1.0,
+    "api-apexrest-namespaced-post": 1.0,
+    "api-bulk2-ingest-upsert": 1.0,
+    "api-bulk2-query-export": 1.0,
+    "api-choose-bulk-for-large-load": 1.0,
+    "api-collections-create-update": 1.0,
+    "api-composite-graph-orders": 1.0,
+    "api-composite-implicit-dependency": 1.0,
+    "api-describe-and-limits": 1.0,
+    "api-oauth-client-credentials": 1.0,
+    "api-platform-event-publish": 1.0,
+    "api-query-paging-queryall": 1.0,
+    "api-sobject-create-case": 1.0,
+    "api-sobject-update-delete": 1.0,
+    "api-tooling-coverage-query": 1.0,
+    "api-tooling-execute-anonymous": 1.0,
+    "api-uiapi-record-optional-fields": 1.0,
+    "api-upsert-external-id": 1.0,
+    "api-upsert-response-semantics": 0.0,
+    "ci-branch-routed-validation": 1.0,
+    "ci-choice-destructive-order": 1.0,
+    "ci-choice-quick-deploy-cache": 1.0,
+    "ci-choice-scratch-vs-sandbox": 1.0,
+    "ci-choice-source-tracking-ci": 1.0,
+    "ci-choice-test-level-prod": 1.0,
+    "ci-code-analyzer-gate": 1.0,
+    "ci-delta-deploy-sgd": 1.0,
+    "ci-environment-secrets-fix": 1.0,
+    "ci-lwc-jest-eslint": 1.0,
+    "ci-nightly-apex-tests": 1.0,
+    "ci-pr-validate-jwt": 1.0,
+    "ci-quick-deploy-on-merge": 0.0,
+    "ci-review-org-script": 1.0,
+    "ci-scratch-org-per-pr": 1.0,
+    "ci-uat-deploy-sfdx-url": 1.0,
+    "ci-unlocked-package-release": 0.0,
+    "cli-apex-run-script-file": 1.0,
+    "cli-apex-tail-log": 1.0,
+    "cli-apex-tests-junit-coverage": 1.0,
+    "cli-assign-permset-user": 1.0,
+    "cli-bulk-export-csv": 0.0,
+    "cli-bulk-upsert-external-id": 1.0,
+    "cli-delete-scratch-org": 1.0,
+    "cli-deploy-apex-class": 1.0,
+    "cli-dev-machine-config": 1.0,
+    "cli-jwt-login-and-deploy": 1.0,
+    "cli-manifest-from-org": 1.0,
+    "cli-org-open-setup-page": 1.0,
+    "cli-package-install-ci": 1.0,
+    "cli-post-destructive-deploy": 1.0,
+    "cli-retrieve-field-and-flexipage": 1.0,
+    "cli-sandbox-create-async": 1.0,
+    "cli-scratch-org-create": 1.0,
+    "cli-tree-export-import-seed": 1.0,
+    "cli-unlocked-package-release": 1.0,
+    "cli-validate-then-quick-deploy": 1.0,
+    "docs-api-concurrent-long-running": 1.0,
+    "docs-api-daily-allocation-calc": 1.0,
+    "docs-batch-querylocator-scope-max": 1.0,
+    "docs-big-object-index-text-length": 1.0,
+    "docs-bulk2-ingest-upload-size": 1.0,
+    "docs-callout-async-response-size": 1.0,
+    "docs-callout-default-timeout": 1.0,
+    "docs-cross-namespace-soql-limit": 1.0,
+    "docs-long-running-apex-concurrency": 0.0,
+    "docs-lws-distortions": 0.0,
+    "docs-lws-enable-setting": 1.0,
+    "docs-order-exec-after-trigger-vs-flow": 1.0,
+    "docs-pe-delivery-allocation-calc": 0.0,
+    "docs-pe-trigger-batch-size": 0.0,
+    "docs-queueable-async-enqueue-limit": 1.0,
+    "docs-rest-limit-info-header": 1.0,
+    "docs-scratch-org-max-duration": 1.0,
+    "fflib-apexmocks-argument-captor": 0.0,
+    "fflib-apexmocks-exception-paths": 0.0,
+    "fflib-apexmocks-mock-domain": 0.0,
+    "fflib-apexmocks-stub-selector": 1.0,
+    "fflib-apexmocks-verify-uow": 1.0,
+    "fflib-application-factories": 1.0,
+    "fflib-domain-calls-service": 1.0,
+    "fflib-domain-opportunity-defaults": 1.0,
+    "fflib-domain-sobjects-structure": 1.0,
+    "fflib-domain-unit-test-mock-db": 1.0,
+    "fflib-domain-validation": 0.0,
+    "fflib-selector-contacts": 1.0,
+    "fflib-selector-query-factory": 1.0,
+    "fflib-selector-user-mode-fieldset": 1.0,
+    "fflib-service-case-escalation": 1.0,
+    "fflib-service-facade": 1.0,
+    "fflib-uow-account-contacts": 1.0,
+    "fflib-uow-platform-events": 1.0,
+    "flow-account-credit-check-action": 1.0,
+    "flow-account-customer-welcome-task": 1.0,
+    "flow-account-discount-cascade": 1.0,
+    "flow-account-onboarding-subflow": 1.0,
+    "flow-case-breakdown-escalation": 1.0,
+    "flow-case-close-open-tasks": 1.0,
+    "flow-case-sla-due": 1.0,
+    "flow-choice-close-date-reminder": 1.0,
+    "flow-choice-guide-statements": 0.0,
+    "flow-choice-same-record-update": 1.0,
+    "flow-choice-undelete-restore": 1.0,
+    "flow-fix-account-address-sync": 1.0,
+    "flow-opportunity-amount-swing": 1.0,
+    "flow-opportunity-close-reminder-scheduled": 1.0,
+    "flow-opportunity-won-project": 1.0,
+    "flow-order-shipment-fault-path": 1.0,
+    "flow-shipping-quote-autolaunched": 1.0,
+    "flow-web-signup-contact-match": 1.0,
+    "limits-async-vs-sync-limits": 1.0,
+    "limits-control-contact-phone-partial-update": 1.0,
+    "limits-control-pipeline-query-per-stage": 1.0,
+    "limits-control-soql-for-loop-stale-deals": 1.0,
+    "limits-count-cascading-trigger-queries": 1.0,
+    "limits-count-queries-helper-per-lead": 1.0,
+    "limits-first-limit-exceeded": 1.0,
+    "limits-pushback-case-priority-query-in-loop": 1.0,
+    "limits-pushback-erp-callout-per-account": 1.0,
+    "limits-pushback-eventbus-publish-per-record": 1.0,
+    "limits-pushback-followup-tasks-dml-per-record": 1.0,
+    "limits-pushback-future-per-opportunity": 1.0,
+    "limits-pushback-helper-query-per-line-item": 1.0,
+    "limits-pushback-nested-loop-lead-matching": 1.0,
+    "limits-pushback-queueable-per-closed-case": 1.0,
+    "limits-pushback-send-email-per-opportunity": 1.0,
+    "limits-pushback-unfiltered-contact-query": 1.0,
+    "limits-spot-risky-trigger-snippets": 1.0,
+    "limits-trigger-chunks-apex-vs-data-loader": 1.0,
+    "lwc-account-header-wire": 1.0,
+    "lwc-account-quick-links-navigation": 1.0,
+    "lwc-case-status-badge": 1.0,
+    "lwc-collapsible-section-slots": 1.0,
+    "lwc-contact-list-sorted": 1.0,
+    "lwc-contact-search-debounce": 1.0,
+    "lwc-contacts-datatable-inline-save": 1.0,
+    "lwc-favorite-toggle-labels": 1.0,
+    "lwc-lms-account-panel": 1.0,
+    "lwc-open-opportunities-imperative-apex": 1.0,
+    "lwc-opportunity-row-actions": 1.0,
+    "lwc-order-lines-child-api": 1.0,
+    "lwc-pipeline-card-app-builder": 1.0,
+    "lwc-product-tile-select-event": 1.0,
+    "lwc-queue-monitor-polling-lifecycle": 1.0,
+    "lwc-registration-form-validation": 1.0,
+    "lwc-status-listbox-keyboard": 1.0,
+    "lwc-task-checklist-reactivity-fix": 1.0,
+    "npsp-affiliation-primary-employer": 1.0,
+    "npsp-bdi-gift-import": 0.0,
+    "npsp-crlp-promote-to-production": 1.0,
+    "npsp-enhanced-rd-monthly": 0.0,
+    "npsp-gau-percent-allocations": 1.0,
+    "npsp-household-create-members": 0.0,
+    "npsp-household-formal-greeting": 1.0,
+    "npsp-namespace-objects": 1.0,
+    "npsp-partial-soft-credits": 0.0,
+    "npsp-payment-installments": 1.0,
+    "npsp-record-gift": 1.0,
+    "npsp-relationship-parent-child": 1.0,
+    "npsp-soql-gau-totals": 1.0,
+    "npsp-soql-unpaid-payments-due": 1.0,
+    "npsp-tdtm-major-gift-handler": 1.0,
+    "npsp-tdtm-test-registration": 1.0,
+    "npsp-trigger-handler-exclude-user": 1.0,
+    "npsp-vs-nonprofit-cloud": 1.0,
+    "packaging-1gp-managed-released-upload": 1.0,
+    "packaging-1gp-vs-2gp": 1.0,
+    "packaging-abandon-ancestor": 1.0,
+    "packaging-ancestry-upgrade-paths": 1.0,
+    "packaging-create-org-dependent": 1.0,
+    "packaging-create-unlocked-no-namespace": 1.0,
+    "packaging-dependency-released-build": 1.0,
+    "packaging-lock-promoted-version": 1.0,
+    "packaging-managed-test-setup": 1.0,
+    "packaging-migrate-metadata-between-packages": 1.0,
+    "packaging-package-id-prefixes": 1.0,
+    "packaging-promote-and-install": 1.0,
+    "packaging-push-upgrade-schedule": 0.0,
+    "packaging-removed-components-upgrade": 0.0,
+    "packaging-skip-validation-consequences": 1.0,
+    "packaging-transitive-dependencies": 1.0,
+    "packaging-unlocked-project-config": 1.0,
+    "packaging-version-create-release-candidate": 1.0,
+    "permissions-bulk-editable-ids": 0.0,
+    "permissions-custom-permission-apex": 1.0,
+    "permissions-effective-access-muting": 1.0,
+    "permissions-fix-over-permissive": 1.0,
+    "permissions-integration-api-access": 1.0,
+    "permissions-profile-only-settings": 1.0,
+    "permissions-psg-muting": 1.0,
+    "permissions-readonly-claims-viewer": 1.0,
+    "permissions-required-field-fls": 1.0,
+    "permissions-session-based-elevation": 1.0,
+    "permissions-sharing-vs-object-perms": 1.0,
+    "permissions-strip-inaccessible-v67": 0.0,
+    "permissions-tab-app-visibility": 1.0,
+    "permissions-view-all-not-modify-all": 1.0,
+    "permissions-with-sharing-api-versions": 1.0,
+    "scratch-def-australian-locale": 0.0,
+    "scratch-def-einstein-generative-ai": 1.0,
+    "scratch-def-experience-cloud-guest-site": 1.0,
+    "scratch-def-field-service-multicurrency": 0.0,
+    "scratch-def-fix-broken-definition": 0.0,
+    "scratch-def-fix-org-preferences": 1.0,
+    "scratch-def-multicurrency-germany": 0.0,
+    "scratch-def-opportunity-teams": 1.0,
+    "scratch-def-package-object-settings": 1.0,
+    "scratch-def-partner-preview-release": 0.0,
+    "scratch-def-person-accounts": 1.0,
+    "scratch-def-professional-edition-api": 1.0,
+    "scratch-def-sales-forecasting": 0.0,
+    "scratch-def-service-knowledge-omni": 1.0,
+    "scratch-def-sfdx-project-2gp-monorepo": 1.0,
+    "scratch-def-sfdx-project-sandbox-team": 1.0,
+    "scratch-def-shield-security": 1.0,
+    "scratch-def-state-country-picklists": 1.0,
+    "soql-accounts-missing-country-or-industry": 1.0,
+    "soql-accounts-open-high-cases": 1.0,
+    "soql-banking-insurance-de-uk": 1.0,
+    "soql-customers-without-2025-wins": 1.0,
+    "soql-energy-wins-2025": 1.0,
+    "soql-fy2026-bookings-by-quarter": 1.0,
+    "soql-german-customers-open-shipments": 1.0,
+    "soql-globex-group-contacts": 1.0,
+    "soql-hardware-without-services-opps": 1.0,
+    "soql-healthcare-manager-contacts": 1.0,
+    "soql-in-transit-shipments": 1.0,
+    "soql-march-2025-activity-typeof": 1.0,
+    "soql-open-german-web-leads-count": 1.0,
+    "soql-open-shipments-handling": 1.0,
+    "soql-open-tasks-on-opportunities": 1.0,
+    "soql-parents-of-german-accounts": 1.0,
+    "soql-service-product-codes": 1.0,
+    "soql-summit-responders": 1.0,
+    "soql-top-customers-by-revenue": 1.0,
+    "soql-won-2025-by-industry": 1.0,
+    "taf-after-insert-onboarding-task": 1.0,
+    "taf-bypass-action-in-import": 1.0,
+    "taf-bypass-object-ownership-service": 1.0,
+    "taf-bypass-permission-integration": 1.0,
+    "taf-disable-action-hotfix": 1.0,
+    "taf-dml-finalizer-erp-sync": 1.0,
+    "taf-dml-less-action-test": 1.0,
+    "taf-duplicate-email-two-contexts": 1.0,
+    "taf-enable-opportunity": 1.0,
+    "taf-entry-criteria-formula": 0.0,
+    "taf-flow-action-authoring": 1.0,
+    "taf-lead-normalize-before-insert": 1.0,
+    "taf-migrate-legacy-case-trigger": 1.0,
+    "taf-open-case-rollup": 1.0,
+    "taf-recursion-amount-audit": 1.0,
+    "taf-register-flow-action": 1.0,
+    "taf-required-permission-pilot": 1.0,
+    "taf-shared-query-singleton": 1.0
+   },
+   "tokens": {
+    "output_mean": 5341.6,
+    "output_median": 3100.5,
+    "output_p90": 12971.7,
+    "input_mean": 889.3,
+    "reasoning_mean": 4723.5
+   },
+   "outcomes": {
+    "no_answer": 3,
+    "truncated": 0,
+    "malformed": 0,
+    "retried": 0
+   },
+   "no_answer_rate": 0.011,
+   "no_answer_tasks": [
+    "apex-queueable-chain-depth",
+    "npsp-household-create-members",
+    "taf-entry-criteria-formula"
+   ],
+   "latency_s_mean": 62.56,
+   "latency_s_median": 36.64,
+   "concurrency": [
+    8
+   ],
+   "samples": 272,
+   "pending": 0,
+   "date": "2026-10-20",
+   "complete": true,
+   "runs": [
+    "20261020T014658Z_gemini-4-argon@high"
+   ],
+   "progress": {
+    "tasks_graded": 272,
+    "tasks_total": 272,
+    "suites_complete": 15,
+    "suites_total": 15
+   },
+   "legacy": 0,
+   "stale": {},
+   "rank": 5
+  },
+  {
    "config_id": "grok-4.6@high",
    "subset": "full",
    "model": "Grok 4.6",
@@ -9449,7 +11617,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 4
+   "rank": 6
   },
   {
    "config_id": "gpt-6-astra@medium",
@@ -11307,7 +13475,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 5
+   "rank": 7
   },
   {
    "config_id": "claude-sonnet-5.5@high",
@@ -13162,7 +15330,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 6
+   "rank": 8
   },
   {
    "config_id": "gpt-6-astra@high",
@@ -15020,7 +17188,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 7
+   "rank": 9
   },
   {
    "config_id": "gpt-6.1-sol@high",
@@ -16878,7 +19046,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 8
+   "rank": 10
   },
   {
    "config_id": "grok-4.7@high",
@@ -18738,7 +20906,1089 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 9
+   "rank": 11
+  },
+  {
+   "config_id": "muse-wonder@medium",
+   "subset": "full",
+   "model": "Muse Wonder",
+   "model_family": "Muse-Wonder",
+   "base_model": "Muse-Wonder",
+   "quant": "Unknown",
+   "engine": "Unknown",
+   "effort": "medium",
+   "effort_tier": "medium",
+   "open_weights": false,
+   "local": false,
+   "model_id": "muse-wonder",
+   "developer": "meta",
+   "developer_name": "Meta",
+   "serving": "api",
+   "provider": "OpenRouter",
+   "hardware": null,
+   "price": {
+    "input": 4.0,
+    "cached_input": 0.2,
+    "output": 20.0,
+    "reasoning": "output",
+    "currency": "USD",
+    "source": "https://openrouter.ai/meta/muse-wonder/providers",
+    "as_of": "2026-10-20",
+    "route": [
+     "meta"
+    ]
+   },
+   "overall": {
+    "score": 0.7744,
+    "ci_low": 0.7288,
+    "ci_high": 0.819
+   },
+   "c_at": {},
+   "usage": {
+    "1": {
+     "overall": {
+      "tasks": 272,
+      "answers": 272,
+      "failed": 0,
+      "solved": 212,
+      "unreported": 0,
+      "time_s": {
+       "median": 22.01,
+       "p90": 57.65,
+       "mean": 29.2
+      },
+      "tokens": {
+       "input": 793.2,
+       "cached_input": 113.0,
+       "reasoning": 2518.7,
+       "answer": 592.5,
+       "unsplit": 0.0,
+       "output": 3111.2
+      },
+      "cost": {
+       "per_task": 0.0654,
+       "per_solved": 0.08391,
+       "total": 17.79,
+       "parts": {
+        "input": 0.002721,
+        "cached_input": 0.0004521,
+        "reasoning": 0.05037,
+        "answer": 0.01185,
+        "unsplit": 0.0
+       }
+      },
+      "no_cost": null,
+      "recorded": {
+       "cached_input": 272,
+       "served_by": 272
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 32.39,
+        "p90": 83.56,
+        "mean": 45.75
+       },
+       "tokens": {
+        "input": 648.4,
+        "cached_input": 92.8,
+        "reasoning": 3368.1,
+        "answer": 1517.5,
+        "unsplit": 0.0,
+        "output": 4885.5
+       },
+       "cost": {
+        "per_task": 0.1003,
+        "per_solved": 0.1337,
+        "total": 2.006,
+        "parts": {
+         "input": 0.002222,
+         "cached_input": 0.0003712,
+         "reasoning": 0.06736,
+         "answer": 0.03035,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 11.74,
+        "p90": 24.93,
+        "mean": 14.44
+       },
+       "tokens": {
+        "input": 382.6,
+        "cached_input": 116.0,
+        "reasoning": 1341.2,
+        "answer": 224.3,
+        "unsplit": 0.0,
+        "output": 1565.5
+       },
+       "cost": {
+        "per_task": 0.03284,
+        "per_solved": 0.03477,
+        "total": 0.5911,
+        "parts": {
+         "input": 0.001066,
+         "cached_input": 0.000464,
+         "reasoning": 0.02682,
+         "answer": 0.004486,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 21.79,
+        "p90": 38.06,
+        "mean": 24.69
+       },
+       "tokens": {
+        "input": 453.6,
+        "cached_input": 116.0,
+        "reasoning": 2118.9,
+        "answer": 503.6,
+        "unsplit": 0.0,
+        "output": 2622.5
+       },
+       "cost": {
+        "per_task": 0.05426,
+        "per_solved": 0.07096,
+        "total": 0.9225,
+        "parts": {
+         "input": 0.00135,
+         "cached_input": 0.000464,
+         "reasoning": 0.04238,
+         "answer": 0.01007,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 20,
+       "unreported": 0,
+       "time_s": {
+        "median": 11.71,
+        "p90": 20.58,
+        "mean": 12.97
+       },
+       "tokens": {
+        "input": 295.1,
+        "cached_input": 116.0,
+        "reasoning": 1248.8,
+        "answer": 103.8,
+        "unsplit": 0.0,
+        "output": 1352.5
+       },
+       "cost": {
+        "per_task": 0.02823,
+        "per_solved": 0.02823,
+        "total": 0.5646,
+        "parts": {
+         "input": 0.0007164,
+         "cached_input": 0.000464,
+         "reasoning": 0.02498,
+         "answer": 0.002076,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 17.52,
+        "p90": 38.79,
+        "mean": 22.5
+       },
+       "tokens": {
+        "input": 267.3,
+        "cached_input": 109.2,
+        "reasoning": 1860.4,
+        "answer": 136.2,
+        "unsplit": 0.0,
+        "output": 1996.6
+       },
+       "cost": {
+        "per_task": 0.041,
+        "per_solved": 0.07745,
+        "total": 0.697,
+        "parts": {
+         "input": 0.0006325,
+         "cached_input": 0.0004367,
+         "reasoning": 0.03721,
+         "answer": 0.002725,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 12,
+       "unreported": 0,
+       "time_s": {
+        "median": 45.84,
+        "p90": 70.55,
+        "mean": 45.03
+       },
+       "tokens": {
+        "input": 863.7,
+        "cached_input": 109.6,
+        "reasoning": 4416.3,
+        "answer": 1116.5,
+        "unsplit": 0.0,
+        "output": 5532.8
+       },
+       "cost": {
+        "per_task": 0.1141,
+        "per_solved": 0.1712,
+        "total": 2.054,
+        "parts": {
+         "input": 0.003016,
+         "cached_input": 0.0004382,
+         "reasoning": 0.08833,
+         "answer": 0.02233,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 48.47,
+        "p90": 94.17,
+        "mean": 50.95
+       },
+       "tokens": {
+        "input": 783.3,
+        "cached_input": 116.0,
+        "reasoning": 4374.9,
+        "answer": 1212.0,
+        "unsplit": 0.0,
+        "output": 5586.9
+       },
+       "cost": {
+        "per_task": 0.1149,
+        "per_solved": 0.2297,
+        "total": 2.068,
+        "parts": {
+         "input": 0.002669,
+         "cached_input": 0.000464,
+         "reasoning": 0.0875,
+         "answer": 0.02424,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 19,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 23.52,
+        "p90": 41.99,
+        "mean": 25.14
+       },
+       "tokens": {
+        "input": 490.9,
+        "cached_input": 116.0,
+        "reasoning": 1947.1,
+        "answer": 669.3,
+        "unsplit": 0.0,
+        "output": 2616.3
+       },
+       "cost": {
+        "per_task": 0.05429,
+        "per_solved": 0.06068,
+        "total": 1.032,
+        "parts": {
+         "input": 0.0015,
+         "cached_input": 0.000464,
+         "reasoning": 0.03894,
+         "answer": 0.01339,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 19.25,
+        "p90": 43.86,
+        "mean": 26.54
+       },
+       "tokens": {
+        "input": 585.8,
+        "cached_input": 116.0,
+        "reasoning": 2249.1,
+        "answer": 580.6,
+        "unsplit": 0.0,
+        "output": 2829.6
+       },
+       "cost": {
+        "per_task": 0.05894,
+        "per_solved": 0.0624,
+        "total": 1.061,
+        "parts": {
+         "input": 0.001879,
+         "cached_input": 0.000464,
+         "reasoning": 0.04498,
+         "answer": 0.01161,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 16,
+       "unreported": 0,
+       "time_s": {
+        "median": 34.78,
+        "p90": 67.36,
+        "mean": 37.75
+       },
+       "tokens": {
+        "input": 522.7,
+        "cached_input": 116.0,
+        "reasoning": 3356.1,
+        "answer": 806.6,
+        "unsplit": 0.0,
+        "output": 4162.6
+       },
+       "cost": {
+        "per_task": 0.08534,
+        "per_solved": 0.09601,
+        "total": 1.536,
+        "parts": {
+         "input": 0.001627,
+         "cached_input": 0.000464,
+         "reasoning": 0.06712,
+         "answer": 0.01613,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 21.36,
+        "p90": 38.37,
+        "mean": 24.45
+       },
+       "tokens": {
+        "input": 411.8,
+        "cached_input": 109.6,
+        "reasoning": 2234.5,
+        "answer": 231.9,
+        "unsplit": 0.0,
+        "output": 2466.4
+       },
+       "cost": {
+        "per_task": 0.05098,
+        "per_solved": 0.06117,
+        "total": 0.9176,
+        "parts": {
+         "input": 0.001209,
+         "cached_input": 0.0004382,
+         "reasoning": 0.04469,
+         "answer": 0.004638,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 15,
+       "failed": 0,
+       "solved": 10,
+       "unreported": 0,
+       "time_s": {
+        "median": 20.91,
+        "p90": 35.62,
+        "mean": 22.21
+       },
+       "tokens": {
+        "input": 594.7,
+        "cached_input": 116.0,
+        "reasoning": 1964.1,
+        "answer": 415.9,
+        "unsplit": 0.0,
+        "output": 2379.9
+       },
+       "cost": {
+        "per_task": 0.04998,
+        "per_solved": 0.07497,
+        "total": 0.7497,
+        "parts": {
+         "input": 0.001915,
+         "cached_input": 0.000464,
+         "reasoning": 0.03928,
+         "answer": 0.008317,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 7,
+       "unreported": 0,
+       "time_s": {
+        "median": 45.36,
+        "p90": 66.0,
+        "mean": 43.86
+       },
+       "tokens": {
+        "input": 373.6,
+        "cached_input": 116.0,
+        "reasoning": 3756.7,
+        "answer": 215.2,
+        "unsplit": 0.0,
+        "output": 3971.9
+       },
+       "cost": {
+        "per_task": 0.08093,
+        "per_solved": 0.2081,
+        "total": 1.457,
+        "parts": {
+         "input": 0.00103,
+         "cached_input": 0.000464,
+         "reasoning": 0.07513,
+         "answer": 0.004304,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 12.97,
+        "p90": 26.15,
+        "mean": 13.88
+       },
+       "tokens": {
+        "input": 280.4,
+        "cached_input": 116.0,
+        "reasoning": 1185.0,
+        "answer": 125.2,
+        "unsplit": 0.0,
+        "output": 1310.2
+       },
+       "cost": {
+        "per_task": 0.02733,
+        "per_solved": 0.03036,
+        "total": 0.5465,
+        "parts": {
+         "input": 0.0006578,
+         "cached_input": 0.000464,
+         "reasoning": 0.0237,
+         "answer": 0.002504,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 20.23,
+        "p90": 42.84,
+        "mean": 27.9
+       },
+       "tokens": {
+        "input": 5008.8,
+        "cached_input": 116.0,
+        "reasoning": 2434.6,
+        "answer": 968.9,
+        "unsplit": 0.0,
+        "output": 3403.5
+       },
+       "cost": {
+        "per_task": 0.08811,
+        "per_solved": 0.09329,
+        "total": 1.586,
+        "parts": {
+         "input": 0.01957,
+         "cached_input": 0.000464,
+         "reasoning": 0.04869,
+         "answer": 0.01938,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      }
+     }
+    }
+   },
+   "suites": {
+    "apex": {
+     "score": 0.75,
+     "ci_low": 0.5313,
+     "ci_high": 0.8881,
+     "n": 20,
+     "tokens": {
+      "output_mean": 4885.5,
+      "output_median": 3684.5,
+      "output_p90": 11440.9,
+      "input_mean": 648.4
+     },
+     "latency_s_median": 32.39
+    },
+    "api": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 1565.5,
+      "output_median": 1424.5,
+      "output_p90": 2532.3,
+      "input_mean": 382.6
+     },
+     "latency_s_median": 11.74
+    },
+    "ci": {
+     "score": 0.7647,
+     "ci_low": 0.5274,
+     "ci_high": 0.9044,
+     "n": 17,
+     "tokens": {
+      "output_mean": 2622.5,
+      "output_median": 2276.0,
+      "output_p90": 4103.0,
+      "input_mean": 453.6
+     },
+     "latency_s_median": 21.79
+    },
+    "cli": {
+     "score": 1.0,
+     "ci_low": 0.8389,
+     "ci_high": 1.0,
+     "n": 20,
+     "tokens": {
+      "output_mean": 1352.5,
+      "output_median": 1129.5,
+      "output_p90": 2372.1,
+      "input_mean": 295.1
+     },
+     "latency_s_median": 11.71
+    },
+    "docs": {
+     "score": 0.5294,
+     "ci_low": 0.3096,
+     "ci_high": 0.7383,
+     "n": 17,
+     "tokens": {
+      "output_mean": 1996.6,
+      "output_median": 1567.0,
+      "output_p90": 3496.4,
+      "input_mean": 267.3
+     },
+     "latency_s_median": 17.52
+    },
+    "fflib": {
+     "score": 0.6667,
+     "ci_low": 0.4375,
+     "ci_high": 0.8372,
+     "n": 18,
+     "tokens": {
+      "output_mean": 5532.8,
+      "output_median": 4971.0,
+      "output_p90": 9282.7,
+      "input_mean": 863.7
+     },
+     "latency_s_median": 45.84
+    },
+    "flow": {
+     "score": 0.5,
+     "ci_low": 0.2903,
+     "ci_high": 0.7097,
+     "n": 18,
+     "tokens": {
+      "output_mean": 5586.9,
+      "output_median": 5822.0,
+      "output_p90": 8571.2,
+      "input_mean": 783.3
+     },
+     "latency_s_median": 48.47
+    },
+    "limits": {
+     "score": 0.8947,
+     "ci_low": 0.6861,
+     "ci_high": 0.9706,
+     "n": 19,
+     "tokens": {
+      "output_mean": 2616.3,
+      "output_median": 2581.0,
+      "output_p90": 4179.8,
+      "input_mean": 490.9
+     },
+     "latency_s_median": 23.52
+    },
+    "lwc": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 2829.6,
+      "output_median": 2489.5,
+      "output_p90": 3985.8,
+      "input_mean": 585.8
+     },
+     "latency_s_median": 19.25
+    },
+    "npsp": {
+     "score": 0.8889,
+     "ci_low": 0.672,
+     "ci_high": 0.969,
+     "n": 18,
+     "tokens": {
+      "output_mean": 4162.6,
+      "output_median": 3881.0,
+      "output_p90": 7305.5,
+      "input_mean": 522.7
+     },
+     "latency_s_median": 34.78
+    },
+    "packaging": {
+     "score": 0.8333,
+     "ci_low": 0.6078,
+     "ci_high": 0.9416,
+     "n": 18,
+     "tokens": {
+      "output_mean": 2466.4,
+      "output_median": 2081.5,
+      "output_p90": 4017.5,
+      "input_mean": 411.8
+     },
+     "latency_s_median": 21.36
+    },
+    "permissions": {
+     "score": 0.6667,
+     "ci_low": 0.4171,
+     "ci_high": 0.8482,
+     "n": 15,
+     "tokens": {
+      "output_mean": 2379.9,
+      "output_median": 2308.0,
+      "output_p90": 3710.6,
+      "input_mean": 594.7
+     },
+     "latency_s_median": 20.91
+    },
+    "scratch-def": {
+     "score": 0.3889,
+     "ci_low": 0.2031,
+     "ci_high": 0.6138,
+     "n": 18,
+     "tokens": {
+      "output_mean": 3971.9,
+      "output_median": 4124.0,
+      "output_p90": 5818.0,
+      "input_mean": 373.6
+     },
+     "latency_s_median": 45.36
+    },
+    "soql": {
+     "score": 0.9,
+     "ci_low": 0.699,
+     "ci_high": 0.9721,
+     "n": 20,
+     "tokens": {
+      "output_mean": 1310.2,
+      "output_median": 1168.0,
+      "output_p90": 2211.7,
+      "input_mean": 280.4
+     },
+     "latency_s_median": 12.97
+    },
+    "taf": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 3403.5,
+      "output_median": 3189.0,
+      "output_p90": 4906.4,
+      "input_mean": 5008.8
+     },
+     "latency_s_median": 20.23
+    }
+   },
+   "per_task": {
+    "apex-api67-access-modes": 1.0,
+    "apex-batch-stateful-overdue": 1.0,
+    "apex-bulkify-legacy-trigger": 1.0,
+    "apex-callout-named-credential-retry": 0.0,
+    "apex-contact-email-domain": 1.0,
+    "apex-custom-exception-hierarchy": 1.0,
+    "apex-dynamic-soql-user-mode": 1.0,
+    "apex-invocable-contact-lookup": 1.0,
+    "apex-json-reserved-keys": 0.0,
+    "apex-mutation-tests-callout": 1.0,
+    "apex-mutation-tests-shipping": 0.0,
+    "apex-mutation-tests-won-handler": 0.0,
+    "apex-partial-success-lead-import": 1.0,
+    "apex-picklist-describe": 1.0,
+    "apex-platform-event-shipments": 1.0,
+    "apex-queueable-chain-depth": 0.0,
+    "apex-queueable-finalizer-retry": 1.0,
+    "apex-rollup-trigger-recursion": 1.0,
+    "apex-schedulable-log-purge": 1.0,
+    "apex-won-amount-by-account": 1.0,
+    "api-apexrest-namespaced-post": 1.0,
+    "api-bulk2-ingest-upsert": 1.0,
+    "api-bulk2-query-export": 1.0,
+    "api-choose-bulk-for-large-load": 1.0,
+    "api-collections-create-update": 1.0,
+    "api-composite-graph-orders": 1.0,
+    "api-composite-implicit-dependency": 0.0,
+    "api-describe-and-limits": 1.0,
+    "api-oauth-client-credentials": 1.0,
+    "api-platform-event-publish": 1.0,
+    "api-query-paging-queryall": 1.0,
+    "api-sobject-create-case": 1.0,
+    "api-sobject-update-delete": 1.0,
+    "api-tooling-coverage-query": 1.0,
+    "api-tooling-execute-anonymous": 1.0,
+    "api-uiapi-record-optional-fields": 1.0,
+    "api-upsert-external-id": 1.0,
+    "api-upsert-response-semantics": 1.0,
+    "ci-branch-routed-validation": 0.0,
+    "ci-choice-destructive-order": 1.0,
+    "ci-choice-quick-deploy-cache": 1.0,
+    "ci-choice-scratch-vs-sandbox": 1.0,
+    "ci-choice-source-tracking-ci": 1.0,
+    "ci-choice-test-level-prod": 1.0,
+    "ci-code-analyzer-gate": 0.0,
+    "ci-delta-deploy-sgd": 0.0,
+    "ci-environment-secrets-fix": 1.0,
+    "ci-lwc-jest-eslint": 1.0,
+    "ci-nightly-apex-tests": 1.0,
+    "ci-pr-validate-jwt": 1.0,
+    "ci-quick-deploy-on-merge": 1.0,
+    "ci-review-org-script": 1.0,
+    "ci-scratch-org-per-pr": 1.0,
+    "ci-uat-deploy-sfdx-url": 1.0,
+    "ci-unlocked-package-release": 0.0,
+    "cli-apex-run-script-file": 1.0,
+    "cli-apex-tail-log": 1.0,
+    "cli-apex-tests-junit-coverage": 1.0,
+    "cli-assign-permset-user": 1.0,
+    "cli-bulk-export-csv": 1.0,
+    "cli-bulk-upsert-external-id": 1.0,
+    "cli-delete-scratch-org": 1.0,
+    "cli-deploy-apex-class": 1.0,
+    "cli-dev-machine-config": 1.0,
+    "cli-jwt-login-and-deploy": 1.0,
+    "cli-manifest-from-org": 1.0,
+    "cli-org-open-setup-page": 1.0,
+    "cli-package-install-ci": 1.0,
+    "cli-post-destructive-deploy": 1.0,
+    "cli-retrieve-field-and-flexipage": 1.0,
+    "cli-sandbox-create-async": 1.0,
+    "cli-scratch-org-create": 1.0,
+    "cli-tree-export-import-seed": 1.0,
+    "cli-unlocked-package-release": 1.0,
+    "cli-validate-then-quick-deploy": 1.0,
+    "docs-api-concurrent-long-running": 0.0,
+    "docs-api-daily-allocation-calc": 0.0,
+    "docs-batch-querylocator-scope-max": 1.0,
+    "docs-big-object-index-text-length": 1.0,
+    "docs-bulk2-ingest-upload-size": 0.0,
+    "docs-callout-async-response-size": 1.0,
+    "docs-callout-default-timeout": 1.0,
+    "docs-cross-namespace-soql-limit": 1.0,
+    "docs-long-running-apex-concurrency": 0.0,
+    "docs-lws-distortions": 0.0,
+    "docs-lws-enable-setting": 0.0,
+    "docs-order-exec-after-trigger-vs-flow": 1.0,
+    "docs-pe-delivery-allocation-calc": 0.0,
+    "docs-pe-trigger-batch-size": 1.0,
+    "docs-queueable-async-enqueue-limit": 1.0,
+    "docs-rest-limit-info-header": 0.0,
+    "docs-scratch-org-max-duration": 1.0,
+    "fflib-apexmocks-argument-captor": 0.0,
+    "fflib-apexmocks-exception-paths": 0.0,
+    "fflib-apexmocks-mock-domain": 0.0,
+    "fflib-apexmocks-stub-selector": 1.0,
+    "fflib-apexmocks-verify-uow": 1.0,
+    "fflib-application-factories": 1.0,
+    "fflib-domain-calls-service": 1.0,
+    "fflib-domain-opportunity-defaults": 1.0,
+    "fflib-domain-sobjects-structure": 0.0,
+    "fflib-domain-unit-test-mock-db": 1.0,
+    "fflib-domain-validation": 0.0,
+    "fflib-selector-contacts": 1.0,
+    "fflib-selector-query-factory": 1.0,
+    "fflib-selector-user-mode-fieldset": 1.0,
+    "fflib-service-case-escalation": 1.0,
+    "fflib-service-facade": 1.0,
+    "fflib-uow-account-contacts": 1.0,
+    "fflib-uow-platform-events": 0.0,
+    "flow-account-credit-check-action": 1.0,
+    "flow-account-customer-welcome-task": 0.0,
+    "flow-account-discount-cascade": 0.0,
+    "flow-account-onboarding-subflow": 0.0,
+    "flow-case-breakdown-escalation": 0.0,
+    "flow-case-close-open-tasks": 1.0,
+    "flow-case-sla-due": 1.0,
+    "flow-choice-close-date-reminder": 1.0,
+    "flow-choice-guide-statements": 0.0,
+    "flow-choice-same-record-update": 1.0,
+    "flow-choice-undelete-restore": 1.0,
+    "flow-fix-account-address-sync": 1.0,
+    "flow-opportunity-amount-swing": 0.0,
+    "flow-opportunity-close-reminder-scheduled": 0.0,
+    "flow-opportunity-won-project": 0.0,
+    "flow-order-shipment-fault-path": 0.0,
+    "flow-shipping-quote-autolaunched": 1.0,
+    "flow-web-signup-contact-match": 1.0,
+    "limits-async-vs-sync-limits": 1.0,
+    "limits-control-contact-phone-partial-update": 1.0,
+    "limits-control-pipeline-query-per-stage": 1.0,
+    "limits-control-soql-for-loop-stale-deals": 0.0,
+    "limits-count-cascading-trigger-queries": 1.0,
+    "limits-count-queries-helper-per-lead": 1.0,
+    "limits-first-limit-exceeded": 1.0,
+    "limits-pushback-case-priority-query-in-loop": 1.0,
+    "limits-pushback-erp-callout-per-account": 1.0,
+    "limits-pushback-eventbus-publish-per-record": 1.0,
+    "limits-pushback-followup-tasks-dml-per-record": 1.0,
+    "limits-pushback-future-per-opportunity": 1.0,
+    "limits-pushback-helper-query-per-line-item": 1.0,
+    "limits-pushback-nested-loop-lead-matching": 1.0,
+    "limits-pushback-queueable-per-closed-case": 1.0,
+    "limits-pushback-send-email-per-opportunity": 0.0,
+    "limits-pushback-unfiltered-contact-query": 1.0,
+    "limits-spot-risky-trigger-snippets": 1.0,
+    "limits-trigger-chunks-apex-vs-data-loader": 1.0,
+    "lwc-account-header-wire": 1.0,
+    "lwc-account-quick-links-navigation": 0.0,
+    "lwc-case-status-badge": 1.0,
+    "lwc-collapsible-section-slots": 1.0,
+    "lwc-contact-list-sorted": 1.0,
+    "lwc-contact-search-debounce": 1.0,
+    "lwc-contacts-datatable-inline-save": 1.0,
+    "lwc-favorite-toggle-labels": 1.0,
+    "lwc-lms-account-panel": 1.0,
+    "lwc-open-opportunities-imperative-apex": 1.0,
+    "lwc-opportunity-row-actions": 1.0,
+    "lwc-order-lines-child-api": 1.0,
+    "lwc-pipeline-card-app-builder": 1.0,
+    "lwc-product-tile-select-event": 1.0,
+    "lwc-queue-monitor-polling-lifecycle": 1.0,
+    "lwc-registration-form-validation": 1.0,
+    "lwc-status-listbox-keyboard": 1.0,
+    "lwc-task-checklist-reactivity-fix": 1.0,
+    "npsp-affiliation-primary-employer": 1.0,
+    "npsp-bdi-gift-import": 1.0,
+    "npsp-crlp-promote-to-production": 1.0,
+    "npsp-enhanced-rd-monthly": 0.0,
+    "npsp-gau-percent-allocations": 1.0,
+    "npsp-household-create-members": 1.0,
+    "npsp-household-formal-greeting": 0.0,
+    "npsp-namespace-objects": 1.0,
+    "npsp-partial-soft-credits": 1.0,
+    "npsp-payment-installments": 1.0,
+    "npsp-record-gift": 1.0,
+    "npsp-relationship-parent-child": 1.0,
+    "npsp-soql-gau-totals": 1.0,
+    "npsp-soql-unpaid-payments-due": 1.0,
+    "npsp-tdtm-major-gift-handler": 1.0,
+    "npsp-tdtm-test-registration": 1.0,
+    "npsp-trigger-handler-exclude-user": 1.0,
+    "npsp-vs-nonprofit-cloud": 1.0,
+    "packaging-1gp-managed-released-upload": 1.0,
+    "packaging-1gp-vs-2gp": 1.0,
+    "packaging-abandon-ancestor": 1.0,
+    "packaging-ancestry-upgrade-paths": 1.0,
+    "packaging-create-org-dependent": 1.0,
+    "packaging-create-unlocked-no-namespace": 1.0,
+    "packaging-dependency-released-build": 1.0,
+    "packaging-lock-promoted-version": 1.0,
+    "packaging-managed-test-setup": 1.0,
+    "packaging-migrate-metadata-between-packages": 1.0,
+    "packaging-package-id-prefixes": 1.0,
+    "packaging-promote-and-install": 1.0,
+    "packaging-push-upgrade-schedule": 0.0,
+    "packaging-removed-components-upgrade": 0.0,
+    "packaging-skip-validation-consequences": 1.0,
+    "packaging-transitive-dependencies": 0.0,
+    "packaging-unlocked-project-config": 1.0,
+    "packaging-version-create-release-candidate": 1.0,
+    "permissions-bulk-editable-ids": 1.0,
+    "permissions-custom-permission-apex": 1.0,
+    "permissions-effective-access-muting": 1.0,
+    "permissions-fix-over-permissive": 1.0,
+    "permissions-integration-api-access": 1.0,
+    "permissions-profile-only-settings": 0.0,
+    "permissions-psg-muting": 0.0,
+    "permissions-readonly-claims-viewer": 1.0,
+    "permissions-required-field-fls": 0.0,
+    "permissions-session-based-elevation": 1.0,
+    "permissions-sharing-vs-object-perms": 1.0,
+    "permissions-strip-inaccessible-v67": 0.0,
+    "permissions-tab-app-visibility": 1.0,
+    "permissions-view-all-not-modify-all": 1.0,
+    "permissions-with-sharing-api-versions": 0.0,
+    "scratch-def-australian-locale": 0.0,
+    "scratch-def-einstein-generative-ai": 0.0,
+    "scratch-def-experience-cloud-guest-site": 0.0,
+    "scratch-def-field-service-multicurrency": 0.0,
+    "scratch-def-fix-broken-definition": 0.0,
+    "scratch-def-fix-org-preferences": 1.0,
+    "scratch-def-multicurrency-germany": 0.0,
+    "scratch-def-opportunity-teams": 0.0,
+    "scratch-def-package-object-settings": 1.0,
+    "scratch-def-partner-preview-release": 0.0,
+    "scratch-def-person-accounts": 1.0,
+    "scratch-def-professional-edition-api": 1.0,
+    "scratch-def-sales-forecasting": 0.0,
+    "scratch-def-service-knowledge-omni": 0.0,
+    "scratch-def-sfdx-project-2gp-monorepo": 1.0,
+    "scratch-def-sfdx-project-sandbox-team": 1.0,
+    "scratch-def-shield-security": 0.0,
+    "scratch-def-state-country-picklists": 1.0,
+    "soql-accounts-missing-country-or-industry": 1.0,
+    "soql-accounts-open-high-cases": 1.0,
+    "soql-banking-insurance-de-uk": 1.0,
+    "soql-customers-without-2025-wins": 1.0,
+    "soql-energy-wins-2025": 1.0,
+    "soql-fy2026-bookings-by-quarter": 1.0,
+    "soql-german-customers-open-shipments": 1.0,
+    "soql-globex-group-contacts": 1.0,
+    "soql-hardware-without-services-opps": 1.0,
+    "soql-healthcare-manager-contacts": 1.0,
+    "soql-in-transit-shipments": 1.0,
+    "soql-march-2025-activity-typeof": 1.0,
+    "soql-open-german-web-leads-count": 0.0,
+    "soql-open-shipments-handling": 1.0,
+    "soql-open-tasks-on-opportunities": 1.0,
+    "soql-parents-of-german-accounts": 0.0,
+    "soql-service-product-codes": 1.0,
+    "soql-summit-responders": 1.0,
+    "soql-top-customers-by-revenue": 1.0,
+    "soql-won-2025-by-industry": 1.0,
+    "taf-after-insert-onboarding-task": 1.0,
+    "taf-bypass-action-in-import": 1.0,
+    "taf-bypass-object-ownership-service": 1.0,
+    "taf-bypass-permission-integration": 1.0,
+    "taf-disable-action-hotfix": 1.0,
+    "taf-dml-finalizer-erp-sync": 1.0,
+    "taf-dml-less-action-test": 0.0,
+    "taf-duplicate-email-two-contexts": 1.0,
+    "taf-enable-opportunity": 1.0,
+    "taf-entry-criteria-formula": 1.0,
+    "taf-flow-action-authoring": 1.0,
+    "taf-lead-normalize-before-insert": 1.0,
+    "taf-migrate-legacy-case-trigger": 1.0,
+    "taf-open-case-rollup": 1.0,
+    "taf-recursion-amount-audit": 1.0,
+    "taf-register-flow-action": 1.0,
+    "taf-required-permission-pilot": 1.0,
+    "taf-shared-query-singleton": 1.0
+   },
+   "tokens": {
+    "output_mean": 3111.2,
+    "output_median": 2382.5,
+    "output_p90": 5929.8,
+    "input_mean": 793.2,
+    "reasoning_mean": 2518.7
+   },
+   "outcomes": {
+    "no_answer": 0,
+    "truncated": 0,
+    "malformed": 0,
+    "retried": 0
+   },
+   "no_answer_rate": 0.0,
+   "no_answer_tasks": [],
+   "latency_s_mean": 29.2,
+   "latency_s_median": 22.01,
+   "concurrency": [
+    6
+   ],
+   "samples": 272,
+   "pending": 0,
+   "date": "2026-10-20",
+   "complete": true,
+   "runs": [
+    "20261020T014658Z_muse-wonder@medium"
+   ],
+   "progress": {
+    "tasks_graded": 272,
+    "tasks_total": 272,
+    "suites_complete": 15,
+    "suites_total": 15
+   },
+   "legacy": 0,
+   "stale": {},
+   "rank": 12
   },
   {
    "config_id": "claude-sonnet-5.5@low",
@@ -20593,7 +23843,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 10
+   "rank": 13
   },
   {
    "config_id": "gpt-5.6-sol@medium",
@@ -22451,7 +25701,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 11
+   "rank": 14
   },
   {
    "config_id": "claude-opus-4.8@high",
@@ -24305,7 +27555,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 12
+   "rank": 15
   },
   {
    "config_id": "gemini-3.8-flash@medium",
@@ -26166,7 +29416,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 13
+   "rank": 16
   },
   {
    "config_id": "claude-fable-5.1@high",
@@ -28047,7 +31297,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 14
+   "rank": 17
   },
   {
    "config_id": "claude-opus-4.8@medium",
@@ -29901,7 +33151,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 15
+   "rank": 18
   },
   {
    "config_id": "claude-sonnet-5.5@medium",
@@ -31756,7 +35006,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 16
+   "rank": 19
   },
   {
    "config_id": "claude-opus-4.8@low",
@@ -33610,7 +36860,1089 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 17
+   "rank": 20
+  },
+  {
+   "config_id": "muse-wonder@low",
+   "subset": "full",
+   "model": "Muse Wonder",
+   "model_family": "Muse-Wonder",
+   "base_model": "Muse-Wonder",
+   "quant": "Unknown",
+   "engine": "Unknown",
+   "effort": "low",
+   "effort_tier": "low",
+   "open_weights": false,
+   "local": false,
+   "model_id": "muse-wonder",
+   "developer": "meta",
+   "developer_name": "Meta",
+   "serving": "api",
+   "provider": "OpenRouter",
+   "hardware": null,
+   "price": {
+    "input": 4.0,
+    "cached_input": 0.2,
+    "output": 20.0,
+    "reasoning": "output",
+    "currency": "USD",
+    "source": "https://openrouter.ai/meta/muse-wonder/providers",
+    "as_of": "2026-10-20",
+    "route": [
+     "meta"
+    ]
+   },
+   "overall": {
+    "score": 0.7005,
+    "ci_low": 0.6537,
+    "ci_high": 0.7471
+   },
+   "c_at": {},
+   "usage": {
+    "1": {
+     "overall": {
+      "tasks": 272,
+      "answers": 272,
+      "failed": 0,
+      "solved": 192,
+      "unreported": 0,
+      "time_s": {
+       "median": 14.71,
+       "p90": 32.67,
+       "mean": 17.92
+      },
+      "tokens": {
+       "input": 793.2,
+       "cached_input": 113.0,
+       "reasoning": 1432.5,
+       "answer": 546.4,
+       "unsplit": 0.0,
+       "output": 1978.8
+      },
+      "cost": {
+       "per_task": 0.04275,
+       "per_solved": 0.06056,
+       "total": 11.63,
+       "parts": {
+        "input": 0.002721,
+        "cached_input": 0.0004521,
+        "reasoning": 0.02865,
+        "answer": 0.01093,
+        "unsplit": 0.0
+       }
+      },
+      "no_cost": null,
+      "recorded": {
+       "cached_input": 272,
+       "served_by": 272
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 18.55,
+        "p90": 57.82,
+        "mean": 26.34
+       },
+       "tokens": {
+        "input": 648.4,
+        "cached_input": 87.0,
+        "reasoning": 1765.3,
+        "answer": 1419.8,
+        "unsplit": 0.0,
+        "output": 3185.2
+       },
+       "cost": {
+        "per_task": 0.0663,
+        "per_solved": 0.078,
+        "total": 1.326,
+        "parts": {
+         "input": 0.002246,
+         "cached_input": 0.000348,
+         "reasoning": 0.03531,
+         "answer": 0.0284,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 10.32,
+        "p90": 17.96,
+        "mean": 11.62
+       },
+       "tokens": {
+        "input": 382.6,
+        "cached_input": 116.0,
+        "reasoning": 984.6,
+        "answer": 210.7,
+        "unsplit": 0.0,
+        "output": 1195.3
+       },
+       "cost": {
+        "per_task": 0.02544,
+        "per_solved": 0.03052,
+        "total": 0.4579,
+        "parts": {
+         "input": 0.001066,
+         "cached_input": 0.000464,
+         "reasoning": 0.01969,
+         "answer": 0.004214,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 14,
+       "unreported": 0,
+       "time_s": {
+        "median": 13.58,
+        "p90": 20.45,
+        "mean": 13.73
+       },
+       "tokens": {
+        "input": 453.6,
+        "cached_input": 109.2,
+        "reasoning": 1139.0,
+        "answer": 446.1,
+        "unsplit": 0.0,
+        "output": 1585.1
+       },
+       "cost": {
+        "per_task": 0.03352,
+        "per_solved": 0.0407,
+        "total": 0.5698,
+        "parts": {
+         "input": 0.001378,
+         "cached_input": 0.0004367,
+         "reasoning": 0.02278,
+         "answer": 0.008921,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 8.53,
+        "p90": 13.32,
+        "mean": 9.12
+       },
+       "tokens": {
+        "input": 295.1,
+        "cached_input": 116.0,
+        "reasoning": 821.0,
+        "answer": 96.7,
+        "unsplit": 0.0,
+        "output": 917.8
+       },
+       "cost": {
+        "per_task": 0.01954,
+        "per_solved": 0.02171,
+        "total": 0.3907,
+        "parts": {
+         "input": 0.0007164,
+         "cached_input": 0.000464,
+         "reasoning": 0.01642,
+         "answer": 0.001934,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 6,
+       "unreported": 0,
+       "time_s": {
+        "median": 15.36,
+        "p90": 31.97,
+        "mean": 18.49
+       },
+       "tokens": {
+        "input": 267.3,
+        "cached_input": 116.0,
+        "reasoning": 1457.6,
+        "answer": 126.6,
+        "unsplit": 0.0,
+        "output": 1584.2
+       },
+       "cost": {
+        "per_task": 0.03275,
+        "per_solved": 0.0928,
+        "total": 0.5568,
+        "parts": {
+         "input": 0.0006052,
+         "cached_input": 0.000464,
+         "reasoning": 0.02915,
+         "answer": 0.002533,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 7,
+       "unreported": 0,
+       "time_s": {
+        "median": 28.18,
+        "p90": 41.25,
+        "mean": 26.59
+       },
+       "tokens": {
+        "input": 863.7,
+        "cached_input": 116.0,
+        "reasoning": 2440.4,
+        "answer": 1080.8,
+        "unsplit": 0.0,
+        "output": 3521.3
+       },
+       "cost": {
+        "per_task": 0.07388,
+        "per_solved": 0.19,
+        "total": 1.33,
+        "parts": {
+         "input": 0.002991,
+         "cached_input": 0.000464,
+         "reasoning": 0.04881,
+         "answer": 0.02162,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 7,
+       "unreported": 0,
+       "time_s": {
+        "median": 28.25,
+        "p90": 38.66,
+        "mean": 27.36
+       },
+       "tokens": {
+        "input": 783.3,
+        "cached_input": 116.0,
+        "reasoning": 2148.8,
+        "answer": 1132.4,
+        "unsplit": 0.0,
+        "output": 3281.2
+       },
+       "cost": {
+        "per_task": 0.06876,
+        "per_solved": 0.1768,
+        "total": 1.238,
+        "parts": {
+         "input": 0.002669,
+         "cached_input": 0.000464,
+         "reasoning": 0.04298,
+         "answer": 0.02265,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 19,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 15.8,
+        "p90": 25.73,
+        "mean": 16.67
+       },
+       "tokens": {
+        "input": 490.9,
+        "cached_input": 116.0,
+        "reasoning": 1106.9,
+        "answer": 584.6,
+        "unsplit": 0.0,
+        "output": 1691.5
+       },
+       "cost": {
+        "per_task": 0.03579,
+        "per_solved": 0.03778,
+        "total": 0.6801,
+        "parts": {
+         "input": 0.0015,
+         "cached_input": 0.000464,
+         "reasoning": 0.02214,
+         "answer": 0.01169,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 14.0,
+        "p90": 19.09,
+        "mean": 14.65
+       },
+       "tokens": {
+        "input": 585.8,
+        "cached_input": 116.0,
+        "reasoning": 1203.1,
+        "answer": 543.2,
+        "unsplit": 0.0,
+        "output": 1746.3
+       },
+       "cost": {
+        "per_task": 0.03727,
+        "per_solved": 0.03946,
+        "total": 0.6708,
+        "parts": {
+         "input": 0.001879,
+         "cached_input": 0.000464,
+         "reasoning": 0.02406,
+         "answer": 0.01086,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 12,
+       "unreported": 0,
+       "time_s": {
+        "median": 20.55,
+        "p90": 39.77,
+        "mean": 22.37
+       },
+       "tokens": {
+        "input": 522.7,
+        "cached_input": 116.0,
+        "reasoning": 1710.8,
+        "answer": 736.7,
+        "unsplit": 0.0,
+        "output": 2447.6
+       },
+       "cost": {
+        "per_task": 0.05104,
+        "per_solved": 0.07656,
+        "total": 0.9188,
+        "parts": {
+         "input": 0.001627,
+         "cached_input": 0.000464,
+         "reasoning": 0.03422,
+         "answer": 0.01473,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 15.2,
+        "p90": 23.48,
+        "mean": 15.57
+       },
+       "tokens": {
+        "input": 411.8,
+        "cached_input": 116.0,
+        "reasoning": 1372.5,
+        "answer": 204.7,
+        "unsplit": 0.0,
+        "output": 1577.2
+       },
+       "cost": {
+        "per_task": 0.03319,
+        "per_solved": 0.04596,
+        "total": 0.5975,
+        "parts": {
+         "input": 0.001183,
+         "cached_input": 0.000464,
+         "reasoning": 0.02745,
+         "answer": 0.004094,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 15,
+       "failed": 0,
+       "solved": 11,
+       "unreported": 0,
+       "time_s": {
+        "median": 11.83,
+        "p90": 28.19,
+        "mean": 15.02
+       },
+       "tokens": {
+        "input": 594.7,
+        "cached_input": 116.0,
+        "reasoning": 1269.7,
+        "answer": 355.8,
+        "unsplit": 0.0,
+        "output": 1625.5
+       },
+       "cost": {
+        "per_task": 0.03489,
+        "per_solved": 0.04757,
+        "total": 0.5233,
+        "parts": {
+         "input": 0.001915,
+         "cached_input": 0.000464,
+         "reasoning": 0.02539,
+         "answer": 0.007116,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 4,
+       "unreported": 0,
+       "time_s": {
+        "median": 25.02,
+        "p90": 35.57,
+        "mean": 24.51
+       },
+       "tokens": {
+        "input": 373.6,
+        "cached_input": 109.6,
+        "reasoning": 2048.8,
+        "answer": 175.2,
+        "unsplit": 0.0,
+        "output": 2223.9
+       },
+       "cost": {
+        "per_task": 0.04597,
+        "per_solved": 0.2069,
+        "total": 0.8275,
+        "parts": {
+         "input": 0.001056,
+         "cached_input": 0.0004382,
+         "reasoning": 0.04098,
+         "answer": 0.003503,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 8.21,
+        "p90": 12.19,
+        "mean": 9.14
+       },
+       "tokens": {
+        "input": 280.4,
+        "cached_input": 116.0,
+        "reasoning": 768.3,
+        "answer": 108.3,
+        "unsplit": 0.0,
+        "output": 876.6
+       },
+       "cost": {
+        "per_task": 0.01865,
+        "per_solved": 0.02073,
+        "total": 0.3731,
+        "parts": {
+         "input": 0.0006578,
+         "cached_input": 0.000464,
+         "reasoning": 0.01537,
+         "answer": 0.002166,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 14.81,
+        "p90": 36.19,
+        "mean": 18.01
+       },
+       "tokens": {
+        "input": 5008.8,
+        "cached_input": 116.0,
+        "reasoning": 1330.6,
+        "answer": 912.6,
+        "unsplit": 0.0,
+        "output": 2243.1
+       },
+       "cost": {
+        "per_task": 0.0649,
+        "per_solved": 0.07788,
+        "total": 1.168,
+        "parts": {
+         "input": 0.01957,
+         "cached_input": 0.000464,
+         "reasoning": 0.02661,
+         "answer": 0.01825,
+         "unsplit": 0.0
+        }
+       },
+       "no_cost": null
+      }
+     }
+    }
+   },
+   "suites": {
+    "apex": {
+     "score": 0.85,
+     "ci_low": 0.6396,
+     "ci_high": 0.9476,
+     "n": 20,
+     "tokens": {
+      "output_mean": 3185.2,
+      "output_median": 2115.5,
+      "output_p90": 6474.5,
+      "input_mean": 648.4
+     },
+     "latency_s_median": 18.55
+    },
+    "api": {
+     "score": 0.8333,
+     "ci_low": 0.6078,
+     "ci_high": 0.9416,
+     "n": 18,
+     "tokens": {
+      "output_mean": 1195.3,
+      "output_median": 1077.5,
+      "output_p90": 1748.6,
+      "input_mean": 382.6
+     },
+     "latency_s_median": 10.32
+    },
+    "ci": {
+     "score": 0.8235,
+     "ci_low": 0.5897,
+     "ci_high": 0.9381,
+     "n": 17,
+     "tokens": {
+      "output_mean": 1585.1,
+      "output_median": 1632.0,
+      "output_p90": 2598.4,
+      "input_mean": 453.6
+     },
+     "latency_s_median": 13.58
+    },
+    "cli": {
+     "score": 0.9,
+     "ci_low": 0.699,
+     "ci_high": 0.9721,
+     "n": 20,
+     "tokens": {
+      "output_mean": 917.8,
+      "output_median": 900.0,
+      "output_p90": 1412.9,
+      "input_mean": 295.1
+     },
+     "latency_s_median": 8.53
+    },
+    "docs": {
+     "score": 0.3529,
+     "ci_low": 0.1731,
+     "ci_high": 0.587,
+     "n": 17,
+     "tokens": {
+      "output_mean": 1584.2,
+      "output_median": 1401.0,
+      "output_p90": 2629.4,
+      "input_mean": 267.3
+     },
+     "latency_s_median": 15.36
+    },
+    "fflib": {
+     "score": 0.3889,
+     "ci_low": 0.2031,
+     "ci_high": 0.6138,
+     "n": 18,
+     "tokens": {
+      "output_mean": 3521.3,
+      "output_median": 3224.0,
+      "output_p90": 6365.7,
+      "input_mean": 863.7
+     },
+     "latency_s_median": 28.18
+    },
+    "flow": {
+     "score": 0.3889,
+     "ci_low": 0.2031,
+     "ci_high": 0.6138,
+     "n": 18,
+     "tokens": {
+      "output_mean": 3281.2,
+      "output_median": 3370.0,
+      "output_p90": 5182.3,
+      "input_mean": 783.3
+     },
+     "latency_s_median": 28.25
+    },
+    "limits": {
+     "score": 0.9474,
+     "ci_low": 0.7536,
+     "ci_high": 0.9906,
+     "n": 19,
+     "tokens": {
+      "output_mean": 1691.5,
+      "output_median": 1595.0,
+      "output_p90": 2673.6,
+      "input_mean": 490.9
+     },
+     "latency_s_median": 15.8
+    },
+    "lwc": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 1746.3,
+      "output_median": 1707.0,
+      "output_p90": 2045.8,
+      "input_mean": 585.8
+     },
+     "latency_s_median": 14.0
+    },
+    "npsp": {
+     "score": 0.6667,
+     "ci_low": 0.4375,
+     "ci_high": 0.8372,
+     "n": 18,
+     "tokens": {
+      "output_mean": 2447.6,
+      "output_median": 2360.5,
+      "output_p90": 3831.6,
+      "input_mean": 522.7
+     },
+     "latency_s_median": 20.55
+    },
+    "packaging": {
+     "score": 0.7222,
+     "ci_low": 0.4913,
+     "ci_high": 0.875,
+     "n": 18,
+     "tokens": {
+      "output_mean": 1577.2,
+      "output_median": 1578.0,
+      "output_p90": 2320.0,
+      "input_mean": 411.8
+     },
+     "latency_s_median": 15.2
+    },
+    "permissions": {
+     "score": 0.7333,
+     "ci_low": 0.4805,
+     "ci_high": 0.891,
+     "n": 15,
+     "tokens": {
+      "output_mean": 1625.5,
+      "output_median": 1337.0,
+      "output_p90": 2863.2,
+      "input_mean": 594.7
+     },
+     "latency_s_median": 11.83
+    },
+    "scratch-def": {
+     "score": 0.2222,
+     "ci_low": 0.09,
+     "ci_high": 0.4521,
+     "n": 18,
+     "tokens": {
+      "output_mean": 2223.9,
+      "output_median": 2231.5,
+      "output_p90": 3423.0,
+      "input_mean": 373.6
+     },
+     "latency_s_median": 25.02
+    },
+    "soql": {
+     "score": 0.9,
+     "ci_low": 0.699,
+     "ci_high": 0.9721,
+     "n": 20,
+     "tokens": {
+      "output_mean": 876.6,
+      "output_median": 851.5,
+      "output_p90": 1037.7,
+      "input_mean": 280.4
+     },
+     "latency_s_median": 8.21
+    },
+    "taf": {
+     "score": 0.8333,
+     "ci_low": 0.6078,
+     "ci_high": 0.9416,
+     "n": 18,
+     "tokens": {
+      "output_mean": 2243.1,
+      "output_median": 2275.5,
+      "output_p90": 3516.4,
+      "input_mean": 5008.8
+     },
+     "latency_s_median": 14.81
+    }
+   },
+   "per_task": {
+    "apex-api67-access-modes": 1.0,
+    "apex-batch-stateful-overdue": 1.0,
+    "apex-bulkify-legacy-trigger": 1.0,
+    "apex-callout-named-credential-retry": 1.0,
+    "apex-contact-email-domain": 1.0,
+    "apex-custom-exception-hierarchy": 1.0,
+    "apex-dynamic-soql-user-mode": 1.0,
+    "apex-invocable-contact-lookup": 0.0,
+    "apex-json-reserved-keys": 1.0,
+    "apex-mutation-tests-callout": 1.0,
+    "apex-mutation-tests-shipping": 1.0,
+    "apex-mutation-tests-won-handler": 0.0,
+    "apex-partial-success-lead-import": 1.0,
+    "apex-picklist-describe": 1.0,
+    "apex-platform-event-shipments": 1.0,
+    "apex-queueable-chain-depth": 1.0,
+    "apex-queueable-finalizer-retry": 1.0,
+    "apex-rollup-trigger-recursion": 1.0,
+    "apex-schedulable-log-purge": 1.0,
+    "apex-won-amount-by-account": 0.0,
+    "api-apexrest-namespaced-post": 1.0,
+    "api-bulk2-ingest-upsert": 0.0,
+    "api-bulk2-query-export": 1.0,
+    "api-choose-bulk-for-large-load": 1.0,
+    "api-collections-create-update": 1.0,
+    "api-composite-graph-orders": 0.0,
+    "api-composite-implicit-dependency": 0.0,
+    "api-describe-and-limits": 1.0,
+    "api-oauth-client-credentials": 1.0,
+    "api-platform-event-publish": 1.0,
+    "api-query-paging-queryall": 1.0,
+    "api-sobject-create-case": 1.0,
+    "api-sobject-update-delete": 1.0,
+    "api-tooling-coverage-query": 1.0,
+    "api-tooling-execute-anonymous": 1.0,
+    "api-uiapi-record-optional-fields": 1.0,
+    "api-upsert-external-id": 1.0,
+    "api-upsert-response-semantics": 1.0,
+    "ci-branch-routed-validation": 1.0,
+    "ci-choice-destructive-order": 1.0,
+    "ci-choice-quick-deploy-cache": 1.0,
+    "ci-choice-scratch-vs-sandbox": 1.0,
+    "ci-choice-source-tracking-ci": 1.0,
+    "ci-choice-test-level-prod": 1.0,
+    "ci-code-analyzer-gate": 1.0,
+    "ci-delta-deploy-sgd": 0.0,
+    "ci-environment-secrets-fix": 1.0,
+    "ci-lwc-jest-eslint": 1.0,
+    "ci-nightly-apex-tests": 1.0,
+    "ci-pr-validate-jwt": 1.0,
+    "ci-quick-deploy-on-merge": 1.0,
+    "ci-review-org-script": 0.0,
+    "ci-scratch-org-per-pr": 1.0,
+    "ci-uat-deploy-sfdx-url": 1.0,
+    "ci-unlocked-package-release": 0.0,
+    "cli-apex-run-script-file": 1.0,
+    "cli-apex-tail-log": 1.0,
+    "cli-apex-tests-junit-coverage": 1.0,
+    "cli-assign-permset-user": 1.0,
+    "cli-bulk-export-csv": 0.0,
+    "cli-bulk-upsert-external-id": 1.0,
+    "cli-delete-scratch-org": 1.0,
+    "cli-deploy-apex-class": 1.0,
+    "cli-dev-machine-config": 0.0,
+    "cli-jwt-login-and-deploy": 1.0,
+    "cli-manifest-from-org": 1.0,
+    "cli-org-open-setup-page": 1.0,
+    "cli-package-install-ci": 1.0,
+    "cli-post-destructive-deploy": 1.0,
+    "cli-retrieve-field-and-flexipage": 1.0,
+    "cli-sandbox-create-async": 1.0,
+    "cli-scratch-org-create": 1.0,
+    "cli-tree-export-import-seed": 1.0,
+    "cli-unlocked-package-release": 1.0,
+    "cli-validate-then-quick-deploy": 1.0,
+    "docs-api-concurrent-long-running": 0.0,
+    "docs-api-daily-allocation-calc": 0.0,
+    "docs-batch-querylocator-scope-max": 1.0,
+    "docs-big-object-index-text-length": 0.0,
+    "docs-bulk2-ingest-upload-size": 0.0,
+    "docs-callout-async-response-size": 1.0,
+    "docs-callout-default-timeout": 0.0,
+    "docs-cross-namespace-soql-limit": 1.0,
+    "docs-long-running-apex-concurrency": 0.0,
+    "docs-lws-distortions": 0.0,
+    "docs-lws-enable-setting": 0.0,
+    "docs-order-exec-after-trigger-vs-flow": 1.0,
+    "docs-pe-delivery-allocation-calc": 0.0,
+    "docs-pe-trigger-batch-size": 1.0,
+    "docs-queueable-async-enqueue-limit": 1.0,
+    "docs-rest-limit-info-header": 0.0,
+    "docs-scratch-org-max-duration": 0.0,
+    "fflib-apexmocks-argument-captor": 0.0,
+    "fflib-apexmocks-exception-paths": 0.0,
+    "fflib-apexmocks-mock-domain": 0.0,
+    "fflib-apexmocks-stub-selector": 1.0,
+    "fflib-apexmocks-verify-uow": 0.0,
+    "fflib-application-factories": 1.0,
+    "fflib-domain-calls-service": 1.0,
+    "fflib-domain-opportunity-defaults": 1.0,
+    "fflib-domain-sobjects-structure": 0.0,
+    "fflib-domain-unit-test-mock-db": 0.0,
+    "fflib-domain-validation": 0.0,
+    "fflib-selector-contacts": 0.0,
+    "fflib-selector-query-factory": 0.0,
+    "fflib-selector-user-mode-fieldset": 1.0,
+    "fflib-service-case-escalation": 1.0,
+    "fflib-service-facade": 1.0,
+    "fflib-uow-account-contacts": 0.0,
+    "fflib-uow-platform-events": 0.0,
+    "flow-account-credit-check-action": 0.0,
+    "flow-account-customer-welcome-task": 0.0,
+    "flow-account-discount-cascade": 0.0,
+    "flow-account-onboarding-subflow": 0.0,
+    "flow-case-breakdown-escalation": 1.0,
+    "flow-case-close-open-tasks": 0.0,
+    "flow-case-sla-due": 1.0,
+    "flow-choice-close-date-reminder": 1.0,
+    "flow-choice-guide-statements": 0.0,
+    "flow-choice-same-record-update": 1.0,
+    "flow-choice-undelete-restore": 1.0,
+    "flow-fix-account-address-sync": 0.0,
+    "flow-opportunity-amount-swing": 0.0,
+    "flow-opportunity-close-reminder-scheduled": 1.0,
+    "flow-opportunity-won-project": 0.0,
+    "flow-order-shipment-fault-path": 0.0,
+    "flow-shipping-quote-autolaunched": 1.0,
+    "flow-web-signup-contact-match": 0.0,
+    "limits-async-vs-sync-limits": 1.0,
+    "limits-control-contact-phone-partial-update": 1.0,
+    "limits-control-pipeline-query-per-stage": 1.0,
+    "limits-control-soql-for-loop-stale-deals": 1.0,
+    "limits-count-cascading-trigger-queries": 1.0,
+    "limits-count-queries-helper-per-lead": 1.0,
+    "limits-first-limit-exceeded": 1.0,
+    "limits-pushback-case-priority-query-in-loop": 1.0,
+    "limits-pushback-erp-callout-per-account": 1.0,
+    "limits-pushback-eventbus-publish-per-record": 0.0,
+    "limits-pushback-followup-tasks-dml-per-record": 1.0,
+    "limits-pushback-future-per-opportunity": 1.0,
+    "limits-pushback-helper-query-per-line-item": 1.0,
+    "limits-pushback-nested-loop-lead-matching": 1.0,
+    "limits-pushback-queueable-per-closed-case": 1.0,
+    "limits-pushback-send-email-per-opportunity": 1.0,
+    "limits-pushback-unfiltered-contact-query": 1.0,
+    "limits-spot-risky-trigger-snippets": 1.0,
+    "limits-trigger-chunks-apex-vs-data-loader": 1.0,
+    "lwc-account-header-wire": 1.0,
+    "lwc-account-quick-links-navigation": 1.0,
+    "lwc-case-status-badge": 1.0,
+    "lwc-collapsible-section-slots": 1.0,
+    "lwc-contact-list-sorted": 1.0,
+    "lwc-contact-search-debounce": 1.0,
+    "lwc-contacts-datatable-inline-save": 1.0,
+    "lwc-favorite-toggle-labels": 1.0,
+    "lwc-lms-account-panel": 0.0,
+    "lwc-open-opportunities-imperative-apex": 1.0,
+    "lwc-opportunity-row-actions": 1.0,
+    "lwc-order-lines-child-api": 1.0,
+    "lwc-pipeline-card-app-builder": 1.0,
+    "lwc-product-tile-select-event": 1.0,
+    "lwc-queue-monitor-polling-lifecycle": 1.0,
+    "lwc-registration-form-validation": 1.0,
+    "lwc-status-listbox-keyboard": 1.0,
+    "lwc-task-checklist-reactivity-fix": 1.0,
+    "npsp-affiliation-primary-employer": 0.0,
+    "npsp-bdi-gift-import": 0.0,
+    "npsp-crlp-promote-to-production": 1.0,
+    "npsp-enhanced-rd-monthly": 0.0,
+    "npsp-gau-percent-allocations": 1.0,
+    "npsp-household-create-members": 0.0,
+    "npsp-household-formal-greeting": 1.0,
+    "npsp-namespace-objects": 1.0,
+    "npsp-partial-soft-credits": 0.0,
+    "npsp-payment-installments": 1.0,
+    "npsp-record-gift": 1.0,
+    "npsp-relationship-parent-child": 1.0,
+    "npsp-soql-gau-totals": 1.0,
+    "npsp-soql-unpaid-payments-due": 1.0,
+    "npsp-tdtm-major-gift-handler": 0.0,
+    "npsp-tdtm-test-registration": 1.0,
+    "npsp-trigger-handler-exclude-user": 1.0,
+    "npsp-vs-nonprofit-cloud": 1.0,
+    "packaging-1gp-managed-released-upload": 1.0,
+    "packaging-1gp-vs-2gp": 1.0,
+    "packaging-abandon-ancestor": 1.0,
+    "packaging-ancestry-upgrade-paths": 1.0,
+    "packaging-create-org-dependent": 0.0,
+    "packaging-create-unlocked-no-namespace": 1.0,
+    "packaging-dependency-released-build": 1.0,
+    "packaging-lock-promoted-version": 1.0,
+    "packaging-managed-test-setup": 1.0,
+    "packaging-migrate-metadata-between-packages": 1.0,
+    "packaging-package-id-prefixes": 1.0,
+    "packaging-promote-and-install": 0.0,
+    "packaging-push-upgrade-schedule": 0.0,
+    "packaging-removed-components-upgrade": 0.0,
+    "packaging-skip-validation-consequences": 1.0,
+    "packaging-transitive-dependencies": 0.0,
+    "packaging-unlocked-project-config": 1.0,
+    "packaging-version-create-release-candidate": 1.0,
+    "permissions-bulk-editable-ids": 1.0,
+    "permissions-custom-permission-apex": 1.0,
+    "permissions-effective-access-muting": 1.0,
+    "permissions-fix-over-permissive": 1.0,
+    "permissions-integration-api-access": 1.0,
+    "permissions-profile-only-settings": 1.0,
+    "permissions-psg-muting": 0.0,
+    "permissions-readonly-claims-viewer": 1.0,
+    "permissions-required-field-fls": 0.0,
+    "permissions-session-based-elevation": 1.0,
+    "permissions-sharing-vs-object-perms": 1.0,
+    "permissions-strip-inaccessible-v67": 0.0,
+    "permissions-tab-app-visibility": 1.0,
+    "permissions-view-all-not-modify-all": 1.0,
+    "permissions-with-sharing-api-versions": 0.0,
+    "scratch-def-australian-locale": 0.0,
+    "scratch-def-einstein-generative-ai": 0.0,
+    "scratch-def-experience-cloud-guest-site": 0.0,
+    "scratch-def-field-service-multicurrency": 0.0,
+    "scratch-def-fix-broken-definition": 0.0,
+    "scratch-def-fix-org-preferences": 0.0,
+    "scratch-def-multicurrency-germany": 0.0,
+    "scratch-def-opportunity-teams": 0.0,
+    "scratch-def-package-object-settings": 0.0,
+    "scratch-def-partner-preview-release": 0.0,
+    "scratch-def-person-accounts": 1.0,
+    "scratch-def-professional-edition-api": 1.0,
+    "scratch-def-sales-forecasting": 0.0,
+    "scratch-def-service-knowledge-omni": 0.0,
+    "scratch-def-sfdx-project-2gp-monorepo": 0.0,
+    "scratch-def-sfdx-project-sandbox-team": 1.0,
+    "scratch-def-shield-security": 0.0,
+    "scratch-def-state-country-picklists": 1.0,
+    "soql-accounts-missing-country-or-industry": 1.0,
+    "soql-accounts-open-high-cases": 1.0,
+    "soql-banking-insurance-de-uk": 1.0,
+    "soql-customers-without-2025-wins": 1.0,
+    "soql-energy-wins-2025": 1.0,
+    "soql-fy2026-bookings-by-quarter": 1.0,
+    "soql-german-customers-open-shipments": 1.0,
+    "soql-globex-group-contacts": 1.0,
+    "soql-hardware-without-services-opps": 1.0,
+    "soql-healthcare-manager-contacts": 1.0,
+    "soql-in-transit-shipments": 1.0,
+    "soql-march-2025-activity-typeof": 1.0,
+    "soql-open-german-web-leads-count": 0.0,
+    "soql-open-shipments-handling": 1.0,
+    "soql-open-tasks-on-opportunities": 1.0,
+    "soql-parents-of-german-accounts": 0.0,
+    "soql-service-product-codes": 1.0,
+    "soql-summit-responders": 1.0,
+    "soql-top-customers-by-revenue": 1.0,
+    "soql-won-2025-by-industry": 1.0,
+    "taf-after-insert-onboarding-task": 1.0,
+    "taf-bypass-action-in-import": 1.0,
+    "taf-bypass-object-ownership-service": 1.0,
+    "taf-bypass-permission-integration": 1.0,
+    "taf-disable-action-hotfix": 1.0,
+    "taf-dml-finalizer-erp-sync": 1.0,
+    "taf-dml-less-action-test": 0.0,
+    "taf-duplicate-email-two-contexts": 1.0,
+    "taf-enable-opportunity": 1.0,
+    "taf-entry-criteria-formula": 0.0,
+    "taf-flow-action-authoring": 1.0,
+    "taf-lead-normalize-before-insert": 1.0,
+    "taf-migrate-legacy-case-trigger": 1.0,
+    "taf-open-case-rollup": 1.0,
+    "taf-recursion-amount-audit": 1.0,
+    "taf-register-flow-action": 1.0,
+    "taf-required-permission-pilot": 1.0,
+    "taf-shared-query-singleton": 0.0
+   },
+   "tokens": {
+    "output_mean": 1978.8,
+    "output_median": 1599.0,
+    "output_p90": 3495.0,
+    "input_mean": 793.2,
+    "reasoning_mean": 1432.5
+   },
+   "outcomes": {
+    "no_answer": 0,
+    "truncated": 0,
+    "malformed": 0,
+    "retried": 0
+   },
+   "no_answer_rate": 0.0,
+   "no_answer_tasks": [],
+   "latency_s_mean": 17.92,
+   "latency_s_median": 14.71,
+   "concurrency": [
+    6
+   ],
+   "samples": 272,
+   "pending": 0,
+   "date": "2026-10-20",
+   "complete": true,
+   "runs": [
+    "20261020T014658Z_muse-wonder@low"
+   ],
+   "progress": {
+    "tasks_graded": 272,
+    "tasks_total": 272,
+    "suites_complete": 15,
+    "suites_total": 15
+   },
+   "legacy": 0,
+   "stale": {},
+   "rank": 21
   },
   {
    "config_id": "claude-opus-4.8@off",
@@ -35464,7 +39796,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 18
+   "rank": 22
   },
   {
    "config_id": "claude-sonnet-5@high",
@@ -37318,7 +41650,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 19
+   "rank": 23
   },
   {
    "config_id": "claude-haiku-5.5@medium",
@@ -39173,7 +43505,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 20
+   "rank": 24
   },
   {
    "config_id": "gpt-6-luna@medium",
@@ -41031,7 +45363,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 21
+   "rank": 25
   },
   {
    "config_id": "claude-haiku-5.5@high",
@@ -42888,7 +47220,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 22
+   "rank": 26
   },
   {
    "config_id": "deepseek-v4.1-flash-deepinfra-fp8@high",
@@ -44745,7 +49077,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 23
+   "rank": 27
   },
   {
    "config_id": "claude-sonnet-5@medium",
@@ -46599,7 +50931,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 24
+   "rank": 28
   },
   {
    "config_id": "claude-haiku-5.5@low",
@@ -48454,7 +52786,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 25
+   "rank": 29
   },
   {
    "config_id": "deepseek-v4.1-flash-1017-native@high",
@@ -49946,7 +54278,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 26
+   "rank": 30
   },
   {
    "config_id": "deepseek-v4.1-flash-exl3-2.9bpw@high",
@@ -51446,7 +55778,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 27
+   "rank": 31
   },
   {
    "config_id": "claude-sonnet-5@off",
@@ -53300,7 +57632,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 28
+   "rank": 32
   },
   {
    "config_id": "deepseek-v4.1-flash-native@high",
@@ -54805,7 +59137,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 29
+   "rank": 33
   },
   {
    "config_id": "claude-sonnet-5@low",
@@ -56659,7 +60991,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 30
+   "rank": 34
   },
   {
    "config_id": "mimo-v2.6-pro-xiaomi-fp8@on",
@@ -58572,7 +62904,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 31
+   "rank": 35
   },
   {
    "config_id": "deepseek-v4-pro-novita-fp8@high",
@@ -60447,7 +64779,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 32
+   "rank": 36
   },
   {
    "config_id": "inkling-small-deepinfra-fp8@high",
@@ -62304,7 +66636,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 33
+   "rank": 37
   },
   {
    "config_id": "glm-5.3-flash-zai-fp8@high",
@@ -64165,7 +68497,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 34
+   "rank": 38
   },
   {
    "config_id": "glm-5.3-flash-exl3-4bpw@high",
@@ -65657,7 +69989,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 35
+   "rank": 39
   },
   {
    "config_id": "glm-5.3-zai-fp8@low",
@@ -67514,7 +71846,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 36
+   "rank": 40
   },
   {
    "config_id": "qwen3.8-flash-next-nvfp4@medium",
@@ -69003,7 +73335,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 37
+   "rank": 41
   },
   {
    "config_id": "mistral-large-4@high",
@@ -70937,7 +75269,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 38
+   "rank": 42
   },
   {
    "config_id": "nemotron-3-ultra-nvidia@on",
@@ -72421,7 +76753,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 39
+   "rank": 43
   },
   {
    "config_id": "claude-haiku-4.5@on",
@@ -74276,7 +78608,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 40
+   "rank": 44
   },
   {
    "config_id": "glm-5.3-flash-exl3-4bpw-tensorfold@high",
@@ -75766,7 +80098,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 41
+   "rank": 45
   },
   {
    "config_id": "qwen3.8-flash-next-mlx-4bit@medium",
@@ -77292,7 +81624,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 42
+   "rank": 46
   },
   {
    "config_id": "deepseek-v4-flash-vision-nvfp4@high",
@@ -78825,7 +83157,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 43
+   "rank": 47
   },
   {
    "config_id": "mimo-v2.6-flash-fp8@on",
@@ -80378,7 +84710,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 44
+   "rank": 48
   },
   {
    "config_id": "mimo-v2.6-flash-xiaomi-fp8@on",
@@ -82298,7 +86630,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 45
+   "rank": 49
   },
   {
    "config_id": "glm-5.3-flash-exl3-4bpw@low",
@@ -83782,7 +88114,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 46
+   "rank": 50
   },
   {
    "config_id": "gemma-4-31b-qat-w4a16@on",
@@ -85265,7 +89597,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 47
+   "rank": 51
   },
   {
    "config_id": "qwen3.8-flash-next-mlx-4bit-tensorfold@medium",
@@ -86790,7 +91122,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 48
+   "rank": 52
   },
   {
    "config_id": "glm-5.3-flash-exl3-4bpw@off",
@@ -88274,7 +92606,915 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 49
+   "rank": 53
+  },
+  {
+   "config_id": "nemotron-3.5-super-vl-nvfp4-tensorfold@on",
+   "subset": "full",
+   "model": "Nemotron 3.5 Super VL",
+   "model_family": "Nemotron-3.5",
+   "base_model": "Nemotron-3.5-Super-VL-120B-A12B",
+   "quant": "NVFP4 mixed precision (NVIDIA ModelOpt)",
+   "engine": "TensorFold (Zig)",
+   "effort": "on",
+   "effort_tier": "on",
+   "open_weights": true,
+   "local": true,
+   "model_id": "nemotron-3-5-super-vl",
+   "developer": "nvidia",
+   "developer_name": "NVIDIA",
+   "serving": "local",
+   "provider": null,
+   "hardware": "1\u00d7 NVIDIA DGX Spark (GB10, 128 GB)",
+   "price": null,
+   "overall": {
+    "score": 0.3234,
+    "ci_low": 0.2714,
+    "ci_high": 0.3758
+   },
+   "c_at": {},
+   "usage": {
+    "1": {
+     "overall": {
+      "tasks": 272,
+      "answers": 272,
+      "failed": 0,
+      "solved": 88,
+      "unreported": 0,
+      "time_s": {
+       "median": 597.64,
+       "p90": 2145.82,
+       "mean": 905.62
+      },
+      "tokens": {
+       "input": 819.8,
+       "cached_input": 105.6,
+       "reasoning": 10038.8,
+       "answer": 379.8,
+       "unsplit": 0.0,
+       "output": 10418.6
+      },
+      "cost": null,
+      "no_cost": "no_price",
+      "recorded": {
+       "cached_input": 272,
+       "served_by": 0
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 4,
+       "unreported": 0,
+       "time_s": {
+        "median": 550.3,
+        "p90": 2125.21,
+        "mean": 904.42
+       },
+       "tokens": {
+        "input": 665.5,
+        "cached_input": 100.7,
+        "reasoning": 9791.4,
+        "answer": 872.4,
+        "unsplit": 0.0,
+        "output": 10663.8
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 187.52,
+        "p90": 1875.62,
+        "mean": 760.47
+       },
+       "tokens": {
+        "input": 396.6,
+        "cached_input": 106.0,
+        "reasoning": 8385.7,
+        "answer": 145.0,
+        "unsplit": 0.0,
+        "output": 8530.7
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 7,
+       "unreported": 0,
+       "time_s": {
+        "median": 877.37,
+        "p90": 1789.93,
+        "mean": 891.91
+       },
+       "tokens": {
+        "input": 460.1,
+        "cached_input": 106.0,
+        "reasoning": 10082.2,
+        "answer": 390.0,
+        "unsplit": 0.0,
+        "output": 10472.2
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 6,
+       "unreported": 0,
+       "time_s": {
+        "median": 275.69,
+        "p90": 1632.43,
+        "mean": 671.99
+       },
+       "tokens": {
+        "input": 296.4,
+        "cached_input": 106.0,
+        "reasoning": 7499.8,
+        "answer": 47.8,
+        "unsplit": 0.0,
+        "output": 7547.6
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 4,
+       "unreported": 0,
+       "time_s": {
+        "median": 995.38,
+        "p90": 1633.47,
+        "mean": 1013.19
+       },
+       "tokens": {
+        "input": 269.7,
+        "cached_input": 106.0,
+        "reasoning": 11237.7,
+        "answer": 94.5,
+        "unsplit": 0.0,
+        "output": 11332.2
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 1,
+       "unreported": 0,
+       "time_s": {
+        "median": 1614.31,
+        "p90": 3082.5,
+        "mean": 1620.85
+       },
+       "tokens": {
+        "input": 883.0,
+        "cached_input": 106.0,
+        "reasoning": 18236.3,
+        "answer": 539.3,
+        "unsplit": 0.0,
+        "output": 18775.7
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 4,
+       "unreported": 0,
+       "time_s": {
+        "median": 2082.46,
+        "p90": 3044.36,
+        "mean": 1945.35
+       },
+       "tokens": {
+        "input": 814.9,
+        "cached_input": 106.0,
+        "reasoning": 21286.4,
+        "answer": 632.4,
+        "unsplit": 0.0,
+        "output": 21918.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 19,
+       "failed": 0,
+       "solved": 8,
+       "unreported": 0,
+       "time_s": {
+        "median": 386.93,
+        "p90": 1696.97,
+        "mean": 657.27
+       },
+       "tokens": {
+        "input": 502.6,
+        "cached_input": 106.0,
+        "reasoning": 6576.7,
+        "answer": 456.3,
+        "unsplit": 0.0,
+        "output": 7032.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 275.47,
+        "p90": 1027.46,
+        "mean": 441.27
+       },
+       "tokens": {
+        "input": 590.8,
+        "cached_input": 106.0,
+        "reasoning": 5131.8,
+        "answer": 490.5,
+        "unsplit": 0.0,
+        "output": 5622.3
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 8,
+       "unreported": 0,
+       "time_s": {
+        "median": 650.63,
+        "p90": 2266.76,
+        "mean": 980.2
+       },
+       "tokens": {
+        "input": 537.3,
+        "cached_input": 106.0,
+        "reasoning": 10523.9,
+        "answer": 631.3,
+        "unsplit": 0.0,
+        "output": 11155.2
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 4,
+       "unreported": 0,
+       "time_s": {
+        "median": 728.73,
+        "p90": 1928.38,
+        "mean": 981.51
+       },
+       "tokens": {
+        "input": 421.9,
+        "cached_input": 106.0,
+        "reasoning": 10845.6,
+        "answer": 129.5,
+        "unsplit": 0.0,
+        "output": 10975.1
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 15,
+       "failed": 0,
+       "solved": 7,
+       "unreported": 0,
+       "time_s": {
+        "median": 329.7,
+        "p90": 1486.75,
+        "mean": 581.54
+       },
+       "tokens": {
+        "input": 610.9,
+        "cached_input": 106.0,
+        "reasoning": 6471.5,
+        "answer": 306.3,
+        "unsplit": 0.0,
+        "output": 6777.7
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 2,
+       "unreported": 0,
+       "time_s": {
+        "median": 582.83,
+        "p90": 2296.11,
+        "mean": 962.51
+       },
+       "tokens": {
+        "input": 378.5,
+        "cached_input": 106.0,
+        "reasoning": 10590.8,
+        "answer": 87.8,
+        "unsplit": 0.0,
+        "output": 10678.6
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 129.65,
+        "p90": 1140.34,
+        "mean": 368.87
+       },
+       "tokens": {
+        "input": 281.4,
+        "cached_input": 106.0,
+        "reasoning": 4076.3,
+        "answer": 77.5,
+        "unsplit": 0.0,
+        "output": 4153.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 2,
+       "unreported": 0,
+       "time_s": {
+        "median": 631.44,
+        "p90": 1905.87,
+        "mean": 853.68
+       },
+       "tokens": {
+        "input": 5254.2,
+        "cached_input": 106.0,
+        "reasoning": 10485.1,
+        "answer": 779.8,
+        "unsplit": 0.0,
+        "output": 11264.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      }
+     }
+    }
+   },
+   "suites": {
+    "apex": {
+     "score": 0.2,
+     "ci_low": 0.0807,
+     "ci_high": 0.416,
+     "n": 20,
+     "tokens": {
+      "output_mean": 10663.8,
+      "output_median": 6941.0,
+      "output_p90": 25494.0,
+      "input_mean": 665.5
+     },
+     "latency_s_median": 550.3
+    },
+    "api": {
+     "score": 0.5,
+     "ci_low": 0.2903,
+     "ci_high": 0.7097,
+     "n": 18,
+     "tokens": {
+      "output_mean": 8530.7,
+      "output_median": 2487.0,
+      "output_p90": 21443.4,
+      "input_mean": 396.6
+     },
+     "latency_s_median": 187.52
+    },
+    "ci": {
+     "score": 0.4118,
+     "ci_low": 0.2161,
+     "ci_high": 0.6399,
+     "n": 17,
+     "tokens": {
+      "output_mean": 10472.2,
+      "output_median": 10355.0,
+      "output_p90": 21296.0,
+      "input_mean": 460.1
+     },
+     "latency_s_median": 877.37
+    },
+    "cli": {
+     "score": 0.3,
+     "ci_low": 0.1455,
+     "ci_high": 0.519,
+     "n": 20,
+     "tokens": {
+      "output_mean": 7547.6,
+      "output_median": 3191.0,
+      "output_p90": 17374.8,
+      "input_mean": 296.4
+     },
+     "latency_s_median": 275.69
+    },
+    "docs": {
+     "score": 0.2353,
+     "ci_low": 0.0956,
+     "ci_high": 0.4726,
+     "n": 17,
+     "tokens": {
+      "output_mean": 11332.2,
+      "output_median": 11907.0,
+      "output_p90": 19116.6,
+      "input_mean": 269.7
+     },
+     "latency_s_median": 995.38
+    },
+    "fflib": {
+     "score": 0.0556,
+     "ci_low": 0.0099,
+     "ci_high": 0.2576,
+     "n": 18,
+     "tokens": {
+      "output_mean": 18775.7,
+      "output_median": 19569.5,
+      "output_p90": 32768.0,
+      "input_mean": 883.0
+     },
+     "latency_s_median": 1614.31
+    },
+    "flow": {
+     "score": 0.2222,
+     "ci_low": 0.09,
+     "ci_high": 0.4521,
+     "n": 18,
+     "tokens": {
+      "output_mean": 21918.9,
+      "output_median": 23268.0,
+      "output_p90": 32768.0,
+      "input_mean": 814.9
+     },
+     "latency_s_median": 2082.46
+    },
+    "limits": {
+     "score": 0.4211,
+     "ci_low": 0.2314,
+     "ci_high": 0.6372,
+     "n": 19,
+     "tokens": {
+      "output_mean": 7032.9,
+      "output_median": 4495.0,
+      "output_p90": 16687.2,
+      "input_mean": 502.6
+     },
+     "latency_s_median": 386.93
+    },
+    "lwc": {
+     "score": 0.5,
+     "ci_low": 0.2903,
+     "ci_high": 0.7097,
+     "n": 18,
+     "tokens": {
+      "output_mean": 5622.3,
+      "output_median": 3970.0,
+      "output_p90": 11084.5,
+      "input_mean": 590.8
+     },
+     "latency_s_median": 275.47
+    },
+    "npsp": {
+     "score": 0.4444,
+     "ci_low": 0.2456,
+     "ci_high": 0.6628,
+     "n": 18,
+     "tokens": {
+      "output_mean": 11155.2,
+      "output_median": 7400.5,
+      "output_p90": 23749.0,
+      "input_mean": 537.3
+     },
+     "latency_s_median": 650.63
+    },
+    "packaging": {
+     "score": 0.2222,
+     "ci_low": 0.09,
+     "ci_high": 0.4521,
+     "n": 18,
+     "tokens": {
+      "output_mean": 10975.1,
+      "output_median": 9146.0,
+      "output_p90": 20275.0,
+      "input_mean": 421.9
+     },
+     "latency_s_median": 728.73
+    },
+    "permissions": {
+     "score": 0.4667,
+     "ci_low": 0.2481,
+     "ci_high": 0.6988,
+     "n": 15,
+     "tokens": {
+      "output_mean": 6777.7,
+      "output_median": 4488.0,
+      "output_p90": 15836.0,
+      "input_mean": 610.9
+     },
+     "latency_s_median": 329.7
+    },
+    "scratch-def": {
+     "score": 0.1111,
+     "ci_low": 0.031,
+     "ci_high": 0.328,
+     "n": 18,
+     "tokens": {
+      "output_mean": 10678.6,
+      "output_median": 6809.5,
+      "output_p90": 24929.2,
+      "input_mean": 378.5
+     },
+     "latency_s_median": 582.83
+    },
+    "soql": {
+     "score": 0.65,
+     "ci_low": 0.4329,
+     "ci_high": 0.8188,
+     "n": 20,
+     "tokens": {
+      "output_mean": 4153.9,
+      "output_median": 1586.0,
+      "output_p90": 11647.5,
+      "input_mean": 281.4
+     },
+     "latency_s_median": 129.65
+    },
+    "taf": {
+     "score": 0.1111,
+     "ci_low": 0.031,
+     "ci_high": 0.328,
+     "n": 18,
+     "tokens": {
+      "output_mean": 11264.9,
+      "output_median": 7787.5,
+      "output_p90": 23155.1,
+      "input_mean": 5254.2
+     },
+     "latency_s_median": 631.44
+    }
+   },
+   "per_task": {
+    "apex-api67-access-modes": 0.0,
+    "apex-batch-stateful-overdue": 0.0,
+    "apex-bulkify-legacy-trigger": 1.0,
+    "apex-callout-named-credential-retry": 0.0,
+    "apex-contact-email-domain": 1.0,
+    "apex-custom-exception-hierarchy": 0.0,
+    "apex-dynamic-soql-user-mode": 0.0,
+    "apex-invocable-contact-lookup": 0.0,
+    "apex-json-reserved-keys": 0.0,
+    "apex-mutation-tests-callout": 0.0,
+    "apex-mutation-tests-shipping": 0.0,
+    "apex-mutation-tests-won-handler": 0.0,
+    "apex-partial-success-lead-import": 0.0,
+    "apex-picklist-describe": 1.0,
+    "apex-platform-event-shipments": 0.0,
+    "apex-queueable-chain-depth": 0.0,
+    "apex-queueable-finalizer-retry": 0.0,
+    "apex-rollup-trigger-recursion": 0.0,
+    "apex-schedulable-log-purge": 0.0,
+    "apex-won-amount-by-account": 1.0,
+    "api-apexrest-namespaced-post": 0.0,
+    "api-bulk2-ingest-upsert": 0.0,
+    "api-bulk2-query-export": 0.0,
+    "api-choose-bulk-for-large-load": 1.0,
+    "api-collections-create-update": 1.0,
+    "api-composite-graph-orders": 0.0,
+    "api-composite-implicit-dependency": 0.0,
+    "api-describe-and-limits": 1.0,
+    "api-oauth-client-credentials": 1.0,
+    "api-platform-event-publish": 1.0,
+    "api-query-paging-queryall": 0.0,
+    "api-sobject-create-case": 1.0,
+    "api-sobject-update-delete": 1.0,
+    "api-tooling-coverage-query": 0.0,
+    "api-tooling-execute-anonymous": 0.0,
+    "api-uiapi-record-optional-fields": 0.0,
+    "api-upsert-external-id": 1.0,
+    "api-upsert-response-semantics": 1.0,
+    "ci-branch-routed-validation": 0.0,
+    "ci-choice-destructive-order": 1.0,
+    "ci-choice-quick-deploy-cache": 1.0,
+    "ci-choice-scratch-vs-sandbox": 1.0,
+    "ci-choice-source-tracking-ci": 0.0,
+    "ci-choice-test-level-prod": 1.0,
+    "ci-code-analyzer-gate": 0.0,
+    "ci-delta-deploy-sgd": 0.0,
+    "ci-environment-secrets-fix": 1.0,
+    "ci-lwc-jest-eslint": 1.0,
+    "ci-nightly-apex-tests": 0.0,
+    "ci-pr-validate-jwt": 0.0,
+    "ci-quick-deploy-on-merge": 0.0,
+    "ci-review-org-script": 0.0,
+    "ci-scratch-org-per-pr": 0.0,
+    "ci-uat-deploy-sfdx-url": 1.0,
+    "ci-unlocked-package-release": 0.0,
+    "cli-apex-run-script-file": 1.0,
+    "cli-apex-tail-log": 0.0,
+    "cli-apex-tests-junit-coverage": 0.0,
+    "cli-assign-permset-user": 1.0,
+    "cli-bulk-export-csv": 0.0,
+    "cli-bulk-upsert-external-id": 0.0,
+    "cli-delete-scratch-org": 1.0,
+    "cli-deploy-apex-class": 1.0,
+    "cli-dev-machine-config": 0.0,
+    "cli-jwt-login-and-deploy": 0.0,
+    "cli-manifest-from-org": 0.0,
+    "cli-org-open-setup-page": 0.0,
+    "cli-package-install-ci": 0.0,
+    "cli-post-destructive-deploy": 0.0,
+    "cli-retrieve-field-and-flexipage": 1.0,
+    "cli-sandbox-create-async": 0.0,
+    "cli-scratch-org-create": 1.0,
+    "cli-tree-export-import-seed": 0.0,
+    "cli-unlocked-package-release": 0.0,
+    "cli-validate-then-quick-deploy": 0.0,
+    "docs-api-concurrent-long-running": 0.0,
+    "docs-api-daily-allocation-calc": 0.0,
+    "docs-batch-querylocator-scope-max": 1.0,
+    "docs-big-object-index-text-length": 0.0,
+    "docs-bulk2-ingest-upload-size": 0.0,
+    "docs-callout-async-response-size": 0.0,
+    "docs-callout-default-timeout": 0.0,
+    "docs-cross-namespace-soql-limit": 0.0,
+    "docs-long-running-apex-concurrency": 0.0,
+    "docs-lws-distortions": 0.0,
+    "docs-lws-enable-setting": 0.0,
+    "docs-order-exec-after-trigger-vs-flow": 1.0,
+    "docs-pe-delivery-allocation-calc": 0.0,
+    "docs-pe-trigger-batch-size": 1.0,
+    "docs-queueable-async-enqueue-limit": 1.0,
+    "docs-rest-limit-info-header": 0.0,
+    "docs-scratch-org-max-duration": 0.0,
+    "fflib-apexmocks-argument-captor": 0.0,
+    "fflib-apexmocks-exception-paths": 0.0,
+    "fflib-apexmocks-mock-domain": 0.0,
+    "fflib-apexmocks-stub-selector": 0.0,
+    "fflib-apexmocks-verify-uow": 0.0,
+    "fflib-application-factories": 0.0,
+    "fflib-domain-calls-service": 0.0,
+    "fflib-domain-opportunity-defaults": 0.0,
+    "fflib-domain-sobjects-structure": 0.0,
+    "fflib-domain-unit-test-mock-db": 0.0,
+    "fflib-domain-validation": 0.0,
+    "fflib-selector-contacts": 0.0,
+    "fflib-selector-query-factory": 0.0,
+    "fflib-selector-user-mode-fieldset": 0.0,
+    "fflib-service-case-escalation": 0.0,
+    "fflib-service-facade": 1.0,
+    "fflib-uow-account-contacts": 0.0,
+    "fflib-uow-platform-events": 0.0,
+    "flow-account-credit-check-action": 0.0,
+    "flow-account-customer-welcome-task": 0.0,
+    "flow-account-discount-cascade": 0.0,
+    "flow-account-onboarding-subflow": 0.0,
+    "flow-case-breakdown-escalation": 0.0,
+    "flow-case-close-open-tasks": 0.0,
+    "flow-case-sla-due": 0.0,
+    "flow-choice-close-date-reminder": 1.0,
+    "flow-choice-guide-statements": 1.0,
+    "flow-choice-same-record-update": 1.0,
+    "flow-choice-undelete-restore": 1.0,
+    "flow-fix-account-address-sync": 0.0,
+    "flow-opportunity-amount-swing": 0.0,
+    "flow-opportunity-close-reminder-scheduled": 0.0,
+    "flow-opportunity-won-project": 0.0,
+    "flow-order-shipment-fault-path": 0.0,
+    "flow-shipping-quote-autolaunched": 0.0,
+    "flow-web-signup-contact-match": 0.0,
+    "limits-async-vs-sync-limits": 1.0,
+    "limits-control-contact-phone-partial-update": 0.0,
+    "limits-control-pipeline-query-per-stage": 1.0,
+    "limits-control-soql-for-loop-stale-deals": 0.0,
+    "limits-count-cascading-trigger-queries": 1.0,
+    "limits-count-queries-helper-per-lead": 1.0,
+    "limits-first-limit-exceeded": 1.0,
+    "limits-pushback-case-priority-query-in-loop": 1.0,
+    "limits-pushback-erp-callout-per-account": 0.0,
+    "limits-pushback-eventbus-publish-per-record": 0.0,
+    "limits-pushback-followup-tasks-dml-per-record": 0.0,
+    "limits-pushback-future-per-opportunity": 1.0,
+    "limits-pushback-helper-query-per-line-item": 0.0,
+    "limits-pushback-nested-loop-lead-matching": 0.0,
+    "limits-pushback-queueable-per-closed-case": 0.0,
+    "limits-pushback-send-email-per-opportunity": 0.0,
+    "limits-pushback-unfiltered-contact-query": 1.0,
+    "limits-spot-risky-trigger-snippets": 0.0,
+    "limits-trigger-chunks-apex-vs-data-loader": 0.0,
+    "lwc-account-header-wire": 0.0,
+    "lwc-account-quick-links-navigation": 0.0,
+    "lwc-case-status-badge": 0.0,
+    "lwc-collapsible-section-slots": 0.0,
+    "lwc-contact-list-sorted": 1.0,
+    "lwc-contact-search-debounce": 1.0,
+    "lwc-contacts-datatable-inline-save": 0.0,
+    "lwc-favorite-toggle-labels": 1.0,
+    "lwc-lms-account-panel": 0.0,
+    "lwc-open-opportunities-imperative-apex": 1.0,
+    "lwc-opportunity-row-actions": 1.0,
+    "lwc-order-lines-child-api": 0.0,
+    "lwc-pipeline-card-app-builder": 1.0,
+    "lwc-product-tile-select-event": 0.0,
+    "lwc-queue-monitor-polling-lifecycle": 1.0,
+    "lwc-registration-form-validation": 1.0,
+    "lwc-status-listbox-keyboard": 0.0,
+    "lwc-task-checklist-reactivity-fix": 1.0,
+    "npsp-affiliation-primary-employer": 1.0,
+    "npsp-bdi-gift-import": 0.0,
+    "npsp-crlp-promote-to-production": 1.0,
+    "npsp-enhanced-rd-monthly": 0.0,
+    "npsp-gau-percent-allocations": 1.0,
+    "npsp-household-create-members": 0.0,
+    "npsp-household-formal-greeting": 0.0,
+    "npsp-namespace-objects": 0.0,
+    "npsp-partial-soft-credits": 0.0,
+    "npsp-payment-installments": 1.0,
+    "npsp-record-gift": 0.0,
+    "npsp-relationship-parent-child": 0.0,
+    "npsp-soql-gau-totals": 1.0,
+    "npsp-soql-unpaid-payments-due": 1.0,
+    "npsp-tdtm-major-gift-handler": 0.0,
+    "npsp-tdtm-test-registration": 0.0,
+    "npsp-trigger-handler-exclude-user": 1.0,
+    "npsp-vs-nonprofit-cloud": 1.0,
+    "packaging-1gp-managed-released-upload": 0.0,
+    "packaging-1gp-vs-2gp": 1.0,
+    "packaging-abandon-ancestor": 1.0,
+    "packaging-ancestry-upgrade-paths": 0.0,
+    "packaging-create-org-dependent": 0.0,
+    "packaging-create-unlocked-no-namespace": 0.0,
+    "packaging-dependency-released-build": 1.0,
+    "packaging-lock-promoted-version": 0.0,
+    "packaging-managed-test-setup": 0.0,
+    "packaging-migrate-metadata-between-packages": 0.0,
+    "packaging-package-id-prefixes": 1.0,
+    "packaging-promote-and-install": 0.0,
+    "packaging-push-upgrade-schedule": 0.0,
+    "packaging-removed-components-upgrade": 0.0,
+    "packaging-skip-validation-consequences": 0.0,
+    "packaging-transitive-dependencies": 0.0,
+    "packaging-unlocked-project-config": 0.0,
+    "packaging-version-create-release-candidate": 0.0,
+    "permissions-bulk-editable-ids": 0.0,
+    "permissions-custom-permission-apex": 1.0,
+    "permissions-effective-access-muting": 1.0,
+    "permissions-fix-over-permissive": 1.0,
+    "permissions-integration-api-access": 0.0,
+    "permissions-profile-only-settings": 0.0,
+    "permissions-psg-muting": 0.0,
+    "permissions-readonly-claims-viewer": 1.0,
+    "permissions-required-field-fls": 0.0,
+    "permissions-session-based-elevation": 0.0,
+    "permissions-sharing-vs-object-perms": 1.0,
+    "permissions-strip-inaccessible-v67": 1.0,
+    "permissions-tab-app-visibility": 0.0,
+    "permissions-view-all-not-modify-all": 1.0,
+    "permissions-with-sharing-api-versions": 0.0,
+    "scratch-def-australian-locale": 0.0,
+    "scratch-def-einstein-generative-ai": 0.0,
+    "scratch-def-experience-cloud-guest-site": 0.0,
+    "scratch-def-field-service-multicurrency": 0.0,
+    "scratch-def-fix-broken-definition": 0.0,
+    "scratch-def-fix-org-preferences": 0.0,
+    "scratch-def-multicurrency-germany": 0.0,
+    "scratch-def-opportunity-teams": 0.0,
+    "scratch-def-package-object-settings": 0.0,
+    "scratch-def-partner-preview-release": 0.0,
+    "scratch-def-person-accounts": 1.0,
+    "scratch-def-professional-edition-api": 0.0,
+    "scratch-def-sales-forecasting": 0.0,
+    "scratch-def-service-knowledge-omni": 0.0,
+    "scratch-def-sfdx-project-2gp-monorepo": 0.0,
+    "scratch-def-sfdx-project-sandbox-team": 1.0,
+    "scratch-def-shield-security": 0.0,
+    "scratch-def-state-country-picklists": 0.0,
+    "soql-accounts-missing-country-or-industry": 0.0,
+    "soql-accounts-open-high-cases": 1.0,
+    "soql-banking-insurance-de-uk": 1.0,
+    "soql-customers-without-2025-wins": 1.0,
+    "soql-energy-wins-2025": 1.0,
+    "soql-fy2026-bookings-by-quarter": 0.0,
+    "soql-german-customers-open-shipments": 0.0,
+    "soql-globex-group-contacts": 0.0,
+    "soql-hardware-without-services-opps": 1.0,
+    "soql-healthcare-manager-contacts": 1.0,
+    "soql-in-transit-shipments": 1.0,
+    "soql-march-2025-activity-typeof": 1.0,
+    "soql-open-german-web-leads-count": 0.0,
+    "soql-open-shipments-handling": 1.0,
+    "soql-open-tasks-on-opportunities": 1.0,
+    "soql-parents-of-german-accounts": 0.0,
+    "soql-service-product-codes": 1.0,
+    "soql-summit-responders": 1.0,
+    "soql-top-customers-by-revenue": 1.0,
+    "soql-won-2025-by-industry": 0.0,
+    "taf-after-insert-onboarding-task": 0.0,
+    "taf-bypass-action-in-import": 0.0,
+    "taf-bypass-object-ownership-service": 0.0,
+    "taf-bypass-permission-integration": 0.0,
+    "taf-disable-action-hotfix": 1.0,
+    "taf-dml-finalizer-erp-sync": 0.0,
+    "taf-dml-less-action-test": 0.0,
+    "taf-duplicate-email-two-contexts": 0.0,
+    "taf-enable-opportunity": 0.0,
+    "taf-entry-criteria-formula": 0.0,
+    "taf-flow-action-authoring": 0.0,
+    "taf-lead-normalize-before-insert": 1.0,
+    "taf-migrate-legacy-case-trigger": 0.0,
+    "taf-open-case-rollup": 0.0,
+    "taf-recursion-amount-audit": 0.0,
+    "taf-register-flow-action": 0.0,
+    "taf-required-permission-pilot": 0.0,
+    "taf-shared-query-singleton": 0.0
+   },
+   "tokens": {
+    "output_mean": 10418.6,
+    "output_median": 6926.0,
+    "output_p90": 24521.2,
+    "input_mean": 819.8,
+    "reasoning_mean": 10038.8
+   },
+   "outcomes": {
+    "no_answer": 12,
+    "truncated": 0,
+    "malformed": 0,
+    "retried": 0
+   },
+   "no_answer_rate": 0.044,
+   "no_answer_tasks": [
+    "apex-rollup-trigger-recursion",
+    "api-bulk2-ingest-upsert",
+    "cli-bulk-upsert-external-id",
+    "fflib-apexmocks-argument-captor",
+    "fflib-apexmocks-exception-paths",
+    "fflib-domain-unit-test-mock-db",
+    "flow-account-credit-check-action",
+    "flow-account-discount-cascade",
+    "flow-case-close-open-tasks",
+    "flow-shipping-quote-autolaunched",
+    "scratch-def-fix-org-preferences",
+    "taf-flow-action-authoring"
+   ],
+   "latency_s_mean": 905.62,
+   "latency_s_median": 597.64,
+   "concurrency": [
+    8
+   ],
+   "samples": 272,
+   "pending": 0,
+   "date": "2026-10-18",
+   "complete": true,
+   "runs": [
+    "20261018T150411Z_nemotron-3.5-super-vl-nvfp4-tensorfold@on"
+   ],
+   "progress": {
+    "tasks_graded": 272,
+    "tasks_total": 272,
+    "suites_complete": 15,
+    "suites_total": 15
+   },
+   "legacy": 0,
+   "stale": {},
+   "rank": 54
   },
   {
    "config_id": "muse-glimmer-30b-nvfp4@high",
@@ -89757,7 +94997,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 50
+   "rank": 55
   },
   {
    "config_id": "gemma-4-26b-a4b-nvfp4@on",
@@ -91240,7 +96480,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 51
+   "rank": 56
   },
   {
    "config_id": "claude-haiku-4.5@off",
@@ -93095,7 +98335,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 52
+   "rank": 57
   },
   {
    "config_id": "qwen3.8-flash-next-int4ar-tensorfold@medium",
@@ -94650,7 +99890,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 53
+   "rank": 58
   },
   {
    "config_id": "qwen3.8-flash-next-int4ar-tensorfold-single@medium",
@@ -96199,7 +101439,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 54
+   "rank": 59
   },
   {
    "config_id": "qwen3.8-27b-mlx-8bit@low",
@@ -97682,7 +102922,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 55
+   "rank": 60
   },
   {
    "config_id": "qwen3.8-27b-mlx-4bit@low",
@@ -99166,7 +104406,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 56
+   "rank": 61
   },
   {
    "config_id": "qwen3.8-flash-next-alibaba@on",
@@ -101117,7 +106357,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 57
+   "rank": 62
   },
   {
    "config_id": "nemotron-3-super-nvidia@on",
@@ -102014,7 +107254,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 58
+   "rank": 63
   },
   {
    "config_id": "laguna-s-2.1-poolside-fp4@on",
@@ -103508,7 +108748,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 59
+   "rank": 64
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@medium",
@@ -105010,7 +110250,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 60
+   "rank": 65
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@low",
@@ -106501,7 +111741,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 61
+   "rank": 66
   },
   {
    "config_id": "ling-3.0-flash-deepinfra-bf16@on",
@@ -108364,7 +113604,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 62
+   "rank": 67
   },
   {
    "config_id": "qwen3.8-27b-splash-4bit@low",
@@ -109847,7 +115087,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 63
+   "rank": 68
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@xhigh",
@@ -111408,7 +116648,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 64
+   "rank": 69
   },
   {
    "config_id": "qwen3.6-35b-a3b-nvfp4@on",
@@ -112898,7 +118138,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 65
+   "rank": 70
   },
   {
    "config_id": "minicpm-v-4.7-35b-a3b-bf16@on",
@@ -114384,7 +119624,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 66
+   "rank": 71
   },
   {
    "config_id": "minicpm-v-4.7-35b-a3b-int4@on",
@@ -115874,7 +121114,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 67
+   "rank": 72
   },
   {
    "config_id": "nemotron-3.5-bolt-24gb-tensorfold@on",
@@ -117404,7 +122644,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 68
+   "rank": 73
   },
   {
    "config_id": "nemotron-3.5-lightning-nvidia-nvfp4@on",
@@ -118888,7 +124128,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 69
+   "rank": 74
   },
   {
    "config_id": "claude-sonnet-5.5@medium",
