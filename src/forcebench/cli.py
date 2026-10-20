@@ -38,7 +38,7 @@ from forcebench import (
 )
 from forcebench import leakcheck as leaks
 from forcebench import validate as validation
-from forcebench.agent import harness_study
+from forcebench.agent import harness_study, mcp_study
 from forcebench.agent.harness import HARNESSES
 from forcebench.agent.mcp import load_server
 from forcebench.agent.skills import load_pack
@@ -636,6 +636,36 @@ def study_harness(
         console.print(
             f"{a['config_id']:<28} {a['harness']:<12} {a['skills'] or '-':<18} "
             f"{a['passed']}/{a['sessions']}",
+            markup=False,
+        )
+    console.print(f"wrote {target.relative_to(REPO_ROOT)}")
+
+
+@study_app.command("mcp")
+def study_mcp(
+    since: Annotated[
+        str,
+        typer.Option(
+            "--since", help="Only runs whose id starts at or after this, e.g. 20261020T12."
+        ),
+    ] = "",
+) -> None:
+    """The MCP study (docs/mcp-study.md), written to studies/mcp.json.
+
+    The opencode runs of the lite subset made through a proxy are aggregated by model and MCP
+    server. Only aggregates are written; the sessions' events stay in the runs' raw records.
+    """
+    out = mcp_study.study(AGENT_RESULTS_DIR / "runs", since)
+    if not out["comparisons"]:
+        console.print("no model has graded runs in both arms", style="red")
+        raise typer.Exit(1)
+    target = REPO_ROOT / "studies" / "mcp.json"
+    target.parent.mkdir(exist_ok=True)
+    atomic_write_text(target, json.dumps(out, indent=1) + "\n")
+    for c in out["comparisons"]:
+        console.print(
+            f"{c['config_id']:<36} {c['mcp']:<10} {c['d']:+.3f} "
+            f"[{c['ci_low']:+.3f}, {c['ci_high']:+.3f}] over {c['tasks']} tasks",
             markup=False,
         )
     console.print(f"wrote {target.relative_to(REPO_ROOT)}")
