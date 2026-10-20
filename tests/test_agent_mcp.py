@@ -9,7 +9,7 @@ import json
 import pytest
 
 from forcebench.agent.harness import AGENT_NOTE, NO_NETWORK, Opencode, agent_note, label
-from forcebench.agent.mcp import load_server, mcp_usage
+from forcebench.agent.mcp import load_server, mcp_usage, tools_in_request
 from forcebench.models import load_registry
 
 
@@ -35,7 +35,7 @@ def test_a_bad_manifest_is_refused(tmp_path):
     good = {"name": "x", "label": "X", "url": "https://x.test/mcp", "token_env": "FORCEBENCH_X",
             "tools": ["a"], "note": "n"}  # fmt: skip
     for bad in ({"url": "http://x.test/mcp"}, {"token_env": "HOME"}, {"tools": ["a", "a"]},
-                {"tools": []}):  # fmt: skip
+                {"tools": []}, {"codemode": "yes"}):  # fmt: skip
         (tmp_path / "x.json").write_text(json.dumps(good | bad))
         with pytest.raises(ValueError, match=r"x\.json"):
             load_server("x", tmp_path)
@@ -70,6 +70,36 @@ def test_opencode_reaches_the_server_only_through_the_proxy():
     assert server["codemode"] is False, "its tools are tools of their own, not Code Mode's"
     assert server["timeout"]["execution"] == 180_000
     assert "mcp" not in json.loads(Opencode().files(m)["/cfg/opencode.json"])
+
+
+def test_the_code_mode_manifest_gives_the_same_tools_through_code_mode():
+    m = load_registry().get("qwen3.8-27b-awq-int4")
+    s, plain = load_server("clientell-codemode"), load_server("clientell")
+    assert (s.name, s.url, s.tools, s.note) == (plain.name, plain.url, plain.tools, plain.note)
+    cfg = json.loads(Opencode(mcp=s).files(m)["/cfg/opencode.json"])
+    assert cfg["mcp"]["servers"]["clientell"]["codemode"] is True
+    assert s.describe()["codemode"] is True
+    # Runs made before the field keep the record they always had.
+    assert "codemode" not in plain.describe()
+
+
+def test_the_server_s_tools_are_found_in_the_first_request_either_way():
+    s, plain = load_server("clientell-codemode"), load_server("clientell")
+    own = {"tools": [{"type": "function", "function": {"name": "clientell_clientell_start"}},
+                     {"type": "function", "function": {"name": "read"}}]}  # fmt: skip
+    catalog = {
+        "tools": [{"type": "function", "function": {"name": "execute"}}],
+        "messages": [
+            {"role": "system", "content": "# Code Mode\n- clientell (7 tools)\n"
+             "  - tools.clientell.clientell_start({}): Promise<{}>\n"
+             "  - tools.clientell.search_salesforce_docs({\n  query: string,\n})"},
+            {"role": "user", "content": [{"type": "text", "text": "the task"}]},
+        ],
+    }  # fmt: skip
+    assert tools_in_request(own, plain) == 1
+    assert tools_in_request(catalog, plain) == 0
+    assert tools_in_request(catalog, s) == 2
+    assert tools_in_request(own, s) == 0, "Code Mode without its catalog is a session without them"
 
 
 def test_a_session_with_a_server_starts_once_opencode_has_connected_it():

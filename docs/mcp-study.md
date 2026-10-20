@@ -107,7 +107,10 @@ Three things about opencode differ with the server, and each was checked:
   its Code Mode by default: the model writes JavaScript that calls them through one `execute`
   tool. They are given as ordinary tools instead (`clientell_search_salesforce_docs` and so on),
   the way most MCP clients give them, so the study measures the server rather than how well a
-  model scripts Code Mode.
+  model scripts Code Mode. The `execute` tool is there in every arm all the same, and some models
+  try to call the server's tools inside it, where they are not. A check arm gives the same tools
+  through Code Mode instead (`--mcp clientell-codemode`, arm `mcp-codemode`), to see how much the
+  choice matters.
 - **The session starts once the server's tools are there.** opencode fixes a session's tools when
   it starts and does not wait for MCP servers, so a session started at once never had the
   server's tools (seen in a smoke test: the server connected a few milliseconds after the first

@@ -44,13 +44,22 @@ def _median(xs: list[float]) -> float | None:
 PARTS = (("everyday", "lite"), ("org-context", "study"))
 # Pairs of arms compared within a model (a minus b), where the model has both: the server against
 # nothing, the org's metadata against nothing, and the server against the metadata.
-PAIRS = (("mcp", "none"), ("org", "none"), ("mcp", "org"))
+PAIRS = (
+    ("mcp", "none"), ("org", "none"), ("mcp", "org"),
+    ("mcp-codemode", "none"), ("mcp-codemode", "mcp"),
+)  # fmt: skip
 
 
 def arm_of(meta: dict[str, Any]) -> str:
-    """A run's arm: ``mcp`` (an MCP server), ``org`` (the org's metadata) or ``none``."""
+    """A run's arm: ``mcp``, ``mcp-codemode``, ``org`` or ``none``.
+
+    ``mcp`` has an MCP server, ``mcp-codemode`` the same through opencode's Code Mode, ``org`` the
+    org's metadata in its workspace, ``none`` neither.
+    """
     h = meta.get("agent") or {}
-    return "mcp" if h.get("mcp") else "org" if h.get("org_source") else "none"
+    if h.get("mcp"):
+        return "mcp-codemode" if h["mcp"].get("codemode") else "mcp"
+    return "org" if h.get("org_source") else "none"
 
 
 def collect(
