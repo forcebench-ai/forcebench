@@ -32,13 +32,21 @@ page is [forcebench.ai/studies/mcp](https://forcebench.ai/studies/mcp/); its num
   it; only Clientell does. It is not the org answers are graded in: its metadata is a standard
   org's, without the grader's `Shipment__c` schema and seed data, and the agent can deploy
   nothing to it.
-- **Its tools:** five of the server's tools, the Salesforce ones that read or draft and bear on
-  the suites' subjects: `search_salesforce_metadata`, `get_salesforce_best_practices`,
-  `search_salesforce_docs`, `build_or_fix_salesforce_flow` and `generate_salesforce_org_report`.
-  Not its account, billing, onboarding and connector tools (opencode approves every call
-  unattended, and some change the account), nor those for people, team context, record merges,
-  reports and dashboards, which no suite asks about. The proxy shows the agent only these five
-  and refuses any other (`docker/agent/mcp/clientell.json`).
+- **Its tools:** the server (`clientell-salesforce` 0.2.0 when the study began) offers 37 tools.
+  The agent gets the seven it marks read-only that concern Salesforce structure, documentation,
+  guidance and drafts: `search_salesforce_metadata` and `clientell_start` (the org's metadata and
+  an overview of it), `search_salesforce_docs`, `get_salesforce_best_practices` and
+  `run_clientell_playbook` (Salesforce's documentation, Clientell's guides and playbooks), and
+  `build_or_fix_salesforce_flow` and `author_salesforce_schema` (drafts of Flows, custom objects
+  and fields, which deploy nothing). Not the account, billing, onboarding and connector tools
+  (opencode approves every call unattended, and some change the account), the record-write
+  proposals and their confirmation, the people and team-context tools, record merges, file
+  generation, and reports and dashboards. The proxy shows the agent only these seven and refuses
+  any other (`docker/agent/mcp/clientell.json`).
+- **Its instructions:** the server sends about 2,000 characters of instructions when it
+  connects (how to use its tools, a reminder never to answer org questions from memory), which
+  opencode puts in the system prompt. They are passed unchanged, though they name some tools the
+  agent isn't given.
 - **What the agent is told:** the one sentence of the agent's note that says there is no network
   and no org becomes "There is no network access except the clientell tools, which reach
   Clientell's Salesforce MCP server and, through it, a Salesforce Developer Edition org; there is
@@ -65,9 +73,10 @@ opencode differ between the arms, and both were checked:
   connected, and runs the task on it. A session whose first request lacks the server's tools is
   re-run, never scored.
 
-Started either way, with a stand-in model and a stand-in MCP server, the two arms' first model
-requests are the same byte for byte (the system prompt, the other tools' definitions, the
-request fields) but for the server's tools and the note's one sentence.
+Started either way, with a stand-in model and a stand-in MCP server that sends no instructions,
+the two arms' first model requests are the same byte for byte (the system prompt, the other
+tools' definitions, the request fields) but for the server's tools and the note's one sentence.
+With Clientell's server, its instructions are the third difference.
 
 ## What is measured
 
