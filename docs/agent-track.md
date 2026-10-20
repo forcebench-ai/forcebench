@@ -68,6 +68,9 @@ Salesforce org."). The one server today is **Clientell**
   default (the model writes JavaScript that calls them through one `execute` tool). The
   server's tools are given as ordinary tools instead (`codemode: false`), named
   `<server>_<tool>`, as most MCP clients give them. A call waits up to three minutes.
+- **With its instructions.** opencode puts the instructions the server sends when it connects
+  in the system prompt, as any MCP client may. They are the server's own and passed unchanged,
+  even where they name tools the run does not give.
 - **Connected before the session starts.** opencode fixes a session's tools when it starts and
   does not wait for MCP servers, so a session started at once never gets them. With a server, the
   agent's container starts opencode's server first, waits until it reports the MCP server
