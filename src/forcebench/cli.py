@@ -41,6 +41,7 @@ from forcebench import validate as validation
 from forcebench.agent import harness_study, mcp_study
 from forcebench.agent.harness import HARNESSES
 from forcebench.agent.mcp import load_server
+from forcebench.agent.org_source import load_org_source
 from forcebench.agent.skills import load_pack
 from forcebench.coverage import COVERAGE_FILE, read_targets, table
 from forcebench.difficulty import MIN_CONFIGS, propose
@@ -97,6 +98,7 @@ from forcebench.task_folder import WORK_DIR, TaskFolderError, pack_into_pool, un
 from forcebench.tasks import (
     ACTIVE,
     EVERY_STATUS,
+    STUDY,
     SUBSET_MIX,
     Difficulty,
     Status,
@@ -206,7 +208,11 @@ def make_env(use_orgs: bool = True) -> GradeEnv:
 
 
 SubsetOpt = Annotated[
-    str, typer.Option("--subset", help="Task subset: full (default) or lite (suites/lite.yaml).")
+    str,
+    typer.Option(
+        "--subset",
+        help="Task subset: full (default), lite (suites/lite.yaml) or study (status: study).",
+    ),
 ]
 
 
@@ -255,6 +261,9 @@ def select_tasks(
         )
     if pool != "public" and private is None:
         private = private_pool()
+    if subset == "study":
+        # The study tasks (status: study), which no default selection or other subset includes.
+        statuses, subset = (STUDY if statuses == ACTIVE else statuses), "full"
     with _pool_errors():
         suites = load_suites(suite, pool, private, statuses=statuses)  # type: ignore[arg-type]
     tasks = all_tasks(suites)
@@ -649,25 +658,35 @@ def study_mcp(
             "--since", help="Only runs whose id starts at or after this, e.g. 20261020T12."
         ),
     ] = "",
+    runs_dir: Annotated[
+        list[Path] | None,
+        typer.Option(
+            "--runs-dir",
+            help="Agent runs directories to read (repeatable; default results/agent/runs). Part "
+            "2's study-task runs are never published, so they may live elsewhere.",
+        ),
+    ] = None,
 ) -> None:
     """The MCP study (docs/mcp-study.md), written to studies/mcp.json.
 
-    The opencode runs of the lite subset made through a proxy are aggregated by model and MCP
-    server. Only aggregates are written; the sessions' events stay in the runs' raw records.
+    Part 1, the opencode runs of the lite subset made through a proxy, and part 2, those of the
+    study tasks, are aggregated by model and arm. Only aggregates are written; the sessions'
+    events stay in the runs' raw records.
     """
-    out = mcp_study.study(AGENT_RESULTS_DIR / "runs", since)
-    if not out["comparisons"]:
-        console.print("no model has graded runs in both arms", style="red")
+    out = mcp_study.study(runs_dir or [AGENT_RESULTS_DIR / "runs"], since)
+    if not any(p["comparisons"] for p in out["parts"]):
+        console.print("no model has graded runs in two arms of a part", style="red")
         raise typer.Exit(1)
     target = REPO_ROOT / "studies" / "mcp.json"
     target.parent.mkdir(exist_ok=True)
     atomic_write_text(target, json.dumps(out, indent=1) + "\n")
-    for c in out["comparisons"]:
-        console.print(
-            f"{c['config_id']:<36} {c['mcp']:<10} {c['d']:+.3f} "
-            f"[{c['ci_low']:+.3f}, {c['ci_high']:+.3f}] over {c['tasks']} tasks",
-            markup=False,
-        )
+    for p in out["parts"]:
+        for c in p["comparisons"]:
+            console.print(
+                f"{p['id']:<12} {c['config_id']:<36} {c['a']}-{c['b']:<5} {c['d']:+.3f} "
+                f"[{c['ci_low']:+.3f}, {c['ci_high']:+.3f}] over {c['tasks']} tasks",
+                markup=False,
+            )
     console.print(f"wrote {target.relative_to(REPO_ROOT)}")
 
 
@@ -1400,8 +1419,8 @@ def run(
         str | None,
         typer.Option(
             "--subset",
-            help="Task subset: full (default) or lite (suites/lite.yaml); with --resume: "
-            "the run's.",
+            help="Task subset: full (default), lite (suites/lite.yaml) or study (the study-only "
+            "tasks, status: study, never on a leaderboard); with --resume: the run's.",
         ),
     ] = None,
     grade: Annotated[
@@ -1460,6 +1479,15 @@ def run(
             "token its manifest names in .env. Recorded with the run (with --resume: the run's).",
         ),
     ] = None,
+    org_source: Annotated[
+        str | None,
+        typer.Option(
+            "--org-source",
+            help="With --agent: start each task's workspace as a grader org profile's SFDX "
+            "project, orgs/<profile>/ (the org's metadata, as an engineer has it). Recorded with "
+            "the run (with --resume: the run's).",
+        ),
+    ] = None,
     agent_image: Annotated[
         str | None,
         typer.Option(
@@ -1500,10 +1528,18 @@ def run(
         raise typer.BadParameter(
             "preloading needs a skill pack: add --skills", param_hint="--preload-skills"
         )
-    mcp = mcp or ((started.get("agent") or {}).get("mcp") or {}).get("name")
+    was = (started.get("agent") or {}).get("mcp") or {}
+    mcp = mcp or was.get("id") or was.get("name")
     if mcp is not None and agent != "opencode":
         raise typer.BadParameter("MCP servers are for opencode runs: add --agent opencode",
                                  param_hint="--mcp")  # fmt: skip
+    org_source = org_source or ((started.get("agent") or {}).get("org_source") or {}).get("profile")
+    if org_source is not None and agent is None:
+        raise typer.BadParameter("the org's metadata is for agent runs: add --agent",
+                                 param_hint="--org-source")  # fmt: skip
+    if org_source is not None and mcp is not None:
+        raise typer.BadParameter("an arm has an MCP server or the org's metadata, not both",
+                                 param_hint="--org-source")  # fmt: skip
     harness = None
     if agent is not None:
         if agent not in HARNESSES:
@@ -1529,7 +1565,11 @@ def run(
             server = load_server(mcp) if mcp else None
         except ValueError as err:
             raise typer.BadParameter(str(err), param_hint="--mcp") from None
-        harness = HARNESSES[agent](skills=pack, preload=preload_skills, mcp=server)
+        try:
+            org = load_org_source(org_source) if org_source else None
+        except ValueError as err:
+            raise typer.BadParameter(str(err), param_hint="--org-source") from None
+        harness = HARNESSES[agent](skills=pack, preload=preload_skills, mcp=server, org_source=org)
         if agent_image:
             harness = dataclasses.replace(harness, image=agent_image)
     model = model or started.get("model", {}).get("id")

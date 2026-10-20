@@ -74,15 +74,28 @@ Salesforce org."). The one server today is **Clientell**
 - **Connected before the session starts.** opencode fixes a session's tools when it starts and
   does not wait for MCP servers, so a session started at once never gets them. With a server, the
   agent's container starts opencode's server first, waits until it reports the MCP server
-  connected (at most a minute), then runs the task on it. A session whose first model request
-  lacks the server's tools is an infrastructure failure, pending and re-run on `--resume`, not a
-  session without them.
+  connected (at most a minute) and 5 seconds more (opencode reports a server connected before
+  it has listed its tools and prompts), then runs the task on it. A session whose first model
+  request lacks the server's tools is an infrastructure failure, pending and re-run on
+  `--resume`, not a session without them.
 - **Recorded.** `run.json` records the server, its URL and the tools given, never the token, and
   the run is never resumed with another server or none; it is shown as its own entry:
   `opencode 2.0.21 + Clientell MCP`. A hosted server can't be pinned the way a skill pack is, so
   each session's raw records keep what the server said it was (its name and version), every tool
   it offered, and every exchange (`raw/agent/<task>#<sample>/mcp.jsonl`: method, tool, arguments,
   status, size, latency), with totals in its `summary.json`.
+
+## The org's metadata
+
+With `--org-source <profile>`, each task's workspace starts as a grader org profile's SFDX
+project (`orgs/<profile>/`: `sfdx-project.json` and `force-app/`), the task's own files on top:
+the metadata of the org the answers are graded in, as an engineer has it in their repository. The
+note's sentence says so ("the metadata of the org this task is about, as retrieved from it, is in
+your working directory"). It gives the agent no way into the org itself. A file of the project
+the agent leaves untouched is never taken as its answer. `run.json` records the profile and the
+hash of its files; the run is never resumed with another one, or none, and is shown as
+`opencode 2.0.21 + org metadata`. It is the [MCP study](mcp-study.md)'s counterpart to an MCP
+server that reads the same org, and an arm has one or the other, never both.
 
 ## Isolation
 
