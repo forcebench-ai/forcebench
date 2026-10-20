@@ -31,6 +31,11 @@ from forcebench.agent.harness_study import _quantile, wilson
 from forcebench.stats import mean, paired_difference_ci, stratified_bootstrap_ci
 
 
+def _median(xs: list[float]) -> float | None:
+    m = _quantile(xs, 0.5)
+    return None if m is None else round(m, 1)
+
+
 def _arm_key(meta: dict[str, Any]) -> tuple[str, str]:
     return meta["config_id"], ((meta.get("agent") or {}).get("mcp") or {}).get("name", "")
 
@@ -120,7 +125,7 @@ def _mcp_use(sessions: list[dict[str, Any]]) -> dict[str, Any]:
         "calls_by_tool": dict(sorted(by_tool.items(), key=lambda kv: -kv[1])),
         "calls_failed": sum(int(s["summary"]["mcp"].get("failed") or 0) for s in with_mcp),
         "calls_refused": sum(int(s["summary"]["mcp"].get("refused") or 0) for s in with_mcp),
-        "wait_s_median": _quantile(waits, 0.5),
+        "wait_s_median": _median(waits),
         "servers": servers,
         "with_calls": passed(used),
         "without_calls": passed(unused),
@@ -147,9 +152,9 @@ def _arm_stats(key: tuple[str, str], arm: dict[str, Any]) -> dict[str, Any]:
         "sessions": len(sessions),
         **_rate(scores, suites),
         "output_tokens_mean": round(mean(out_tokens), 1) if out_tokens else None,
-        "input_tokens_median": _quantile(in_tokens, 0.5),
-        "requests_median": _quantile(requests, 0.5),
-        "latency_s_median": _quantile(latency, 0.5),
+        "input_tokens_median": _median(in_tokens),
+        "requests_median": _median(requests),
+        "latency_s_median": _median(latency),
         "no_answer": sum(s["case"].get("finish_reason") != "stop" for s in sessions),
         "summaries": len(summaries),
         **({"mcp_use": _mcp_use(sessions)} if mcp else {}),
