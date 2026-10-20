@@ -41,12 +41,16 @@ class McpServer:
     # The manifest's file name, when it is not the server's name: two manifests may give one
     # server with different notes (docs/mcp-study.md, part 2).
     id: str = ""
+    # The tools through opencode's Code Mode (its default: the model writes JavaScript that calls
+    # them through one `execute` tool) instead of as tools of their own.
+    codemode: bool = False
 
     def describe(self) -> dict[str, Any]:
         """What a run records about its server (a resume must match it)."""
         return {
             "name": self.name, "label": self.label, "url": self.url, "tools": list(self.tools),
             **({"id": self.id} if self.id and self.id != self.name else {}),
+            **({"codemode": True} if self.codemode else {}),
         }  # fmt: skip
 
     def token(self) -> str:
@@ -73,7 +77,33 @@ def load_server(name: str, servers: Path = SERVERS_DIR) -> McpServer:
         raise ValueError(f"{path.name}: tools must be distinct tool names")
     if not _NAME.fullmatch(d["name"]):
         raise ValueError(f"{path.name}: name must be a tool prefix (lowercase, digits, - and _)")
-    return McpServer(d["name"], d["label"], d["url"], d["token_env"], tools, d["note"], name)
+    codemode = d.get("codemode", False)
+    if codemode is not True and codemode is not False:
+        raise ValueError(f"{path.name}: codemode must be true or false")
+    return McpServer(
+        d["name"], d["label"], d["url"], d["token_env"], tools, d["note"], name, codemode
+    )  # fmt: skip
+
+
+def tools_in_request(request: dict[str, Any], server: McpServer) -> int:
+    """How many of the server's tools a model request gives the model.
+
+    As tools of their own, they are the request's tools named ``<server>_<tool>``. Through Code
+    Mode, they are listed in the system prompt's catalog as ``tools.<server>.<tool>(``.
+    """
+    if not server.codemode:
+        prefix = f"{server.name}_"
+        return sum(
+            1
+            for t in request.get("tools") or []
+            if str((t.get("function") or {}).get("name") or "").startswith(prefix)
+        )
+    text = ""
+    for m in request.get("messages") or []:
+        content = m.get("content")
+        parts = content if isinstance(content, list) else [{"text": content}]
+        text += "\n".join(str(p.get("text") or "") for p in parts if isinstance(p, dict))
+    return sum(f"tools.{server.name}.{t}(" in text for t in server.tools)
 
 
 def mcp_usage(log: Path) -> dict[str, Any]:

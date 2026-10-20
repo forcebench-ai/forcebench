@@ -109,6 +109,8 @@ def test_only_the_study_s_runs_count(tmp_path):
 
 def test_an_arm_is_read_from_the_run_s_agent_record():
     assert arm_of({"agent": {"name": "opencode", "mcp": CLIENTELL}}) == "mcp"
+    code_mode = CLIENTELL | {"codemode": True}
+    assert arm_of({"agent": {"name": "opencode", "mcp": code_mode}}) == "mcp-codemode"
     assert arm_of({"agent": {"name": "opencode", "org_source": ORG}}) == "org"
     assert arm_of({"agent": {"name": "opencode"}}) == "none"
 

@@ -34,7 +34,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, ClassVar
 
-from forcebench.agent.mcp import McpServer, mcp_usage
+from forcebench.agent.mcp import McpServer, mcp_usage, tools_in_request
 from forcebench.agent.org_source import OrgSource
 from forcebench.agent.skills import SkillPack, skill_block
 from forcebench.answers import extract, lang_for
@@ -331,13 +331,14 @@ def opencode_config(m: ModelConfig, mcp: McpServer | None = None) -> dict[str, A
     as tools of their own, as most MCP clients give them, not through opencode's Code Mode (its
     default: the model writes JavaScript that calls them). A tool call waits up to three minutes,
     as the server's own setup recommends (opencode's default is five seconds). The proxy adds the
-    token, so opencode's own OAuth discovery is off.
+    token, so opencode's own OAuth discovery is off. A manifest may ask for Code Mode instead
+    (``codemode``), to check how much the choice matters.
     """
     server = {
         "type": "remote",
         "url": "http://fbproxy:8080/mcp",
         "oauth": False,
-        "codemode": False,
+        "codemode": bool(mcp and mcp.codemode),
         "timeout": {"startup": 60_000, "catalog": 60_000, "execution": 180_000},
     }
     return {
@@ -808,14 +809,11 @@ class AgentClient:
         """The MCP log's totals, and how many of the server's tools the first request carried."""
         out = mcp_usage(log / "mcp.jsonl")
         first = log / "first_request.json"
-        tools: list[Any] = []
+        request: dict[str, Any] = {}
         if first.exists():
             with contextlib.suppress(ValueError):
-                tools = json.loads(first.read_text()).get("tools") or []
-        prefix = f"{self.h.mcp.name}_" if self.h.mcp else ""
-        out["in_first_request"] = sum(
-            1 for t in tools if str((t.get("function") or {}).get("name") or "").startswith(prefix)
-        )
+                request = json.loads(first.read_text())
+        out["in_first_request"] = tools_in_request(request, self.h.mcp) if self.h.mcp else 0
         return out
 
     def _infra(self, t0: float, why: str) -> Generation:

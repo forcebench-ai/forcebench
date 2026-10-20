@@ -67,7 +67,8 @@ Salesforce org."). The one server today is **Clientell**
 - **As tools of their own.** opencode 2 gives MCP tools to the model through its Code Mode by
   default (the model writes JavaScript that calls them through one `execute` tool). The
   server's tools are given as ordinary tools instead (`codemode: false`), named
-  `<server>_<tool>`, as most MCP clients give them. A call waits up to three minutes.
+  `<server>_<tool>`, as most MCP clients give them. A call waits up to three minutes. A
+  manifest with `"codemode": true` gives them through Code Mode instead (the run records it).
 - **With its instructions.** opencode puts the instructions the server sends when it connects
   in the system prompt, as any MCP client may. They are the server's own and passed unchanged,
   even where they name tools the run does not give.
