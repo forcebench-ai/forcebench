@@ -3,7 +3,7 @@
  "benchmark": "forcebench",
  "visibility": "public",
  "version": "0.2.0",
- "generated_at": "2026-10-20T04:08:17+00:00",
+ "generated_at": "2026-10-20T04:15:14+00:00",
  "tasks_sha": "21fe52ce6d1f04b7",
  "suites": [
   {
@@ -370,7 +370,7 @@
    "suite": "api",
    "title": "Upsert an account by external ID with its parent",
    "difficulty": "medium",
-   "observed_difficulty": "medium"
+   "observed_difficulty": "easy"
   },
   {
    "id": "api-upsert-response-semantics",
@@ -454,14 +454,14 @@
    "suite": "ci",
    "title": "Nightly Apex regression run in a full sandbox",
    "difficulty": "easy",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "ci-pr-validate-jwt",
    "suite": "ci",
    "title": "Validate pull requests against production with JWT auth",
    "difficulty": "medium",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "ci-quick-deploy-on-merge",
@@ -1336,7 +1336,7 @@
    "suite": "npsp",
    "title": "Replace a pledge's open payments with an installment plan",
    "difficulty": "medium",
-   "observed_difficulty": "medium"
+   "observed_difficulty": "easy"
   },
   {
    "id": "npsp-record-gift",
@@ -1427,7 +1427,7 @@
    "suite": "packaging",
    "title": "Package metadata that depends on unpackaged org metadata",
    "difficulty": "easy",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "packaging-create-unlocked-no-namespace",
@@ -1987,7 +1987,7 @@
    "suite": "taf",
    "title": "Roll up open cases to Account across all after contexts",
    "difficulty": "hard",
-   "observed_difficulty": "hard"
+   "observed_difficulty": "medium"
   },
   {
    "id": "taf-recursion-amount-audit",
@@ -20535,6 +20535,901 @@
    "rank": 11
   },
   {
+   "config_id": "muse-wonder@medium",
+   "subset": "full",
+   "model": "Muse Wonder",
+   "model_family": "Muse-Wonder",
+   "base_model": "Muse-Wonder",
+   "quant": "Unknown",
+   "engine": "Unknown",
+   "effort": "medium",
+   "effort_tier": "medium",
+   "open_weights": false,
+   "local": false,
+   "model_id": "muse-wonder",
+   "developer": "meta",
+   "developer_name": "Meta",
+   "serving": "api",
+   "provider": "OpenRouter",
+   "hardware": null,
+   "price": null,
+   "overall": {
+    "score": 0.7744,
+    "ci_low": 0.7288,
+    "ci_high": 0.819
+   },
+   "c_at": {},
+   "usage": {
+    "1": {
+     "overall": {
+      "tasks": 272,
+      "answers": 272,
+      "failed": 0,
+      "solved": 212,
+      "unreported": 0,
+      "time_s": {
+       "median": 22.01,
+       "p90": 57.65,
+       "mean": 29.2
+      },
+      "tokens": {
+       "input": 793.2,
+       "cached_input": 113.0,
+       "reasoning": 2518.7,
+       "answer": 592.5,
+       "unsplit": 0.0,
+       "output": 3111.2
+      },
+      "cost": null,
+      "no_cost": "no_price",
+      "recorded": {
+       "cached_input": 272,
+       "served_by": 272
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 32.39,
+        "p90": 83.56,
+        "mean": 45.75
+       },
+       "tokens": {
+        "input": 648.4,
+        "cached_input": 92.8,
+        "reasoning": 3368.1,
+        "answer": 1517.5,
+        "unsplit": 0.0,
+        "output": 4885.5
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 11.74,
+        "p90": 24.93,
+        "mean": 14.44
+       },
+       "tokens": {
+        "input": 382.6,
+        "cached_input": 116.0,
+        "reasoning": 1341.2,
+        "answer": 224.3,
+        "unsplit": 0.0,
+        "output": 1565.5
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 21.79,
+        "p90": 38.06,
+        "mean": 24.69
+       },
+       "tokens": {
+        "input": 453.6,
+        "cached_input": 116.0,
+        "reasoning": 2118.9,
+        "answer": 503.6,
+        "unsplit": 0.0,
+        "output": 2622.5
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 20,
+       "unreported": 0,
+       "time_s": {
+        "median": 11.71,
+        "p90": 20.58,
+        "mean": 12.97
+       },
+       "tokens": {
+        "input": 295.1,
+        "cached_input": 116.0,
+        "reasoning": 1248.8,
+        "answer": 103.8,
+        "unsplit": 0.0,
+        "output": 1352.5
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 17.52,
+        "p90": 38.79,
+        "mean": 22.5
+       },
+       "tokens": {
+        "input": 267.3,
+        "cached_input": 109.2,
+        "reasoning": 1860.4,
+        "answer": 136.2,
+        "unsplit": 0.0,
+        "output": 1996.6
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 12,
+       "unreported": 0,
+       "time_s": {
+        "median": 45.84,
+        "p90": 70.55,
+        "mean": 45.03
+       },
+       "tokens": {
+        "input": 863.7,
+        "cached_input": 109.6,
+        "reasoning": 4416.3,
+        "answer": 1116.5,
+        "unsplit": 0.0,
+        "output": 5532.8
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 48.47,
+        "p90": 94.17,
+        "mean": 50.95
+       },
+       "tokens": {
+        "input": 783.3,
+        "cached_input": 116.0,
+        "reasoning": 4374.9,
+        "answer": 1212.0,
+        "unsplit": 0.0,
+        "output": 5586.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 19,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 23.52,
+        "p90": 41.99,
+        "mean": 25.14
+       },
+       "tokens": {
+        "input": 490.9,
+        "cached_input": 116.0,
+        "reasoning": 1947.1,
+        "answer": 669.3,
+        "unsplit": 0.0,
+        "output": 2616.3
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 19.25,
+        "p90": 43.86,
+        "mean": 26.54
+       },
+       "tokens": {
+        "input": 585.8,
+        "cached_input": 116.0,
+        "reasoning": 2249.1,
+        "answer": 580.6,
+        "unsplit": 0.0,
+        "output": 2829.6
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 16,
+       "unreported": 0,
+       "time_s": {
+        "median": 34.78,
+        "p90": 67.36,
+        "mean": 37.75
+       },
+       "tokens": {
+        "input": 522.7,
+        "cached_input": 116.0,
+        "reasoning": 3356.1,
+        "answer": 806.6,
+        "unsplit": 0.0,
+        "output": 4162.6
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 21.36,
+        "p90": 38.37,
+        "mean": 24.45
+       },
+       "tokens": {
+        "input": 411.8,
+        "cached_input": 109.6,
+        "reasoning": 2234.5,
+        "answer": 231.9,
+        "unsplit": 0.0,
+        "output": 2466.4
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 15,
+       "failed": 0,
+       "solved": 10,
+       "unreported": 0,
+       "time_s": {
+        "median": 20.91,
+        "p90": 35.62,
+        "mean": 22.21
+       },
+       "tokens": {
+        "input": 594.7,
+        "cached_input": 116.0,
+        "reasoning": 1964.1,
+        "answer": 415.9,
+        "unsplit": 0.0,
+        "output": 2379.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 7,
+       "unreported": 0,
+       "time_s": {
+        "median": 45.36,
+        "p90": 66.0,
+        "mean": 43.86
+       },
+       "tokens": {
+        "input": 373.6,
+        "cached_input": 116.0,
+        "reasoning": 3756.7,
+        "answer": 215.2,
+        "unsplit": 0.0,
+        "output": 3971.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 18,
+       "unreported": 0,
+       "time_s": {
+        "median": 12.97,
+        "p90": 26.15,
+        "mean": 13.88
+       },
+       "tokens": {
+        "input": 280.4,
+        "cached_input": 116.0,
+        "reasoning": 1185.0,
+        "answer": 125.2,
+        "unsplit": 0.0,
+        "output": 1310.2
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 20.23,
+        "p90": 42.84,
+        "mean": 27.9
+       },
+       "tokens": {
+        "input": 5008.8,
+        "cached_input": 116.0,
+        "reasoning": 2434.6,
+        "answer": 968.9,
+        "unsplit": 0.0,
+        "output": 3403.5
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      }
+     }
+    }
+   },
+   "suites": {
+    "apex": {
+     "score": 0.75,
+     "ci_low": 0.5313,
+     "ci_high": 0.8881,
+     "n": 20,
+     "tokens": {
+      "output_mean": 4885.5,
+      "output_median": 3684.5,
+      "output_p90": 11440.9,
+      "input_mean": 648.4
+     },
+     "latency_s_median": 32.39
+    },
+    "api": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 1565.5,
+      "output_median": 1424.5,
+      "output_p90": 2532.3,
+      "input_mean": 382.6
+     },
+     "latency_s_median": 11.74
+    },
+    "ci": {
+     "score": 0.7647,
+     "ci_low": 0.5274,
+     "ci_high": 0.9044,
+     "n": 17,
+     "tokens": {
+      "output_mean": 2622.5,
+      "output_median": 2276.0,
+      "output_p90": 4103.0,
+      "input_mean": 453.6
+     },
+     "latency_s_median": 21.79
+    },
+    "cli": {
+     "score": 1.0,
+     "ci_low": 0.8389,
+     "ci_high": 1.0,
+     "n": 20,
+     "tokens": {
+      "output_mean": 1352.5,
+      "output_median": 1129.5,
+      "output_p90": 2372.1,
+      "input_mean": 295.1
+     },
+     "latency_s_median": 11.71
+    },
+    "docs": {
+     "score": 0.5294,
+     "ci_low": 0.3096,
+     "ci_high": 0.7383,
+     "n": 17,
+     "tokens": {
+      "output_mean": 1996.6,
+      "output_median": 1567.0,
+      "output_p90": 3496.4,
+      "input_mean": 267.3
+     },
+     "latency_s_median": 17.52
+    },
+    "fflib": {
+     "score": 0.6667,
+     "ci_low": 0.4375,
+     "ci_high": 0.8372,
+     "n": 18,
+     "tokens": {
+      "output_mean": 5532.8,
+      "output_median": 4971.0,
+      "output_p90": 9282.7,
+      "input_mean": 863.7
+     },
+     "latency_s_median": 45.84
+    },
+    "flow": {
+     "score": 0.5,
+     "ci_low": 0.2903,
+     "ci_high": 0.7097,
+     "n": 18,
+     "tokens": {
+      "output_mean": 5586.9,
+      "output_median": 5822.0,
+      "output_p90": 8571.2,
+      "input_mean": 783.3
+     },
+     "latency_s_median": 48.47
+    },
+    "limits": {
+     "score": 0.8947,
+     "ci_low": 0.6861,
+     "ci_high": 0.9706,
+     "n": 19,
+     "tokens": {
+      "output_mean": 2616.3,
+      "output_median": 2581.0,
+      "output_p90": 4179.8,
+      "input_mean": 490.9
+     },
+     "latency_s_median": 23.52
+    },
+    "lwc": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 2829.6,
+      "output_median": 2489.5,
+      "output_p90": 3985.8,
+      "input_mean": 585.8
+     },
+     "latency_s_median": 19.25
+    },
+    "npsp": {
+     "score": 0.8889,
+     "ci_low": 0.672,
+     "ci_high": 0.969,
+     "n": 18,
+     "tokens": {
+      "output_mean": 4162.6,
+      "output_median": 3881.0,
+      "output_p90": 7305.5,
+      "input_mean": 522.7
+     },
+     "latency_s_median": 34.78
+    },
+    "packaging": {
+     "score": 0.8333,
+     "ci_low": 0.6078,
+     "ci_high": 0.9416,
+     "n": 18,
+     "tokens": {
+      "output_mean": 2466.4,
+      "output_median": 2081.5,
+      "output_p90": 4017.5,
+      "input_mean": 411.8
+     },
+     "latency_s_median": 21.36
+    },
+    "permissions": {
+     "score": 0.6667,
+     "ci_low": 0.4171,
+     "ci_high": 0.8482,
+     "n": 15,
+     "tokens": {
+      "output_mean": 2379.9,
+      "output_median": 2308.0,
+      "output_p90": 3710.6,
+      "input_mean": 594.7
+     },
+     "latency_s_median": 20.91
+    },
+    "scratch-def": {
+     "score": 0.3889,
+     "ci_low": 0.2031,
+     "ci_high": 0.6138,
+     "n": 18,
+     "tokens": {
+      "output_mean": 3971.9,
+      "output_median": 4124.0,
+      "output_p90": 5818.0,
+      "input_mean": 373.6
+     },
+     "latency_s_median": 45.36
+    },
+    "soql": {
+     "score": 0.9,
+     "ci_low": 0.699,
+     "ci_high": 0.9721,
+     "n": 20,
+     "tokens": {
+      "output_mean": 1310.2,
+      "output_median": 1168.0,
+      "output_p90": 2211.7,
+      "input_mean": 280.4
+     },
+     "latency_s_median": 12.97
+    },
+    "taf": {
+     "score": 0.9444,
+     "ci_low": 0.7424,
+     "ci_high": 0.9901,
+     "n": 18,
+     "tokens": {
+      "output_mean": 3403.5,
+      "output_median": 3189.0,
+      "output_p90": 4906.4,
+      "input_mean": 5008.8
+     },
+     "latency_s_median": 20.23
+    }
+   },
+   "per_task": {
+    "apex-api67-access-modes": 1.0,
+    "apex-batch-stateful-overdue": 1.0,
+    "apex-bulkify-legacy-trigger": 1.0,
+    "apex-callout-named-credential-retry": 0.0,
+    "apex-contact-email-domain": 1.0,
+    "apex-custom-exception-hierarchy": 1.0,
+    "apex-dynamic-soql-user-mode": 1.0,
+    "apex-invocable-contact-lookup": 1.0,
+    "apex-json-reserved-keys": 0.0,
+    "apex-mutation-tests-callout": 1.0,
+    "apex-mutation-tests-shipping": 0.0,
+    "apex-mutation-tests-won-handler": 0.0,
+    "apex-partial-success-lead-import": 1.0,
+    "apex-picklist-describe": 1.0,
+    "apex-platform-event-shipments": 1.0,
+    "apex-queueable-chain-depth": 0.0,
+    "apex-queueable-finalizer-retry": 1.0,
+    "apex-rollup-trigger-recursion": 1.0,
+    "apex-schedulable-log-purge": 1.0,
+    "apex-won-amount-by-account": 1.0,
+    "api-apexrest-namespaced-post": 1.0,
+    "api-bulk2-ingest-upsert": 1.0,
+    "api-bulk2-query-export": 1.0,
+    "api-choose-bulk-for-large-load": 1.0,
+    "api-collections-create-update": 1.0,
+    "api-composite-graph-orders": 1.0,
+    "api-composite-implicit-dependency": 0.0,
+    "api-describe-and-limits": 1.0,
+    "api-oauth-client-credentials": 1.0,
+    "api-platform-event-publish": 1.0,
+    "api-query-paging-queryall": 1.0,
+    "api-sobject-create-case": 1.0,
+    "api-sobject-update-delete": 1.0,
+    "api-tooling-coverage-query": 1.0,
+    "api-tooling-execute-anonymous": 1.0,
+    "api-uiapi-record-optional-fields": 1.0,
+    "api-upsert-external-id": 1.0,
+    "api-upsert-response-semantics": 1.0,
+    "ci-branch-routed-validation": 0.0,
+    "ci-choice-destructive-order": 1.0,
+    "ci-choice-quick-deploy-cache": 1.0,
+    "ci-choice-scratch-vs-sandbox": 1.0,
+    "ci-choice-source-tracking-ci": 1.0,
+    "ci-choice-test-level-prod": 1.0,
+    "ci-code-analyzer-gate": 0.0,
+    "ci-delta-deploy-sgd": 0.0,
+    "ci-environment-secrets-fix": 1.0,
+    "ci-lwc-jest-eslint": 1.0,
+    "ci-nightly-apex-tests": 1.0,
+    "ci-pr-validate-jwt": 1.0,
+    "ci-quick-deploy-on-merge": 1.0,
+    "ci-review-org-script": 1.0,
+    "ci-scratch-org-per-pr": 1.0,
+    "ci-uat-deploy-sfdx-url": 1.0,
+    "ci-unlocked-package-release": 0.0,
+    "cli-apex-run-script-file": 1.0,
+    "cli-apex-tail-log": 1.0,
+    "cli-apex-tests-junit-coverage": 1.0,
+    "cli-assign-permset-user": 1.0,
+    "cli-bulk-export-csv": 1.0,
+    "cli-bulk-upsert-external-id": 1.0,
+    "cli-delete-scratch-org": 1.0,
+    "cli-deploy-apex-class": 1.0,
+    "cli-dev-machine-config": 1.0,
+    "cli-jwt-login-and-deploy": 1.0,
+    "cli-manifest-from-org": 1.0,
+    "cli-org-open-setup-page": 1.0,
+    "cli-package-install-ci": 1.0,
+    "cli-post-destructive-deploy": 1.0,
+    "cli-retrieve-field-and-flexipage": 1.0,
+    "cli-sandbox-create-async": 1.0,
+    "cli-scratch-org-create": 1.0,
+    "cli-tree-export-import-seed": 1.0,
+    "cli-unlocked-package-release": 1.0,
+    "cli-validate-then-quick-deploy": 1.0,
+    "docs-api-concurrent-long-running": 0.0,
+    "docs-api-daily-allocation-calc": 0.0,
+    "docs-batch-querylocator-scope-max": 1.0,
+    "docs-big-object-index-text-length": 1.0,
+    "docs-bulk2-ingest-upload-size": 0.0,
+    "docs-callout-async-response-size": 1.0,
+    "docs-callout-default-timeout": 1.0,
+    "docs-cross-namespace-soql-limit": 1.0,
+    "docs-long-running-apex-concurrency": 0.0,
+    "docs-lws-distortions": 0.0,
+    "docs-lws-enable-setting": 0.0,
+    "docs-order-exec-after-trigger-vs-flow": 1.0,
+    "docs-pe-delivery-allocation-calc": 0.0,
+    "docs-pe-trigger-batch-size": 1.0,
+    "docs-queueable-async-enqueue-limit": 1.0,
+    "docs-rest-limit-info-header": 0.0,
+    "docs-scratch-org-max-duration": 1.0,
+    "fflib-apexmocks-argument-captor": 0.0,
+    "fflib-apexmocks-exception-paths": 0.0,
+    "fflib-apexmocks-mock-domain": 0.0,
+    "fflib-apexmocks-stub-selector": 1.0,
+    "fflib-apexmocks-verify-uow": 1.0,
+    "fflib-application-factories": 1.0,
+    "fflib-domain-calls-service": 1.0,
+    "fflib-domain-opportunity-defaults": 1.0,
+    "fflib-domain-sobjects-structure": 0.0,
+    "fflib-domain-unit-test-mock-db": 1.0,
+    "fflib-domain-validation": 0.0,
+    "fflib-selector-contacts": 1.0,
+    "fflib-selector-query-factory": 1.0,
+    "fflib-selector-user-mode-fieldset": 1.0,
+    "fflib-service-case-escalation": 1.0,
+    "fflib-service-facade": 1.0,
+    "fflib-uow-account-contacts": 1.0,
+    "fflib-uow-platform-events": 0.0,
+    "flow-account-credit-check-action": 1.0,
+    "flow-account-customer-welcome-task": 0.0,
+    "flow-account-discount-cascade": 0.0,
+    "flow-account-onboarding-subflow": 0.0,
+    "flow-case-breakdown-escalation": 0.0,
+    "flow-case-close-open-tasks": 1.0,
+    "flow-case-sla-due": 1.0,
+    "flow-choice-close-date-reminder": 1.0,
+    "flow-choice-guide-statements": 0.0,
+    "flow-choice-same-record-update": 1.0,
+    "flow-choice-undelete-restore": 1.0,
+    "flow-fix-account-address-sync": 1.0,
+    "flow-opportunity-amount-swing": 0.0,
+    "flow-opportunity-close-reminder-scheduled": 0.0,
+    "flow-opportunity-won-project": 0.0,
+    "flow-order-shipment-fault-path": 0.0,
+    "flow-shipping-quote-autolaunched": 1.0,
+    "flow-web-signup-contact-match": 1.0,
+    "limits-async-vs-sync-limits": 1.0,
+    "limits-control-contact-phone-partial-update": 1.0,
+    "limits-control-pipeline-query-per-stage": 1.0,
+    "limits-control-soql-for-loop-stale-deals": 0.0,
+    "limits-count-cascading-trigger-queries": 1.0,
+    "limits-count-queries-helper-per-lead": 1.0,
+    "limits-first-limit-exceeded": 1.0,
+    "limits-pushback-case-priority-query-in-loop": 1.0,
+    "limits-pushback-erp-callout-per-account": 1.0,
+    "limits-pushback-eventbus-publish-per-record": 1.0,
+    "limits-pushback-followup-tasks-dml-per-record": 1.0,
+    "limits-pushback-future-per-opportunity": 1.0,
+    "limits-pushback-helper-query-per-line-item": 1.0,
+    "limits-pushback-nested-loop-lead-matching": 1.0,
+    "limits-pushback-queueable-per-closed-case": 1.0,
+    "limits-pushback-send-email-per-opportunity": 0.0,
+    "limits-pushback-unfiltered-contact-query": 1.0,
+    "limits-spot-risky-trigger-snippets": 1.0,
+    "limits-trigger-chunks-apex-vs-data-loader": 1.0,
+    "lwc-account-header-wire": 1.0,
+    "lwc-account-quick-links-navigation": 0.0,
+    "lwc-case-status-badge": 1.0,
+    "lwc-collapsible-section-slots": 1.0,
+    "lwc-contact-list-sorted": 1.0,
+    "lwc-contact-search-debounce": 1.0,
+    "lwc-contacts-datatable-inline-save": 1.0,
+    "lwc-favorite-toggle-labels": 1.0,
+    "lwc-lms-account-panel": 1.0,
+    "lwc-open-opportunities-imperative-apex": 1.0,
+    "lwc-opportunity-row-actions": 1.0,
+    "lwc-order-lines-child-api": 1.0,
+    "lwc-pipeline-card-app-builder": 1.0,
+    "lwc-product-tile-select-event": 1.0,
+    "lwc-queue-monitor-polling-lifecycle": 1.0,
+    "lwc-registration-form-validation": 1.0,
+    "lwc-status-listbox-keyboard": 1.0,
+    "lwc-task-checklist-reactivity-fix": 1.0,
+    "npsp-affiliation-primary-employer": 1.0,
+    "npsp-bdi-gift-import": 1.0,
+    "npsp-crlp-promote-to-production": 1.0,
+    "npsp-enhanced-rd-monthly": 0.0,
+    "npsp-gau-percent-allocations": 1.0,
+    "npsp-household-create-members": 1.0,
+    "npsp-household-formal-greeting": 0.0,
+    "npsp-namespace-objects": 1.0,
+    "npsp-partial-soft-credits": 1.0,
+    "npsp-payment-installments": 1.0,
+    "npsp-record-gift": 1.0,
+    "npsp-relationship-parent-child": 1.0,
+    "npsp-soql-gau-totals": 1.0,
+    "npsp-soql-unpaid-payments-due": 1.0,
+    "npsp-tdtm-major-gift-handler": 1.0,
+    "npsp-tdtm-test-registration": 1.0,
+    "npsp-trigger-handler-exclude-user": 1.0,
+    "npsp-vs-nonprofit-cloud": 1.0,
+    "packaging-1gp-managed-released-upload": 1.0,
+    "packaging-1gp-vs-2gp": 1.0,
+    "packaging-abandon-ancestor": 1.0,
+    "packaging-ancestry-upgrade-paths": 1.0,
+    "packaging-create-org-dependent": 1.0,
+    "packaging-create-unlocked-no-namespace": 1.0,
+    "packaging-dependency-released-build": 1.0,
+    "packaging-lock-promoted-version": 1.0,
+    "packaging-managed-test-setup": 1.0,
+    "packaging-migrate-metadata-between-packages": 1.0,
+    "packaging-package-id-prefixes": 1.0,
+    "packaging-promote-and-install": 1.0,
+    "packaging-push-upgrade-schedule": 0.0,
+    "packaging-removed-components-upgrade": 0.0,
+    "packaging-skip-validation-consequences": 1.0,
+    "packaging-transitive-dependencies": 0.0,
+    "packaging-unlocked-project-config": 1.0,
+    "packaging-version-create-release-candidate": 1.0,
+    "permissions-bulk-editable-ids": 1.0,
+    "permissions-custom-permission-apex": 1.0,
+    "permissions-effective-access-muting": 1.0,
+    "permissions-fix-over-permissive": 1.0,
+    "permissions-integration-api-access": 1.0,
+    "permissions-profile-only-settings": 0.0,
+    "permissions-psg-muting": 0.0,
+    "permissions-readonly-claims-viewer": 1.0,
+    "permissions-required-field-fls": 0.0,
+    "permissions-session-based-elevation": 1.0,
+    "permissions-sharing-vs-object-perms": 1.0,
+    "permissions-strip-inaccessible-v67": 0.0,
+    "permissions-tab-app-visibility": 1.0,
+    "permissions-view-all-not-modify-all": 1.0,
+    "permissions-with-sharing-api-versions": 0.0,
+    "scratch-def-australian-locale": 0.0,
+    "scratch-def-einstein-generative-ai": 0.0,
+    "scratch-def-experience-cloud-guest-site": 0.0,
+    "scratch-def-field-service-multicurrency": 0.0,
+    "scratch-def-fix-broken-definition": 0.0,
+    "scratch-def-fix-org-preferences": 1.0,
+    "scratch-def-multicurrency-germany": 0.0,
+    "scratch-def-opportunity-teams": 0.0,
+    "scratch-def-package-object-settings": 1.0,
+    "scratch-def-partner-preview-release": 0.0,
+    "scratch-def-person-accounts": 1.0,
+    "scratch-def-professional-edition-api": 1.0,
+    "scratch-def-sales-forecasting": 0.0,
+    "scratch-def-service-knowledge-omni": 0.0,
+    "scratch-def-sfdx-project-2gp-monorepo": 1.0,
+    "scratch-def-sfdx-project-sandbox-team": 1.0,
+    "scratch-def-shield-security": 0.0,
+    "scratch-def-state-country-picklists": 1.0,
+    "soql-accounts-missing-country-or-industry": 1.0,
+    "soql-accounts-open-high-cases": 1.0,
+    "soql-banking-insurance-de-uk": 1.0,
+    "soql-customers-without-2025-wins": 1.0,
+    "soql-energy-wins-2025": 1.0,
+    "soql-fy2026-bookings-by-quarter": 1.0,
+    "soql-german-customers-open-shipments": 1.0,
+    "soql-globex-group-contacts": 1.0,
+    "soql-hardware-without-services-opps": 1.0,
+    "soql-healthcare-manager-contacts": 1.0,
+    "soql-in-transit-shipments": 1.0,
+    "soql-march-2025-activity-typeof": 1.0,
+    "soql-open-german-web-leads-count": 0.0,
+    "soql-open-shipments-handling": 1.0,
+    "soql-open-tasks-on-opportunities": 1.0,
+    "soql-parents-of-german-accounts": 0.0,
+    "soql-service-product-codes": 1.0,
+    "soql-summit-responders": 1.0,
+    "soql-top-customers-by-revenue": 1.0,
+    "soql-won-2025-by-industry": 1.0,
+    "taf-after-insert-onboarding-task": 1.0,
+    "taf-bypass-action-in-import": 1.0,
+    "taf-bypass-object-ownership-service": 1.0,
+    "taf-bypass-permission-integration": 1.0,
+    "taf-disable-action-hotfix": 1.0,
+    "taf-dml-finalizer-erp-sync": 1.0,
+    "taf-dml-less-action-test": 0.0,
+    "taf-duplicate-email-two-contexts": 1.0,
+    "taf-enable-opportunity": 1.0,
+    "taf-entry-criteria-formula": 1.0,
+    "taf-flow-action-authoring": 1.0,
+    "taf-lead-normalize-before-insert": 1.0,
+    "taf-migrate-legacy-case-trigger": 1.0,
+    "taf-open-case-rollup": 1.0,
+    "taf-recursion-amount-audit": 1.0,
+    "taf-register-flow-action": 1.0,
+    "taf-required-permission-pilot": 1.0,
+    "taf-shared-query-singleton": 1.0
+   },
+   "tokens": {
+    "output_mean": 3111.2,
+    "output_median": 2382.5,
+    "output_p90": 5929.8,
+    "input_mean": 793.2,
+    "reasoning_mean": 2518.7
+   },
+   "outcomes": {
+    "no_answer": 0,
+    "truncated": 0,
+    "malformed": 0,
+    "retried": 0
+   },
+   "no_answer_rate": 0.0,
+   "no_answer_tasks": [],
+   "latency_s_mean": 29.2,
+   "latency_s_median": 22.01,
+   "concurrency": [
+    6
+   ],
+   "samples": 272,
+   "pending": 0,
+   "date": "2026-10-20",
+   "complete": true,
+   "runs": [
+    "20261020T014658Z_muse-wonder@medium"
+   ],
+   "progress": {
+    "tasks_graded": 272,
+    "tasks_total": 272,
+    "suites_complete": 15,
+    "suites_total": 15
+   },
+   "legacy": 0,
+   "stale": {},
+   "rank": 12
+  },
+  {
    "config_id": "claude-sonnet-5.5@low",
    "subset": "full",
    "model": "Claude Sonnet 5.5",
@@ -22387,7 +23282,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 12
+   "rank": 13
   },
   {
    "config_id": "gpt-5.6-sol@medium",
@@ -24245,7 +25140,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 13
+   "rank": 14
   },
   {
    "config_id": "claude-opus-4.8@high",
@@ -26099,7 +26994,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 14
+   "rank": 15
   },
   {
    "config_id": "gemini-3.8-flash@medium",
@@ -27960,7 +28855,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 15
+   "rank": 16
   },
   {
    "config_id": "claude-fable-5.1@high",
@@ -29841,7 +30736,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 16
+   "rank": 17
   },
   {
    "config_id": "claude-opus-4.8@medium",
@@ -31695,7 +32590,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 17
+   "rank": 18
   },
   {
    "config_id": "claude-sonnet-5.5@medium",
@@ -33550,7 +34445,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 18
+   "rank": 19
   },
   {
    "config_id": "claude-opus-4.8@low",
@@ -35404,7 +36299,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 19
+   "rank": 20
   },
   {
    "config_id": "muse-wonder@low",
@@ -36299,7 +37194,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 20
+   "rank": 21
   },
   {
    "config_id": "claude-opus-4.8@off",
@@ -38153,7 +39048,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 21
+   "rank": 22
   },
   {
    "config_id": "claude-sonnet-5@high",
@@ -40007,7 +40902,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 22
+   "rank": 23
   },
   {
    "config_id": "claude-haiku-5.5@medium",
@@ -41862,7 +42757,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 23
+   "rank": 24
   },
   {
    "config_id": "gpt-6-luna@medium",
@@ -43720,7 +44615,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 24
+   "rank": 25
   },
   {
    "config_id": "claude-haiku-5.5@high",
@@ -45577,7 +46472,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 25
+   "rank": 26
   },
   {
    "config_id": "deepseek-v4.1-flash-deepinfra-fp8@high",
@@ -47434,7 +48329,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 26
+   "rank": 27
   },
   {
    "config_id": "claude-sonnet-5@medium",
@@ -49288,7 +50183,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 27
+   "rank": 28
   },
   {
    "config_id": "claude-haiku-5.5@low",
@@ -51143,7 +52038,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 28
+   "rank": 29
   },
   {
    "config_id": "deepseek-v4.1-flash-1017-native@high",
@@ -52635,7 +53530,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 29
+   "rank": 30
   },
   {
    "config_id": "deepseek-v4.1-flash-exl3-2.9bpw@high",
@@ -54135,7 +55030,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 30
+   "rank": 31
   },
   {
    "config_id": "claude-sonnet-5@off",
@@ -55989,7 +56884,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 31
+   "rank": 32
   },
   {
    "config_id": "deepseek-v4.1-flash-native@high",
@@ -57494,7 +58389,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 32
+   "rank": 33
   },
   {
    "config_id": "claude-sonnet-5@low",
@@ -59348,7 +60243,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 33
+   "rank": 34
   },
   {
    "config_id": "mimo-v2.6-pro-xiaomi-fp8@on",
@@ -61261,7 +62156,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 34
+   "rank": 35
   },
   {
    "config_id": "deepseek-v4-pro-novita-fp8@high",
@@ -63136,7 +64031,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 35
+   "rank": 36
   },
   {
    "config_id": "inkling-small-deepinfra-fp8@high",
@@ -64993,7 +65888,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 36
+   "rank": 37
   },
   {
    "config_id": "glm-5.3-flash-zai-fp8@high",
@@ -66854,7 +67749,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 37
+   "rank": 38
   },
   {
    "config_id": "glm-5.3-flash-exl3-4bpw@high",
@@ -68346,7 +69241,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 38
+   "rank": 39
   },
   {
    "config_id": "glm-5.3-zai-fp8@low",
@@ -70203,7 +71098,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 39
+   "rank": 40
   },
   {
    "config_id": "qwen3.8-flash-next-nvfp4@medium",
@@ -71692,7 +72587,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 40
+   "rank": 41
   },
   {
    "config_id": "mistral-large-4@high",
@@ -73626,7 +74521,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 41
+   "rank": 42
   },
   {
    "config_id": "nemotron-3-ultra-nvidia@on",
@@ -75110,7 +76005,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 42
+   "rank": 43
   },
   {
    "config_id": "claude-haiku-4.5@on",
@@ -76965,7 +77860,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 43
+   "rank": 44
   },
   {
    "config_id": "glm-5.3-flash-exl3-4bpw-tensorfold@high",
@@ -78455,7 +79350,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 44
+   "rank": 45
   },
   {
    "config_id": "qwen3.8-flash-next-mlx-4bit@medium",
@@ -79981,7 +80876,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 45
+   "rank": 46
   },
   {
    "config_id": "deepseek-v4-flash-vision-nvfp4@high",
@@ -81514,7 +82409,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 46
+   "rank": 47
   },
   {
    "config_id": "mimo-v2.6-flash-fp8@on",
@@ -83067,7 +83962,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 47
+   "rank": 48
   },
   {
    "config_id": "mimo-v2.6-flash-xiaomi-fp8@on",
@@ -84987,7 +85882,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 48
+   "rank": 49
   },
   {
    "config_id": "glm-5.3-flash-exl3-4bpw@low",
@@ -86471,7 +87366,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 49
+   "rank": 50
   },
   {
    "config_id": "gemma-4-31b-qat-w4a16@on",
@@ -87954,7 +88849,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 50
+   "rank": 51
   },
   {
    "config_id": "qwen3.8-flash-next-mlx-4bit-tensorfold@medium",
@@ -89479,7 +90374,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 51
+   "rank": 52
   },
   {
    "config_id": "glm-5.3-flash-exl3-4bpw@off",
@@ -90963,7 +91858,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 52
+   "rank": 53
   },
   {
    "config_id": "nemotron-3.5-super-vl-nvfp4-tensorfold@on",
@@ -91871,7 +92766,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 53
+   "rank": 54
   },
   {
    "config_id": "muse-glimmer-30b-nvfp4@high",
@@ -93354,7 +94249,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 54
+   "rank": 55
   },
   {
    "config_id": "gemma-4-26b-a4b-nvfp4@on",
@@ -94837,7 +95732,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 55
+   "rank": 56
   },
   {
    "config_id": "claude-haiku-4.5@off",
@@ -96692,7 +97587,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 56
+   "rank": 57
   },
   {
    "config_id": "qwen3.8-flash-next-int4ar-tensorfold@medium",
@@ -98247,7 +99142,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 57
+   "rank": 58
   },
   {
    "config_id": "qwen3.8-flash-next-int4ar-tensorfold-single@medium",
@@ -99796,7 +100691,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 58
+   "rank": 59
   },
   {
    "config_id": "qwen3.8-27b-mlx-8bit@low",
@@ -101279,7 +102174,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 59
+   "rank": 60
   },
   {
    "config_id": "qwen3.8-27b-mlx-4bit@low",
@@ -102763,7 +103658,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 60
+   "rank": 61
   },
   {
    "config_id": "qwen3.8-flash-next-alibaba@on",
@@ -104714,7 +105609,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 61
+   "rank": 62
   },
   {
    "config_id": "nemotron-3-super-nvidia@on",
@@ -105611,7 +106506,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 62
+   "rank": 63
   },
   {
    "config_id": "laguna-s-2.1-poolside-fp4@on",
@@ -107105,7 +108000,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 63
+   "rank": 64
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@medium",
@@ -108607,7 +109502,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 64
+   "rank": 65
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@low",
@@ -110098,7 +110993,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 65
+   "rank": 66
   },
   {
    "config_id": "ling-3.0-flash-deepinfra-bf16@on",
@@ -111961,7 +112856,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 66
+   "rank": 67
   },
   {
    "config_id": "qwen3.8-27b-splash-4bit@low",
@@ -113444,7 +114339,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 67
+   "rank": 68
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@xhigh",
@@ -115005,7 +115900,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 68
+   "rank": 69
   },
   {
    "config_id": "qwen3.6-35b-a3b-nvfp4@on",
@@ -116495,7 +117390,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 69
+   "rank": 70
   },
   {
    "config_id": "minicpm-v-4.7-35b-a3b-bf16@on",
@@ -117981,7 +118876,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 70
+   "rank": 71
   },
   {
    "config_id": "minicpm-v-4.7-35b-a3b-int4@on",
@@ -119471,7 +120366,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 71
+   "rank": 72
   },
   {
    "config_id": "nemotron-3.5-bolt-24gb-tensorfold@on",
@@ -121001,7 +121896,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 72
+   "rank": 73
   },
   {
    "config_id": "nemotron-3.5-lightning-nvidia-nvfp4@on",
@@ -122485,7 +123380,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 73
+   "rank": 74
   },
   {
    "config_id": "claude-sonnet-5.5@medium",
