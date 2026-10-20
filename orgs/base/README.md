@@ -38,10 +38,32 @@ A run takes about a minute. Record Ids change on every reset; no task depends on
 | `Shipment__c` (custom object) | Name `Shipment Number` (text), activities enabled. Lookups `Account__c` → Account and `Opportunity__c` → Opportunity, both with child relationship name `Shipments` (`Shipments__r`). `Status__c` picklist: Planned, In Transit, Delivered, Returned. `Carrier__c` picklist: DHL, FedEx, UPS, Maersk, DB Schenker. `Handling__c` multi-select picklist: Fragile, Refrigerated, Hazardous, Oversized, Signature Required. `Freight_Cost__c` currency(16,2), `Weight_Kg__c` number(10,2), `Ship_Date__c` and `Delivered_Date__c` dates, `Tracking_Number__c` text(40), `Destination_Country__c` text(80). No required fields, no validation rules, no automation. |
 | `Product2Family` standard value set | Hardware, Software, Services |
 | `Company.settings` (fiscal year) | Standard fiscal year starting in **April**, named by the **ending** month (FY2026 = 1 Apr 2025 – 31 Mar 2026). Also set in the scratch definition so new orgs have it before any data exists. |
-| `Forcebench_Base_Data` permission set | CRUD, View/Modify All and field access on `Shipment__c` |
+| `Forcebench_Base_Data` permission set | CRUD, View/Modify All and field access on `Shipment__c` and the field service objects below |
 
 Other suites that deploy check-only to base orgs should not ship their own `Shipment__c`
 metadata; pick another object name.
+
+## Field service study schema
+
+The org the [MCP study](../../docs/mcp-study.md)'s org-context tasks (`suites/org-context`,
+status `study`) are about: what an agent has to find in the org, because the prompts describe it
+in business terms only. The same `force-app` is deployed to the Developer Edition org Clientell's
+MCP server reads. Its automation runs on its own objects only, so no other suite's tests see it.
+Its names and values are deliberately not the obvious ones (`Stage__c`, not `Status__c`; SLA hours
+4, 10, 36 and 120, not 4, 8, 24 and 72).
+
+| Component | Details |
+|---|---|
+| `Service_Site__c` | Name `Site Name`. `Account__c` → Account (`Service_Sites`), `Site_Code__c` (unique, external id), `Region__c` (North, South, East, West, Central), `Hazard_Level__c` (None, Low, High), `Active__c` |
+| `Technician__c` | Name `Technician Name`. `Employee_Number__c` (unique, external id), `Home_Region__c`, `Certification__c` (Apprentice, Certified, Senior), `Hourly_Rate__c` (currency), `Contractor__c` |
+| `Field_Job__c` | Auto-number `JOB-{00000}`. `Site__c` → Service_Site__c (`Field_Jobs`), `Stage__c` (Requested, Scheduled, In Progress, On Hold, Completed, Cancelled), `Priority_Band__c` (P1 most urgent to P4), `Scheduled_Start__c`, `Completed_On__c`, `Lead_Technician__c` → Technician__c (`Led_Jobs`), `Customer_Signoff__c`, `Signoff_Name__c`, `Labour_Minutes__c`, `Billable__c`, `SLA_Breached__c`, `Job_Region__c`, `Parts_Total__c` (roll-up: sum of the parts' `Line_Total__c`) |
+| `Job_Part__c` | Auto-number `PRT-{00000}`, master-detail `Field_Job__c` (`Job_Parts`). `Part_Number__c`, `Quantity__c`, `Unit_Cost__c`, `Line_Total__c` |
+| `SLA_Policy__mdt` | Custom metadata: `Band__c`, `Resolution_Hours__c`; records P1 4, P2 10, P3 36, P4 120 hours |
+| Flow `Job_Part_Line_Total` | Before save, part lines (create and update): `Line_Total__c` = quantity × unit cost |
+| Flow `Field_Job_Completion` | Before save, jobs (update, when the stage becomes Completed): stamps `Completed_On__c` unless set |
+| Trigger `FieldJobTrigger`, class `FieldJobTriggerHandler` | Before insert and update of jobs: copies the site's region to `Job_Region__c`; refuses to reopen a completed job; on completion sets `SLA_Breached__c` from the SLA policy (it runs after the completion flow). Tested by `FieldJobTriggerHandlerTest` |
+| Validation rules | `Field_Job__c.Signoff_Before_Completion` (a completed job needs the sign-off and the signer's name); `Job_Part__c.Quantity_Above_Zero` |
+| Permission sets | `Field_Dispatcher` (plans jobs; reads sites and technicians; billable read-only), `Field_Technician` (works jobs and records parts; no costs or rates), `Field_Billing` (marks jobs billable; reads costs and rates) |
 
 ## Dataset (`data/seed.py`)
 

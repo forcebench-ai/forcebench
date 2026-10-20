@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Signoff_Before_Completion</fullName>
+    <active>true</active>
+    <description>A job is completed only with the customer's sign-off and the name of who signed.</description>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Stage__c, &apos;Completed&apos;),
+    OR(NOT(Customer_Signoff__c), ISBLANK(Signoff_Name__c))
+)</errorConditionFormula>
+    <errorMessage>A job can&apos;t be completed without the customer&apos;s sign-off and the name of who signed.</errorMessage>
+</ValidationRule>
