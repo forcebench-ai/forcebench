@@ -1,0 +1,10 @@
+id: org-context
+name: Org context
+description: >-
+  Work that depends on what is already in the org: a field service org's objects, fields,
+  automation, permission sets and custom metadata (orgs/base, the field service study schema),
+  which the prompts describe in business terms only. Apex and metadata answers are deployed
+  check-only to the base grader org, which holds that schema, and must pass hidden Apex tests;
+  questions about the org are graded deterministically. A study suite (status: study) for the MCP
+  study (docs/mcp-study.md): run only with --subset study, never on a leaderboard.
+grading: hybrid
