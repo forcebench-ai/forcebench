@@ -49,6 +49,41 @@ task's suite (`preload`, one skill per suite, chosen by subject), in exactly the
 skill tool returns them. opencode tells the model that a skill given this way is already loaded.
 Such runs are their own entry: `opencode 2.0.21 + sf-skills 1.58.0, preloaded`.
 
+## MCP servers
+
+A run can also give opencode a remote **MCP server**'s tools (`--mcp <name>`). A server is a
+manifest in `docker/agent/mcp/`: its URL, the `.env` variable that holds its token, the tools the
+agent gets, and one sentence for the note (in place of "There is no network access and no
+Salesforce org."). The one server today is **Clientell**
+([setup](https://www.getclientell.com/salesforce-mcp/docs)), `FORCEBENCH_CLIENTELL_TOKEN`, for the
+[MCP study](mcp-study.md).
+
+- **Only through the proxy.** opencode reaches the server at the proxy's `/mcp`; the proxy adds
+  the token, so the agent's container never has it, and passes MCP's Streamable HTTP both ways.
+- **Only the manifest's tools.** The proxy cuts the server's tool list to them and answers a call
+  to any other as an unknown tool, without forwarding it. opencode approves every call
+  unattended, so tools that change the account (billing, deleting data, connecting other
+  systems) are never offered.
+- **As tools of their own.** opencode 2 gives MCP tools to the model through its Code Mode by
+  default (the model writes JavaScript that calls them through one `execute` tool). The
+  server's tools are given as ordinary tools instead (`codemode: false`), named
+  `<server>_<tool>`, as most MCP clients give them. A call waits up to three minutes.
+- **With its instructions.** opencode puts the instructions the server sends when it connects
+  in the system prompt, as any MCP client may. They are the server's own and passed unchanged,
+  even where they name tools the run does not give.
+- **Connected before the session starts.** opencode fixes a session's tools when it starts and
+  does not wait for MCP servers, so a session started at once never gets them. With a server, the
+  agent's container starts opencode's server first, waits until it reports the MCP server
+  connected (at most a minute), then runs the task on it. A session whose first model request
+  lacks the server's tools is an infrastructure failure, pending and re-run on `--resume`, not a
+  session without them.
+- **Recorded.** `run.json` records the server, its URL and the tools given, never the token, and
+  the run is never resumed with another server or none; it is shown as its own entry:
+  `opencode 2.0.21 + Clientell MCP`. A hosted server can't be pinned the way a skill pack is, so
+  each session's raw records keep what the server said it was (its name and version), every tool
+  it offered, and every exchange (`raw/agent/<task>#<sample>/mcp.jsonl`: method, tool, arguments,
+  status, size, latency), with totals in its `summary.json`.
+
 ## Isolation
 
 Each task runs in two throwaway containers on its own internal Docker network:
@@ -58,8 +93,9 @@ Each task runs in two throwaway containers on its own internal Docker network:
   host it can reach is the proxy. There is no Salesforce CLI and no credential in the container,
   so it cannot touch any org.
 - **The model proxy** (`src/forcebench/agent/proxy.py`) is the only member also on the default
-  network. It forwards chat completions to the model server and nothing else. The server's key
-  lives only in the proxy's environment. A harness that speaks only Anthropic's Messages API
+  network. It forwards chat completions to the model server and, in a run with an MCP server,
+  MCP requests to that one server, and nothing else. The keys live only in the proxy's
+  environment. A harness that speaks only Anthropic's Messages API
   (Claude Code) is translated to and from chat completions in the proxy, so it reaches the model
   with the same request as the others.
 
