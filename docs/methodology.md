@@ -99,6 +99,9 @@ against another.
   inspection, not published.
   The budget is tokens, never wall-clock time: a slow machine must not cost a model points, so
   a request that times out is treated like an endpoint failure and re-run, not scored.
+  One entry is the exception and says so in its name: DeepSeek V4.1 Flash 1017 (64K budget)
+  gets 65,536 tokens at max effort, to show what a larger budget buys. Its configuration records
+  the budget, and every run records it with its request fields.
 - **No hidden retries.** Responses are streamed, and the SDK's and pydantic-ai's own retries are
   off: a proxy or SDK that silently restarts slow requests would keep only the answers that
   happened to finish quickly, biasing slow configurations towards short answers. A run may go
