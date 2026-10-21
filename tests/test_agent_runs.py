@@ -87,6 +87,42 @@ def test_a_run_is_never_resumed_with_another_agent_or_none(agent_runs, make_task
     assert calls == ["test-task"]
 
 
+def _with_the_old_hour(run_dir, finish: str) -> None:
+    """Make a run look started when agent sessions had an hour, its answer ending with `finish`."""
+    meta = json.loads((run_dir / "run.json").read_text())
+    meta["agent"] = {k: v for k, v in meta["agent"].items() if k != "guard_s"}
+    meta["agent"]["budget"]["timeout_s"] = 3600
+    (run_dir / "run.json").write_text(json.dumps(meta))
+    raw = run_dir / "raw" / "generations.jsonl"
+    rec = json.loads(raw.read_text().splitlines()[-1])
+    rec["generation"].update(finish_reason=finish, latency_s=3600.4 if finish != "stop" else 60)
+    raw.write_text(json.dumps(rec) + "\n")
+
+
+def test_a_run_from_when_sessions_had_an_hour_resumes_once_its_cut_answers_are_marked(
+    agent_runs, make_task
+):
+    reg, _, _, calls = agent_runs
+    task = make_task({"format": "text"})
+    run_dir = _generate(reg, [task], agent=Opencode())
+    _with_the_old_hour(run_dir, "timeout (3600s)")
+    with pytest.raises(ResumeError, match="cut short by the hour"):
+        _generate(reg, [task], agent=Opencode(), run_dir=run_dir)
+    runner.invalidate(run_dir, lambda recs: [r["key"] for r in recs], "the old one-hour limit")
+    _generate(reg, [task], agent=Opencode(), run_dir=run_dir)
+    assert calls == ["test-task", "test-task"], "the cut answer is answered again, without the hour"
+    assert json.loads((run_dir / "run.json").read_text())["agent"]["guard_s"] == 12 * 3600
+
+
+def test_a_run_from_when_sessions_had_an_hour_and_none_ran_out_resumes(agent_runs, make_task):
+    reg, _, _, calls = agent_runs
+    task = make_task({"format": "text"})
+    run_dir = _generate(reg, [task], agent=Opencode())
+    _with_the_old_hour(run_dir, "stop")
+    _generate(reg, [task], agent=Opencode(), run_dir=run_dir)
+    assert calls == ["test-task"], "nothing to answer again"
+
+
 def test_agent_runs_use_public_tasks_only(agent_runs, make_task):
     reg, *_ = agent_runs
     with pytest.raises(ValueError, match="public tasks only"):

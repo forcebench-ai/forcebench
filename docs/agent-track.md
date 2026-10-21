@@ -130,11 +130,16 @@ wrote it there: agents often save their work instead of printing it.
 |---|---|---|
 | Model requests | 60 | the proxy refuses further requests; the session ends |
 | Output tokens (all requests) | 262,144 | the same |
-| Wall time | 60 minutes | the agent's container is stopped |
-
 An answer cut short by a budget is scored like any other: graded if the final message has an
 answer, otherwise a failure. A task whose agent never reached the model (a server or harness
 failure) is pending and re-run on `--resume`, like an endpoint failure in single-turn runs.
+
+Time is not budgeted, as in single-turn runs ([methodology](methodology.md)): a slower server
+must not cost a model its answer. A session still running after 12 hours is stopped as stalled
+and is pending like a server failure; within its budget a model never needs that long (262,144
+tokens at 10 tokens a second take about 7 hours). Runs started before 2026-10-21 gave each
+session an hour and scored a session stopped by it as a failure; such a run resumes only once
+those answers are marked for new ones (`forcebench invalidate <run> --min-latency 3600`).
 
 ## What is recorded
 
