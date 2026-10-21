@@ -34,6 +34,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, ClassVar
 
+import anyio
+
 from forcebench.agent.mcp import McpServer, mcp_usage, tools_in_request
 from forcebench.agent.org_source import OrgSource
 from forcebench.agent.skills import SkillPack, skill_block
@@ -820,10 +822,13 @@ class AgentClient:
             )
         finally:
             # The guard kills `docker run`, not its container: stop the container first, or it
-            # runs on and holds the network, which can then never be removed.
-            await _run("docker", "rm", "-f", agent)
-            await _run("docker", "rm", "-f", proxy)
-            await _run("docker", "network", "rm", net)
+            # runs on and holds the network, which can then never be removed. Shielded: an
+            # interrupted run (Ctrl-C) cancels every await in its cases' task group, and the
+            # session would run on, still calling the model.
+            with anyio.CancelScope(shield=True):
+                await _run("docker", "rm", "-f", agent)
+                await _run("docker", "rm", "-f", proxy)
+                await _run("docker", "network", "rm", net)
             shutil.rmtree(root, ignore_errors=True)
 
     def _mcp_usage(self, log: Path) -> dict[str, Any]:

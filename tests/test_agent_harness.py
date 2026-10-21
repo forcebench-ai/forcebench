@@ -7,6 +7,7 @@ Containers are not started here.
 import asyncio
 import json
 
+import anyio
 import pytest
 
 from forcebench.agent import harness
@@ -159,6 +160,40 @@ def test_a_stalled_session_is_pending_and_its_container_stops_before_its_network
     ]
     assert cleanup[0] == ["docker", "rm", "-f", name], "killing `docker run` leaves its container"
     assert cleanup[-1][:3] == ["docker", "network", "rm"]
+
+
+def test_an_interrupted_run_still_removes_its_sessions(make_task, tmp_path, monkeypatch):
+    finished: list[list[str]] = []
+
+    async def fake_run(*args: str, stdin: bytes | None = None) -> tuple[int, bytes, bytes]:
+        if args[:2] == ("docker", "run") and "--rm" in args:
+            await asyncio.sleep(5)  # the agent, still working when the run is interrupted
+        await asyncio.sleep(0.01)  # a command takes a moment
+        finished.append(list(args))
+        return 0, b"", b""
+
+    async def interrupted() -> None:
+        # Cases run in an anyio task group (pydantic-evals); Ctrl-C cancels it, and anyio
+        # cancels every await in it from then on, cleanup's too.
+        async with anyio.create_task_group() as tg:
+            tg.start_soon(client.generate_task, make_task({"format": "text"}), 0, "s", "p")
+            await asyncio.sleep(0.2)
+            tg.cancel_scope.cancel()
+
+    monkeypatch.setattr(harness, "_run", fake_run)
+    client = AgentClient(
+        Opencode(),
+        load_registry().get("qwen3.8-27b-awq-int4"),
+        Provider(kind="openai_compatible", base_url="http://model.test/v1"),
+        "medium",
+        tmp_path,
+        "forcebench-agent",
+    )
+    asyncio.run(interrupted())
+    removed = [c[:-1] for c in finished if c[1:3] in (["rm", "-f"], ["network", "rm"])]
+    assert removed == [["docker", "rm", "-f"]] * 2 + [["docker", "network", "rm"]], (
+        "the session, its proxy and its network outlive the run"
+    )
 
 
 @pytest.fixture
