@@ -15,6 +15,7 @@ from urllib import error, request
 import pytest
 
 import forcebench.agent.proxy as proxy_module
+from forcebench.agent.harness import usage
 from forcebench.agent.proxy import (
     AnthropicStream,
     Budget,
@@ -102,11 +103,13 @@ class _Upstream(BaseHTTPRequestHandler):
     """A model server that records what it was asked and streams a short reply."""
 
     seen: ClassVar[list[dict]] = []
+    delay: ClassVar[float] = 0
 
     def log_message(self, format, *args):  # noqa: A002 (BaseHTTPRequestHandler's name)
         pass
 
     def do_POST(self):
+        time.sleep(self.delay)
         self.seen.append(
             {"path": self.path, "auth": self.headers.get("Authorization"),
              "body": json.loads(self.rfile.read(int(self.headers["Content-Length"])))}
@@ -125,7 +128,7 @@ class _Upstream(BaseHTTPRequestHandler):
 
 @pytest.fixture
 def servers(tmp_path):
-    _Upstream.seen = []
+    _Upstream.seen, _Upstream.delay = [], 0
     up = ThreadingHTTPServer(("127.0.0.1", 0), _Upstream)
     threading.Thread(target=up.serve_forever, daemon=True).start()
     log = tmp_path / "requests.jsonl"
@@ -184,6 +187,24 @@ def test_a_spent_budget_ends_the_session(servers):
     assert b"budget exhausted" in body
     assert len(_Upstream.seen) == 1, "nothing more reaches the model"
     assert "refused" in json.loads(log.read_text().splitlines()[-1])
+
+
+def test_a_reply_the_agent_stopped_waiting_for_is_not_a_server_failure(servers):
+    url, log = servers
+    _Upstream.delay = 0.5  # the model answers after the agent's own timeout
+    req = request.Request(
+        url + "/chat/completions", json.dumps({"messages": [], "stream": True}).encode(),
+        {"Content-Type": "application/json"},
+    )  # fmt: skip
+    with pytest.raises(TimeoutError):
+        request.urlopen(req, timeout=0.1)
+    for _ in range(50):
+        if log.exists() and log.read_text():
+            break
+        time.sleep(0.1)
+    rec = json.loads(log.read_text().splitlines()[0])
+    assert (rec["status"], rec["error"].split(":")[0]) == (499, "BrokenPipeError")
+    assert usage(log)["upstream_errors"] == 0, "a session cut by it would be re-run as infra"
 
 
 def test_only_chat_completions_are_proxied(servers):

@@ -135,6 +135,8 @@ wrote it there: agents often save their work instead of printing it.
 An answer cut short by a budget is scored like any other: graded if the final message has an
 answer, otherwise a failure. A task whose agent never reached the model (a server or harness
 failure) is pending and re-run on `--resume`, like an endpoint failure in single-turn runs.
+Every request through the proxy counts, the agent's own too (a script it writes may call the
+model); a reply the agent stopped waiting for is logged as 499 and is not a server failure.
 
 Time is not budgeted, as in single-turn runs ([methodology](methodology.md)): a slower server
 must not cost a model its answer. A session still running after 12 hours is stopped as stalled
