@@ -4,8 +4,9 @@
   "url": "https://mcp.clientell.ai/mcp",
   "docs": "https://www.getclientell.com/salesforce-mcp/docs",
   "token_env": "FORCEBENCH_CLIENTELL_TOKEN",
+  "codemode": true,
   "server": "clientell-salesforce 0.2.0 offered 37 tools on 2026-10-20",
-  "selection": "The tools the server marks read-only that concern Salesforce structure, documentation, guidance and drafts: the connected org's metadata and an overview of it, Salesforce's documentation, Clientell's best practices and playbooks, and drafts of Flows and of custom objects and fields. Not the account, billing, onboarding and connector tools (opencode approves every call unattended, and some change the account), the record-write proposals and their confirmation, the people and team-context tools, record merges, file generation, and reports and dashboards. The same server and tools as clientell.json; only the note differs: here the connected org is the one the task is about (docs/mcp-study.md, part 2).",
+  "selection": "The tools the server marks read-only that concern Salesforce structure, documentation, guidance and drafts: the connected org's metadata and an overview of it, Salesforce's documentation, Clientell's best practices and playbooks, and drafts of Flows and of custom objects and fields. Not the account, billing, onboarding and connector tools (opencode approves every call unattended, and some change the account), the record-write proposals and their confirmation, the people and team-context tools, record merges, file generation, and reports and dashboards. The same server, tools and Code Mode as clientell-codemode.json; only the note differs: here the connected org is the one the task is about (docs/mcp-study.md, part 2).",
   "tools": [
     "search_salesforce_metadata",
     "search_salesforce_docs",

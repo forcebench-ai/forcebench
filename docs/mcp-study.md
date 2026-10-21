@@ -31,8 +31,12 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
 ## Part 1: everyday work
 
 - **Tasks:** the lite subset, 60 tasks (four per suite, fifteen suites).
-- **Arms:** opencode alone, and opencode with the server (`--mcp clientell`,
-  [MCP servers](agent-track.md#mcp-servers)); `make mcp-study-arms`.
+- **Arms:** opencode alone, and opencode with the server through its Code Mode
+  (`--mcp clientell-codemode`, [MCP servers](agent-track.md#mcp-servers)); `make mcp-study-arms`.
+  The study's first runs gave the server's tools as tools of their own (`--mcp clientell`); they
+  are kept as a check arm, `mcp-tools` (see below). The Code Mode arms ran after the others,
+  alone, at the pair's total concurrency (DeepSeek 8, Qwen 4) so the model server carried the
+  same load; Gemma's at 2, where no session came near the hour.
 - **The server's org:** a Salesforce Developer Edition org made for this study, with Clientell's
   managed package installed (`04tQy000000CDJFIA4`) and connected to Clientell. Forcebench never
   logs in to it; only Clientell does. For these tasks it is just an org: the tasks don't depend on
@@ -71,7 +75,7 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
     from. Its note: "There is no network access and no Salesforce org; the metadata of the org
     this task is about, as retrieved from it, is in your working directory (an SFDX project:
     sfdx-project.json and force-app/)."
-  - **with the server** (`--mcp clientell-org`): the same server and tools as part 1, its org now
+  - **with the server** (`--mcp clientell-org`): the same server, tools and Code Mode as part 1, its org now
     holding the same metadata. Its note: "There is no network access except the clientell tools,
     which reach Clientell's Salesforce MCP server and, through it, the org this task is about;
     there is no org to deploy to or run tests in."
@@ -103,14 +107,17 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
 
 Three things about opencode differ with the server, and each was checked:
 
-- **The server's tools are tools of their own.** opencode 2 gives MCP tools to the model through
-  its Code Mode by default: the model writes JavaScript that calls them through one `execute`
-  tool. They are given as ordinary tools instead (`clientell_search_salesforce_docs` and so on),
-  the way most MCP clients give them, so the study measures the server rather than how well a
-  model scripts Code Mode. The `execute` tool is there in every arm all the same, and some models
-  try to call the server's tools inside it, where they are not. A check arm gives the same tools
-  through Code Mode instead (`--mcp clientell-codemode`, arm `mcp-codemode`), to see how much the
-  choice matters.
+- **The server's tools go through Code Mode, opencode's default.** opencode 2 gives every session
+  one `execute` tool, in which the model writes JavaScript that calls the tools of a catalog; MCP
+  tools are in that catalog unless a server asks otherwise. The study first gave them as tools of
+  their own (`codemode: false`), the way most MCP clients give them. But `execute` stays in every
+  arm either way, its description says tools are called inside it, and the models called the
+  server's tools there, where they were not: in part 1, Gemma 397 times in 33 of 180 sessions,
+  often never answering (29 sessions without an answer, against 13 without the server), DeepSeek
+  120 times in 74, Qwen 8 times in 4. Through Code Mode those calls work, and the agent uses the
+  server as opencode does out of the box (Gemma then called it in 42 sessions rather than 9, and
+  ended without an answer as often as without it). The first runs are kept as a check arm,
+  `mcp-tools`.
 - **The session starts once the server's tools are there.** opencode fixes a session's tools when
   it starts and does not wait for MCP servers, so a session started at once never had the
   server's tools (seen in a smoke test: the server connected a few milliseconds after the first
@@ -124,7 +131,9 @@ Three things about opencode differ with the server, and each was checked:
 Started either way, with a stand-in model and a stand-in MCP server that sends no instructions,
 the two arms' first model requests are the same byte for byte (the system prompt, the other
 tools' definitions, the request fields) but for the server's tools and the note's one sentence.
-With Clientell's server, its instructions are the third difference.
+With Clientell's server, its instructions are the third difference. Through Code Mode the tool
+list itself is the same byte for byte as without the server (checked on Gemma's runs): the
+server's tools are a catalog in the system prompt, beside its instructions.
 
 ## What is measured
 
@@ -136,7 +145,8 @@ Per model, for each pair of arms (the server against nothing; in part 2 also the
 nothing, and the server against the metadata): the difference, **paired by task** over the tasks
 both arms answered, with a 95% bootstrap interval over those tasks (10,000 resamples); the same
 per suite, as a point only; how many tasks did better and worse. Across the three models: the mean
-of their differences, tasks resampled jointly.
+of their differences, tasks resampled jointly. In part 1, the check arm too: the server's tools as
+tools of their own against nothing, and Code Mode against them.
 
 How the agent used the server, from each session's raw records: sessions that called at least
 one of its tools, calls per session and by tool, calls the server failed, time spent waiting for
@@ -165,6 +175,8 @@ make agent-image
 make mcp-study-arms MODEL=deepseek-v4.1-flash-1017-native EFFORT=high ARGS="--subset lite --samples 3 -c 4"
 make mcp-study-arms MODEL=qwen3.8-27b-awq-int4 EFFORT=medium ARGS="--subset lite --samples 3 -c 2"
 make mcp-study-arms MODEL=gemma-4-26b-a4b-nvfp4 EFFORT=on ARGS="--subset lite --samples 3 -c 2"
+# Part 1's check arm, the server's tools as tools of their own
+uv run forcebench run --agent opencode --mcp clientell --via local -m <id> -e <effort> --subset lite --samples 3 --no-grade
 # Part 2, in a worktree (its runs are never published), once orgs/base/force-app is deployed to
 # the base grader org (orgs/base/setup.sh) and to the org connected to Clientell
 make mcp-study-org-arms MODEL=deepseek-v4.1-flash-1017-native EFFORT=high ARGS="--samples 3 -c 2"
