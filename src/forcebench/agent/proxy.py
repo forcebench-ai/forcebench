@@ -718,6 +718,7 @@ def make_handler(proxy: Proxy) -> type[BaseHTTPRequestHandler]:
             stream = bool(req.get("stream"))
             record.update(stream=stream, messages=len(req.get("messages") or []))
             proxy.keep_first(req)
+            resp = None
             try:
                 conn = proxy.connect()
                 headers = {
@@ -793,7 +794,10 @@ def make_handler(proxy: Proxy) -> type[BaseHTTPRequestHandler]:
                     record["completion_tokens"] = int(usage.get("completion_tokens") or 0)
                     proxy.budget.spend(record["completion_tokens"])
             except Exception as e:  # noqa: BLE001 (any failure is answered with a 502 and logged)
-                record.update(status=502, error=f"{type(e).__name__}: {e}")
+                # A broken pipe once the server has answered is the agent's side: it stopped
+                # waiting (a script of its own with a timeout), not a server failure (499, nginx's).
+                gone = resp is not None and isinstance(e, BrokenPipeError)
+                record.update(status=499 if gone else 502, error=f"{type(e).__name__}: {e}")
                 with contextlib.suppress(Exception):  # the client may be gone
                     self._error(anthropic, 502, f"model server: {type(e).__name__}")
             record["latency_s"] = round(time.time() - t0, 3)
