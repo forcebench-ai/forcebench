@@ -206,6 +206,9 @@ When you change a task, follow [CONTRIBUTING.md](CONTRIBUTING.md) and
 - Write original tasks only, and keep the canary line.
 - Bump `version` when what the model sees changes, then run
   `uv run forcebench tasks --write-manifest`.
+- Branch a new task from the next version's branch (now `v0.3`) and open its PR against it:
+  new tasks join the full set only with a benchmark version bump. Study tasks and fixes to
+  existing tasks go to `main`.
 
 ## Where to read more
 

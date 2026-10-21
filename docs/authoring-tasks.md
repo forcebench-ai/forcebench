@@ -165,6 +165,12 @@ Stored answers are kept across task changes when they are still answers to the s
   keep `version`. The fix applies to every stored answer when they are re-graded
   (`make regrade-all`). Add a dated changelog line to `notes` saying what changed and why.
 
+**A new task** joins the full set only with a benchmark version bump, so every configuration
+answers a batch of new tasks once: open its pull request against the next version's branch
+(now `v0.3`), where it waits for the bump. CI skips the leaderboard check
+(`forcebench report --check`) on pull requests to a version branch; the bump rebuilds the
+leaderboard. A study task (`status: study`) goes to `main`.
+
 `suites/prompt-hashes.json` records every task's version and the hash of the prompt the model
 sees. A unit test fails when a prompt changes but its version does not; after adding a task or
 bumping a version, regenerate the file with `uv run forcebench tasks --write-manifest` (it
