@@ -751,3 +751,23 @@ models:
       "on": {chat_template_kwargs: {enable_thinking: true}}
     effort_tiers: {"off": "off", "on": "on"}
     notes: Ornith AI's BF16 release (HF revision dfa07bab) on vLLM 0.30.0 across four GB10s on a switchless CX7 ring. Sampling is the model's generation config, the card's profile for precise coding.
+
+  - id: ornith-1.5-122b-exl3-tensorfold
+    provider: direct-ornith-tf
+    endpoint_model: Ornith-1.5-122B
+    display: Ornith 1.5 122B
+    model_id: ornith-1-5-122b
+    developer: ornith-ai
+    family: Ornith-1.5
+    base_model: Ornith-1.5-122B
+    quant: EXL3 4.05 bpw (EAQv1)
+    engine: TensorFold (Zig)
+    hardware: 1× NVIDIA DGX Spark (GB10, 128 GB)
+    context: 262144
+    sampling: {temperature: 0.6, top_p: 0.95, top_k: 20}
+    default_effort: "on"
+    efforts:
+      "off": {chat_template_kwargs: {enable_thinking: false}}
+      "on": {chat_template_kwargs: {enable_thinking: true}}
+    effort_tiers: {"off": "off", "on": "on"}
+    notes: Mia's AI Lab EXL3 EAQv1 quant at 4.05 bits per weight (HF revision 9c5c913b) on TensorFold's Zig engine (d1018b31) with MiaAI-Lab's single-Spark kit (0c8fd6a, 27 patches), built from source; DFlash2 drafting (incoai, revision a5ed7396), FP8 KV cache, 4 concurrent streams at a 262,144-token window. Sampling is the model's generation config, as for Ornith's other builds.
