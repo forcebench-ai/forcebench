@@ -322,6 +322,7 @@ name = "forcebench"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "anyio" },
     { name = "httpx" },
     { name = "jsonschema" },
     { name = "pydantic-ai-slim", extra = ["anthropic", "google", "openai"] },
@@ -346,6 +347,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "anyio", specifier = ">=4.15.1" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "huggingface-hub", marker = "extra == 'traces'", specifier = ">=0.35" },
     { name = "jsonschema", specifier = ">=4.23" },

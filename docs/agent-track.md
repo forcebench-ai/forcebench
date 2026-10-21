@@ -143,6 +143,9 @@ tokens at 10 tokens a second take about 7 hours). Runs started before 2026-10-21
 session an hour and scored a session stopped by it as a failure; such a run resumes only once
 those answers are marked for new ones (`forcebench invalidate <run> --min-latency 3600`).
 
+An interrupted run (Ctrl-C) removes the sessions it started, their proxies and their networks
+before it exits; their tasks are pending, as with any interrupted run.
+
 ## What is recorded
 
 `run.json` records `"track": "agent"` and the agent: name (`opencode`, `claude-code` or `pi`),
