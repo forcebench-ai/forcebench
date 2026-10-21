@@ -19,8 +19,9 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
 ## Common design
 
 - **Agent:** opencode 2.0.21, the [agent track](agent-track.md)'s, with its image, proxy, budgets
-  (60 model requests, 262,144 output tokens, an hour per task), request fields (effort,
-  sampling) and grading.
+  (60 model requests and 262,144 output tokens per task; time is not budgeted), request fields
+  (effort, sampling) and grading. The study's first DeepSeek sessions had an hour, as the agent
+  track then did; those it stopped were answered again without it.
 - **Models:** three served locally, each at its default effort: DeepSeek V4.1 Flash 1017
   (`deepseek-v4.1-flash-1017-native`, high), Qwen3.8 27B (`qwen3.8-27b-awq-int4`, medium) and
   Gemma 4 26B-A4B (`gemma-4-26b-a4b-nvfp4`, thinking on).
@@ -35,8 +36,8 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
   (`--mcp clientell-codemode`, [MCP servers](agent-track.md#mcp-servers)); `make mcp-study-arms`.
   The study's first runs gave the server's tools as tools of their own (`--mcp clientell`); they
   are kept as a check arm, `mcp-tools` (see below). The Code Mode arms ran after the others,
-  alone, at the pair's total concurrency (DeepSeek 8, Qwen 4) so the model server carried the
-  same load; Gemma's at 2, where no session came near the hour.
+  alone, at the pair's total concurrency (DeepSeek 8, Qwen 4, Gemma 2) so the model server
+  carried the same load.
 - **The server's org:** a Salesforce Developer Edition org made for this study, with Clientell's
   managed package installed (`04tQy000000CDJFIA4`) and connected to Clientell. Forcebench never
   logs in to it; only Clientell does. For these tasks it is just an org: the tasks don't depend on

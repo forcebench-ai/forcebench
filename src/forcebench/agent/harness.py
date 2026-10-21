@@ -72,13 +72,26 @@ def agent_note(mcp: McpServer | None = None, org: OrgSource | None = None) -> st
 class Budget:
     """What one task may use.
 
-    Exceeding the requests or tokens ends the agent's session (the proxy refuses further calls);
-    exceeding the time stops its container.
+    Exceeding the requests or tokens ends the agent's session (the proxy refuses further calls).
+    Time is not budgeted, so a slower server costs no model its answer. Sessions are only stopped
+    by a guard against stalls (``Harness.guard_s``), as an infrastructure failure.
     """
 
     max_requests: int = 60
     max_output_tokens: int = 262_144
-    timeout_s: int = 3600
+
+
+def resume_record(record: dict[str, Any] | None) -> dict[str, Any] | None:
+    """A run's agent record as a resume must match it: without the stall guard.
+
+    The guard limits no answer. Runs from before it kept an hour in their budget, as ``timeout_s``.
+    """
+    if record is None:
+        return None
+    out = {k: v for k, v in record.items() if k != "guard_s"}
+    if isinstance(out.get("budget"), dict):
+        out["budget"] = {k: v for k, v in out["budget"].items() if k != "timeout_s"}
+    return out
 
 
 @dataclass(frozen=True)
@@ -97,6 +110,10 @@ class Harness:
     image: str = "forcebench-agent"
     version: str = ""
     budget: Budget = field(default_factory=Budget)
+    # A session still running after this long is stopped as a stalled server's (pending, re-run
+    # on resume): a model within its budget never needs it (262,144 tokens at 10 tokens/s take
+    # about 7 hours).
+    guard_s: int = 12 * 3600
     skills: SkillPack | None = None
     # Start each task's message with the pack's skills for the task's suite (skills.skill_block).
     preload: bool = False
@@ -134,8 +151,8 @@ class Harness:
             "budget": {
                 "max_requests": self.budget.max_requests,
                 "max_output_tokens": self.budget.max_output_tokens,
-                "timeout_s": self.budget.timeout_s,
             },
+            "guard_s": self.guard_s,
             # Only when there is a pack (a server), so runs without keep the record they started
             # with.
             **({"skills": self._skills_record(self.skills)} if self.skills else {}),
@@ -743,7 +760,7 @@ class AgentClient:
             if self.h.preload and self.h.skills and self.skills:
                 message = preload_skills(self.h.skills, self.skills, task.suite, message)
             try:
-                async with asyncio.timeout(self.h.budget.timeout_s):
+                async with asyncio.timeout(self.h.guard_s):
                     code, out, err = await _run(
                         "docker", "run", "--rm", "-i", "--name", agent, "--network", net,
                         "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
@@ -776,6 +793,8 @@ class AgentClient:
                     indent=1,
                 )
             )  # fmt: skip
+            if timed_out:
+                return self._infra(t0, f"session still running after {self.h.guard_s} s (stalled)")
             if u["requests"] == 0 or (u["upstream_errors"] and not answer):
                 # The model was never reached, or the server failed and no answer came back: an
                 # infrastructure failure (pending, re-run on resume), not the model's.
@@ -787,9 +806,7 @@ class AgentClient:
                 # them, not with them. Pending, like a model server failure.
                 return self._infra(t0, "the MCP server's tools were not in the first request")
             finish = "stop"
-            if timed_out:
-                finish = f"timeout ({self.h.budget.timeout_s}s)"
-            elif u["refused"]:
+            if u["refused"]:
                 finish = f"budget: {u['refused']}"
             elif not answer:
                 finish = "no final message"
@@ -801,7 +818,7 @@ class AgentClient:
                 latency_s=round(time.time() - t0, 2),
             )
         finally:
-            # A timeout kills `docker run`, not its container: stop the container first, or it
+            # The guard kills `docker run`, not its container: stop the container first, or it
             # runs on and holds the network, which can then never be removed.
             await _run("docker", "rm", "-f", agent)
             await _run("docker", "rm", "-f", proxy)

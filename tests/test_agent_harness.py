@@ -14,7 +14,6 @@ from forcebench.agent.harness import (
     AGENT_NOTE,
     HARNESSES,
     AgentClient,
-    Budget,
     ClaudeCode,
     Opencode,
     Pi,
@@ -131,7 +130,7 @@ def test_errors_in_the_stream_are_kept():
     assert (t.text, t.errors) == ("", ["boom"])
 
 
-def test_a_session_out_of_time_stops_its_container_before_removing_its_network(
+def test_a_stalled_session_is_pending_and_its_container_stops_before_its_network(
     make_task, tmp_path, monkeypatch
 ):
     calls: list[list[str]] = []
@@ -139,19 +138,20 @@ def test_a_session_out_of_time_stops_its_container_before_removing_its_network(
     async def fake_run(*args: str, stdin: bytes | None = None) -> tuple[int, bytes, bytes]:
         calls.append(list(args))
         if args[:2] == ("docker", "run") and "--rm" in args:
-            await asyncio.sleep(5)  # the agent, still working when its time is up
+            await asyncio.sleep(5)  # the agent, still running when the guard stops it
         return 0, b"", b""
 
     monkeypatch.setattr(harness, "_run", fake_run)
     client = AgentClient(
-        Opencode(budget=Budget(timeout_s=0)),
+        Opencode(guard_s=0),
         load_registry().get("qwen3.8-27b-awq-int4"),
         Provider(kind="openai_compatible", base_url="http://model.test/v1"),
         "medium",
         tmp_path,
         "forcebench-agent",
     )
-    asyncio.run(client.generate_task(make_task({"format": "text"}), 0, "system", "prompt"))
+    gen = asyncio.run(client.generate_task(make_task({"format": "text"}), 0, "system", "prompt"))
+    assert "stalled" in (gen.error or ""), "not the model's failure: re-run on resume"
     run = next(c for c in calls if c[:2] == ["docker", "run"] and "--rm" in c)
     name = run[run.index("--name") + 1]
     cleanup = [
@@ -297,7 +297,8 @@ def test_usage_totals_the_proxy_log(tmp_path):
 def test_a_run_records_which_agent_answered():
     d = Opencode().describe("sha256:abc")
     assert (d["name"], d["version"], d["image"]) == ("opencode", "2.0.21", "sha256:abc")
-    assert set(d["budget"]) == {"max_requests", "max_output_tokens", "timeout_s"}
+    assert set(d["budget"]) == {"max_requests", "max_output_tokens"}, "time is not budgeted"
+    assert d["guard_s"] == 12 * 3600
     assert label(d) == "opencode 2.0.21"
     assert label(None) is None
 

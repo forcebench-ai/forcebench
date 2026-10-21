@@ -45,7 +45,7 @@ from forcebench import (
     __version__,
     run_protocol,
 )
-from forcebench.agent.harness import AgentClient, Harness, image_id
+from forcebench.agent.harness import AgentClient, Harness, image_id, resume_record
 from forcebench.agent.skills import prepare as prepare_skills
 from forcebench.answer_files import format_error, path_problem
 from forcebench.answers import (
@@ -525,7 +525,7 @@ def _check_resume(run_dir: Path, started: dict[str, Any], asked: dict[str, Any])
         "protocol": run_protocol(started),
         "request": started.get("request"),
         "system prompt": started.get("system_prompt_sha"),
-        "agent": started.get("agent"),
+        "agent": resume_record(started.get("agent")),
         "endpoint model": started.get("endpoint_model"),
         "sample seeds": bool(started.get("sample_seeds")),
         "via": started.get("via"),
@@ -683,7 +683,7 @@ async def _generate(
     if started:
         asked = {"model": m.id, "effort": effort, "subset": subset, "samples": samples}
         asked |= {"protocol": GENERATION_PROTOCOL, "endpoint model": m.endpoint_model}
-        asked["agent"] = agent_info  # None for a single-turn run, which must stay one
+        asked["agent"] = resume_record(agent_info)  # None for a single-turn run, which stays one
         asked["sample seeds"] = bool(sample_seeds)
         asked["via"] = via
         if "system_prompt_sha" in started:
@@ -710,6 +710,14 @@ async def _generate(
                 ),
             )
     store = GenerationStore(run_dir / "raw" / "generations.jsonl")
+    cut = [k for k, g in store.done.items() if str(g.finish_reason).startswith("timeout (")]
+    if agent is not None and cut:
+        # Agent sessions once had an hour; the run will record that they no longer do.
+        raise ResumeError(
+            f"cannot resume {run_dir.name}: {len(cut)} answers were cut short by the hour agent "
+            "sessions once had. Mark them for new answers first: forcebench invalidate "
+            f"{run_dir} --min-latency 3600 --reason 'cut short by the old one-hour limit'"
+        )
     client = Client(m, provider, effort)
     agent_client = (
         AgentClient(agent, m, provider, effort, run_dir, agent_image)
