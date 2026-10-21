@@ -197,7 +197,7 @@ mcp-study-org-arms: ## Part 2 of the MCP study, three arms side by side: make mc
 	@test -n "$(MODEL)" -a -n "$(EFFORT)" || { echo 'usage: make mcp-study-org-arms MODEL=<id> EFFORT=<effort> ARGS="--samples 3 -c 2"' >&2; exit 2; }
 	uv run forcebench run --agent opencode --via local --subset study -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & a=$$!; sleep 5; \
 	uv run forcebench run --agent opencode --org-source base --via local --subset study -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & b=$$!; sleep 5; \
-	uv run forcebench run --agent opencode --mcp clientell-org --via local --subset study -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & c=$$!; \
+	uv run forcebench run --agent opencode --mcp clientell-org-live --via local --subset study -m $(MODEL) -e $(EFFORT) $(ARGS) --no-grade & c=$$!; \
 	wait $$a; ra=$$?; wait $$b; rb=$$?; wait $$c; rc=$$?; exit $$(( ra || rb || rc ))
 
 agent-report: ## Aggregate agent runs into results/agent/leaderboard.json

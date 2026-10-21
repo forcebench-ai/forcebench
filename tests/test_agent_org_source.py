@@ -82,6 +82,15 @@ def test_the_part_two_clientell_manifest_says_the_org_is_the_task_s():
     assert load_server("clientell-codemode").codemode
 
 
+def test_part_two_s_clientell_arm_adds_its_live_reads_held_to_salesforce():
+    live, index = load_server("clientell-org-live"), load_server("clientell-org")
+    assert (live.name, live.note, live.codemode) == (index.name, index.note, True)
+    assert set(live.tools) - set(index.tools) == {"use_connector", "list_connector_capabilities"}
+    assert live.fixed_args == {"use_connector": {"provider": "salesforce"}}
+    assert live.describe()["fixed_args"] == live.fixed_args
+    assert "fixed_args" not in index.describe(), "the index-only runs keep their record"
+
+
 def test_an_mcp_session_waits_for_the_server_s_tools():
     run = Opencode(mcp=load_server("clientell")).command()
     assert "done; sleep 5; exec opencode run" in run
