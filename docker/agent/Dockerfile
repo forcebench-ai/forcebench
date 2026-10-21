@@ -14,9 +14,13 @@ FROM node:24-bookworm-slim
 ARG OPENCODE_VERSION=2.0.21
 ARG OPENCODE_SHA512_ARM64=sha512-2P8Ah4Ae9TylSrNy6Bo9x9MpsafvmylM0HJ4jHsY0m4BsdXpZOw1r8J6q8OTpuus6CUOuTYAgWZnPxEQO9GaIw==
 ARG OPENCODE_SHA512_X64=sha512-intPGPRrEoZk+5Qq2dzYcq3Wv07vWvQrv56WieurupI9jGJSEAfT4a9Pi6YMW4tEW6SapAds/95K0egVS2YwiA==
+# The first ca-certificates that distrusts the compromised eMudhra intermediates (October 2026).
+# Checking it also stops a cached apt layer with an older package from being reused.
+ARG CA_CERTIFICATES_MIN=20250419~deb12u2
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends ca-certificates curl git python3 ripgrep jq openssl \
+ && dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge "$CA_CERTIFICATES_MIN" \
  && rm -rf /var/lib/apt/lists/*
 
 RUN set -eu; \
