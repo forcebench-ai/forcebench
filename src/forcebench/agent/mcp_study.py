@@ -1,12 +1,13 @@
 """The MCP study: the same model on the same tasks, in opencode without and with an MCP server.
 
 Two parts (docs/mcp-study.md). **Everyday** work, the lite subset: opencode alone against opencode
-with an MCP server's tools (forcebench.agent.mcp). **Org context**, the study tasks (status: study),
-whose answers depend on what is already in the org: opencode alone, opencode with the org's
-metadata in its workspace (forcebench.agent.org_source), and opencode with an MCP server connected
-to an org with the same metadata. A model's arms answer side by side through the same proxy and
-the same route to the model, so what differs is what the agent has, and the one sentence of the
-note that tells it.
+with an MCP server's tools through its Code Mode (forcebench.agent.mcp), and, as a check, the same
+tools as tools of their own (the study's first setting). **Org context**, the study tasks
+(status: study), whose answers depend on what is already in the org: opencode alone, opencode
+with the org's metadata in its workspace (forcebench.agent.org_source), and opencode with an MCP
+server connected to an org with the same metadata. A model's arms answer side by side through the
+same proxy and the same route to the model, so what differs is what the agent has, and the one
+sentence of the note that tells it.
 
 Per arm: the pass rate (a task's score is the mean over its answers; the rate is the mean over
 tasks), with a 95% bootstrap interval over tasks, stratified by suite; output and input tokens,
@@ -46,19 +47,20 @@ PARTS = (("everyday", "lite"), ("org-context", "study"))
 # nothing, the org's metadata against nothing, and the server against the metadata.
 PAIRS = (
     ("mcp", "none"), ("org", "none"), ("mcp", "org"),
-    ("mcp-codemode", "none"), ("mcp-codemode", "mcp"),
+    ("mcp-tools", "none"), ("mcp", "mcp-tools"),
 )  # fmt: skip
 
 
 def arm_of(meta: dict[str, Any]) -> str:
-    """A run's arm: ``mcp``, ``mcp-codemode``, ``org`` or ``none``.
+    """A run's arm: ``mcp``, ``mcp-tools``, ``org`` or ``none``.
 
-    ``mcp`` has an MCP server, ``mcp-codemode`` the same through opencode's Code Mode, ``org`` the
-    org's metadata in its workspace, ``none`` neither.
+    ``mcp`` has an MCP server through opencode's Code Mode, its default; ``mcp-tools`` the same
+    server's tools as tools of their own, the study's first setting, kept as a check;
+    ``org`` the org's metadata in its workspace; ``none`` neither.
     """
     h = meta.get("agent") or {}
     if h.get("mcp"):
-        return "mcp-codemode" if h["mcp"].get("codemode") else "mcp"
+        return "mcp" if h["mcp"].get("codemode") else "mcp-tools"
     return "org" if h.get("org_source") else "none"
 
 

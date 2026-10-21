@@ -8,7 +8,8 @@ import pytest
 from forcebench.agent.mcp_study import arm_of, collect, part, study
 
 
-CLIENTELL = {"name": "clientell", "label": "Clientell MCP", "url": "https://x", "tools": ["a"]}
+CLIENTELL = {"name": "clientell", "label": "Clientell MCP", "url": "https://x", "tools": ["a"],
+             "codemode": True}  # fmt: skip
 ORG = {"profile": "base", "sha256": "0" * 64}
 
 
@@ -109,8 +110,8 @@ def test_only_the_study_s_runs_count(tmp_path):
 
 def test_an_arm_is_read_from_the_run_s_agent_record():
     assert arm_of({"agent": {"name": "opencode", "mcp": CLIENTELL}}) == "mcp"
-    code_mode = CLIENTELL | {"codemode": True}
-    assert arm_of({"agent": {"name": "opencode", "mcp": code_mode}}) == "mcp-codemode"
+    own_tools = {k: v for k, v in CLIENTELL.items() if k != "codemode"}
+    assert arm_of({"agent": {"name": "opencode", "mcp": own_tools}}) == "mcp-tools"
     assert arm_of({"agent": {"name": "opencode", "org_source": ORG}}) == "org"
     assert arm_of({"agent": {"name": "opencode"}}) == "none"
 

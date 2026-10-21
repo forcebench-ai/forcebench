@@ -78,6 +78,8 @@ def test_the_part_two_clientell_manifest_says_the_org_is_the_task_s():
     assert s.describe()["id"] == "clientell-org"
     assert "id" not in load_server("clientell").describe(), "part 1 runs keep their record"
     assert s.tools == load_server("clientell").tools
+    assert s.codemode, "through Code Mode, as part 1's arm"
+    assert load_server("clientell-codemode").codemode
 
 
 def test_an_mcp_session_waits_for_the_server_s_tools():
