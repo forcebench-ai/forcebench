@@ -112,6 +112,10 @@ def test_an_arm_is_read_from_the_run_s_agent_record():
     assert arm_of({"agent": {"name": "opencode", "mcp": CLIENTELL}}) == "mcp"
     own_tools = {k: v for k, v in CLIENTELL.items() if k != "codemode"}
     assert arm_of({"agent": {"name": "opencode", "mcp": own_tools}}) == "mcp-tools"
+    index_only = CLIENTELL | {"id": "clientell-org"}
+    assert arm_of({"agent": {"name": "opencode", "mcp": index_only}}) == "mcp-index"
+    live = CLIENTELL | {"id": "clientell-org-live", "fixed_args": {"a": {"p": "v"}}}
+    assert arm_of({"agent": {"name": "opencode", "mcp": live}}) == "mcp"
     assert arm_of({"agent": {"name": "opencode", "org_source": ORG}}) == "org"
     assert arm_of({"agent": {"name": "opencode"}}) == "none"
 

@@ -15,8 +15,9 @@ model the same way, with the same fields. On the way the proxy:
 
 A run with an MCP server (forcebench.agent.mcp) also reaches that one server through the proxy, at
 ``/mcp`` (MCP's Streamable HTTP transport). The proxy adds the server's token, shows the agent only
-the run's tools (a ``tools/list`` answer is cut to them) and refuses a call to any other, and logs
-every exchange: the method, the tool and its arguments, the status, size and latency.
+the run's tools (a ``tools/list`` answer is cut to them) and refuses a call to any other, or one
+with another value of an argument the run holds a tool to, and logs every exchange: the method,
+the tool and its arguments, the status, size and latency.
 
 The model server's address and key, and the MCP server's token, live only in this process's
 environment; the agent never sees them. Standard library only, so it runs in the agent image's own
@@ -26,7 +27,8 @@ Environment: FB_UPSTREAM (base URL ending in /v1), FB_UPSTREAM_KEY (optional), F
 the server serves), FB_INJECT (JSON object merged into each request), FB_MAX_TOKENS,
 FB_MAX_REQUESTS, FB_MAX_OUTPUT_TOKENS, FB_LOG (JSON lines file), FB_FIRST_REQUEST (file), FB_PORT
 (default 8080); for an MCP server, FB_MCP_UPSTREAM (its URL), FB_MCP_KEY (its bearer token),
-FB_MCP_TOOLS (JSON list of the tools the agent may use) and FB_MCP_LOG (JSON lines file).
+FB_MCP_TOOLS (JSON list of the tools the agent may use), FB_MCP_FIXED_ARGS (optional JSON object:
+the argument values a tool may only be called with, by tool) and FB_MCP_LOG (JSON lines file).
 """
 
 import contextlib
@@ -432,13 +434,20 @@ def _rpc(body: Any) -> list[dict[str, Any]]:
 class McpExchange:
     """One MCP request relayed to the MCP server, and its log record.
 
-    ``refused`` names a tool the request calls that the run does not offer (the request is then
-    answered here, as an MCP server answers an unknown tool). The server's answer passes through
+    ``refused`` names a tool the request calls that the run does not offer, or calls with another
+    value of an argument in ``fixed`` (the request is then answered here, as an MCP server
+    answers an unknown tool or invalid arguments). The server's answer passes through
     ``answer``, which cuts a ``tools/list`` result to the run's tools and notes what each tool
     call returned.
     """
 
-    def __init__(self, body: Any, allowed: set[str], record: dict[str, Any]) -> None:
+    def __init__(
+        self,
+        body: Any,
+        allowed: set[str],
+        record: dict[str, Any],
+        fixed: dict[str, dict[str, Any]] | None = None,
+    ) -> None:
         self.allowed, self.record = allowed, record
         msgs = _rpc(body)
         self.lists = {m.get("id") for m in msgs if m.get("method") == "tools/list"}
@@ -452,13 +461,21 @@ class McpExchange:
         for m in calls:
             params = m.get("params") or {}
             name = str(params.get("name") or "")
-            record.update(tool=name, arguments=params.get("arguments"))
-            if name not in allowed:
+            args = params.get("arguments")
+            record.update(tool=name, arguments=args)
+            held = (fixed or {}).get(name) or {}
+            off = [k for k, v in held.items() if not isinstance(args, dict) or args.get(k) != v]
+            if name not in allowed or off:
                 self.refused = name
+                message = (
+                    f"Unknown tool: {name}"
+                    if name not in allowed
+                    else f"{name} is allowed only with {off[0]}={held[off[0]]!r}"
+                )
                 self.refusal = {
                     "jsonrpc": "2.0",
                     "id": m.get("id"),
-                    "error": {"code": -32602, "message": f"Unknown tool: {name}"},
+                    "error": {"code": -32602, "message": message},
                 }
 
     def answer(self, obj: Any) -> Any:
@@ -522,6 +539,7 @@ class Proxy:
         self.mcp = urllib.parse.urlsplit(mcp) if mcp else None
         self.mcp_key = env.get("FB_MCP_KEY") or ""
         self.mcp_tools: set[str] = set(json.loads(env.get("FB_MCP_TOOLS") or "[]"))
+        self.mcp_fixed: dict[str, dict[str, Any]] = json.loads(env.get("FB_MCP_FIXED_ARGS") or "{}")
         self.mcp_log_path = env.get("FB_MCP_LOG") or ""
 
     def log(self, record: dict[str, Any], path: str | None = None) -> None:
@@ -609,7 +627,7 @@ def make_handler(proxy: Proxy) -> type[BaseHTTPRequestHandler]:
             except ValueError:
                 self._json(400, {"error": {"message": "invalid JSON"}})
                 return
-            ex = McpExchange(body, proxy.mcp_tools, record)
+            ex = McpExchange(body, proxy.mcp_tools, record, proxy.mcp_fixed)
             if ex.refused is not None:
                 record["refused"] = ex.refused
                 proxy.log(record, proxy.mcp_log_path)

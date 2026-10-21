@@ -48,19 +48,25 @@ PARTS = (("everyday", "lite"), ("org-context", "study"))
 PAIRS = (
     ("mcp", "none"), ("org", "none"), ("mcp", "org"),
     ("mcp-tools", "none"), ("mcp", "mcp-tools"),
+    ("mcp-index", "none"), ("mcp", "mcp-index"),
 )  # fmt: skip
+# Part 2's first Clientell manifest: the server's metadata index, without its live reads.
+INDEX_ONLY = "clientell-org"
 
 
 def arm_of(meta: dict[str, Any]) -> str:
-    """A run's arm: ``mcp``, ``mcp-tools``, ``org`` or ``none``.
+    """A run's arm: ``mcp``, ``mcp-tools``, ``mcp-index``, ``org`` or ``none``.
 
     ``mcp`` has an MCP server through opencode's Code Mode, its default; ``mcp-tools`` the same
     server's tools as tools of their own, the study's first setting, kept as a check;
-    ``org`` the org's metadata in its workspace; ``none`` neither.
+    ``mcp-index`` part 2's first runs, with Clientell's metadata index but not its live reads of
+    the org, also kept as a check; ``org`` the org's metadata in its workspace; ``none`` neither.
     """
     h = meta.get("agent") or {}
     if h.get("mcp"):
-        return "mcp" if h["mcp"].get("codemode") else "mcp-tools"
+        if not h["mcp"].get("codemode"):
+            return "mcp-tools"
+        return "mcp-index" if h["mcp"].get("id") == INDEX_ONLY else "mcp"
     return "org" if h.get("org_source") else "none"
 
 

@@ -63,7 +63,9 @@ Salesforce org."). The one server today is **Clientell**
 - **Only the manifest's tools.** The proxy cuts the server's tool list to them and answers a call
   to any other as an unknown tool, without forwarding it. opencode approves every call
   unattended, so tools that change the account (billing, deleting data, connecting other
-  systems) are never offered.
+  systems) are never offered. A manifest can also hold a tool to argument values
+  (`"fixed_args": {"use_connector": {"provider": "salesforce"}}`): a call with any other value is
+  refused the same way.
 - **As tools of their own.** opencode 2 gives MCP tools to the model through its Code Mode by
   default (the model writes JavaScript that calls them through one `execute` tool). The
   server's tools are given as ordinary tools instead (`codemode: false`), named

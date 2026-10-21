@@ -18,6 +18,7 @@ import forcebench.agent.proxy as proxy_module
 from forcebench.agent.proxy import (
     AnthropicStream,
     Budget,
+    McpExchange,
     Proxy,
     anthropic_error,
     make_handler,
@@ -484,6 +485,25 @@ def test_a_call_to_a_tool_the_run_does_not_offer_never_reaches_the_server(mcp):
     assert json.loads(body)["error"]["message"] == "Unknown tool: delete"
     assert not _McpServer.seen
     assert _logged(log, 1)[0]["refused"] == "delete"
+
+
+def test_a_tool_held_to_an_argument_is_refused_with_any_other_value():
+    fixed = {"use_connector": {"provider": "salesforce"}}
+
+    def call(arguments: object) -> McpExchange:
+        params = {"name": "use_connector", "arguments": arguments}
+        msg = {"jsonrpc": "2.0", "id": 7, "method": "tools/call", "params": params}
+        return McpExchange(msg, {"use_connector"}, {}, fixed)
+
+    assert call({"provider": "salesforce", "action": "query", "args": {}}).refused is None
+    for arguments in ({"provider": "slack", "action": "send"}, {"action": "query"}, None):
+        ex = call(arguments)
+        assert ex.refused == "use_connector"
+        assert ex.refusal["error"]["message"] == (
+            "use_connector is allowed only with provider='salesforce'"
+        )
+    bare = {"method": "tools/call", "params": {"name": "use_connector"}}
+    assert McpExchange(bare, {"use_connector"}, {}).refused is None, "a run without fixed_args"
 
 
 def test_a_run_without_an_mcp_server_relays_nothing(servers):

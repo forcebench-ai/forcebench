@@ -76,10 +76,16 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
     from. Its note: "There is no network access and no Salesforce org; the metadata of the org
     this task is about, as retrieved from it, is in your working directory (an SFDX project:
     sfdx-project.json and force-app/)."
-  - **with the server** (`--mcp clientell-org`): the same server, tools and Code Mode as part 1, its org now
-    holding the same metadata. Its note: "There is no network access except the clientell tools,
-    which reach Clientell's Salesforce MCP server and, through it, the org this task is about;
-    there is no org to deploy to or run tests in."
+  - **with the server** (`--mcp clientell-org-live`): the same server and Code Mode as part 1,
+    its org now holding the same metadata, and part 1's tools with Clientell's live reads of that
+    org (see [The server](#the-server)). Its note: "There is no network access except the
+    clientell tools, which reach Clientell's Salesforce MCP server and, through it, the org this
+    task is about; there is no org to deploy to or run tests in."
+  - **check arm `mcp-index`** (`--mcp clientell-org`): part 2's first Clientell runs, with part
+    1's seven tools only. Clientell's metadata index holds no Apex source, custom metadata
+    records or picklist values, and its own answers send the agent to its live reads for them;
+    without those, four of the fourteen tasks were out of its reach (0 of 3 answers on each, for
+    both models run first). Kept to show what the live reads add.
 - **Its runs are never published.** The tasks break the benchmark's rule that a prompt names
   everything the grader checks, on purpose; only the study's aggregates are.
 
@@ -99,6 +105,12 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
   proposals and their confirmation, the people and team-context tools, record merges, file
   generation, and reports and dashboards. The proxy shows the agent only these seven and refuses
   any other (`docker/agent/mcp/clientell.json`, `clientell-org.json`).
+- **Part 2 adds its live reads of the org:** `use_connector` and `list_connector_capabilities`
+  (`clientell-org-live.json`). With the provider `salesforce`, `use_connector` reads the org
+  through Clientell's connection to it: `query` (SOQL), `tooling_query` (e.g. Apex source),
+  `describe` and `limits`, and has no create, update, delete or deploy action. The server marks it
+  destructive because other providers (Slack, Jira) can write, so the proxy refuses it with any
+  provider but `salesforce` (the manifest's `fixed_args`).
 - **Its instructions:** the server sends about 2,000 characters of instructions when it
   connects (how to use its tools, a reminder never to answer org questions from memory), which
   opencode puts in the system prompt. They are passed unchanged, though they name some tools the

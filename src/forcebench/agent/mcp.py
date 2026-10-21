@@ -2,9 +2,10 @@
 
 A server is a manifest, docker/agent/mcp/<name>.json: its name (opencode shows its tools to the
 model as ``<name>_<tool>``), the label runs are shown with, its URL, the .env variable that holds
-its token, the tools the agent gets, and the sentence that tells the agent about them. The agent
-reaches the server only through the model proxy, which adds the token (the agent's container
-never has it), shows the agent only those tools and refuses any other, and logs every exchange
+its token, the tools the agent gets (and any argument a tool is held to), and the sentence that
+tells the agent about them. The agent reaches the server only through the model proxy, which adds
+the token (the agent's container never has it), shows the agent only those tools and refuses any
+other call, and logs every exchange
 (forcebench.agent.proxy). A run records the server and its tools, never the token, and is never
 resumed with another server, or none.
 
@@ -15,7 +16,7 @@ records what the server said it was (its name and version) and every tool it off
 import json
 import os
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +45,9 @@ class McpServer:
     # The tools through opencode's Code Mode (its default: the model writes JavaScript that calls
     # them through one `execute` tool) instead of as tools of their own.
     codemode: bool = False
+    # Arguments a tool may only be called with, by tool: the proxy refuses a call with any other
+    # value (e.g. a connector tool held to one read-only provider).
+    fixed_args: dict[str, dict[str, str]] = field(default_factory=dict)
 
     def describe(self) -> dict[str, Any]:
         """What a run records about its server (a resume must match it)."""
@@ -51,6 +55,7 @@ class McpServer:
             "name": self.name, "label": self.label, "url": self.url, "tools": list(self.tools),
             **({"id": self.id} if self.id and self.id != self.name else {}),
             **({"codemode": True} if self.codemode else {}),
+            **({"fixed_args": self.fixed_args} if self.fixed_args else {}),
         }  # fmt: skip
 
     def token(self) -> str:
@@ -80,8 +85,17 @@ def load_server(name: str, servers: Path = SERVERS_DIR) -> McpServer:
     codemode = d.get("codemode", False)
     if codemode is not True and codemode is not False:
         raise ValueError(f"{path.name}: codemode must be true or false")
+    fixed = d.get("fixed_args", {})
+    if not isinstance(fixed, dict) or any(
+        t not in tools
+        or not isinstance(a, dict)
+        or not a
+        or not all(isinstance(k, str) and isinstance(v, str) for k, v in a.items())
+        for t, a in fixed.items()
+    ):
+        raise ValueError(f"{path.name}: fixed_args maps the run's tools to string arguments")
     return McpServer(
-        d["name"], d["label"], d["url"], d["token_env"], tools, d["note"], name, codemode
+        d["name"], d["label"], d["url"], d["token_env"], tools, d["note"], name, codemode, fixed
     )  # fmt: skip
 
 

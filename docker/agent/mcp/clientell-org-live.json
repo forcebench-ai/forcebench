@@ -1,0 +1,27 @@
+{
+  "name": "clientell",
+  "label": "Clientell MCP",
+  "url": "https://mcp.clientell.ai/mcp",
+  "docs": "https://www.getclientell.com/salesforce-mcp/docs",
+  "token_env": "FORCEBENCH_CLIENTELL_TOKEN",
+  "codemode": true,
+  "server": "clientell-salesforce 0.2.0 offered 37 tools on 2026-10-20",
+  "selection": "The tools of clientell-org.json, and Clientell's live reads of the org: use_connector, only with the provider salesforce (its actions query, tooling_query, describe and limits; read-only, no create, update, delete or deploy), and list_connector_capabilities. The metadata index holds no Apex source, custom metadata records or picklist values; Clientell's own answers send the agent to use_connector for them. use_connector is marked destructive because other providers (Slack, Jira) can write: the proxy refuses it with any provider but salesforce. Part 2's Clientell arm (docs/mcp-study.md); clientell-org.json, without the live reads, is kept as a check.",
+  "tools": [
+    "search_salesforce_metadata",
+    "search_salesforce_docs",
+    "get_salesforce_best_practices",
+    "run_clientell_playbook",
+    "build_or_fix_salesforce_flow",
+    "author_salesforce_schema",
+    "clientell_start",
+    "use_connector",
+    "list_connector_capabilities"
+  ],
+  "fixed_args": {
+    "use_connector": {
+      "provider": "salesforce"
+    }
+  },
+  "note": "There is no network access except the clientell tools, which reach Clientell's Salesforce MCP server and, through it, the org this task is about; there is no org to deploy to or run tests in."
+}

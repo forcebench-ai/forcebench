@@ -35,7 +35,8 @@ def test_a_bad_manifest_is_refused(tmp_path):
     good = {"name": "x", "label": "X", "url": "https://x.test/mcp", "token_env": "FORCEBENCH_X",
             "tools": ["a"], "note": "n"}  # fmt: skip
     for bad in ({"url": "http://x.test/mcp"}, {"token_env": "HOME"}, {"tools": ["a", "a"]},
-                {"tools": []}, {"codemode": "yes"}):  # fmt: skip
+                {"tools": []}, {"codemode": "yes"}, {"fixed_args": {"b": {"p": "v"}}},
+                {"fixed_args": {"a": {}}}, {"fixed_args": {"a": {"p": 1}}}):  # fmt: skip
         (tmp_path / "x.json").write_text(json.dumps(good | bad))
         with pytest.raises(ValueError, match=r"x\.json"):
             load_server("x", tmp_path)

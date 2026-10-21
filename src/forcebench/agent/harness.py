@@ -732,6 +732,7 @@ class AgentClient:
                                 f"FB_MCP_UPSTREAM={self.h.mcp.url}",
                                 f"FB_MCP_KEY={self.mcp_token}",
                                 f"FB_MCP_TOOLS={json.dumps(list(self.h.mcp.tools))}",
+                                f"FB_MCP_FIXED_ARGS={json.dumps(self.h.mcp.fixed_args)}",
                                 "FB_MCP_LOG=/log/mcp.jsonl",
                             ]
                             if self.h.mcp
