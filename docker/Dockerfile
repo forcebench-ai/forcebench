@@ -6,14 +6,18 @@
 FROM node:24-bookworm-slim
 
 ARG SF_CLI_VERSION=2.151.7
-ARG UV_VERSION=0.12.12
+ARG UV_VERSION=0.13.4
+# The first ca-certificates that distrusts the compromised eMudhra intermediates (October 2026).
+# Checking it also stops a cached apt layer with an older package from being reused.
+ARG CA_CERTIFICATES_MIN=20250419~deb12u2
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends ca-certificates curl git \
+ && dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge "$CA_CERTIFICATES_MIN" \
  && rm -rf /var/lib/apt/lists/* \
  && git config --system --add safe.directory /work
 
-COPY --from=ghcr.io/astral-sh/uv:0.12.12 /uv /uvx /usr/local/bin/
+COPY --from=ghcr.io/astral-sh/uv:0.13.4 /uv /uvx /usr/local/bin/
 RUN npm install -g "@salesforce/cli@${SF_CLI_VERSION}" && npm cache clean --force
 
 ENV FORCEBENCH_SANDBOX=1 \
