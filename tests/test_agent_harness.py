@@ -4,13 +4,17 @@ What the agent is given, how each harness's events are read, and how its answer 
 Containers are not started here.
 """
 
+import asyncio
 import json
 
 import pytest
 
+from forcebench.agent import harness
 from forcebench.agent.harness import (
     AGENT_NOTE,
     HARNESSES,
+    AgentClient,
+    Budget,
     ClaudeCode,
     Opencode,
     Pi,
@@ -27,7 +31,7 @@ from forcebench.agent.harness import (
     write_workspace,
 )
 from forcebench.agent.skills import load_pack
-from forcebench.models import load_registry
+from forcebench.models import Provider, load_registry
 
 
 def _events(*items: dict) -> str:
@@ -125,6 +129,36 @@ def test_errors_in_the_stream_are_kept():
         _events({"type": "error", "error": {"name": "APIError", "data": {"message": "boom"}}})
     )
     assert (t.text, t.errors) == ("", ["boom"])
+
+
+def test_a_session_out_of_time_stops_its_container_before_removing_its_network(
+    make_task, tmp_path, monkeypatch
+):
+    calls: list[list[str]] = []
+
+    async def fake_run(*args: str, stdin: bytes | None = None) -> tuple[int, bytes, bytes]:
+        calls.append(list(args))
+        if args[:2] == ("docker", "run") and "--rm" in args:
+            await asyncio.sleep(5)  # the agent, still working when its time is up
+        return 0, b"", b""
+
+    monkeypatch.setattr(harness, "_run", fake_run)
+    client = AgentClient(
+        Opencode(budget=Budget(timeout_s=0)),
+        load_registry().get("qwen3.8-27b-awq-int4"),
+        Provider(kind="openai_compatible", base_url="http://model.test/v1"),
+        "medium",
+        tmp_path,
+        "forcebench-agent",
+    )
+    asyncio.run(client.generate_task(make_task({"format": "text"}), 0, "system", "prompt"))
+    run = next(c for c in calls if c[:2] == ["docker", "run"] and "--rm" in c)
+    name = run[run.index("--name") + 1]
+    cleanup = [
+        c for c in calls if c[:2] == ["docker", "rm"] or c[:3] == ["docker", "network", "rm"]
+    ]
+    assert cleanup[0] == ["docker", "rm", "-f", name], "killing `docker run` leaves its container"
+    assert cleanup[-1][:3] == ["docker", "network", "rm"]
 
 
 @pytest.fixture
