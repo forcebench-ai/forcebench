@@ -680,7 +680,7 @@ class AgentClient:
     async def generate_task(self, task: Task, sample: int, system: str, prompt: str) -> Generation:
         key = f"{task.id}#{sample}"
         tag = uuid.uuid4().hex[:10]
-        net, proxy = f"fb-agent-{tag}", f"fb-proxy-{tag}"
+        net, proxy, agent = f"fb-agent-{tag}", f"fb-proxy-{tag}", f"fb-session-{tag}"
         root = Path(tempfile.mkdtemp(prefix="fb-agent-"))
         keep = self.run_dir / "raw" / "agent" / key
         t0 = time.time()
@@ -745,7 +745,7 @@ class AgentClient:
             try:
                 async with asyncio.timeout(self.h.budget.timeout_s):
                     code, out, err = await _run(
-                        "docker", "run", "--rm", "-i", "--network", net,
+                        "docker", "run", "--rm", "-i", "--name", agent, "--network", net,
                         "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
                         *envs, *mounts, "-v", f"{work}:/work",
                         *(["-v", f"{self.skills}:{self.h.skills_mount}:ro"] if self.skills else []),
@@ -801,6 +801,9 @@ class AgentClient:
                 latency_s=round(time.time() - t0, 2),
             )
         finally:
+            # A timeout kills `docker run`, not its container: stop the container first, or it
+            # runs on and holds the network, which can then never be removed.
+            await _run("docker", "rm", "-f", agent)
             await _run("docker", "rm", "-f", proxy)
             await _run("docker", "network", "rm", net)
             shutil.rmtree(root, ignore_errors=True)
