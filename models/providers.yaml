@@ -97,6 +97,11 @@ direct-ornith:  # Ornith 1.5 on vLLM on the GB10s; each build has its own served
   local: true
   base_url_env: FORCEBENCH_ORNITH_BASE_URL
   api_key_env: FORCEBENCH_ORNITH_API_KEY
+direct-ornith-tf:  # Ornith 1.5 on TensorFold on one GB10, its own server and key
+  kind: openai_compatible
+  local: true
+  base_url_env: FORCEBENCH_ORNITH_TF_BASE_URL
+  api_key_env: FORCEBENCH_ORNITH_TF_API_KEY
 direct-ds4v:
   kind: openai_compatible
   local: true
