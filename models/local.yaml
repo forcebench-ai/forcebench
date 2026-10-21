@@ -684,3 +684,43 @@ models:
       "on": {chat_template_kwargs: {enable_thinking: true}}
     effort_tiers: {"off": "off", "on": "on"}
     notes: NVIDIA's NVFP4 checkpoint (HF revision 82d93699) on TensorFold 1.0.12 with plotarmordev's single-Spark recipe, whose 18 patches speed up decoding without changing tokens (replies matched stock TensorFold 1.0.12 token for token on the recipe's benchmark prompts); MTP drafting, 8 concurrent streams at a 131,072-token window. The image tower is loaded; the tasks are text-only.
+
+  - id: ornith-1.5-122b-nvfp4
+    provider: direct-ornith
+    endpoint_model: ornith-1.5-122b-nvfp4
+    display: Ornith 1.5 122B
+    model_id: ornith-1-5-122b
+    developer: ornith-ai
+    family: Ornith-1.5
+    base_model: Ornith-1.5-122B
+    quant: NVFP4 experts, FP8 attention (NVIDIA ModelOpt)
+    engine: vLLM
+    hardware: 1× NVIDIA DGX Spark (GB10, 128 GB)
+    context: 262144
+    sampling: {temperature: 0.6, top_p: 0.95, top_k: 20}
+    default_effort: "on"
+    efforts:
+      "off": {chat_template_kwargs: {enable_thinking: false}}
+      "on": {chat_template_kwargs: {enable_thinking: true}}
+    effort_tiers: {"off": "off", "on": "on"}
+    notes: Ornith AI's own NVFP4 checkpoint (HF revision dde0b1af) on vLLM 0.30.0, one GB10. Sampling is the model's generation config, the card's profile for precise coding.
+
+  - id: ornith-1.5-122b-bf16
+    provider: direct-ornith
+    endpoint_model: ornith-1.5-122b-bf16
+    display: Ornith 1.5 122B
+    model_id: ornith-1-5-122b
+    developer: ornith-ai
+    family: Ornith-1.5
+    base_model: Ornith-1.5-122B
+    quant: BF16
+    engine: vLLM
+    hardware: 4× NVIDIA GB10, 128 GB each (3× DGX Spark, 1× Gigabyte AI TOP ATOM)
+    context: 262144
+    sampling: {temperature: 0.6, top_p: 0.95, top_k: 20}
+    default_effort: "on"
+    efforts:
+      "off": {chat_template_kwargs: {enable_thinking: false}}
+      "on": {chat_template_kwargs: {enable_thinking: true}}
+    effort_tiers: {"off": "off", "on": "on"}
+    notes: Ornith AI's BF16 release (HF revision dfa07bab) on vLLM 0.30.0 across four GB10s on a switchless CX7 ring. Sampling is the model's generation config, the card's profile for precise coding.
