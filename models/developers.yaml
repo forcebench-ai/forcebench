@@ -13,6 +13,7 @@ moonshotai: {name: Moonshot AI}
 nvidia: {name: NVIDIA}
 openai: {name: OpenAI}
 openbmb: {name: OpenBMB}
+ornith-ai: {name: Ornith AI}
 poolside: {name: Poolside}
 qwen: {name: Qwen}
 thinkingmachines: {name: Thinking Machines Lab}
