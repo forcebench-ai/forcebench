@@ -438,6 +438,33 @@ models:
       max: {chat_template_kwargs: {thinking: true, reasoning_effort: 100}}
     effort_tiers: {"off": "off", low: low, high: high, max: max}
 
+  - id: deepseek-v4.1-flash-1017-native-64k
+    provider: direct-ds41x3
+    endpoint_model: deepseek-v4.1-flash-1017
+    proxy_model: deepseek-v4.1-flash-tp4
+    display: DeepSeek V4.1 Flash 1017
+    model_id: deepseek-v4-1-flash-1017
+    developer: deepseek
+    family: DeepSeek-V4
+    base_model: DeepSeek-V4.1-Flash-1017
+    quant: Native FP8, FP4 experts
+    engine: SGLang
+    hardware: 4× NVIDIA GB10, 128 GB each (3× DGX Spark, 1× Gigabyte AI TOP ATOM)
+    context: 1048576
+    max_tokens: 65536
+    notes: >-
+      The same server, recipe and request fields as DeepSeek V4.1 Flash 1017, with one change: each
+      answer gets 65,536 output tokens, twice the benchmark's budget, to show what max effort does
+      with room to finish. Every other entry gets 32,768.
+    sampling: {temperature: 1.0, top_p: 1.0}
+    default_effort: max
+    efforts:
+      "off": {chat_template_kwargs: {thinking: false}}
+      low: {chat_template_kwargs: {thinking: true, reasoning_effort: 50}}
+      high: {chat_template_kwargs: {thinking: true, reasoning_effort: 75}}
+      max: {chat_template_kwargs: {thinking: true, reasoning_effort: 100}}
+    effort_tiers: {"off": "off", low: low, high: high, max: max}
+
   - id: deepseek-v4-flash-vision-nvfp4
     provider: direct-ds4v
     endpoint_model: deepseek-v4-flash-vision-exp

@@ -68,6 +68,9 @@ from forcebench.usage import (
 # tasks_sha and unscored are new; effort_tier has the value "on" (a thinking switch, formerly
 # "max").
 SCHEMA_VERSION = 2
+# Output tokens per answer, reasoning included, that every configuration gets unless its own says
+# otherwise (docs/methodology.md, *Output budget*); an entry with another budget says so.
+BENCHMARK_BUDGET: int = ModelConfig.model_fields["max_tokens"].default
 # What a configuration without a comparable overall score publishes as its overall.
 NO_SCORE: dict[str, float | None] = {"score": None, "ci_low": None, "ci_high": None}
 
@@ -276,6 +279,23 @@ def serving(metas: list[dict[str, Any]], registry: Registry) -> dict[str, Any]:
     if served["serving"] == "api" and not served["provider"]:
         raise ValueError(f"{who}: its hosted service has no label (providers.yaml)")
     return served
+
+
+def output_budget(metas: list[dict[str, Any]]) -> dict[str, int]:
+    """The output budget of the configuration of runs ``metas``, when it isn't the benchmark's.
+
+    ``{"output_budget": n}`` when its runs asked for n output tokens per answer rather than the
+    usual 32,768 (docs/methodology.md, *Output budget*), else nothing; runs that don't record
+    their request had the usual one. Runs of one configuration with different budgets are a
+    ValueError: they can't be scored together.
+    """
+    budgets = {
+        int(m["request"]["max_tokens"]) for m in metas if (m.get("request") or {}).get("max_tokens")
+    }
+    if len(budgets) > 1:
+        raise ValueError(f"{metas[-1]['config_id']}: runs with output budgets {sorted(budgets)}")
+    budget = budgets.pop() if budgets else BENCHMARK_BUDGET
+    return {} if budget == BENCHMARK_BUDGET else {"output_budget": budget}
 
 
 def developer(metas: list[dict[str, Any]], registry: Registry) -> dict[str, str]:
@@ -772,6 +792,7 @@ def build_leaderboard(
                 **model_identity(metas, registry),
                 **developer(metas, registry),
                 **serving(metas, registry),
+                **output_budget(metas),
                 **list_price(metas, prices),
             },
             chains,

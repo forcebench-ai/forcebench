@@ -34,6 +34,7 @@ from forcebench.report import (
     list_price,
     load_runs,
     model_identity,
+    output_budget,
     render_markdown,
     serving,
     tasks_sha,
@@ -1101,6 +1102,24 @@ def test_serving_names_the_hosted_service_or_the_hardware():
     local = serving(_runs_of("gemma-4-31b-qat-w4a16"), reg)
     assert (local["serving"], local["provider"]) == ("local", None)
     assert "RTX 5090" in local["hardware"]
+
+
+def test_an_entry_names_its_output_budget_only_when_it_is_not_the_benchmark_s():
+    def run(budget):
+        request = {"max_tokens": budget, "temperature": 1.0} if budget else None
+        return {"config_id": "m@max", "request": request}
+
+    assert output_budget([run(32768), run(32768)]) == {}
+    assert output_budget([run(None)]) == {}, "runs that record no request had the usual budget"
+    assert output_budget([run(65536), run(65536)]) == {"output_budget": 65536}
+    with pytest.raises(ValueError, match=r"m@max: runs with output budgets \[32768, 65536\]"):
+        output_budget([run(32768), run(65536)])
+
+
+def test_the_64k_entry_asks_for_its_budget():
+    reg = load_registry()
+    assert reg.get("deepseek-v4.1-flash-1017-native-64k").max_tokens == 65536
+    assert reg.get("deepseek-v4.1-flash-1017-native").max_tokens == 32768
 
 
 def test_an_ambiguous_config_fails_the_report(suites, tmp_path):
