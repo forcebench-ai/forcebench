@@ -2,9 +2,9 @@
 
 What difference does an MCP server make to a coding agent doing Salesforce work? This study holds
 the model, the agent and the model server still and adds one thing: the tools of
-[Clientell's Salesforce MCP server](https://www.getclientell.com/salesforce-mcp/docs). The site
-page is [forcebench.ai/studies/mcp](https://forcebench.ai/studies/mcp/); its numbers come from
-`studies/mcp.json`, which this repository publishes and which holds aggregates only.
+[Clientell's Salesforce MCP server](https://www.getclientell.com/salesforce-mcp/docs). Its site
+page's numbers come from `studies/mcp.json`, written by `forcebench study mcp`, which holds
+aggregates only. Neither is public yet.
 
 It has two parts, because an MCP server like Clientell's offers two kinds of help:
 
@@ -25,8 +25,10 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
 - **Models:** three served locally, each at its default effort: DeepSeek V4.1 Flash 1017
   (`deepseek-v4.1-flash-1017-native`, high), Qwen3.8 27B (`qwen3.8-27b-awq-int4`, medium) and
   Gemma 4 26B-A4B (`gemma-4-26b-a4b-nvfp4`, thinking on).
-- **Order and load:** a model's arms run side by side, at the same concurrency, through the same
-  LiteLLM proxy (`--via local`), so they share the model server under the same load.
+- **Order and load:** a model's arms go through the same LiteLLM proxy (`--via local`) to the same
+  model server, but not all at the same time or under the same load (each part says how they ran).
+  Time is not budgeted, so the load changes how long an answer takes, not whether it passes; the
+  arms' times compare only roughly.
 - **Answers:** each task three times per arm (`--samples 3`).
 
 ## Part 1: everyday work
@@ -35,9 +37,10 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
 - **Arms:** opencode alone, and opencode with the server through its Code Mode
   (`--mcp clientell-codemode`, [MCP servers](agent-track.md#mcp-servers)); `make mcp-study-arms`.
   The study's first runs gave the server's tools as tools of their own (`--mcp clientell`); they
-  are kept as a check arm, `mcp-tools` (see below). The Code Mode arms ran after the others,
-  alone, at the pair's total concurrency (DeepSeek 8, Qwen 4, Gemma 2) so the model server
-  carried the same load.
+  are kept as a check arm, `mcp-tools` (see below). Opencode alone and `mcp-tools` ran side by
+  side, and the Code Mode arm after them: alone for Qwen (at 4, the pair's total) and Gemma (at 2,
+  half its pair's); for DeepSeek at 8 and then lower, while its other arms, resumed at
+  concurrencies from 2 to 9, were still running.
 - **The server's org:** a Salesforce Developer Edition org made for this study, with Clientell's
   managed package installed (`04tQy000000CDJFIA4`) and connected to Clientell. Forcebench never
   logs in to it; only Clientell does. For these tasks it is just an org: the tasks don't depend on
@@ -69,7 +72,10 @@ It has two parts, because an MCP server like Clientell's offers two kinds of hel
   already grants), and six questions about the org graded deterministically (who can see part
   costs, what renaming a stage would break, the SLA hours of a band, and three outcomes of saving
   a job, which need the order of execution).
-- **Arms:** `make mcp-study-org-arms`, three side by side on `--subset study`:
+- **Arms:** `make mcp-study-org-arms` runs the first three side by side on `--subset study`. In
+  the study, without, with the org's metadata and `mcp-index` ran side by side at 2 each
+  (DeepSeek's resumed at up to 5), and the arm with the server after them: alone for Qwen (at 2, then 1) and Gemma (at 2); for DeepSeek at
+  4 and then 8, while its other arms were still running.
   - **without:** opencode alone. It has only the prompt; it shows how far guessing gets.
   - **with the org's metadata** (`--org-source base`, [The org's metadata](agent-track.md#the-orgs-metadata)):
     the workspace is the org's SFDX project, the same `force-app` the two orgs were deployed
