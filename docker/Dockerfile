@@ -5,7 +5,7 @@
 # See docs/sandbox.md.
 FROM node:24-bookworm-slim
 
-ARG SF_CLI_VERSION=2.151.7
+ARG SF_CLI_VERSION=2.155.7
 ARG UV_VERSION=0.13.4
 # The first ca-certificates that distrusts the compromised eMudhra intermediates (October 2026).
 # Checking it also stops a cached apt layer with an older package from being reused.
