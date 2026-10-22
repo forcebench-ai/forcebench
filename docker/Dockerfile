@@ -3,7 +3,7 @@
 # It has its own Salesforce login store (the `forcebench-sf-home` volume). Your machine's
 # ~/.sf and ~/.sfdx are never mounted, so nothing in here can reach orgs logged in there.
 # See docs/sandbox.md.
-FROM node:24-bookworm-slim
+FROM node:24.22.1-bookworm-slim
 
 ARG SF_CLI_VERSION=2.151.7
 ARG UV_VERSION=0.13.4
