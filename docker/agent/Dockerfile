@@ -6,7 +6,7 @@
 # CLI and no credential of any kind in here. Hidden tests never enter the container; grading
 # happens afterwards, in the Forcebench sandbox, exactly as for single-turn runs.
 # See docs/agent-track.md.
-FROM node:24-bookworm-slim
+FROM node:24.22.1-bookworm-slim
 
 # opencode v2, as opencode.ai's own installer gets it (https://opencode.ai/v2/install): the
 # @opencode/cli-<platform> npm package published by opencode's maintainers from
