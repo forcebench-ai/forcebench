@@ -47,6 +47,7 @@
   "ci-delta-deploy-sgd": {"version": 1, "prompt_sha": "aef8767c70e9"},
   "ci-environment-secrets-fix": {"version": 1, "prompt_sha": "3ede3ad94b7d"},
   "ci-lwc-jest-eslint": {"version": 1, "prompt_sha": "5ef7a9b4cf72"},
+  "ci-monorepo-matrix-package-build": {"version": 1, "prompt_sha": "9f2550eebbb5"},
   "ci-nightly-apex-tests": {"version": 1, "prompt_sha": "dcb3b48e227c"},
   "ci-pr-validate-jwt": {"version": 1, "prompt_sha": "7daa6a12989d"},
   "ci-quick-deploy-on-merge": {"version": 1, "prompt_sha": "84e87f9d0bff"},
