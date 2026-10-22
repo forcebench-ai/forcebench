@@ -142,6 +142,24 @@ def _record_upstream() -> None:
     cls._map_provider_details = mapped  # type: ignore[method-assign]
 
 
+def _keep_missing_finish_reason() -> None:
+    """Leave a streamed reply that ended without a finish reason without one.
+
+    pydantic-ai calls such a reply finished ('stop'), as it does a complete response with none.
+    A server that dies mid-answer ends its stream that way, and _finished must see the reply
+    was cut off.
+    """
+    cls = oai.OpenAIStreamedResponse
+    if getattr(cls._missing_finish_reason, "forcebench_missing", False):
+        return
+
+    def missing(_self: Any) -> None:
+        return None
+
+    missing.forcebench_missing = True  # type: ignore[attr-defined]
+    cls._missing_finish_reason = missing  # type: ignore[method-assign]
+
+
 def served_by(resp: ModelResponse | None) -> str | None:
     """Who served a response behind the service, as it reported it: "OpenAI (flex)", or None."""
     details = (resp.provider_details if resp is not None else None) or {}
@@ -160,6 +178,7 @@ def _build_model(m: ModelConfig, p: Provider, timeout: float):
     match p.kind:
         case "openai_compatible" | "openai":
             _count_hidden_output()
+            _keep_missing_finish_reason()
             if p.reports_upstream:
                 _record_upstream()
             base_url = p.resolved_base_url()
