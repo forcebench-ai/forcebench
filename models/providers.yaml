@@ -122,6 +122,11 @@ direct-minicpm:   # MiniCPM-V 4.7 on vLLM, one GB10
   local: true
   base_url_env: FORCEBENCH_MINICPM_BASE_URL
   api_key_env: FORCEBENCH_MINICPM_API_KEY
+direct-minimax-m31:  # MiniMax M3.1 Flash on vLLM over four GB10s, its own server and key
+  kind: openai_compatible
+  local: true
+  base_url_env: FORCEBENCH_MINIMAX_M31_BASE_URL
+  api_key_env: FORCEBENCH_MINIMAX_M31_API_KEY
 direct-nemotron-bolt-tf:  # Nemotron 3.5 Bolt on TensorFold's Zig engine, one GB10 (MiaAI's single-Spark recipe)
   kind: openai_compatible
   local: true

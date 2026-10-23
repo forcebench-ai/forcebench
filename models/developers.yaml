@@ -8,6 +8,7 @@ deepseek: {name: DeepSeek}
 google: {name: Google}
 inclusionai: {name: inclusionAI}
 meta: {name: Meta}
+minimax: {name: MiniMax}
 mistral: {name: Mistral AI}
 moonshotai: {name: Moonshot AI}
 nvidia: {name: NVIDIA}
