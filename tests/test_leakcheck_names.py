@@ -8,34 +8,37 @@ import pytest
 
 from forcebench.leakcheck import check
 from forcebench.leakcheck.names import (
-    OWNER,
+    OWNERS,
     no_home_directories,
     only_known_forcebench_names,
     only_known_repositories,
 )
 
 
-UNKNOWN_REPO = OWNER + "/" + "forcebench" + "-held-out-demo"
+UNKNOWN_REPO = OWNERS[0] + "/" + "forcebench" + "-held-out-demo"
 UNKNOWN_NAME = "forcebench" + "-held-out-demo"
 HOME = "/" + "Users" + "/someone/Dev/pool"
 
 
+@pytest.mark.parametrize("owner", OWNERS)
 @pytest.mark.parametrize(
     "text",
     [
-        f"see https://github.com/{UNKNOWN_REPO}\n",
-        f"git clone git@github.com:{UNKNOWN_REPO}.git\n",
-        f"https://raw.githubusercontent.com/{UNKNOWN_REPO}/main/x\n",
+        "see https://github.com/{repo}\n",
+        "git clone git@github.com:{repo}.git\n",
+        "https://raw.githubusercontent.com/{repo}/main/x\n",
     ],
 )
-def test_another_repository_of_this_project_is_found(text):
-    [finding] = check([("docs/x.md", text)], [only_known_repositories])
+def test_another_repository_of_this_project_is_found(owner, text):
+    repo = owner + "/" + "forcebench" + "-held-out-demo"
+    [finding] = check([("docs/x.md", text.format(repo=repo))], [only_known_repositories])
     assert finding.rule == "names"
     assert "held-out" not in str(finding), "a finding never quotes what it matched"
 
 
-def test_this_projects_repositories_are_allowed():
-    text = f"{OWNER}/forcebench and {OWNER}/forcebench-site, {OWNER}/forcebench.git.\n"
+@pytest.mark.parametrize("owner", OWNERS)
+def test_this_projects_repositories_are_allowed(owner):
+    text = f"{owner}/forcebench and {owner}/forcebench-site, {owner}/forcebench.git.\n"
     assert not check([("README.md", text)], [only_known_repositories])
 
 

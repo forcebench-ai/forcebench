@@ -12,18 +12,19 @@ from collections.abc import Iterator
 from forcebench.leakcheck import Finding, line_of, rule
 
 
-# This project's repositories: the harness and the website. Any other repository of the same
-# owner named here is refused.
-OWNER = "leo-dcfa"
+# This project's repositories: the harness and the website, under the organisation that owns them
+# and the account that owned them before (whose old links still redirect). Any other repository
+# of either owner named here is refused.
+OWNERS = ("forcebench-ai", "leo-dcfa")
 KNOWN_REPOSITORIES = frozenset({"forcebench", "forcebench-site"})
-_REPO_RE = re.compile(rf"\b{OWNER}/([A-Za-z0-9_.-]+)", re.I)
+_REPO_RE = re.compile(rf"\b(?:{'|'.join(OWNERS)})/([A-Za-z0-9_.-]+)", re.I)
 
 # Every forcebench-* name this repository uses (images, volumes, org and project names, salts,
 # temporary prefixes). A new one that is public is added here, deliberately.
 KNOWN_NAMES = frozenset(
     {
         "forcebench-agent", "forcebench-agent-harnesses", "forcebench-agent-proxy",
-        "forcebench-auth", "forcebench-cache",
+        "forcebench-ai", "forcebench-auth", "forcebench-cache",
         "forcebench-devhub-limits", "forcebench-generate",
         "forcebench-grader-base", "forcebench-grader-fflib", "forcebench-grader-npsp",
         "forcebench-grader-taf", "forcebench-lite-v1", "forcebench-lwc-jest",
