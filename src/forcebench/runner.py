@@ -1195,10 +1195,11 @@ async def _evaluate(
                 "served_by": gen.served_by,
             }
         )
-        if gen.error is None and "cached_input_tokens" not in gen.model_fields_set:
-            # An answer stored before the count was (2026-10-10) is regraded without it, as
-            # usage.py tells such answers apart by its absence.
-            del lines[-1]["cached_input_tokens"]
+        # An answer stored before these were recorded (2026-10-10) is regraded without them, as
+        # usage.py tells such answers apart by the cache count's absence.
+        for key in ("cached_input_tokens", "served_by"):
+            if gen.error is None and key not in gen.model_fields_set:
+                del lines[-1][key]
     cases_path = run_dir / "cases.jsonl"
     if merge and cases_path.exists():
         graded = {t.id for t in tasks}
