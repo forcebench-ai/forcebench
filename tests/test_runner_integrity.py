@@ -220,6 +220,20 @@ def test_cases_publish_the_answer_without_reasoning_left_in_the_reply(model, mak
     assert "my plan" in rec["generation"]["text"], "the full reply stays in raw/"
 
 
+def test_a_regrade_leaves_out_what_the_answer_was_stored_without(model, make_task, tmp_path):
+    # Answers stored before 2026-10-10 have no cached_input_tokens or served_by, and usage.py
+    # reads the cache count's absence as recorded before it was: a regrade must not write a 0.
+    run_dir = _generate(model, tmp_path / RUN, [_task(make_task)])
+    (case,) = _grade(run_dir, [_task(make_task)])
+    assert (case["cached_input_tokens"], case["served_by"]) == (0, None)
+    raw = run_dir / "raw" / "generations.jsonl"
+    (rec,) = read_records(raw)
+    del rec["generation"]["cached_input_tokens"], rec["generation"]["served_by"]
+    raw.write_text(json.dumps(rec) + "\n")
+    (case,) = _grade(run_dir, [_task(make_task)])
+    assert {"cached_input_tokens", "served_by"}.isdisjoint(case)
+
+
 # --------------------------------------------------------------------------- resume
 
 
