@@ -51,6 +51,7 @@ from forcebench.answer_files import format_error, path_problem
 from forcebench.answers import (
     SYSTEM_PROMPT,
     Answer,
+    drop_reasoning,
     extract,
     prompt_sha,
     render_prompt,
@@ -1176,7 +1177,9 @@ async def _evaluate(
                 # Why the answer is not in the required format (an answer that cannot be read,
                 # or has a file path that cannot be written), counted as malformed.
                 "answer_error": format_error(ans) if ans else None,
-                "output": gen.text,
+                # Published, so without the reasoning a server left in the reply text (it stays in
+                # raw/ with the rest of the reasoning).
+                "output": drop_reasoning(gen.text),
                 "reasoning_chars": len(gen.reasoning),
                 "input_tokens": gen.input_tokens,
                 # Recorded from 2026-10-10 (absent from earlier runs): the part of input_tokens

@@ -208,15 +208,18 @@ _FENCE_RE = re.compile(
 _CONTROL_TOKEN_RE = re.compile(r"<\|[\w.:-]{1,40}\|?>|<[\w.:-]{1,40}\|>")
 
 
-def strip_reasoning(text: str) -> str:
-    text = _CONTROL_TOKEN_RE.sub("", text)
+def drop_reasoning(text: str) -> str:
+    """The reply without the reasoning a server left in it, the rest exactly as it was."""
     text = _THINK_RE.sub("", text)
     # A </think> without its <think>: the template opened the reasoning; keep what follows.
     text = _THINK_CLOSE_RE.split(text)[-1]
     # A <think> never closed: the model never left its reasoning (it ran out of budget), so
     # nothing after it is an answer, as when a server separates the reasoning itself.
-    text = _THINK_OPEN_RE.split(text)[0]
-    return text.strip()
+    return _THINK_OPEN_RE.split(text)[0]
+
+
+def strip_reasoning(text: str) -> str:
+    return drop_reasoning(_CONTROL_TOKEN_RE.sub("", text)).strip()
 
 
 def fenced_blocks(text: str) -> list[tuple[str, str, int]]:
