@@ -771,3 +771,32 @@ models:
       "on": {chat_template_kwargs: {enable_thinking: true}}
     effort_tiers: {"off": "off", "on": "on"}
     notes: Mia's AI Lab EXL3 EAQv1 quant at 4.05 bits per weight (HF revision 9c5c913b) on TensorFold's Zig engine (d1018b31) with MiaAI-Lab's single-Spark kit (0c8fd6a, 27 patches), built from source; DFlash2 drafting (incoai, revision a5ed7396), FP8 KV cache, 4 concurrent streams at a 262,144-token window. Sampling is the model's generation config, as for Ornith's other builds.
+
+  # ---------------------------------------------------------------- MiniMax M3.1 Flash (MoE)
+  # MiniMax's vision-language MoE (MiniMax Community License): ~428B total, 23B active, MiniMax
+  # Sparse Attention in all 60 layers, a built-in DSpark draft head. The weights are MiniMax's own
+  # quantisation-aware trained release. The chat template has no thinking switch: thinking is
+  # adaptive (the model decides each turn), and reasoning_effort adds an <effort> line to the system
+  # prompt. The card lists low, medium, high, xhigh and max; xhigh has no tier between high and max,
+  # so it is left out.
+  - id: minimax-m3.1-flash
+    provider: direct-minimax-m31
+    endpoint_model: minimax-m3.1-flash
+    display: MiniMax M3.1 Flash
+    model_id: minimax-m3-1-flash
+    developer: minimax
+    family: MiniMax-M3
+    base_model: MiniMax-M3.1-Flash
+    quant: NVFP4 experts, MXFP8 (QAT)
+    engine: vLLM
+    hardware: 4× NVIDIA GB10, 128 GB each (3× DGX Spark, 1× Gigabyte AI TOP ATOM)
+    context: 262144
+    sampling: {temperature: 1.0, top_p: 0.95}
+    default_effort: high
+    efforts:
+      low: {chat_template_kwargs: {reasoning_effort: low}}
+      medium: {chat_template_kwargs: {reasoning_effort: medium}}
+      high: {chat_template_kwargs: {reasoning_effort: high}}
+      max: {chat_template_kwargs: {reasoning_effort: max}}
+    effort_tiers: {low: low, medium: medium, high: high, max: max}
+    notes: MiniMax's own release (HF revision 76faee1b; NVFP4 routed experts, MXFP8 attention and dense layers) on vLLM's MiniMax-M3.1 image (0.1.dev23341+g8744dd2fb), tensor-parallel over four GB10s on a switchless CX7 ring. The experts run weight-only on Marlin, the sparse attention on Triton with an fp8 KV cache; no DSpark drafting; 8 concurrent requests at a 262,144-token window. Served text and image, tasks text-only.
