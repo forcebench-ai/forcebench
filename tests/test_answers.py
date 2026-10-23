@@ -9,6 +9,11 @@ from forcebench.runner import GenerationStore, invalidate, write_artifacts
 def test_strip_reasoning():
     assert strip_reasoning("<think>hmm</think>\nAnswer: B") == "Answer: B"
     assert strip_reasoning("leaked thoughts</think>final") == "final"
+    assert strip_reasoning("<mm:think>hmm</mm:think>\nAnswer: B") == "Answer: B"
+    assert strip_reasoning("leaked thoughts</mm:think>final") == "final"
+    # Reasoning that never closed is no answer, even with a draft inside it.
+    assert strip_reasoning("<think>draft:\n```apex\nclass A {}\n```") == ""
+    assert strip_reasoning("<mm:think>draft:\n```apex\nclass A {}\n```") == ""
 
 
 def test_command_block_last_wins(make_task):

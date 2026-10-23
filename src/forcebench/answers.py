@@ -191,7 +191,12 @@ class Answer(BaseModel):
     requests: list[HttpRequest] = Field(default_factory=list)
 
 
-_THINK_RE = re.compile(r"<think>.*?</think>", re.S | re.I)
+# <think>, and namespaced forms such as MiniMax's <mm:think>, which a server's reasoning parser
+# can leave in the answer text (vLLM's minimax_m3 parser does when streaming).
+_THINK_TAG = r"(?:[\w-]+:)?think"
+_THINK_RE = re.compile(rf"<{_THINK_TAG}>.*?</{_THINK_TAG}>", re.S | re.I)
+_THINK_OPEN_RE = re.compile(rf"<{_THINK_TAG}>", re.I)
+_THINK_CLOSE_RE = re.compile(rf"</{_THINK_TAG}>", re.I)
 _FENCE_RE = re.compile(
     r"^[ \t]*(`{3,}|~{3,})[ \t]*([\w+#.-]*)[^\n]*\n(.*?)^[ \t]*\1[ \t]*$", re.S | re.M
 )
@@ -206,9 +211,11 @@ _CONTROL_TOKEN_RE = re.compile(r"<\|[\w.:-]{1,40}\|?>|<[\w.:-]{1,40}\|>")
 def strip_reasoning(text: str) -> str:
     text = _CONTROL_TOKEN_RE.sub("", text)
     text = _THINK_RE.sub("", text)
-    # An unclosed <think> means the model never left its reasoning; keep what follows if any.
-    if "</think>" in text.lower():
-        text = re.split(r"</think>", text, flags=re.I)[-1]
+    # A </think> without its <think>: the template opened the reasoning; keep what follows.
+    text = _THINK_CLOSE_RE.split(text)[-1]
+    # A <think> never closed: the model never left its reasoning (it ran out of budget), so
+    # nothing after it is an answer, as when a server separates the reasoning itself.
+    text = _THINK_OPEN_RE.split(text)[0]
     return text.strip()
 
 
