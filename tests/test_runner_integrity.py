@@ -211,6 +211,15 @@ def test_cases_publish_how_many_attempts_each_answer_took(model, make_task, tmp_
     assert (case["passed"], case["attempts"]) == (True, 3)
 
 
+def test_cases_publish_the_answer_without_reasoning_left_in_the_reply(model, make_task, tmp_path):
+    model.reply = Generation(text="<mm:think>my plan</mm:think>\nAnswer: x", finish_reason="stop")
+    run_dir = _generate(model, tmp_path / RUN, [_task(make_task)])
+    (case,) = _grade(run_dir, [_task(make_task)])
+    assert (case["passed"], case["output"]) == (True, "\nAnswer: x")
+    (rec,) = read_records(run_dir / "raw" / "generations.jsonl")
+    assert "my plan" in rec["generation"]["text"], "the full reply stays in raw/"
+
+
 # --------------------------------------------------------------------------- resume
 
 
