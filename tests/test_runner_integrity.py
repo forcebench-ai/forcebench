@@ -220,6 +220,22 @@ def test_cases_publish_the_answer_without_reasoning_left_in_the_reply(model, mak
     assert "my plan" in rec["generation"]["text"], "the full reply stays in raw/"
 
 
+def test_a_regrade_leaves_the_cache_count_out_where_the_answer_never_recorded_it(
+    model, make_task, tmp_path
+):
+    # Answers stored before 2026-10-10 have no cached_input_tokens, and usage.py reads its absence
+    # as recorded before the cache and thinking counts were: a regrade must not write a 0.
+    run_dir = _generate(model, tmp_path / RUN, [_task(make_task)])
+    (case,) = _grade(run_dir, [_task(make_task)])
+    assert case["cached_input_tokens"] == 0
+    raw = run_dir / "raw" / "generations.jsonl"
+    (rec,) = read_records(raw)
+    del rec["generation"]["cached_input_tokens"]
+    raw.write_text(json.dumps(rec) + "\n")
+    (case,) = _grade(run_dir, [_task(make_task)])
+    assert "cached_input_tokens" not in case
+
+
 # --------------------------------------------------------------------------- resume
 
 
