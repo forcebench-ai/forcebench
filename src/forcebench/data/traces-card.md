@@ -80,7 +80,7 @@ Wherever possible by running them: check-only deploys to clean scratch orgs with
 tests (including 200-record bulk tests), hidden Jest tests for Lightning web components, SOQL
 result sets compared with a gold query on a seeded org, and every CLI command validated against
 the real `sf` manifest. No LLM judges. The tasks, hidden tests and graders are open:
-[the harness repository](https://github.com/leo-dcfa/forcebench), and the
+[the harness repository](https://github.com/forcebench-ai/forcebench), and the
 [methodology](https://forcebench.ai/methodology/).
 
 ## Canary
