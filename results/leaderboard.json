@@ -3,7 +3,7 @@
  "benchmark": "forcebench",
  "visibility": "public",
  "version": "0.2.0",
- "generated_at": "2026-10-22T00:11:14+00:00",
+ "generated_at": "2026-10-24T14:10:12+00:00",
  "tasks_sha": "21fe52ce6d1f04b7",
  "suites": [
   {
@@ -1112,7 +1112,7 @@
    "suite": "limits",
    "title": "Survey tasks for closed cases, asked to enqueue a Queueable per case",
    "difficulty": "medium",
-   "observed_difficulty": "medium"
+   "observed_difficulty": "hard"
   },
   {
    "id": "limits-pushback-send-email-per-opportunity",
@@ -1336,7 +1336,7 @@
    "suite": "npsp",
    "title": "Replace a pledge's open payments with an installment plan",
    "difficulty": "medium",
-   "observed_difficulty": "easy"
+   "observed_difficulty": "medium"
   },
   {
    "id": "npsp-record-gift",
@@ -1399,7 +1399,7 @@
    "suite": "packaging",
    "title": "Upload a Managed - Released first-generation package version",
    "difficulty": "hard",
-   "observed_difficulty": "medium"
+   "observed_difficulty": "hard"
   },
   {
    "id": "packaging-1gp-vs-2gp",
@@ -1427,7 +1427,7 @@
    "suite": "packaging",
    "title": "Package metadata that depends on unpackaged org metadata",
    "difficulty": "easy",
-   "observed_difficulty": "medium"
+   "observed_difficulty": "hard"
   },
   {
    "id": "packaging-create-unlocked-no-namespace",
@@ -1609,7 +1609,7 @@
    "suite": "permissions",
    "title": "App and tab visibility in a permission set",
    "difficulty": "easy",
-   "observed_difficulty": "medium"
+   "observed_difficulty": "hard"
   },
   {
    "id": "permissions-view-all-not-modify-all",
@@ -116520,6 +116520,1489 @@
    "rank": 66
   },
   {
+   "config_id": "minimax-m3.1-flash@high",
+   "subset": "full",
+   "model": "MiniMax M3.1 Flash",
+   "model_family": "MiniMax-M3",
+   "base_model": "MiniMax-M3.1-Flash",
+   "quant": "NVFP4 experts, MXFP8 (QAT)",
+   "engine": "vLLM",
+   "effort": "high",
+   "effort_tier": "high",
+   "open_weights": true,
+   "local": true,
+   "model_id": "minimax-m3-1-flash",
+   "developer": "minimax",
+   "developer_name": "MiniMax",
+   "serving": "local",
+   "provider": null,
+   "hardware": "4\u00d7 NVIDIA GB10, 128 GB each (3\u00d7 DGX Spark, 1\u00d7 Gigabyte AI TOP ATOM)",
+   "price": null,
+   "overall": {
+    "score": 0.2409,
+    "ci_low": 0.1931,
+    "ci_high": 0.2895
+   },
+   "c_at": {
+    "2": {
+     "score": 0.387,
+     "ci_low": 0.3354,
+     "ci_high": 0.4376,
+     "suites": {
+      "apex": {
+       "score": 0.5,
+       "ci_low": 0.2993,
+       "ci_high": 0.7007,
+       "n": 20
+      },
+      "api": {
+       "score": 0.3333,
+       "ci_low": 0.1628,
+       "ci_high": 0.5625,
+       "n": 18
+      },
+      "ci": {
+       "score": 0.3529,
+       "ci_low": 0.1731,
+       "ci_high": 0.587,
+       "n": 17
+      },
+      "cli": {
+       "score": 0.35,
+       "ci_low": 0.1812,
+       "ci_high": 0.5671,
+       "n": 20
+      },
+      "docs": {
+       "score": 0.1176,
+       "ci_low": 0.0329,
+       "ci_high": 0.3434,
+       "n": 17
+      },
+      "fflib": {
+       "score": 0.0,
+       "ci_low": 0.0,
+       "ci_high": 0.1759,
+       "n": 18
+      },
+      "flow": {
+       "score": 0.1667,
+       "ci_low": 0.0584,
+       "ci_high": 0.3922,
+       "n": 18
+      },
+      "limits": {
+       "score": 0.5789,
+       "ci_low": 0.3628,
+       "ci_high": 0.7686,
+       "n": 19
+      },
+      "lwc": {
+       "score": 0.7778,
+       "ci_low": 0.5479,
+       "ci_high": 0.91,
+       "n": 18
+      },
+      "npsp": {
+       "score": 0.3889,
+       "ci_low": 0.2031,
+       "ci_high": 0.6138,
+       "n": 18
+      },
+      "packaging": {
+       "score": 0.2778,
+       "ci_low": 0.125,
+       "ci_high": 0.5087,
+       "n": 18
+      },
+      "permissions": {
+       "score": 0.6667,
+       "ci_low": 0.4171,
+       "ci_high": 0.8482,
+       "n": 15
+      },
+      "scratch-def": {
+       "score": 0.0556,
+       "ci_low": 0.0099,
+       "ci_high": 0.2576,
+       "n": 18
+      },
+      "soql": {
+       "score": 0.85,
+       "ci_low": 0.6396,
+       "ci_high": 0.9476,
+       "n": 20
+      },
+      "taf": {
+       "score": 0.3889,
+       "ci_low": 0.2031,
+       "ci_high": 0.6138,
+       "n": 18
+      }
+     }
+    },
+    "3": {
+     "score": 0.4229,
+     "ci_low": 0.3725,
+     "ci_high": 0.4735,
+     "suites": {
+      "apex": {
+       "score": 0.55,
+       "ci_low": 0.3421,
+       "ci_high": 0.7418,
+       "n": 20
+      },
+      "api": {
+       "score": 0.3333,
+       "ci_low": 0.1628,
+       "ci_high": 0.5625,
+       "n": 18
+      },
+      "ci": {
+       "score": 0.3529,
+       "ci_low": 0.1731,
+       "ci_high": 0.587,
+       "n": 17
+      },
+      "cli": {
+       "score": 0.4,
+       "ci_low": 0.2188,
+       "ci_high": 0.6134,
+       "n": 20
+      },
+      "docs": {
+       "score": 0.1176,
+       "ci_low": 0.0329,
+       "ci_high": 0.3434,
+       "n": 17
+      },
+      "fflib": {
+       "score": 0.0,
+       "ci_low": 0.0,
+       "ci_high": 0.1759,
+       "n": 18
+      },
+      "flow": {
+       "score": 0.1667,
+       "ci_low": 0.0584,
+       "ci_high": 0.3922,
+       "n": 18
+      },
+      "limits": {
+       "score": 0.6842,
+       "ci_low": 0.4601,
+       "ci_high": 0.8464,
+       "n": 19
+      },
+      "lwc": {
+       "score": 0.8333,
+       "ci_low": 0.6078,
+       "ci_high": 0.9416,
+       "n": 18
+      },
+      "npsp": {
+       "score": 0.5,
+       "ci_low": 0.2903,
+       "ci_high": 0.7097,
+       "n": 18
+      },
+      "packaging": {
+       "score": 0.2778,
+       "ci_low": 0.125,
+       "ci_high": 0.5087,
+       "n": 18
+      },
+      "permissions": {
+       "score": 0.6667,
+       "ci_low": 0.4171,
+       "ci_high": 0.8482,
+       "n": 15
+      },
+      "scratch-def": {
+       "score": 0.1111,
+       "ci_low": 0.031,
+       "ci_high": 0.328,
+       "n": 18
+      },
+      "soql": {
+       "score": 0.85,
+       "ci_low": 0.6396,
+       "ci_high": 0.9476,
+       "n": 20
+      },
+      "taf": {
+       "score": 0.5,
+       "ci_low": 0.2903,
+       "ci_high": 0.7097,
+       "n": 18
+      }
+     }
+    },
+    "fixed": {
+     "fixed": 50,
+     "failed": 206,
+     "within": 3
+    }
+   },
+   "usage": {
+    "1": {
+     "overall": {
+      "tasks": 272,
+      "answers": 272,
+      "failed": 0,
+      "solved": 66,
+      "unreported": 0,
+      "time_s": {
+       "median": 472.88,
+       "p90": 2120.25,
+       "mean": 800.49
+      },
+      "tokens": {
+       "input": 968.2,
+       "cached_input": 0.0,
+       "reasoning": 8746.7,
+       "answer": 843.0,
+       "unsplit": 0.0,
+       "output": 9589.7
+      },
+      "cost": null,
+      "no_cost": "no_price",
+      "recorded": {
+       "cached_input": 272,
+       "served_by": 0
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 3,
+       "unreported": 0,
+       "time_s": {
+        "median": 630.76,
+        "p90": 1538.4,
+        "mean": 821.49
+       },
+       "tokens": {
+        "input": 819.0,
+        "cached_input": 0.0,
+        "reasoning": 8261.0,
+        "answer": 1648.6,
+        "unsplit": 0.0,
+        "output": 9909.6
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 6,
+       "unreported": 0,
+       "time_s": {
+        "median": 320.61,
+        "p90": 976.52,
+        "mean": 447.78
+       },
+       "tokens": {
+        "input": 549.9,
+        "cached_input": 0.0,
+        "reasoning": 4788.0,
+        "answer": 619.2,
+        "unsplit": 0.0,
+        "output": 5407.2
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 5,
+       "unreported": 0,
+       "time_s": {
+        "median": 328.65,
+        "p90": 1081.15,
+        "mean": 458.15
+       },
+       "tokens": {
+        "input": 621.5,
+        "cached_input": 0.0,
+        "reasoning": 4556.1,
+        "answer": 970.0,
+        "unsplit": 0.0,
+        "output": 5526.1
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 3,
+       "unreported": 0,
+       "time_s": {
+        "median": 220.3,
+        "p90": 920.53,
+        "mean": 386.39
+       },
+       "tokens": {
+        "input": 464.6,
+        "cached_input": 0.0,
+        "reasoning": 4419.9,
+        "answer": 308.1,
+        "unsplit": 0.0,
+        "output": 4728.1
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 2,
+       "unreported": 0,
+       "time_s": {
+        "median": 204.26,
+        "p90": 826.45,
+        "mean": 361.8
+       },
+       "tokens": {
+        "input": 436.5,
+        "cached_input": 0.0,
+        "reasoning": 4100.4,
+        "answer": 305.7,
+        "unsplit": 0.0,
+        "output": 4406.1
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 0,
+       "unreported": 0,
+       "time_s": {
+        "median": 1742.19,
+        "p90": 2757.04,
+        "mean": 1691.76
+       },
+       "tokens": {
+        "input": 1039.3,
+        "cached_input": 0.0,
+        "reasoning": 19179.7,
+        "answer": 940.1,
+        "unsplit": 0.0,
+        "output": 20119.8
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 3,
+       "unreported": 0,
+       "time_s": {
+        "median": 2775.3,
+        "p90": 2798.12,
+        "mean": 2177.87
+       },
+       "tokens": {
+        "input": 960.2,
+        "cached_input": 0.0,
+        "reasoning": 25210.6,
+        "answer": 392.8,
+        "unsplit": 0.0,
+        "output": 25603.3
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 19,
+       "failed": 0,
+       "solved": 7,
+       "unreported": 0,
+       "time_s": {
+        "median": 682.95,
+        "p90": 1529.91,
+        "mean": 739.98
+       },
+       "tokens": {
+        "input": 661.9,
+        "cached_input": 0.0,
+        "reasoning": 7289.8,
+        "answer": 1483.1,
+        "unsplit": 0.0,
+        "output": 8772.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 10,
+       "unreported": 0,
+       "time_s": {
+        "median": 301.66,
+        "p90": 2002.14,
+        "mean": 647.75
+       },
+       "tokens": {
+        "input": 755.0,
+        "cached_input": 0.0,
+        "reasoning": 6656.7,
+        "answer": 1025.2,
+        "unsplit": 0.0,
+        "output": 7681.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 5,
+       "unreported": 0,
+       "time_s": {
+        "median": 812.07,
+        "p90": 2614.03,
+        "mean": 1036.53
+       },
+       "tokens": {
+        "input": 689.9,
+        "cached_input": 0.0,
+        "reasoning": 10821.1,
+        "answer": 1412.7,
+        "unsplit": 0.0,
+        "output": 12233.8
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 4,
+       "unreported": 0,
+       "time_s": {
+        "median": 731.23,
+        "p90": 1439.43,
+        "mean": 767.38
+       },
+       "tokens": {
+        "input": 580.4,
+        "cached_input": 0.0,
+        "reasoning": 8638.3,
+        "answer": 551.4,
+        "unsplit": 0.0,
+        "output": 9189.7
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 15,
+       "failed": 0,
+       "solved": 3,
+       "unreported": 0,
+       "time_s": {
+        "median": 271.13,
+        "p90": 885.44,
+        "mean": 370.35
+       },
+       "tokens": {
+        "input": 770.0,
+        "cached_input": 0.0,
+        "reasoning": 3741.7,
+        "answer": 715.2,
+        "unsplit": 0.0,
+        "output": 4456.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 1,
+       "unreported": 0,
+       "time_s": {
+        "median": 709.58,
+        "p90": 2242.81,
+        "mean": 946.1
+       },
+       "tokens": {
+        "input": 541.2,
+        "cached_input": 0.0,
+        "reasoning": 10976.2,
+        "answer": 451.1,
+        "unsplit": 0.0,
+        "output": 11427.3
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 20,
+       "failed": 0,
+       "solved": 10,
+       "unreported": 0,
+       "time_s": {
+        "median": 105.11,
+        "p90": 601.15,
+        "mean": 253.02
+       },
+       "tokens": {
+        "input": 448.1,
+        "cached_input": 0.0,
+        "reasoning": 2636.5,
+        "answer": 376.2,
+        "unsplit": 0.0,
+        "output": 3012.7
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 4,
+       "unreported": 0,
+       "time_s": {
+        "median": 678.84,
+        "p90": 1768.13,
+        "mean": 893.7
+       },
+       "tokens": {
+        "input": 5251.3,
+        "cached_input": 0.0,
+        "reasoning": 9893.4,
+        "answer": 1387.8,
+        "unsplit": 0.0,
+        "output": 11281.3
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      }
+     }
+    },
+    "2": {
+     "overall": {
+      "tasks": 272,
+      "answers": 433,
+      "failed": 0,
+      "solved": 106,
+      "unreported": 0,
+      "time_s": {
+       "median": 810.81,
+       "p90": 3528.04,
+       "mean": 1377.74
+      },
+      "tokens": {
+       "input": 2342.6,
+       "cached_input": 0.0,
+       "reasoning": 16606.4,
+       "answer": 1457.2,
+       "unsplit": 0.0,
+       "output": 18063.6
+      },
+      "cost": null,
+      "no_cost": "no_price",
+      "recorded": {
+       "cached_input": 433,
+       "served_by": 0
+      }
+     }
+    },
+    "3": {
+     "overall": {
+      "tasks": 272,
+      "answers": 542,
+      "failed": 0,
+      "solved": 116,
+      "unreported": 0,
+      "time_s": {
+       "median": 958.41,
+       "p90": 5346.89,
+       "mean": 1921.95
+      },
+      "tokens": {
+       "input": 3786.2,
+       "cached_input": 0.0,
+       "reasoning": 24102.1,
+       "answer": 1849.8,
+       "unsplit": 0.0,
+       "output": 25951.9
+      },
+      "cost": null,
+      "no_cost": "no_price",
+      "recorded": {
+       "cached_input": 542,
+       "served_by": 0
+      }
+     },
+     "suites": {
+      "apex": {
+       "tasks": 20,
+       "answers": 47,
+       "failed": 0,
+       "solved": 11,
+       "unreported": 0,
+       "time_s": {
+        "median": 1716.65,
+        "p90": 5207.47,
+        "mean": 2459.69
+       },
+       "tokens": {
+        "input": 5643.4,
+        "cached_input": 0.0,
+        "reasoning": 29334.2,
+        "answer": 3865.7,
+        "unsplit": 0.0,
+        "output": 33199.8
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "api": {
+       "tasks": 18,
+       "answers": 18,
+       "failed": 0,
+       "solved": 6,
+       "unreported": 0,
+       "time_s": {
+        "median": 320.61,
+        "p90": 976.52,
+        "mean": 447.78
+       },
+       "tokens": {
+        "input": 549.9,
+        "cached_input": 0.0,
+        "reasoning": 4788.0,
+        "answer": 619.2,
+        "unsplit": 0.0,
+        "output": 5407.2
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "ci": {
+       "tasks": 17,
+       "answers": 33,
+       "failed": 0,
+       "solved": 6,
+       "unreported": 0,
+       "time_s": {
+        "median": 856.56,
+        "p90": 2301.92,
+        "mean": 1127.18
+       },
+       "tokens": {
+        "input": 2971.7,
+        "cached_input": 0.0,
+        "reasoning": 13255.1,
+        "answer": 2230.9,
+        "unsplit": 0.0,
+        "output": 15486.0
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "cli": {
+       "tasks": 20,
+       "answers": 42,
+       "failed": 0,
+       "solved": 8,
+       "unreported": 0,
+       "time_s": {
+        "median": 410.45,
+        "p90": 2922.3,
+        "mean": 1171.92
+       },
+       "tokens": {
+        "input": 1649.0,
+        "cached_input": 0.0,
+        "reasoning": 15333.8,
+        "answer": 631.8,
+        "unsplit": 0.0,
+        "output": 15965.5
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "docs": {
+       "tasks": 17,
+       "answers": 17,
+       "failed": 0,
+       "solved": 2,
+       "unreported": 0,
+       "time_s": {
+        "median": 204.26,
+        "p90": 826.45,
+        "mean": 361.8
+       },
+       "tokens": {
+        "input": 436.5,
+        "cached_input": 0.0,
+        "reasoning": 4100.4,
+        "answer": 305.7,
+        "unsplit": 0.0,
+        "output": 4406.1
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "fflib": {
+       "tasks": 18,
+       "answers": 54,
+       "failed": 0,
+       "solved": 0,
+       "unreported": 0,
+       "time_s": {
+        "median": 4616.06,
+        "p90": 6479.03,
+        "mean": 4646.74
+       },
+       "tokens": {
+        "input": 6620.4,
+        "cached_input": 0.0,
+        "reasoning": 61953.5,
+        "answer": 3003.9,
+        "unsplit": 0.0,
+        "output": 64957.4
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "flow": {
+       "tasks": 18,
+       "answers": 46,
+       "failed": 0,
+       "solved": 3,
+       "unreported": 0,
+       "time_s": {
+        "median": 6573.52,
+        "p90": 7678.23,
+        "mean": 5096.44
+       },
+       "tokens": {
+        "input": 3715.7,
+        "cached_input": 0.0,
+        "reasoning": 65467.4,
+        "answer": 1343.9,
+        "unsplit": 0.0,
+        "output": 66811.3
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "limits": {
+       "tasks": 19,
+       "answers": 33,
+       "failed": 0,
+       "solved": 13,
+       "unreported": 0,
+       "time_s": {
+        "median": 807.48,
+        "p90": 3242.16,
+        "mean": 1394.57
+       },
+       "tokens": {
+        "input": 3607.2,
+        "cached_input": 0.0,
+        "reasoning": 15082.8,
+        "answer": 2970.7,
+        "unsplit": 0.0,
+        "output": 18053.6
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "lwc": {
+       "tasks": 18,
+       "answers": 30,
+       "failed": 0,
+       "solved": 15,
+       "unreported": 0,
+       "time_s": {
+        "median": 510.82,
+        "p90": 2849.59,
+        "mean": 1292.67
+       },
+       "tokens": {
+        "input": 2300.2,
+        "cached_input": 0.0,
+        "reasoning": 15323.4,
+        "answer": 1834.7,
+        "unsplit": 0.0,
+        "output": 17158.1
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "npsp": {
+       "tasks": 18,
+       "answers": 36,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 1195.94,
+        "p90": 6021.07,
+        "mean": 2265.77
+       },
+       "tokens": {
+        "input": 4576.7,
+        "cached_input": 0.0,
+        "reasoning": 26674.1,
+        "answer": 3358.3,
+        "unsplit": 0.0,
+        "output": 30032.4
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "packaging": {
+       "tasks": 18,
+       "answers": 37,
+       "failed": 0,
+       "solved": 5,
+       "unreported": 0,
+       "time_s": {
+        "median": 974.2,
+        "p90": 4452.73,
+        "mean": 1953.34
+       },
+       "tokens": {
+        "input": 2070.1,
+        "cached_input": 0.0,
+        "reasoning": 25430.4,
+        "answer": 925.8,
+        "unsplit": 0.0,
+        "output": 26356.2
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "permissions": {
+       "tasks": 15,
+       "answers": 28,
+       "failed": 0,
+       "solved": 10,
+       "unreported": 0,
+       "time_s": {
+        "median": 372.3,
+        "p90": 2316.55,
+        "mean": 985.84
+       },
+       "tokens": {
+        "input": 2383.9,
+        "cached_input": 0.0,
+        "reasoning": 12218.6,
+        "answer": 1194.1,
+        "unsplit": 0.0,
+        "output": 13412.7
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "scratch-def": {
+       "tasks": 18,
+       "answers": 50,
+       "failed": 0,
+       "solved": 2,
+       "unreported": 0,
+       "time_s": {
+        "median": 2596.94,
+        "p90": 5365.86,
+        "mean": 2996.18
+       },
+       "tokens": {
+        "input": 3010.5,
+        "cached_input": 0.0,
+        "reasoning": 39526.9,
+        "answer": 1146.1,
+        "unsplit": 0.0,
+        "output": 40672.9
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "soql": {
+       "tasks": 20,
+       "answers": 29,
+       "failed": 0,
+       "solved": 17,
+       "unreported": 0,
+       "time_s": {
+        "median": 123.22,
+        "p90": 2364.55,
+        "mean": 684.68
+       },
+       "tokens": {
+        "input": 893.0,
+        "cached_input": 0.0,
+        "reasoning": 8418.6,
+        "answer": 534.4,
+        "unsplit": 0.0,
+        "output": 8953.0
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      },
+      "taf": {
+       "tasks": 18,
+       "answers": 42,
+       "failed": 0,
+       "solved": 9,
+       "unreported": 0,
+       "time_s": {
+        "median": 1275.45,
+        "p90": 3954.72,
+        "mean": 1848.24
+       },
+       "tokens": {
+        "input": 16262.5,
+        "cached_input": 0.0,
+        "reasoning": 23565.8,
+        "answer": 3603.4,
+        "unsplit": 0.0,
+        "output": 27169.3
+       },
+       "cost": null,
+       "no_cost": "no_price"
+      }
+     }
+    }
+   },
+   "suites": {
+    "apex": {
+     "score": 0.15,
+     "ci_low": 0.0524,
+     "ci_high": 0.3604,
+     "n": 20,
+     "tokens": {
+      "output_mean": 9909.6,
+      "output_median": 7602.5,
+      "output_p90": 18508.8,
+      "input_mean": 819.0
+     },
+     "latency_s_median": 630.76
+    },
+    "api": {
+     "score": 0.3333,
+     "ci_low": 0.1628,
+     "ci_high": 0.5625,
+     "n": 18,
+     "tokens": {
+      "output_mean": 5407.2,
+      "output_median": 3926.0,
+      "output_p90": 11787.2,
+      "input_mean": 549.9
+     },
+     "latency_s_median": 320.61
+    },
+    "ci": {
+     "score": 0.2941,
+     "ci_low": 0.1328,
+     "ci_high": 0.5313,
+     "n": 17,
+     "tokens": {
+      "output_mean": 5526.1,
+      "output_median": 3976.0,
+      "output_p90": 13034.0,
+      "input_mean": 621.5
+     },
+     "latency_s_median": 328.65
+    },
+    "cli": {
+     "score": 0.15,
+     "ci_low": 0.0524,
+     "ci_high": 0.3604,
+     "n": 20,
+     "tokens": {
+      "output_mean": 4728.1,
+      "output_median": 2728.5,
+      "output_p90": 11327.6,
+      "input_mean": 464.6
+     },
+     "latency_s_median": 220.3
+    },
+    "docs": {
+     "score": 0.1176,
+     "ci_low": 0.0329,
+     "ci_high": 0.3434,
+     "n": 17,
+     "tokens": {
+      "output_mean": 4406.1,
+      "output_median": 2446.0,
+      "output_p90": 10104.4,
+      "input_mean": 436.5
+     },
+     "latency_s_median": 204.26
+    },
+    "fflib": {
+     "score": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.1759,
+     "n": 18,
+     "tokens": {
+      "output_mean": 20119.8,
+      "output_median": 20637.5,
+      "output_p90": 32768.0,
+      "input_mean": 1039.3
+     },
+     "latency_s_median": 1742.19
+    },
+    "flow": {
+     "score": 0.1667,
+     "ci_low": 0.0584,
+     "ci_high": 0.3922,
+     "n": 18,
+     "tokens": {
+      "output_mean": 25603.3,
+      "output_median": 32768.0,
+      "output_p90": 32768.0,
+      "input_mean": 960.2
+     },
+     "latency_s_median": 2775.3
+    },
+    "limits": {
+     "score": 0.3684,
+     "ci_low": 0.1915,
+     "ci_high": 0.5896,
+     "n": 19,
+     "tokens": {
+      "output_mean": 8772.9,
+      "output_median": 7966.0,
+      "output_p90": 18233.8,
+      "input_mean": 661.9
+     },
+     "latency_s_median": 682.95
+    },
+    "lwc": {
+     "score": 0.5556,
+     "ci_low": 0.3372,
+     "ci_high": 0.7544,
+     "n": 18,
+     "tokens": {
+      "output_mean": 7681.9,
+      "output_median": 3572.0,
+      "output_p90": 23590.4,
+      "input_mean": 755.0
+     },
+     "latency_s_median": 301.66
+    },
+    "npsp": {
+     "score": 0.2778,
+     "ci_low": 0.125,
+     "ci_high": 0.5087,
+     "n": 18,
+     "tokens": {
+      "output_mean": 12233.8,
+      "output_median": 9537.5,
+      "output_p90": 30876.3,
+      "input_mean": 689.9
+     },
+     "latency_s_median": 812.07
+    },
+    "packaging": {
+     "score": 0.2222,
+     "ci_low": 0.09,
+     "ci_high": 0.4521,
+     "n": 18,
+     "tokens": {
+      "output_mean": 9189.7,
+      "output_median": 8757.0,
+      "output_p90": 17212.4,
+      "input_mean": 580.4
+     },
+     "latency_s_median": 731.23
+    },
+    "permissions": {
+     "score": 0.2,
+     "ci_low": 0.0705,
+     "ci_high": 0.4519,
+     "n": 15,
+     "tokens": {
+      "output_mean": 4456.9,
+      "output_median": 3245.0,
+      "output_p90": 10651.2,
+      "input_mean": 770.0
+     },
+     "latency_s_median": 271.13
+    },
+    "scratch-def": {
+     "score": 0.0556,
+     "ci_low": 0.0099,
+     "ci_high": 0.2576,
+     "n": 18,
+     "tokens": {
+      "output_mean": 11427.3,
+      "output_median": 8621.0,
+      "output_p90": 27137.2,
+      "input_mean": 541.2
+     },
+     "latency_s_median": 709.58
+    },
+    "soql": {
+     "score": 0.5,
+     "ci_low": 0.2993,
+     "ci_high": 0.7007,
+     "n": 20,
+     "tokens": {
+      "output_mean": 3012.7,
+      "output_median": 1272.0,
+      "output_p90": 7193.4,
+      "input_mean": 448.1
+     },
+     "latency_s_median": 105.11
+    },
+    "taf": {
+     "score": 0.2222,
+     "ci_low": 0.09,
+     "ci_high": 0.4521,
+     "n": 18,
+     "tokens": {
+      "output_mean": 11281.3,
+      "output_median": 7888.0,
+      "output_p90": 20685.0,
+      "input_mean": 5251.3
+     },
+     "latency_s_median": 678.84
+    }
+   },
+   "per_task": {
+    "apex-api67-access-modes": 0.0,
+    "apex-batch-stateful-overdue": 0.0,
+    "apex-bulkify-legacy-trigger": 0.0,
+    "apex-callout-named-credential-retry": 0.0,
+    "apex-contact-email-domain": 0.0,
+    "apex-custom-exception-hierarchy": 0.0,
+    "apex-dynamic-soql-user-mode": 0.0,
+    "apex-invocable-contact-lookup": 0.0,
+    "apex-json-reserved-keys": 0.0,
+    "apex-mutation-tests-callout": 0.0,
+    "apex-mutation-tests-shipping": 0.0,
+    "apex-mutation-tests-won-handler": 0.0,
+    "apex-partial-success-lead-import": 0.0,
+    "apex-picklist-describe": 0.0,
+    "apex-platform-event-shipments": 1.0,
+    "apex-queueable-chain-depth": 0.0,
+    "apex-queueable-finalizer-retry": 0.0,
+    "apex-rollup-trigger-recursion": 1.0,
+    "apex-schedulable-log-purge": 0.0,
+    "apex-won-amount-by-account": 1.0,
+    "api-apexrest-namespaced-post": 0.0,
+    "api-bulk2-ingest-upsert": 0.0,
+    "api-bulk2-query-export": 1.0,
+    "api-choose-bulk-for-large-load": 1.0,
+    "api-collections-create-update": 0.0,
+    "api-composite-graph-orders": 0.0,
+    "api-composite-implicit-dependency": 0.0,
+    "api-describe-and-limits": 0.0,
+    "api-oauth-client-credentials": 1.0,
+    "api-platform-event-publish": 1.0,
+    "api-query-paging-queryall": 0.0,
+    "api-sobject-create-case": 1.0,
+    "api-sobject-update-delete": 1.0,
+    "api-tooling-coverage-query": 0.0,
+    "api-tooling-execute-anonymous": 0.0,
+    "api-uiapi-record-optional-fields": 0.0,
+    "api-upsert-external-id": 0.0,
+    "api-upsert-response-semantics": 0.0,
+    "ci-branch-routed-validation": 0.0,
+    "ci-choice-destructive-order": 1.0,
+    "ci-choice-quick-deploy-cache": 1.0,
+    "ci-choice-scratch-vs-sandbox": 1.0,
+    "ci-choice-source-tracking-ci": 0.0,
+    "ci-choice-test-level-prod": 1.0,
+    "ci-code-analyzer-gate": 0.0,
+    "ci-delta-deploy-sgd": 0.0,
+    "ci-environment-secrets-fix": 0.0,
+    "ci-lwc-jest-eslint": 1.0,
+    "ci-nightly-apex-tests": 0.0,
+    "ci-pr-validate-jwt": 0.0,
+    "ci-quick-deploy-on-merge": 0.0,
+    "ci-review-org-script": 0.0,
+    "ci-scratch-org-per-pr": 0.0,
+    "ci-uat-deploy-sfdx-url": 0.0,
+    "ci-unlocked-package-release": 0.0,
+    "cli-apex-run-script-file": 1.0,
+    "cli-apex-tail-log": 0.0,
+    "cli-apex-tests-junit-coverage": 0.0,
+    "cli-assign-permset-user": 0.0,
+    "cli-bulk-export-csv": 0.0,
+    "cli-bulk-upsert-external-id": 0.0,
+    "cli-delete-scratch-org": 0.0,
+    "cli-deploy-apex-class": 1.0,
+    "cli-dev-machine-config": 0.0,
+    "cli-jwt-login-and-deploy": 0.0,
+    "cli-manifest-from-org": 0.0,
+    "cli-org-open-setup-page": 1.0,
+    "cli-package-install-ci": 0.0,
+    "cli-post-destructive-deploy": 0.0,
+    "cli-retrieve-field-and-flexipage": 0.0,
+    "cli-sandbox-create-async": 0.0,
+    "cli-scratch-org-create": 0.0,
+    "cli-tree-export-import-seed": 0.0,
+    "cli-unlocked-package-release": 0.0,
+    "cli-validate-then-quick-deploy": 0.0,
+    "docs-api-concurrent-long-running": 0.0,
+    "docs-api-daily-allocation-calc": 0.0,
+    "docs-batch-querylocator-scope-max": 0.0,
+    "docs-big-object-index-text-length": 0.0,
+    "docs-bulk2-ingest-upload-size": 0.0,
+    "docs-callout-async-response-size": 0.0,
+    "docs-callout-default-timeout": 1.0,
+    "docs-cross-namespace-soql-limit": 0.0,
+    "docs-long-running-apex-concurrency": 0.0,
+    "docs-lws-distortions": 0.0,
+    "docs-lws-enable-setting": 1.0,
+    "docs-order-exec-after-trigger-vs-flow": 0.0,
+    "docs-pe-delivery-allocation-calc": 0.0,
+    "docs-pe-trigger-batch-size": 0.0,
+    "docs-queueable-async-enqueue-limit": 0.0,
+    "docs-rest-limit-info-header": 0.0,
+    "docs-scratch-org-max-duration": 0.0,
+    "fflib-apexmocks-argument-captor": 0.0,
+    "fflib-apexmocks-exception-paths": 0.0,
+    "fflib-apexmocks-mock-domain": 0.0,
+    "fflib-apexmocks-stub-selector": 0.0,
+    "fflib-apexmocks-verify-uow": 0.0,
+    "fflib-application-factories": 0.0,
+    "fflib-domain-calls-service": 0.0,
+    "fflib-domain-opportunity-defaults": 0.0,
+    "fflib-domain-sobjects-structure": 0.0,
+    "fflib-domain-unit-test-mock-db": 0.0,
+    "fflib-domain-validation": 0.0,
+    "fflib-selector-contacts": 0.0,
+    "fflib-selector-query-factory": 0.0,
+    "fflib-selector-user-mode-fieldset": 0.0,
+    "fflib-service-case-escalation": 0.0,
+    "fflib-service-facade": 0.0,
+    "fflib-uow-account-contacts": 0.0,
+    "fflib-uow-platform-events": 0.0,
+    "flow-account-credit-check-action": 0.0,
+    "flow-account-customer-welcome-task": 0.0,
+    "flow-account-discount-cascade": 0.0,
+    "flow-account-onboarding-subflow": 0.0,
+    "flow-case-breakdown-escalation": 0.0,
+    "flow-case-close-open-tasks": 0.0,
+    "flow-case-sla-due": 0.0,
+    "flow-choice-close-date-reminder": 1.0,
+    "flow-choice-guide-statements": 0.0,
+    "flow-choice-same-record-update": 1.0,
+    "flow-choice-undelete-restore": 1.0,
+    "flow-fix-account-address-sync": 0.0,
+    "flow-opportunity-amount-swing": 0.0,
+    "flow-opportunity-close-reminder-scheduled": 0.0,
+    "flow-opportunity-won-project": 0.0,
+    "flow-order-shipment-fault-path": 0.0,
+    "flow-shipping-quote-autolaunched": 0.0,
+    "flow-web-signup-contact-match": 0.0,
+    "limits-async-vs-sync-limits": 1.0,
+    "limits-control-contact-phone-partial-update": 0.0,
+    "limits-control-pipeline-query-per-stage": 0.0,
+    "limits-control-soql-for-loop-stale-deals": 0.0,
+    "limits-count-cascading-trigger-queries": 0.0,
+    "limits-count-queries-helper-per-lead": 1.0,
+    "limits-first-limit-exceeded": 1.0,
+    "limits-pushback-case-priority-query-in-loop": 1.0,
+    "limits-pushback-erp-callout-per-account": 0.0,
+    "limits-pushback-eventbus-publish-per-record": 1.0,
+    "limits-pushback-followup-tasks-dml-per-record": 0.0,
+    "limits-pushback-future-per-opportunity": 0.0,
+    "limits-pushback-helper-query-per-line-item": 1.0,
+    "limits-pushback-nested-loop-lead-matching": 1.0,
+    "limits-pushback-queueable-per-closed-case": 0.0,
+    "limits-pushback-send-email-per-opportunity": 0.0,
+    "limits-pushback-unfiltered-contact-query": 0.0,
+    "limits-spot-risky-trigger-snippets": 0.0,
+    "limits-trigger-chunks-apex-vs-data-loader": 0.0,
+    "lwc-account-header-wire": 1.0,
+    "lwc-account-quick-links-navigation": 0.0,
+    "lwc-case-status-badge": 0.0,
+    "lwc-collapsible-section-slots": 1.0,
+    "lwc-contact-list-sorted": 1.0,
+    "lwc-contact-search-debounce": 1.0,
+    "lwc-contacts-datatable-inline-save": 0.0,
+    "lwc-favorite-toggle-labels": 0.0,
+    "lwc-lms-account-panel": 0.0,
+    "lwc-open-opportunities-imperative-apex": 1.0,
+    "lwc-opportunity-row-actions": 0.0,
+    "lwc-order-lines-child-api": 1.0,
+    "lwc-pipeline-card-app-builder": 0.0,
+    "lwc-product-tile-select-event": 1.0,
+    "lwc-queue-monitor-polling-lifecycle": 1.0,
+    "lwc-registration-form-validation": 1.0,
+    "lwc-status-listbox-keyboard": 0.0,
+    "lwc-task-checklist-reactivity-fix": 1.0,
+    "npsp-affiliation-primary-employer": 0.0,
+    "npsp-bdi-gift-import": 0.0,
+    "npsp-crlp-promote-to-production": 1.0,
+    "npsp-enhanced-rd-monthly": 0.0,
+    "npsp-gau-percent-allocations": 0.0,
+    "npsp-household-create-members": 0.0,
+    "npsp-household-formal-greeting": 0.0,
+    "npsp-namespace-objects": 0.0,
+    "npsp-partial-soft-credits": 0.0,
+    "npsp-payment-installments": 0.0,
+    "npsp-record-gift": 0.0,
+    "npsp-relationship-parent-child": 1.0,
+    "npsp-soql-gau-totals": 0.0,
+    "npsp-soql-unpaid-payments-due": 1.0,
+    "npsp-tdtm-major-gift-handler": 0.0,
+    "npsp-tdtm-test-registration": 0.0,
+    "npsp-trigger-handler-exclude-user": 1.0,
+    "npsp-vs-nonprofit-cloud": 1.0,
+    "packaging-1gp-managed-released-upload": 0.0,
+    "packaging-1gp-vs-2gp": 1.0,
+    "packaging-abandon-ancestor": 1.0,
+    "packaging-ancestry-upgrade-paths": 0.0,
+    "packaging-create-org-dependent": 0.0,
+    "packaging-create-unlocked-no-namespace": 0.0,
+    "packaging-dependency-released-build": 1.0,
+    "packaging-lock-promoted-version": 0.0,
+    "packaging-managed-test-setup": 0.0,
+    "packaging-migrate-metadata-between-packages": 0.0,
+    "packaging-package-id-prefixes": 1.0,
+    "packaging-promote-and-install": 0.0,
+    "packaging-push-upgrade-schedule": 0.0,
+    "packaging-removed-components-upgrade": 0.0,
+    "packaging-skip-validation-consequences": 0.0,
+    "packaging-transitive-dependencies": 0.0,
+    "packaging-unlocked-project-config": 0.0,
+    "packaging-version-create-release-candidate": 0.0,
+    "permissions-bulk-editable-ids": 0.0,
+    "permissions-custom-permission-apex": 0.0,
+    "permissions-effective-access-muting": 1.0,
+    "permissions-fix-over-permissive": 0.0,
+    "permissions-integration-api-access": 0.0,
+    "permissions-profile-only-settings": 0.0,
+    "permissions-psg-muting": 0.0,
+    "permissions-readonly-claims-viewer": 0.0,
+    "permissions-required-field-fls": 0.0,
+    "permissions-session-based-elevation": 1.0,
+    "permissions-sharing-vs-object-perms": 1.0,
+    "permissions-strip-inaccessible-v67": 0.0,
+    "permissions-tab-app-visibility": 0.0,
+    "permissions-view-all-not-modify-all": 0.0,
+    "permissions-with-sharing-api-versions": 0.0,
+    "scratch-def-australian-locale": 0.0,
+    "scratch-def-einstein-generative-ai": 0.0,
+    "scratch-def-experience-cloud-guest-site": 0.0,
+    "scratch-def-field-service-multicurrency": 0.0,
+    "scratch-def-fix-broken-definition": 0.0,
+    "scratch-def-fix-org-preferences": 0.0,
+    "scratch-def-multicurrency-germany": 0.0,
+    "scratch-def-opportunity-teams": 0.0,
+    "scratch-def-package-object-settings": 0.0,
+    "scratch-def-partner-preview-release": 0.0,
+    "scratch-def-person-accounts": 0.0,
+    "scratch-def-professional-edition-api": 0.0,
+    "scratch-def-sales-forecasting": 0.0,
+    "scratch-def-service-knowledge-omni": 0.0,
+    "scratch-def-sfdx-project-2gp-monorepo": 0.0,
+    "scratch-def-sfdx-project-sandbox-team": 1.0,
+    "scratch-def-shield-security": 0.0,
+    "scratch-def-state-country-picklists": 0.0,
+    "soql-accounts-missing-country-or-industry": 1.0,
+    "soql-accounts-open-high-cases": 1.0,
+    "soql-banking-insurance-de-uk": 1.0,
+    "soql-customers-without-2025-wins": 1.0,
+    "soql-energy-wins-2025": 1.0,
+    "soql-fy2026-bookings-by-quarter": 0.0,
+    "soql-german-customers-open-shipments": 0.0,
+    "soql-globex-group-contacts": 0.0,
+    "soql-hardware-without-services-opps": 1.0,
+    "soql-healthcare-manager-contacts": 1.0,
+    "soql-in-transit-shipments": 0.0,
+    "soql-march-2025-activity-typeof": 0.0,
+    "soql-open-german-web-leads-count": 0.0,
+    "soql-open-shipments-handling": 0.0,
+    "soql-open-tasks-on-opportunities": 1.0,
+    "soql-parents-of-german-accounts": 0.0,
+    "soql-service-product-codes": 0.0,
+    "soql-summit-responders": 1.0,
+    "soql-top-customers-by-revenue": 1.0,
+    "soql-won-2025-by-industry": 0.0,
+    "taf-after-insert-onboarding-task": 0.0,
+    "taf-bypass-action-in-import": 1.0,
+    "taf-bypass-object-ownership-service": 0.0,
+    "taf-bypass-permission-integration": 1.0,
+    "taf-disable-action-hotfix": 1.0,
+    "taf-dml-finalizer-erp-sync": 0.0,
+    "taf-dml-less-action-test": 0.0,
+    "taf-duplicate-email-two-contexts": 0.0,
+    "taf-enable-opportunity": 0.0,
+    "taf-entry-criteria-formula": 0.0,
+    "taf-flow-action-authoring": 0.0,
+    "taf-lead-normalize-before-insert": 1.0,
+    "taf-migrate-legacy-case-trigger": 0.0,
+    "taf-open-case-rollup": 0.0,
+    "taf-recursion-amount-audit": 0.0,
+    "taf-register-flow-action": 0.0,
+    "taf-required-permission-pilot": 0.0,
+    "taf-shared-query-singleton": 0.0
+   },
+   "tokens": {
+    "output_mean": 9589.7,
+    "output_median": 5641.0,
+    "output_p90": 25144.8,
+    "input_mean": 968.2,
+    "reasoning_mean": 8746.7
+   },
+   "outcomes": {
+    "no_answer": 0,
+    "truncated": 21,
+    "malformed": 1,
+    "retried": 0
+   },
+   "no_answer_rate": 0.0,
+   "no_answer_tasks": [],
+   "latency_s_mean": 800.49,
+   "latency_s_median": 472.88,
+   "concurrency": [
+    8
+   ],
+   "samples": 272,
+   "pending": 0,
+   "date": "2026-10-23",
+   "complete": true,
+   "runs": [
+    "20261023T103004Z_minimax-m3.1-flash@high"
+   ],
+   "progress": {
+    "tasks_graded": 272,
+    "tasks_total": 272,
+    "suites_complete": 15,
+    "suites_total": 15
+   },
+   "legacy": 0,
+   "stale": {},
+   "rank": 67
+  },
+  {
    "config_id": "laguna-s-2.1-poolside-fp4@on",
    "subset": "full",
    "model": "Laguna S 2.1",
@@ -118011,7 +119494,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 67
+   "rank": 68
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@medium",
@@ -119513,7 +120996,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 68
+   "rank": 69
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@low",
@@ -121004,7 +122487,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 69
+   "rank": 70
   },
   {
    "config_id": "ling-3.0-flash-deepinfra-bf16@on",
@@ -122867,7 +124350,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 70
+   "rank": 71
   },
   {
    "config_id": "qwen3.8-27b-splash-4bit@low",
@@ -124350,7 +125833,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 71
+   "rank": 72
   },
   {
    "config_id": "qwen3.8-27b-awq-int4@xhigh",
@@ -125911,7 +127394,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 72
+   "rank": 73
   },
   {
    "config_id": "qwen3.6-35b-a3b-nvfp4@on",
@@ -127401,7 +128884,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 73
+   "rank": 74
   },
   {
    "config_id": "minicpm-v-4.7-35b-a3b-bf16@on",
@@ -128887,7 +130370,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 74
+   "rank": 75
   },
   {
    "config_id": "minicpm-v-4.7-35b-a3b-int4@on",
@@ -130377,7 +131860,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 75
+   "rank": 76
   },
   {
    "config_id": "nemotron-3.5-bolt-24gb-tensorfold@on",
@@ -131907,7 +133390,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 76
+   "rank": 77
   },
   {
    "config_id": "nemotron-3.5-lightning-nvidia-nvfp4@on",
@@ -133391,7 +134874,7 @@
    },
    "legacy": 0,
    "stale": {},
-   "rank": 77
+   "rank": 78
   },
   {
    "config_id": "claude-sonnet-5.5@medium",
