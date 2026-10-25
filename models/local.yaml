@@ -730,7 +730,7 @@ models:
       "off": {chat_template_kwargs: {enable_thinking: false}}
       "on": {chat_template_kwargs: {enable_thinking: true}}
     effort_tiers: {"off": "off", "on": "on"}
-    notes: Ornith AI's own NVFP4 checkpoint (HF revision dde0b1af) on vLLM 0.30.0, one GB10. Sampling is the model's generation config, the card's profile for precise coding.
+    notes: Ornith AI's own NVFP4 checkpoint (HF revision dde0b1af) on vLLM 0.30.0, one GB10. The @on run's first 163 answers came from one such server; the other 109 and attempts 2 and 3 from four identical copies of it, one per GB10 (three DGX Sparks and a Gigabyte AI TOP ATOM, the same chip and memory), 8 requests at a time each, behind a balancer that passes requests through unchanged. Sampling is the model's generation config, the card's profile for precise coding.
 
   - id: ornith-1.5-122b-bf16
     provider: direct-ornith
