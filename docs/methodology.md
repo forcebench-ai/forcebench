@@ -330,7 +330,12 @@ with every run).
   regenerates it and refuses to record such a change or a version that goes down. A removed
   task keeps its entry, marked removed, so its id cannot come back with another prompt under
   a version it already had.
-- Adding or removing a suite bumps the benchmark version.
+- Adding or removing a suite bumps the benchmark version, and so does adding a task to the full
+  set. A new task leaves every leaderboard entry partial in its suite until the entry has
+  answered it, so new tasks (community submissions and tasks retired from the private pool)
+  collect on the next version's branch and land together, with the bump, and every
+  configuration answers the batch once. Study tasks (`status: study`) never join the full set
+  and land at any time, as do fixes to existing tasks (above).
 
 **Clearing pending answers.** A pending answer keeps its entry (and its suite) partial until it
 is cleared, and how depends on why it is pending:
